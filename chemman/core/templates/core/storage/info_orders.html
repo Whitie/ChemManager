@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+{% if choice == 'open' %}
+<h1 class="uk-text-center">{% trans %}Open Orders{% endtrans %}</h1>
+<a class="uk-button uk-button-primary uk-margin-bottom" href="{{ url('core:info-orders') }}?filter=all">
+    {% trans %}Show delivered orders{% endtrans %}
+</a>
+{% else %}
+<h1 class="uk-text-center">{% trans %}Old Orders (1 year){% endtrans %}</h1>
+<a class="uk-button uk-button-primary uk-margin-bottom" href="{{ url('core:info-orders') }}?filter=open">
+    {% trans %}Show open orders{% endtrans %}
+</a>
+{% endif %}
+<table id="dtable" class="uk-table uk-table-hover uk-table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}Ident{% endtrans %}</th>
+            <th>{% trans %}Content{% endtrans %}</th>
+            <th>{% trans %}User{% endtrans %}</th>
+            <th>{% trans %}Ordered{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}Ident{% endtrans %}</th>
+            <th>{% trans %}Content{% endtrans %}</th>
+            <th>{% trans %}User{% endtrans %}</th>
+            <th>{% trans %}Ordered{% endtrans %}</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for o in orders %}
+        {% set chem=o.barcode.chemical %}
+        {% set stchem=o.barcode.stored_chemical %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', cid=chem.id) }}" title="{% trans %}Show details for this chemical{% endtrans %}">
+                    {{ chem.display_name }}
+                </a>
+                {% if stchem and stchem.name_extra %}({{ stchem.name_extra }}){% endif %}
+            </td>
+            <td>{% if stchem %}
+                <a href="{{ url('core:info-supplier', sid=stchem.company.id) }}" title="{% trans %}Show all chemicals for this supplier{% endtrans %}">
+                    {{ stchem.company }}
+                </a>
+                {% else %}-{% endif %}
+            </td>
+            <td title="{% trans %}Barcode{% endtrans %}: {{ o.barcode.code }}">
+                {{ o.barcode.ident }}
+            </td>
+            <td>{{ o.barcode.content }} {{ o.barcode.unit }}</td>
+            <td>{{ o.user }}</td>
+            <td>{{ o.stored|date('SHORT_DATETIME_FORMAT') }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a class="uk-button uk-button-primary uk-margin-top" href="{{ url('core:info') }}">
+    <i class="uk-icon-chevron-circle-left"></i> {% trans %}Back{% endtrans %}
+</a>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    make_datatable($('#dtable'));
+})
+</script>
+{% endblock %}

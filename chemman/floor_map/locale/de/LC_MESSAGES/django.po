@@ -1,0 +1,150 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-29 07:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: floor_map/admin.py:33
+msgid "Lockable"
+msgstr "Abschließbar"
+
+#: floor_map/forms.py:27 floor_map/models.py:35
+#: floor_map/templates/floor_map/edit_map.html:8
+#: floor_map/templates/floor_map/index.html:18
+msgid "Building"
+msgstr "Gebäude"
+
+#: floor_map/forms.py:31 floor_map/models.py:37
+#: floor_map/templates/floor_map/edit_map.html:10
+#: floor_map/templates/floor_map/index.html:10
+#: floor_map/templates/floor_map/index.html:20
+msgid "Level"
+msgstr "Stock"
+
+#: floor_map/models.py:38 floor_map/templates/floor_map/edit_map.html:12
+#: floor_map/templates/floor_map/edit_map.html:23
+#: floor_map/templates/floor_map/index.html:22
+msgid "Name"
+msgstr "Name"
+
+#: floor_map/models.py:39
+msgid "Map"
+msgstr "Karte"
+
+#: floor_map/models.py:55 floor_map/models.py:62
+msgid "Floor"
+msgstr "Etage"
+
+#: floor_map/models.py:56
+msgid "Floors"
+msgstr "Etagen"
+
+#: floor_map/models.py:64
+msgid "Storage"
+msgstr "Lager"
+
+#: floor_map/models.py:66 floor_map/templates/floor_map/edit_map.html:24
+msgid "X"
+msgstr "X"
+
+#: floor_map/models.py:67 floor_map/templates/floor_map/edit_map.html:25
+msgid "Y"
+msgstr "Y"
+
+#: floor_map/models.py:81
+msgid "Floor Storage"
+msgstr "Etagenlager"
+
+#: floor_map/models.py:82
+msgid "Floor Storages"
+msgstr "Etagenlager"
+
+#: floor_map/templates/floor_map/edit_map.html:5
+#: floor_map/templates/floor_map/index.html:34 floor_map/views.py:56
+msgid "Edit Map"
+msgstr "Karte bearbeiten"
+
+#: floor_map/templates/floor_map/edit_map.html:14
+#: floor_map/templates/floor_map/index.html:24
+msgid "Usage"
+msgstr "Benutzung"
+
+#: floor_map/templates/floor_map/edit_map.html:15
+msgid "Click to see the name, drag to position"
+msgstr ""
+"Klicken um den Namen zu sehen, halten und verschieben um die Position zu "
+"verändern"
+
+#: floor_map/templates/floor_map/edit_map.html:19
+msgid "Storages"
+msgstr "Lager"
+
+#: floor_map/templates/floor_map/edit_map.html:26
+msgid "Actions"
+msgstr "Aktionen"
+
+#: floor_map/templates/floor_map/edit_map.html:43
+msgid "Add Marker"
+msgstr "Marker hinzufügen"
+
+#: floor_map/templates/floor_map/edit_map.html:48
+msgid "Save"
+msgstr "Speichern"
+
+#: floor_map/templates/floor_map/edit_map.html:50
+msgid "Remove Marker"
+msgstr "Marker entfernen"
+
+#: floor_map/templates/floor_map/edit_map.html:59
+msgid "No storage found on this floor!"
+msgstr "Kein Lager auf dieser Etage gefunden!"
+
+#: floor_map/templates/floor_map/edit_map.html:67
+msgid "Back"
+msgstr "Zurück"
+
+#: floor_map/templates/floor_map/index.html:5
+msgid "Storage Maps"
+msgstr "Lagerkarten"
+
+#: floor_map/templates/floor_map/index.html:12
+msgid "Show"
+msgstr "Anzeigen"
+
+#: floor_map/templates/floor_map/index.html:25
+msgid "Click to see the name, doubleclick to go to the inventory"
+msgstr "Klicken um den Namen zu sehen, doppelklicken um zum Inventar zu kommen"
+
+#: floor_map/templates/floor_map/index.html:31
+msgid "Add floors and levels"
+msgstr "Etagen hinzufügen"
+
+#: floor_map/views.py:14
+msgid "Storage Map"
+msgstr "Lagerkarte"
+
+#: floor_map/views.py:41
+msgid "Floor Map"
+msgstr "Etagenkarte"
+
+#: floor_map/views.py:67
+msgid "<b>Position saved</b>"
+msgstr "<b>Position gespeichert</b>"
+
+#: floor_map/views.py:69
+msgid "Error: {}"
+msgstr "Fehler: {}"

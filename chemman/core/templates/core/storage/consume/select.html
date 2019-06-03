@@ -1,0 +1,72 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Consume{% endtrans %}
+</h1>
+<div class="uk-grid">
+    <div class="uk-width-1-3" id="step-1">
+        <h2 class="uk-text-center">{% trans %}Select Chemical{% endtrans %}</h2>
+        <form class="uk-form" method="post">
+            {% csrf_token %}
+            {% trans %}QR-Code{% endtrans %}:
+            <input type="text" name="package_id" maxlength="20" placeholder="#..." id="qr">
+            <button type="button" class="uk-button uk-button-danger clear">
+                <i class="uk-icon-eraser"></i>
+            </button>
+        </form>
+        <p class="uk-text-center"><strong>{% trans %}or{% endtrans %}</strong></p>
+        <div class="uk-autocomplete uk-form" data-uk-autocomplete="{source:'{{ url('core:api-consume-chem') }}'}">
+            {% trans %}Chemical{% endtrans %}: <input type="text" placeholder="{% trans %}Name, IUPAC, CAS{% endtrans %}" id="select-chem">
+            <button type="button" class="uk-button uk-button-danger clear">
+                <i class="uk-icon-eraser"></i>
+            </button>
+            {% raw %}
+            <script type="text/autocomplete">
+                <ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results">
+                    {{~items}}
+                    <li data-cmid="{{ $item.id }}" data-value="{{ $item.title }}">
+                        <a>
+                            {{ $item.title }}
+                            <div>{{ $item.text }}</div>
+                        </a>
+                    </li>
+                    {{/items}}
+                </ul>
+            </script>
+            {% endraw %}
+        </div>
+    </div>
+    <div class="uk-width-1-3" id="step-2"></div>
+    <div class="uk-width-1-3" id="step-3"></div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $("[data-uk-autocomplete]").on(
+        "selectitem.uk.autocomplete", function(event, data, acobj) {
+        var url = '{{ url("core:api-consume-storage") }}?stchemid=' + data.cmid;
+        $.get(url, function(res) {
+            $('#step-2').html(res);
+            $('#step-3').html('');
+            $('#places').change(function() {
+                var place = $('#places').val();
+                var url = '{{ url("core:api-consume-packages") }}?place=' + place + '&stchemid=' + data.cmid;
+                $.get(url, function(res) {
+                    $('#step-3').html(res);
+                });
+            });
+        });
+    });
+    $('.clear').click(function() {
+        $('#qr').val('');
+        $('#select-chem').val('');
+        $('#step-2').html('');
+        $('#step-3').html('');
+    });
+})
+</script>
+{% endblock %}

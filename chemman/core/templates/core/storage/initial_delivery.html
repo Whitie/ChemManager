@@ -1,0 +1,110 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Initial Delivery{% endtrans %}</h1>
+<form class="uk-form">
+    <div class="uk-form-controls uk-form-controls-text">
+        <p class="uk-form-controls-condensed">
+            {% trans %}Number of packages to add:{% endtrans %}
+            <select name="num" size="1">
+                {% for n in range(1, max_forms + 1) %}
+                <option value="{{ n }}"{% if n == num %} selected{% endif %}>{{ n }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="uk-button uk-button-success">
+                {% trans %}GO{% endtrans %}
+            </button>
+        </p>
+    </div>
+</form>
+<form class="uk-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <div class="uk-overflow-container">
+        <table class="uk-table uk-table-condensed">
+            <thead>
+                <tr>
+                    <th colspan="3">{% trans %}Chemical{% endtrans %}</th>
+                    <th>{% trans %}Storage{% endtrans %}</th>
+                    <th colspan="5">
+                        {% trans %}Package Information{% endtrans %}
+                    </th>
+                    <th colspan="6">
+                        {% trans %}Supplier Information{% endtrans %}
+                    </th>
+                    <th colspan="2">
+                        {% trans %}Toxic Information{% endtrans %}
+                    </th>
+                </tr>
+                <tr>
+                    <th>{% trans %}Name{% endtrans %}</th>
+                    <th>{% trans %}Quality{% endtrans %}</th>
+                    <th>{% trans %}Name Extra{% endtrans %}</th>
+                    <th>{% trans %}Place{% endtrans %}</th>
+                    <th>{% trans %}Content{% endtrans %}</th>
+                    <th>{% trans %}Unit{% endtrans %}</th>
+                    <th>{% trans %}Composition{% endtrans %}</th>
+                    <th>{% trans %}Container{% endtrans %}</th>
+                    <th>{% trans %}Best before{% endtrans %}</th>
+                    <th>{% trans %}Name{% endtrans %}</th>
+                    <th>{% trans %}MSDS{% endtrans %}</th>
+                    <th>{% trans %}Published{% endtrans %}</th>
+                    <th>{% trans %}Ident.{% endtrans %}</th>
+                    <th>{% trans %}Code{% endtrans %}</th>
+                    <th>{% trans %}Batch{% endtrans %}</th>
+                    <th>{% trans %}Brutto{% endtrans %}</th>
+                    <th>{% trans %}Unit{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for form in formset %}
+                <tr data-cmnum="{{ loop.index0 }}">
+                    {% for field in form %}
+                    <td{% if field.help_text %} title="{{ field.help_text }}"{% endif %}>
+                        {{ field }}
+                        {% if field.errors %}<br>{{ field.errors }}{% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <button type="submit" class="uk-button uk-button-success uk-button-large">
+        {% trans %}Save{% endtrans %}
+    </button>
+</form>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $.getJSON('{{ url("core:api-special_log-list") }}', function(data) {
+        var chems = data;
+        $('.chem').change(function() {
+            var cid = $(this).val();
+            var parent = $(this).parent().parent();
+            var row = parent.data('cmnum'); 
+            if (chems[cid] === true) {
+                $('#id_form-' + row + '-brutto_mass').prop('required', true);
+                parent.addClass('cmr');
+                UIkit.notify({
+                    'message': "<i class='uk-icon-info-circle'></i> {% trans %}Don't forget to enter the brutto mass!{% endtrans %}",
+                    'status': 'info',
+                    'timeout': 5000,
+                    'pos': 'top-center'
+                });
+            } else {
+                $('#id_form-' + row + '-brutto_mass').prop('required', false);
+                parent.removeClass('cmr');
+            }
+        });
+    });
+    var opts = {'format': 'DD.MM.YYYY'};
+    $('.dt').each(function() {
+        var dt = UIkit.datepicker($(this), opts);
+    });
+})
+</script>
+{% endblock %}

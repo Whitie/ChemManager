@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Storage Overview{% endtrans %}</h1>
+{% for b in buildings %}
+<table class="uk-table building" cellspacing="0" width="100%">
+    <caption>{{ b.name }}</caption>
+    <thead>
+        <tr>
+            <th class="uk-text-center">{% trans %}Storage{% endtrans %}</th>
+            <th class="uk-text-center">{% trans %}Department{% endtrans %}</th>
+            <th class="uk-text-center">{% trans %}Rooms{% endtrans %}</th>
+            <th class="uk-text-center">{% trans %}Storage Places{% endtrans %}</th>
+            <th class="uk-text-center">{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th class="uk-text-center">{% trans %}Storage{% endtrans %}</th>
+            <th class="uk-text-center">{% trans %}Department{% endtrans %}</th>
+            <th class="uk-text-center">{% trans %}Rooms{% endtrans %}</th>
+            <th class="uk-text-center">{% trans %}Storage Places{% endtrans %}</th>
+            <th class="uk-text-center">{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for s in b.storages.all() %}
+        <tr>
+            <td>
+                <a href="{{ url('core:storage-inventory', storage_id=s.id) }}">
+                    {{ s.name }} ({{ s.get_type_display() }})
+                </a>
+            </td>
+            <td>{{ s.department.name }}</td>
+            <td>
+                {{ s.rooms.all()|join(', ', attribute='display')|default('-', true) }}
+            </td>
+            <td>
+                <ul>
+                    {% for p in s.places.all() %}
+                    <li>
+                        {{ p.name }}
+                        ({% trans count=p.packages.filter(empty=False).count() %}{{ count }} stored package{% pluralize %}{{ count }} stored packages{% endtrans %})
+                    </li>
+                    {% else %}
+                    <li>{% trans %}No packages stored{% endtrans %}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{ m.storage_actions(user, perms, s.id) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    dt_opts = {
+        'aaSorting': [],
+        'iDisplayLength': 25,
+        'columns': [
+            null,
+            null,
+            null,
+            null,
+            {'orderable': false, 'searchable': false},
+        ]
+    };
+    $('.building').each(function() {
+        make_datatable($(this), dt_opts);
+    });
+});
+</script>
+{% endblock %}

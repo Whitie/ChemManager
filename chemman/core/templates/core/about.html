@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}About ChemManager{% endtrans %}</h1>
+<div class="uk-grid uk-grid-divider">
+    <div class="uk-width-1-2">
+        <h2 class="uk-text-center">{% trans %}Hardware{% endtrans %}</h2>
+        <dl class="uk-description-list-line">
+            <dt>{% trans %}Machine{% endtrans %}</dt>
+            <dd>{{ hardware.machine }}</dd>
+            <dt>{% trans %}Processor{% endtrans %}</dt>
+            <dd>{{ hardware.processor }}</dd>
+            <dt>{% trans %}Cores{% endtrans %}</dt>
+            <dd>{{ hardware.cpu_count }}</dd>
+            <dt>{% trans %}Byteorder{% endtrans %}</dt>
+            <dd>{{ hardware.byteorder }} endian</dd>
+        </dl>
+    </div>
+    <div class="uk-width-1-2">
+        <h2 class="uk-text-center">{% trans %}Software{% endtrans %}</h2>
+        <dl class="uk-description-list-line">
+            <dt>{% trans %}OS{% endtrans %}</dt>
+            <dd>{{ software.uname }}</dd>
+            <dt>{% trans %}Python{% endtrans %}</dt>
+            <dd>{{ software.python }}</dd>
+            <dt>{% trans %}Python executable{% endtrans %}</dt>
+            <dd>{{ software.executable }}</dd>
+            <dt>{% trans %}Python path{% endtrans %}</dt>
+            <dd>{{ software.path|join(', ') }}</dd>
+            <dt>{% trans %}Django{% endtrans %}</dt>
+            <dd>{{ software.django_version }}</dd>
+            <dt>{% trans %}ChemManager{% endtrans %}</dt>
+            <dd>{{ software.cm_version }}</dd>
+        </dl>
+    </div>
+</div>
+<a class="uk-button uk-button-primary uk-margin-top" href="{{ url('core:info') }}">
+    <i class="uk-icon-chevron-circle-left"></i> {% trans %}Back{% endtrans %}
+</a>
+{% endblock %}

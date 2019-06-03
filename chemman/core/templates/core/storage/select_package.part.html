@@ -1,0 +1,19 @@
+{% import 'core/macros.inc.html' as macros with context %}
+
+<div{% if chem.special_log %} class="special_log"{% endif %}>
+    <h2 class="uk-text-center">{{ macros.risk_info(chem) }}</h2>
+    <h3 class="uk-text-center">{% trans %}Select Package{% endtrans %}</h3>
+    <h4 class="uk-text-center">
+        {% trans %}From place{% endtrans %}: {{ place }}
+    </h4>
+    <ul class="uk-list uk-list-line">
+        {% for p in packages.order_by('-stored') %}
+        <li>
+            <i class="uk-icon-angle-double-right"></i>
+            <a href="{{ url('core:consume', p.id) }}">
+                {{ p }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

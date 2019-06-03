@@ -1,0 +1,92 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-heading-large uk-text-center">
+    {% trans %}Listgenerator{% endtrans %}
+</h1>
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Builtin lists{% endtrans %}</h3>
+        <hr>
+        <ul>
+            <li>{{ 'toxic'|builtin_list }}</li>
+            <li>{{ 'cmr'|builtin_list }}</li>
+        </ul>
+    </div>
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Create own list{% endtrans %}</h3>
+        <hr>
+        <form class="uk-form" method="post" action="">
+            {% csrf_token %}
+            <fieldset data-uk-margin>
+                {{ form.name.label_tag() }}
+                {{ form.name }}
+            </fieldset>
+            <fieldset data-uk-margin>
+                {{ form.field_1 }}
+                {{ form.exp_1 }}
+                {{ form.term_1 }}
+                {{ form.andor_2 }}
+            </fieldset>
+            <fieldset data-uk-margin>
+                {{ form.field_2 }}
+                {{ form.exp_2 }}
+                {{ form.term_2 }}
+                {{ form.andor_3 }}
+            </fieldset>
+            <fieldset data-uk-margin>
+                {{ form.field_3 }}
+                {{ form.exp_3 }}
+                {{ form.term_3 }}
+                {{ form.andor_4 }}
+            </fieldset>
+            <fieldset data-uk-margin>
+                {{ form.field_4 }}
+                {{ form.exp_4 }}
+                {{ form.term_4 }}
+                <button class="uk-button uk-button-primary">
+                    {% trans %}Create List{% endtrans %}
+                </button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Last build lists{% endtrans %}</h3>
+        <hr>
+        <ul id="last-lists">
+            {% for l in lists %}
+            <li>
+                <a href="{{ l.json_query|list_url(l.name) }}">
+                    {{ l.name }} ({{ l.added|date('SHORT_DATETIME_FORMAT') }})
+                </a>
+            </li>
+            {% else %}
+            <li>{% trans %}Nothing saved{% endtrans %}</li>
+            {% endfor %}
+        </ul>
+        {% if count > 10 %}
+        <button type="button" class="uk-button uk-button-small uk-button-primary" onclick="load_all();" id="more-btn">
+            {% trans %}Show all{% endtrans %}
+        </button>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+<script>
+function load_all() {
+    var ul = $('#last-lists');
+    $.getJSON('{{ url("core:api-get-lists") }}', function(data) {
+        $.each(data, function(i, val) {
+            var s = '<li><a href="' + val['url'] + '">' + val['name'] + ' (' + val['added'] + ')</a></li>';
+            ul.append(s);
+        });
+    });
+    $('#more-btn').remove();
+}
+</script>
+{% endblock %}

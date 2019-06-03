@@ -1,0 +1,103 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Deliver Packages{% endtrans %}</h1>
+<h2 class="uk-text-center">{{ ref.stored_chemical }}</h2>
+<form class="uk-form">
+    <table class="uk-table uk-table-striped">
+        <thead>
+            <tr>
+                <th>{% trans %}Package ID{% endtrans %}</th>
+                <th>{% trans %}Content{% endtrans %}</th>
+                <th>{% trans %}Composition{% endtrans %}</th>
+                <th>{% trans %}Container{% endtrans %}</th>
+                <th>{% trans %}Batch{% endtrans %}</th>
+                <th>{% trans %}Best before{% endtrans %}</th>
+                {% if log %}
+                <th>{% trans %}Brutto Mass{% endtrans %}</th>
+                <th>{% trans %}Unit{% endtrans %}</th>
+                {% endif %}
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in packages %}
+            <tr>
+                <td>{{ p.package_id }}</td>
+                <td class="uk-text-right">
+                    {{ p.content }} {{ p.get_unit_display() }}
+                </td>
+                <td>
+                    {{ m.select(comp, 'composition', p.id) }}
+                </td>
+                <td>
+                    {{ m.select(cont, 'container', p.id) }}
+                </td>
+                <td>
+                    <input type="text" maxlength="30" id="batch-{{ p.id }}">
+                </td>
+                <td>
+                    <div class="uk-form-icon">
+                        <i class="uk-icon-calendar"></i>
+                        <input type="text" id="best-{{ p.id }}" data-uk-datepicker="{format:'DD.MM.YYYY'}">
+                    </div>
+                </td>
+                {% if log %}
+                <td>
+                    <input type="number" step="0.01" id="brutto-{{ p.id }}" required>
+                </td>
+                <td>
+                    {{ m.select(mass, 'brutto_unit', p.id, 'g') }}
+                </td>
+                {% else %}
+                <input type="hidden" id="brutto-{{ p.id }}" value="">
+                <input type="hidden" id="brutto_unit-{{ p.id }}" value="">
+                {% endif %}
+                <td>
+                    <button type="button" class="uk-button uk-button-success" onclick="save_row({{ p.id }});" id="btn-{{ p.id }}">
+                        {% trans %}Save{% endtrans %}
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</form>
+<p>
+    <a href="{{ url('core:delivery') }}?storage={{ storage }}" class="uk-button uk-button-large">
+        {% trans %}Back{% endtrans %}
+    </a>
+</p>
+{% endblock %}
+
+{% block js %}
+<script>
+function save_row(pid) {
+    var url = '{{ url("core:api-delivery-store-extra") }}';
+    var special_log = {% if log %}true{% else %}false{% endif %};
+    var saved = '<span class="uk-badge uk-badge-notification uk-badge-success">{% trans %}Saved{% endtrans %}</span>';
+    var data = {
+        'package': pid,
+        'composition': $('#composition-' + pid).val(),
+        'container': $('#container-' + pid).val(),
+        'batch': $('#batch-' + pid).val(),
+        'best_before': $('#best-' + pid).val(),
+        'brutto': $('#brutto-' + pid).val() || 0,
+        'brutto_unit': $('#brutto_unit-' + pid).val()
+    }
+    console.log(data);
+    if (special_log == true && data['brutto'] == 0) {
+        UIkit.modal.alert('{% trans %}Please fill in brutto mass!{% endtrans %}');
+        return false;
+    }
+    $.post(url, data).done(function(res) {
+        if (res['success'] == true) {
+            $('#btn-' + pid).replaceWith(saved);
+        } else {
+            UIkit.modal.alert('{% trans %}Error while saving!{% endtrans %}');
+        }
+    });
+}
+</script>
+{% endblock %}

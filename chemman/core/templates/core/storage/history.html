@@ -1,0 +1,127 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Current Packages{% endtrans %}</h1>
+<table class="uk-table uk-table-hover uk-table-striped dtable" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Quality{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}Stored{% endtrans %}</th>
+            <th>{% trans %}Opened{% endtrans %}</th>
+            <th>{% trans %}Last Usage{% endtrans %}</th>
+            <th>{% trans %}Current Stock{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Quality{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}Stored{% endtrans %}</th>
+            <th>{% trans %}Opened{% endtrans %}</th>
+            <th>{% trans %}Last Usage{% endtrans %}</th>
+            <th>{% trans %}Current Stock{% endtrans %}</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for c in current %}
+        {% set sc=c.stored_chemical %}
+        {% set first_usage=c.usage.all().order_by('usage_date').first() %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', cid=sc.chemical.id) }}">
+                    {{ sc.chemical.display_name }}
+                    {% if sc.name_extra %}({{ sc.name_extra }}){% endif %}
+                </a>
+            </td>
+            <td>{{ sc.get_quality_display() }}</td>
+            <td>{{ sc.company|default('-') }}</td>
+            <td>
+                {{ c.stored|date('SHORT_DATE_FORMAT') }}
+            </td>
+            <td>
+                {% if first_usage %}{{ first_usage.usage_date|date('SHORT_DATE_FORMAT') }}{% else %}-{% endif %}
+            </td>
+            <td>
+                {{ c.last_usage|date('SHORT_DATE_FORMAT') }}
+            </td>
+            <td class="uk-text-right" title="{% trans %}Click for usage details{% endtrans %}">
+                <a href="{{ url('core:package-info', pid=c.id) }}">
+                    {{ sc.get_inventory() }}
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h1 class="uk-text-center">{% trans %}Empty Packages{% endtrans %}</h1>
+<table class="uk-table uk-table-hover uk-table-striped dtable" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Quality{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}Stored{% endtrans %}</th>
+            <th>{% trans %}Emptied{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Quality{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}Stored{% endtrans %}</th>
+            <th>{% trans %}Emptied{% endtrans %}</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for c in old %}
+        {% set sc=c.stored_chemical %}
+        {% set log=c.stored_chemical.chemical.special_log %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', cid=sc.chemical.id) }}">
+                    {{ sc.chemical.display_name }}
+                    {% if sc.name_extra %}({{ sc.name_extra }}){% endif %}
+                </a>
+            </td>
+            <td>{{ sc.get_quality_display() }}</td>
+            <td>{{ sc.company|default('-') }}</td>
+            <td>
+                {{ c.stored|date('SHORT_DATE_FORMAT') }}
+            </td>
+            <td{% if log %} title="{% trans %}Click for usage details{% endtrans %}"{% endif %}>
+                {% if log %}<a href="{{ url('core:package-info', pid=c.id) }}">{% endif %}
+                    {{ c.last_usage|date('SHORT_DATETIME_FORMAT') }}
+                {% if log %}</a>{% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% if not tox and old and user.is_staff %}
+<a class="uk-button uk-button-danger" href="#">
+    <i class="uk-icon-trash"></i>
+    {% trans %}Clear old (non toxic) packages{% endtrans %}
+</a>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $('.dtable').each(function() {
+        make_datatable($(this));
+    });
+})
+</script>
+{% endblock %}

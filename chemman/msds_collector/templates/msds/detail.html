@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {{ msds.name|default(_('No name found'), true) }}
+</h1>
+<form method="post" class="uk-form uk-form-horizontal">
+    {% csrf_token %}
+    {% for f in form %}
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ f.auto_id }}">
+            {{ f.label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ f }}
+            {% if f.help_text %}
+            <span class="uk-form-help-inline">{{ f.help_text }}</span>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="uk-form-row">
+        <a href="{{ url('msds:list') }}" class="uk-button uk-button-large">
+            {% trans %}Back{% endtrans %}
+        </a>
+        <button type="submit" class="uk-button uk-button-success uk-button-large">
+            {% trans %}Save{% endtrans %}
+        </button>
+    </div>
+</form>
+{% endblock %}

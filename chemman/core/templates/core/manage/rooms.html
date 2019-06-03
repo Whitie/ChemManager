@@ -1,0 +1,23 @@
+{% extends 'core/manage/base.html' %}
+
+{% block left %}
+<h3>{% trans %}Existing Rooms (by building){% endtrans %}</h3>
+{% for b in buildings %}
+<h4>{{ b.name }}</h4>
+<ul class="uk-list uk-list-line">
+    {% for r in b.rooms.all().order_by('number') %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        <a href="{{ url('core:manage-rooms', room_id=r.id) }}" title="{% trans %}Click to edit this room{% endtrans %}">
+            {{ r.number }} - {{ r.name }}
+            ({% trans %}Storage{% endtrans %}: {{ r.storage.name }})
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<div class="uk-alert uk-alert-warning">
+    {% trans %}No rooms defined.{% endtrans %}
+</div>
+{% endfor %}
+{% endblock %}

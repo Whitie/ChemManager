@@ -1,0 +1,100 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Merge Packages{% endtrans %}</h1>
+<h2 class="uk-text-center">
+    {% trans %}Storage{% endtrans %}:
+    {{ storage.name }} ({{ storage.department.name }})
+</h2>
+<h3 class="uk-text-center">{{ chem.display_name }} {{ m.risk_info(chem) }}</h3>
+<div class="uk-grid">
+    <div class="uk-width-1-3">
+        <h4>{% trans %}Select packages to remove:{% endtrans %}</h4>
+        <ul class="uk-list uk-form">
+            {% for p in packages %}
+            <li>
+                <label>
+                    <input type="checkbox" class="remove" data-pid="{{ p.id }}" data-id="{{ p.package_id }}">
+                    {{ p }}
+                </label>
+            </li>
+            {% endfor %}
+        </ul>
+        <button type="button" class="uk-button uk-button-success uk-align-right" id="btn-1">
+            {% trans %}next{% endtrans %}
+            <i class="uk-icon uk-icon-angle-double-right"></i>
+        </button>
+    </div>
+    <div class="uk-width-1-3" id="selection"></div>
+    <div class="uk-width-1-3" id="result"></div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ static('core/js/cm_i18n.js') }}"></script>
+<script>
+var to_remove = [];
+var to_remove_ids = [];
+var iwarning = '<i class="uk-icon uk-icon-warning"></i> ';
+
+function get_removal() {
+    var els = $('.remove:checked');
+    var all_pids = [{{ packages|join(', ', attribute='id') }}];
+    var packages_count = all_pids.length;
+    to_remove.length = 0;
+    to_remove_ids.length = 0;
+    $('#selection').html('');
+    $('#result').html('');
+    $.each(els, function() {
+        var data_pid = $(this).data('pid');
+        var data_id = $(this).data('id');
+        to_remove.push(data_pid);
+        to_remove_ids.push(data_id);
+        all_pids.splice($.inArray(data_pid, all_pids), 1);
+    });
+    if (to_remove.length === packages_count) {
+        UIkit.notify(iwarning + messages.all,
+                     {status: 'warning', timeout: 5000});
+        return false;
+    }
+    if (to_remove.length === 0) {
+        UIkit.notify(iwarning + messages.no,
+                     {status: 'warning', timeout: 5000});
+        return false;
+    }
+    show_possible_packages(all_pids);
+}
+
+function show_possible_packages(possible) {
+    var url = '{{ url("core:packages-merge-get") }}';
+    $.get(url, {'packages': possible}, function(ret) {
+        $('#selection').html(ret);
+        $('#btn-2').click(save_merge);
+    });
+}
+
+function save_merge() {
+    var fillup_elm = $('.fillup:checked').first();
+    var data = {
+        fillup: fillup_elm.data('pid'),
+        remove: to_remove
+    };
+    var fillup = fillup_elm.data('id');
+    var text = messages.remove + to_remove_ids.toString() + '<br>' +
+               messages.fillup + fillup + '<br>' + messages.proceed;
+    UIkit.modal.confirm(text, function() {
+        var url = '{{ url("core:packages-merge-do") }}';
+        $.get(url, data, function(ret) {
+            $('#result').html(ret);
+            $('#btn-1').prop('disabled', true);
+            $('#btn-2').prop('disabled', true);
+        });
+    });
+}
+
+$(document).ready(function() {
+    $('#btn-1').click(get_removal);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Compare data{% endtrans %}
+</h1>
+<a href="{{ url('msds:transfer', parsed.upload.id) }}" class="uk-button">
+{% trans %}Back{% endtrans %}
+</a>
+<p>{% trans %}All data in the "New Data" column will be added to the existing database record ({{ chem }}). Edit with care!{% endtrans %}</p>
+<table class="uk-table uk-table-striped uk-form">
+    <thead>
+        <tr>
+            <th></th>
+            <th>{% trans %}Existing Data{% endtrans %}</th>
+            <th>{% trans %}New Data{% endtrans %}</th>
+            <th></th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th>{% trans %}Existing Data{% endtrans %}</th>
+            <th>{% trans %}New Data{% endtrans %}</th>
+            <th></th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for key, h, old, new in data %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>
+                {{ old|default('-', true) }}
+                <input type="hidden" id="old_{{ loop.index }}" value="{{ old|default('', true) }}">
+            </td>
+            <td>
+                <input type="text" id="new_{{ loop.index }}" value="{% if new %}{{ new }}{% else %}{{ old|default('', true) }}{% endif %}">
+            </td>
+            <td style="width:250px;">{{ h }}</td>
+            <td>
+                <button type="button" id="btn_{{ loop.index }}" class="uk-button uk-button-primary uk-button-small" onclick="copy_data('{{ loop.index }}');" title="{% trans %}Copy old to new{% endtrans %}">
+                    <i class="uk-icon-copy"></i>
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td>{% trans %}CMR{% endtrans %}</td>
+            <td>
+                {% if chem.cmr %}
+                <span class="cmr">{% trans %}YES{% endtrans %}</span>
+                {% else %}
+                <span>{% trans %}NO{% endtrans %}</span>
+                {% endif %}
+            </td>
+            <td>
+                <input type="checkbox" id="cmr"{% if parsed.cmr %} checked{% endif %}>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>{% trans %}Signal Word{% endtrans %}</td>
+            <td>{{ chem.get_signal_word_display() }}</td>
+            <td>
+                <select id="signal_word">
+                    <option value=""{% if not parsed.signal_word %} selected{% endif %}>-</option>
+                    <option value="warning"{% if parsed.signal_word == 'warning' %} selected{% endif %}>{% trans %}Warning{% endtrans %}</option>
+                    <option value="danger"{% if parsed.signal_word == 'danger' %} selected{% endif %}>{% trans %}Danger{% endtrans %}</option>
+                </select>
+            </td>
+            <td></td>
+            <tr>
+            <td>{% trans %}Physical State{% endtrans %}</td>
+            <td>{{ chem.physical_data.get_physical_state_display() }}</td>
+            <td>
+                <select id="physical_state">
+                    <option value=""{% if not parsed.physical_state %} selected{% endif %}>-</option>
+                    <option value="s"{% if parsed.physical_state == 'solid' %} selected{% endif %}>{% trans %}solid{% endtrans %}</option>
+                    <option value="l"{% if parsed.physical_state == 'liquid' %} selected{% endif %}>{% trans %}liquid{% endtrans %}</option>
+                    <option value="g"{% if parsed.physical_state == 'gaseous' %} selected{% endif %}>{% trans %}gaseous{% endtrans %}</option>
+                </select>
+            </td>
+            <td></td>
+        </tr>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
+
+{% block js %}
+<script>
+function copy_data(row) {
+    var old = $('#old_' + row).val();
+    $('#new_' + row).val(old);
+}
+</script>
+{% endblock %}

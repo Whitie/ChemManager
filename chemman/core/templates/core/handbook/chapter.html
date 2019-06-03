@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {{ chapter.number }} - {{ chapter.title }}
+</h1>
+
+{% if chapter.synopsis %}
+<p class="uk-text-primary uk-text-bold">{{ chapter.safe_synopsis() }}</p>
+{% endif %}
+
+{% for p in chapter.paragraphs.all() %}
+{{ m.render_paragraph(p, true) }}
+{% endfor %}
+
+<h3>{% trans %}Comments{% endtrans %}</h3>
+<ul class="uk-comment-list uk-margin-top">
+    {% for comment in chapter.comments.all().order_by('-added') %}
+    <li>
+        <article class="uk-comment">
+            <header class="uk-comment-header">
+                <h4 class="uk-comment-title">{{ comment.title|default(no_title, true) }}</h4>
+                <div class="uk-comment-meta">
+                    {% trans author=comment.author.username, added=comment.added|date('DATETIME_FORMAT') %}Posted by {{ author }} on {{ added }}{% endtrans %}
+                </div>
+            </header>
+            <div class="uk-comment-body">{{ comment.text }}</div>
+        </article>
+    </li>
+    {% else %}
+    <li class="uk-text-large">{% trans %}No comments{% endtrans %}</li>
+    {% endfor %}
+</ul>
+
+{% if user.is_authenticated() %}
+<hr class="uk-margin-top uk-margin-bottom">
+<h3>{% trans %}Leave a comment{% endtrans %}</h3>
+<form action="" method="post" class="uk-form uk-form-horizontal">
+    {% csrf_token %}
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ form['title'].auto_id }}">
+            {{ form['title'].label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ form['title'] }}
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ form['text'].auto_id }}">
+            {{ form['text'].label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ form['text'] }}
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <div class="uk-form-controls">
+            <button type="submit" class="uk-button uk-button-primary">
+                {% trans %}Send{% endtrans %}
+            </button>
+        </div>
+    </div>
+</form>
+{% endif %}
+
+<a href="{{ url('core:hb-handbook', handbook.id) }}" class="uk-button uk-button-primary uk-margin-top">
+    {% trans %}< Back{% endtrans %}
+</a>
+{% endblock %}

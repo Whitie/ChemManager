@@ -1,0 +1,294 @@
+{% macro chem_as_panel(chem) -%}
+<div class="uk-width-1-2">
+    <div class="uk-panel uk-panel-box">
+        {% if chem.signal_word or chem.special_log %}
+        <div class="uk-panel-badge uk-badge uk-badge-{{ chem.signal_word }}">
+            {{ chem.get_signal_word_display() }}
+            {% if chem.cmr %}| {% trans %}CMR{% endtrans %}{% endif %}
+        </div>
+        {% endif %}
+        <h3 class="uk-panel-title sr">
+            {{ chem.display_name }}
+            {% for pic in chem.pictograms.all() %}
+            <img src="{{ pic.image.url }}" width="30" alt="{{ pic.short }}" title="{{ pic }}">
+            {% endfor %}
+        </h3>
+        <strong>{% trans %}Synonyms{% endtrans %}:</strong>
+        <span class="more sr">
+            {{ chem.synonyms.all()|join(', ', attribute='name') }}
+        </span>
+        <br>
+        <strong>{% trans %}IUPAC{% endtrans %}:</strong>
+        <span class="sr">{{ chem.iupac_name|default('-', true) }}</span>
+        <br>
+        <strong>{% trans %}CAS{% endtrans %}:</strong>
+        {{ chem.identifiers.cas|default('-', true) }}
+        <br>
+        <strong>{% trans %}Formula{% endtrans %}:</strong>
+        <span class="formula">{{ chem.formula }}</span>
+        <a class="uk-button uk-button-primary uk-align-right" href="{{ url('core:detail-by-id', chem.id) }}">
+            {% trans %}Show more{% endtrans %}
+        </a>
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro chem_table_row(chem, num) -%}
+<tr>
+    <td>{{ num }}</td>
+    <td>
+        <a href="{{ url('core:detail-by-id', chem.id) }}" class="sr">
+            {{ chem.display_name }}
+        </a>
+        {% if chem.signal_word or chem.cmr %}
+        <span class="uk-badge uk-badge-{{ chem.signal_word }}">
+            {{ chem.get_signal_word_display() }}
+            {% if chem.cmr %}| {% trans %}CMR{% endtrans %}{% endif %}
+        </span>
+        {% endif %}
+    </td>
+    <td>{{ chem.identifiers.cas| default('-', true) }}</td>
+    <td class="formula">{{ chem.formula }}</td>
+    <td>
+        {% for pic in chem.pictograms.all() %}
+        <img src="{{ pic.image.url }}" width="25" alt="{{ pic.short }}" title="{{ pic }}">
+        {% endfor %}
+    </td>
+    <td class="uk-text-center storage-data" data-url="{{ url('core:api-inventory-chemical', chem_id=chem.id) }}">
+        <i class="uk-icon-spinner uk-icon-spin"></i>
+    </td>
+    <td>{{ operating_instruction(chem) }}</td>
+</tr>
+{% endmacro -%}
+
+{% macro chems_as_datatable(chems, id='chem-table') -%}
+<table id="{{ id }}" class="uk-table uk-table-hover uk-table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}Formula{% endtrans %}</th>
+            <th>{% trans %}GHS{% endtrans %}</th>
+            <th>{% trans %}Storage{% endtrans %}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}Formula{% endtrans %}</th>
+            <th>{% trans %}GHS{% endtrans %}</th>
+            <th>{% trans %}Storage{% endtrans %}</th>
+            <th></th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for chem in chems %}
+        {{ chem_table_row(chem, loop.index) }}
+        {% else %}
+        <tr>
+            <td></td>
+            <td>{% trans %}No results{% endtrans %}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endmacro -%}
+
+{%- macro render_paragraph(p, with_comments=false) %}
+<article class="uk-article">
+    <h2 class="uk-article-title">
+        {{ p.chapter.number }}.{{ p.number }} - {{ p.title }}
+    </h2>
+    <p class="uk-article-meta">
+        {% trans author=p.author.username, added=p.added|date('SHORT_DATETIME_FORMAT') %}
+        Written by {{ author }}, {{ added }}.{% endtrans %}
+        {% if p.last_modified_by %}
+        {% trans author=p.last_modified_by.username, added=p.last_modified|date('SHORT_DATETIME_FORMAT') %}
+        Last modified by {{ author }}, {{ added }}.{% endtrans %}
+        {% endif %}
+    </p>
+    {% if p.lead %}
+    <p class="uk-article-lead">{{ p.safe_lead() }}</p>
+    {% endif %}
+    {{ p.safe_text() }}
+    <hr class="uk-article-divider">
+</article>
+{% endmacro -%}
+
+{%- macro risk_info(chem, tag='span') %}
+{% if chem.acutely_toxic or chem.special_log %}
+<{{ tag }} class="uk-badge uk-badge-danger">
+    <i class="uk-icon-warning"></i> {% trans %}Toxic{% endtrans %}
+</{{ tag }}>
+{% endif %}
+{% if chem.cmr %}
+<{{ tag }} class="uk-badge uk-badge-danger">
+    <i class="uk-icon-warning"></i> {% trans %}CMR{% endtrans %}
+</{{ tag }}>
+{% endif %}
+{% endmacro -%}
+
+{%- macro actions(perms, pid, size='', icon_only=true, container='', end_container='') %}
+{{ container|safe }}
+{% if perms.core.can_consume %}
+<a href="{{ url('core:consume', pid) }}" class="uk-button uk-button-primary{% if size %} uk-button-{{ size }}{% endif %}" title="{% trans %}Consume{% endtrans %}">
+    <i class="uk-icon-arrow-circle-down"></i>
+    {% if not icon_only %}{% trans %}Consume{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{{ end_container|safe }}
+{{ container|safe }}
+{% if perms.core.can_transfer %}
+<a href="{{ url('core:package-transfer', pid) }}" class="uk-button uk-button-primary{% if size %} uk-button-{{ size }}{% endif %}" title="{% trans %}Transfer{% endtrans %}">
+    <i class="uk-icon-arrows"></i>
+    {% if not icon_only %}{% trans %}Transfer{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{{ end_container|safe }}
+{{ container|safe }}
+{% if perms.core.can_dispose %}
+<a href="{{ url('core:package-dispose', pid) }}" class="uk-button uk-button-danger{% if size %} uk-button-{{ size }}{% endif %}" title="{% trans %}Dispose{% endtrans %}">
+    <i class="uk-icon-trash"></i>
+    {% if not icon_only %}{% trans %}Dispose{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{{ end_container|safe }}
+{{ container|safe }}
+{% if perms.core.can_order %}
+<a href="{{ url('core:order-old', pid) }}" class="uk-button uk-button-success{% if size %} uk-button-{{ size }}{% endif %}" title="{{ pgettext('Order system', 'Order') }}">
+    <i class="uk-icon-cart-arrow-down"></i>
+    {% if not icon_only %}{{ pgettext('Order system', 'Order') }}{% endif %}
+</a>
+{% endif %}
+{{ end_container|safe }}
+{% endmacro -%}
+
+{%- macro inventory_row(i, package, stored_chem, inventory, units) %}
+{% set log=stored_chem.chemical.special_log %}
+{% set last=package.differences.all().order_by('saved').last() %}
+{% if log %}
+{% set value=package.current_brutto %}{% else %}{% set value=inventory %}
+{% endif %}
+<tr class="inv-row{% if log %} cmr{% endif %}" data-pid="{{ package.id }}">
+    <td>{{ i }}</td>
+    <td{% if last %} title="{% trans %}Last inventory:{% endtrans %} {{ last.saved|date('SHORT_DATETIME_FORMAT') }}"{% endif %}>
+        {{ stored_chem.chemical.display_name }}
+    </td>
+    <td>{{ stored_chem.get_quality_display() }}</td>
+    <td>{{ stored_chem.company|default('-', true) }}</td>
+    <td>
+        <a href="{{ url('core:package-info', pid=package.id) }}">
+            {{ package.package_id }}
+        </a>
+    </td>
+    <td class="uk-text-right">
+        {% if log %}
+        <span title="{% trans %}Brutto mass{% endtrans %}">
+            {{ value }}
+        </span>
+        <span title="{% trans %}Inventory{% endtrans %}">
+            ({{ inventory }})
+        </span>
+        {% else %}
+        <span title="{% trans %}Inventory{% endtrans %}">
+            {{ value }}
+        </span>
+        {% endif %}
+    </td>
+    <td class="uk-text-right"{% if log %} title="{% trans %}New brutto mass here!{% endtrans %}"{% endif %}>
+        <input id="val_{{ package.id }}" type="number" step="0.0001" class="uk-form-width-small">
+        <select id="unit_{{ package.id }}" size="1">
+            {% for val, name in units %}
+            <option value="{{ val }}"{% if val == value.unit %} selected{% endif %}>
+                {{ name }}
+            </option>
+            {% endfor %}
+        </select>
+    </td>
+    <td>
+        <input type="checkbox" id="ok_{{ package.id }}" title="{% trans %}Check if the stock is correct{% endtrans %}">
+        <button type="button" class="uk-button uk-button-mini" title="{% trans %}Add a note for this stock{% endtrans %}" onclick="add_note('{{ package.id }}');" id="btn-note-{{ package.id }}">
+            {% trans %}Note{% endtrans %}
+        </button>
+        <input type="hidden" id="before_val_{{ package.id }}" value="{{ value.value }}">
+        <input type="hidden" id="before_unit_{{ package.id }}" value="{{ value.unit }}">
+        <input type="hidden" id="note_{{ package.id }}" value="">
+        <input type="hidden" id="sl_{{ package.id }}" value="{% if log %}yes{% else %}no{% endif %}">
+    </td>
+    <td id="result_{{ package.id }}"></td>
+</tr>
+{% endmacro -%}
+
+{%- macro storage_actions(user, perms, storage_id, icon_only=true) %}
+{% if perms.core.inventory %}
+<a href="{{ url('core:storage-inventory-make', storage_id=storage_id) }}" class="uk-button" title="{% trans %}Make inventory{% endtrans %}">
+    <i class="uk-icon-cubes"></i>
+    {% if not icon_only %}{% trans %}Make inventory{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{% if user.is_authenticated %}
+<a href="{{ url('core:storage-inventory-result', storage_id=storage_id) }}" class="uk-button" title="{% trans %}Show last inventory{% endtrans %}">
+    <i class="uk-icon-list-alt"></i>
+    {% if not icon_only %}{% trans %}Show last inventory{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{% if perms.core.can_store %}
+<a href="{{ url('core:delivery') }}?storage={{ storage_id }}" class="uk-button" title="{% trans %}Deliver new package here{% endtrans %}">
+    <i class="uk-icon-truck"></i>
+    {% if not icon_only %}{% trans %}Deliver new package here{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{% if user.is_authenticated %}
+<a href="{{ url('core:info-observe', storage_id=storage_id) }}" class="uk-button" title="{% trans %}Check chemicals against storage classes{% endtrans %}">
+    <i class="uk-icon-eye"></i>
+    {% if not icon_only %}{% trans %}Check storage classes{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{% if perms.core.set_limits %}
+<a href="{{ url('core:set-stocklimits', storage_id=storage_id) }}" class="uk-button" title="{% trans %}Set stocklimits for chemicals in this storage{% endtrans %}">
+    <i class="uk-icon-balance-scale"></i>
+    {% if not icon_only %}{% trans %}Set stocklimits{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{% endmacro -%}
+
+{%- macro select(items, name, pid, default='') %}
+<select id="{{ name }}-{{ pid }}">
+    {% for value, display in items %}
+    <option value="{{ value }}"{% if value == default %} selected{% endif %}>
+        {{ display }}
+    </option>
+    {% endfor %}
+</select>
+{% endmacro -%}
+
+{%- macro show_bool(value, icon=true) %}
+{% if value %}
+{% if icon %}<i class="uk-icon-check"></i>{% endif %}
+{% trans %}yes{% endtrans %}
+{% else %}
+{% if icon %}<i class="uk-icon-close"></i>{% endif %}
+{% trans %}no{% endtrans %}
+{% endif %}
+{% endmacro -%}
+
+{%- macro operating_instruction(chem) %}
+{% if chem.has_oi %}
+<span class="uk-badge uk-badge-notification uk-badge-success" title="{% trans %}Operating Instruction available{% endtrans %}">
+    {% trans %}OI{% endtrans %}
+</span>
+{% else %}
+<span class="uk-badge uk-badge-notification uk-badge-warning" title="{% trans %}No Operating Instruction available{% endtrans %}">
+    {% trans %}No OI{% endtrans %}
+</span>
+{% endif %}
+{% endmacro -%}

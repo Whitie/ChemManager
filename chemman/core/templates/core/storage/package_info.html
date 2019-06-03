@@ -1,0 +1,219 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <h1 class="uk-text-center{% if chem.special_log %} cmr{% endif %}">
+            {{ chem.display_name }}
+            {{ m.risk_info(chem) }}
+        </h1>
+    </div>
+</div>
+<div class="uk-grid">
+    <div class="uk-width-4-10">
+        <dl class="uk-description-list-horizontal">
+            <dt>{% trans %}Storage{% endtrans %}</dt>
+            <dd>{{ package.place.storage }}</dd>
+            <dt>{% trans %}Storage place{% endtrans %}</dt>
+            <dd>{{ package.place }}</dd>
+            <dt>{% trans %}ID{% endtrans %}</dt>
+            <dd>{{ package.package_id }}</dd>
+            <dt>{% trans %}Content{% endtrans %}</dt>
+            <dd>{{ package.content }} {{ package.unit|unit }}</dd>
+            {% if chem.special_log %}
+            <dt>{% trans %}Brutto mass{% endtrans %}</dt>
+            <dd>{{ package.brutto_mass }} {{ package.brutto_mass_unit }}</dd>
+            <dt>{% trans %}Current brutto{% endtrans %}</dt>
+            <dd>
+                {{ package.current_brutto }}
+                <button type="button" id="wrong_brutto" class="uk-button uk-button-mini uk-button-danger" title="{% trans %}Report wrong brutto mass.{% endtrans %}">
+                    <i class="uk-icon-exclamation-triangle"></i>
+            </button>
+            </dd>
+            {% endif %}
+            <dt>{% trans %}Current Stock{% endtrans %}</dt>
+            <dd>{{ inventory.value|floatformat(4) }} {{ inventory.unit }}</dd>
+            {% if user.is_authenticated() %}
+            <dt>{% trans %}Stored by{% endtrans %}</dt>
+            <dd>{{ package.stored_by }}, {{ package.stored|date('SHORT_DATETIME_FORMAT') }}</dd>
+            {% endif %}
+            {% if package.best_before %}
+            <dt>{% trans %}Best before{% endtrans %}</dt>
+            <dd>{{ package.best_before|date('SHORT_DATE_FORMAT') }}</dd>
+            {% endif %}
+        </dl>
+        {% if not package.empty %}
+        <div class="uk-grid">
+            {{ m.actions(perms, package.id, icon_only=false, container='<div class="uk-width-1-4">', end_container='</div>')}}
+        </div>
+        {% endif %}
+    </div>
+    <div class="uk-width-2-10">
+        <img src="{{ url('core:qr-package', image_format='svg', package_id=package.package_id) }}" alt="ID: {{ package.package_id }}" title="ID: {{ package.package_id }}">
+        <a href="{{ url('core:qr-print-packages') }}?pid={{ package.id }}" class="uk-button">
+            {% trans %}Print QR-Code{% endtrans %}
+        </a>
+    </div>
+    <div class="uk-width-4-10">
+        <h3>{% trans %}Consumption:{% endtrans %}</h3>
+        <ul>
+            {% for use in package.usage.all().order_by('-usage_date') %}
+            <li title="{{ use.task }}">
+                {% if use.is_inventory %}<mark>{% endif %}
+                [{{ use.usage_date|date('SHORT_DATETIME_FORMAT') }}]
+                {{ use.user }}: {{ use.removed_quantity }}
+                {{ use.removed_quantity_unit }}
+                {% if use.group %}({{ use.group }}){% endif %}
+                {% if use.is_inventory %}</mark>{% endif %}
+            </li>
+            {% else %}
+            <li>{% trans %}Nothing listed{% endtrans %}</li>
+            {% endfor %}
+        </ul>
+        {% if package.empty %}
+        {% if package.disposed_by %}
+        <div class="uk-badge uk-badge-warning">
+            <i class="uk-icon-exclamation-triangle"></i>
+            {% trans u=package.disposed_by %}This package was disposed by {{ u }}{% endtrans %}
+        </div>
+        <hr>
+        {% trans %}Reason{% endtrans %}: {{ package.dispose_reason }}
+        {% else %}
+        <div class="uk-badge uk-badge-warning">
+            <i class="uk-icon-exclamation-triangle"></i>
+            {% trans %}Package is empty{% endtrans %}
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% if chem.special_log and user.is_authenticated %}
+<div class="uk-grid">
+    <div class="uk-width-1-6"></div>
+    <div class="uk-width-4-6">
+        <h2 class="uk-text-center">{% trans %}Detailed usage{% endtrans %}</h2>
+        <div class="uk-grid" data-uk-margin>
+            <div class="uk-width-1-1">
+                <div class="uk-panel uk-panel-box uk-panel-box-secondary">
+                    <div class="uk-panel-badge uk-badge">
+                        {{ package.stored|date('SHORT_DATE_FORMAT') }}
+                    </div>
+                    <h3 class="uk-panel-title">
+                        <i class="uk-icon-truck"></i>
+                        {% trans %}Delivery{% endtrans %}
+                    </h3>
+                    <dl class="uk-description-list-horizontal">
+                        <dt>{% trans %}Content{% endtrans %}</dt>
+                        <dd>{{ package.content }} {{ package.unit|unit }}</dd>
+                        <dt>{% trans %}Brutto mass{% endtrans %}</dt>
+                        <dd>{{ package.brutto_mass }} {{ package.brutto_mass_unit }}</dd>
+                        <dt>{% trans %}Stored by{% endtrans %}</dt>
+                        <dd>{{ package.stored_by }}</dd>
+                    </dl>
+                </div>
+            </div>
+            {% for use in package.usage.all().order_by('usage_date') %}
+            <div class="uk-width-1-1">
+                <div class="uk-panel uk-panel-box uk-panel-box-secondary">
+                    <div class="uk-panel-badge uk-badge{% if use.is_inventory %} uk-badge-warning{% endif %}">
+                        {{ use.usage_date|date('SHORT_DATE_FORMAT') }}
+                    </div>
+                    <h3 class="uk-panel-title">
+                        {% if use.is_inventory %}
+                        <i class="uk-icon-balance-scale"></i>
+                        {% else %}
+                        <i class="uk-icon-arrow-circle-down"></i>
+                        {% endif %}
+                        {% trans %}Consume{% endtrans %}: {{ use.removed }}
+                    </h3>
+                    <dl class="uk-description-list-horizontal">
+                        <dt>{% trans %}Instructor{% endtrans %}</dt>
+                        <dd>
+                            {{ use.used_by }}
+                            ({% trans %}Account{% endtrans %}: {{ use.user }})
+                        </dd>
+                        <dt>{% trans %}Usage time{% endtrans %}</dt>
+                        <dd>{{ use.usage_date|date('SHORT_DATETIME_FORMAT') }}</dd>
+                        <dt>{% trans %}Group{% endtrans %}</dt>
+                        <dd>{{ use.group.name|default('-', true) }}</dd>
+                        <dt>{% trans %}Task{% endtrans %}</dt>
+                        <dd>
+                            {% if use.is_inventory %}
+                            <mark>{{ use.task }}</mark>
+                            {% else %}
+                            {{ use.task|default('-', true) }}
+                            {% endif %}
+                        </dd>
+                        <dt>{% trans %}New brutto mass{% endtrans %}</dt>
+                        <dd>{{ use.brutto }}</dd>
+                    </dl>
+                    {% if loop.last and package.empty %}
+                    <div class="uk-badge uk-badge-warning">
+                        <i class="uk-icon-exclamation-triangle"></i>
+                        {% trans %}Package is empty{% endtrans %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% if package.empty and package.disposed_by %}
+            <div class="uk-width-1-1">
+                <div class="uk-panel uk-panel-box uk-panel-box-secondary">
+                    <div class="uk-panel-badge uk-badge uk-badge-danger">
+                        {{ package.last_usage|date('SHORT_DATE_FORMAT') }}
+                    </div>
+                    <h3 class="uk-panel-title">
+                        <i class="uk-icon-trash"></i>
+                        {% trans %}Disposal{% endtrans %}
+                    </h3>
+                    <dl class="uk-description-list-horizontal">
+                        <dt>{% trans %}Disposed by{% endtrans %}</dt>
+                        <dd>{{ package.disposed_by }}</dd>
+                        <dt>{% trans %}Reason{% endtrans %}</dt>
+                        <dd>{{ package.dispose_reason }}</dd>
+                    </dl>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="uk-width-1-6"></div>
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+    function report_wrong_brutto() {
+        $('#wrong_brutto').prop('disabled', true);
+        var url = '{{ url("core:api-consume-wrong-brutto") }}';
+        var params = {
+            'mass': '{{ package.current_brutto.value }}',
+            'unit': '{{ package.current_brutto.unit }}',
+            'pid': '{{ package.id }}',
+            'uid': '{{ user.id }}'
+        };
+        $.getJSON(url, params).done(function(data) {
+            if (data['success'] === true) {
+                icon = '<i class="uk-icon-check"></i> ';
+                status = 'success';
+            } else {
+                icon = '<i class="uk-icon-exclamation"></i> ';
+                status = 'warning';
+            }
+            UIkit.notify({
+                message: icon + data['msg'],
+                status: status,
+                timeout: 5000,
+                pos: 'top-center'
+            });
+        });
+    }
+
+    $(document).ready(function() {
+        $('#wrong_brutto').click(report_wrong_brutto);
+    });
+</script>
+{% endblock %}

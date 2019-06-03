@@ -1,0 +1,89 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}General Information{% endtrans %}</h1>
+<ul class="uk-grid" data-uk-grid-margin>
+    <li class="uk-width-1-3">
+        <h2 class="uk-text-center">{% trans %}Safety{% endtrans %}</h2>
+        <ul class="uk-list uk-list-line uk-list-space">
+            <li>
+                <a href="{{ url('core:info-hp') }}">
+                    {% trans %}H+P - Statements{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('core:info-ghs') }}">
+                    {% trans %}GHS - Symbols{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('core:info-whc') }}">
+                    {% trans %}Water Hazard Classes{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('core:info-opinst') }}">
+                    {% trans %}Operating Instructions{% endtrans %}
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="uk-width-1-3">
+        <h2 class="uk-text-center">{% trans %}Storage{% endtrans %}</h2>
+        <ul class="uk-list uk-list-line uk-list-space">
+            <li>
+                <a href="{{ url('core:storage-index') }}">
+                    {% trans %}Storage Overview{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('core:storage-classes-info') }}">
+                    {% trans %}Storage Classes{% endtrans %}
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+                <a href="{{ url('core:info-stored-chemicals') }}">
+                    {% trans %}Stored Chemicals{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('core:packages-history') }}?filter=tox">
+                    {% trans %}Toxic Packages History{% endtrans %}
+                </a>
+                <a href="{{ url('core:packages-history') }}?filter=all">
+                    ({% trans %}all{% endtrans %})
+                </a>
+            </li>
+            <li>
+                <a href="{{ url('core:info-orders') }}">
+                    {% trans %}Orders{% endtrans %}
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </li>
+    <li class="uk-width-1-3">
+        {% if user.is_authenticated %}
+        <h2 class="uk-text-center">{% trans %}Toxic Chemicals{% endtrans %}</h2>
+        <ul class="uk-list uk-list-line uk-list-space">
+            <li>
+                <a href="{{ url('core:info-usage') }}">
+                    {% trans %}Toxic Usage Info{% endtrans %}
+                </a>
+            </li>
+        </ul>
+        {% endif %}
+    </li>
+    <li class="uk-width-1-3">
+        <h2 class="uk-text-center">{% trans %}System{% endtrans %}</h2>
+        <ul class="uk-list uk-list-line uk-list-space">
+            <li>
+                <a href="{{ url('core:about') }}">
+                    {% trans %}About ChemManager{% endtrans %}
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+{% endblock %}

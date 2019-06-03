@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% macro list_matches(chems) -%}
+<ul class="uk-list uk-list-striped">
+    {% for chem in chems %}
+    <li>
+        {{ chem.name }}
+        <a href="{{ url('msds:compare', parsed.id, chem.id) }}" class="uk-button uk-button-success uk-button-small">
+            {% trans %}Choose{% endtrans %}
+            <i class="uk-icon-hand-o-right"></i>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+{%- endmacro %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans name=parsed.upload.name %}Transfer {{ name }} to Database{% endtrans %}
+</h1>
+<h2>{% trans %}Exact matches in database{% endtrans %}</h2>
+{% if exact %}
+<p>{% trans count=exact.count() %}We have one exact match, you can choose to edit this one instead of adding a new chemical.{% pluralize %}We have {{ count }} exact matches, you can choose to edit one instead of adding a new chemical.{% endtrans %}</p>
+{{ list_matches(exact) }}
+{% else %}
+<p>{% trans %}No exact matches.{% endtrans %}
+{% endif %}
+
+<h2>{% trans %}Similar matches in database{% endtrans %}</h2>
+{% if similar %}
+<p>{% trans count=similar.count() %}We have one similar match, you can choose to edit this one instead of adding a new chemical.{% pluralize %}We have {{ count }} similar matches, you can choose to edit one instead of adding a new chemical.{% endtrans %}</p>
+{{ list_matches(similar) }}
+{% else %}
+<p>{% trans %}No similar matches.{% endtrans %}</p>
+{% endif %}
+
+<a href="{{ url('msds:list') }}" class="uk-button">
+    {% trans %}Back{% endtrans %}
+</a>
+<a href="{{ url('msds:add', parsed.id) }}" class="uk-button uk-button-{% if exact or similar %}danger{% else %}success{% endif %}">
+    {% trans %}Add as new chemical{% endtrans %}
+</a>
+{% endblock %}

@@ -1,0 +1,45 @@
+<h3>{% trans %}Orders found:{% endtrans %}</h3>
+<div class="uk-grid" data-uk-margin>
+    {% for o in orders %}
+    {% set rest=o.count - o.delivered_count %}
+    {% set log=o.barcode.chemical.special_log %}
+    <div class="uk-width-1-1">
+        <div class="uk-panel uk-panel-box{% if log %} cmr{% endif %}">
+            <div class="uk-panel-badge uk-badge">
+                {% trans %}Ordered{% endtrans %}:
+                {{ o.sent|date('SHORT_DATE_FORMAT') }}
+            </div>
+            <h3 class="uk-panel-title">
+                {{ o.barcode.name }}
+            </h3>
+            {% trans %}Count{% endtrans %}: {{ o.count }},
+            {% trans %}Delivered{% endtrans %}: {{ o.delivered_count }},
+            {% trans %}User{% endtrans %}: {{ o.user }}
+            <form class="uk-form" action="{{ url('core:delivery-store-packages') }}" id="form-{{ o.id }}">
+                <fieldset id="fs-{{ o.id }}" data-uk-margin>
+                    <input type="hidden" id="rest_{{ o.id }}" value="{{ rest }}">
+                    <input type="hidden" name="order" value="{{ o.id }}">
+                    <input type="hidden" name="storage" value="{{ storage.id }}">
+                    {% trans %}Delivered now{% endtrans %}:
+                    <input type="number" class="uk-form-width-small" id="delivered_{{ o.id }}" min="1" max="{{ rest }}" name="delivered" required>
+                    <button type="button" class="uk-button" onclick="deliver_all({{ o.id }});">
+                        {% trans %}ALL{% endtrans %}
+                    </button>
+                    {% trans %}To place{% endtrans %}:
+                    <select name="place">
+                        {% for p in places %}
+                        <option value="{{ p.id }}">{{ p }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="button" class="uk-button" onclick="store_fast({{ o.id }}, {{ rest }});" id="btn-1-{{ o.id }}"{% if log %} disabled{% endif %}>
+                        {% trans %}Store fast{% endtrans %}
+                    </button>
+                    <button type="submit" class="uk-button uk-button-success" id="btn-2-{{ o.id }}">
+                        {% trans %}Store with extra data{% endtrans %}
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>

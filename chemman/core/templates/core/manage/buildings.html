@@ -1,0 +1,20 @@
+{% extends 'core/manage/base.html' %}
+
+{% block left %}
+<h3>{% trans %}Existing Buildings{% endtrans %}</h3>
+<ul class="uk-list uk-list-line">
+    {% for b in buildings %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        <a href="{{ url('core:manage-buildings', building_id=b.id) }}" title="{% trans %}Click to edit this building{% endtrans %}">
+            {{ b.identifier }} - {{ b.name }} ({{ b.street }})
+        </a>
+    </li>
+    {% else %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        {% trans %}No buildings found{% endtrans %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

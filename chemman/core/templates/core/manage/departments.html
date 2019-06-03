@@ -1,0 +1,21 @@
+{% extends 'core/manage/base.html' %}
+
+{% block left %}
+<h3>{% trans %}Existing Departments{% endtrans %}</h3>
+<ul class="uk-list uk-list-line">
+    {% for d in deps %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        <a href="{{ url('core:manage-departments', dep_id=d.id) }}" title="{% trans %}Click to edit this Department{% endtrans %}">
+            {{ d.name }}
+        </a>
+        ({% trans %}assigned:{% endtrans %} {{ d.users.all()|join(', ') }})
+    </li>
+    {% else %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        {% trans %}No departments found{% endtrans %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

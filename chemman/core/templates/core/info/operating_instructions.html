@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Operating Instructions{% endtrans %}</h1>
+<div class="uk-grid">
+    <div class="uk-width-1-6"></div>
+    <div class="uk-width-4-6">
+        {% for dep, insts in instructions.items() %}
+        <h3>{{ dep.name }}</h3>
+        <ul class="uk-list uk-list-striped">
+            {% for inst in insts %}
+            <li>
+                <a href="{{ inst.document.url }}" target="_blank">
+                    {{ inst.chemical.display_name }},
+                    {% trans %}last update{% endtrans %}:
+                    {{ inst.last_updated|date('SHORT_DATE_FORMAT') }}
+                    ({{ inst.last_updated_by }})
+                </a>
+                <i class="uk-icon-external-link"></i>
+            </li>
+            {% else %}
+            <li>{% trans %}no operating instructions found{% endtrans %}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+    <div class="uk-width-1-6"></div>
+</div>
+<a class="uk-button uk-button-primary uk-margin-top" href="{{ url('core:info') }}">
+    <i class="uk-icon-chevron-circle-left"></i> {% trans %}Back{% endtrans %}
+</a>
+{% endblock %}

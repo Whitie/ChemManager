@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Storage Classes{% endtrans %}</h1>
+<a name="page-start"></a>
+<div class="uk-button-dropdown" data-uk-dropdown="{mode: 'click'}">
+    <button class="uk-button uk-button-primary">
+        {% trans %}Choose...{% endtrans %} <i class="uk-icon-caret-down"></i>
+    </button>
+    <div class="uk-dropdown uk-dropdown-small">
+        <ul class="uk-nav uk-nav-dropdown">
+            {% for cls in classes %}
+            <li><a href="#{{ cls.value }}">{{ cls }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="uk-grid uk-margin-top" data-uk-grid-margin>
+    {% for cls in classes %}
+    <div class="uk-width-1-1">
+        <a name="{{ cls.value }}"></a>
+        <div class="uk-panel uk-panel-box uk-panel-box-primary">
+            <div class="uk-panel-badge uk-badge">{{ cls.value }}</div>
+            <h3 class="uk-panel-title">
+                {{ cls }}
+                <a href="#page-start" class="uk-button uk-button-primary uk-button-small">
+                    <i class="uk-icon-arrow-up"></i> {% trans %}Up{% endtrans %}
+                </a>
+            </h3>
+            <p>{% trans sys=cls.chemicals.count(), sto=cls.stored_chems %}In system: {{ sys }}, stored: {{ sto }}{% endtrans %}
+            {% if cls.chemicals.count() %}(<a href="{{ cls.spec|list_url(name=cls) }}">{% trans %}Show{% endtrans %}</a>){% endif %}
+            </p>
+            <table class="uk-table">
+                <thead>
+                    <tr>
+                        <th>{% trans %}Store together with{% endtrans %}</th>
+                        <th>{% trans %}Restrictions{% endtrans %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c, r in cls.info.items() %}
+                    <tr>
+                        <td>{{ c }}</td>
+                        <td>{{ r.get_text() }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="2">{% trans %}Nothing listed{% endtrans %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<a class="uk-button uk-button-primary uk-margin-top" href="{{ url('core:info') }}">
+    <i class="uk-icon-chevron-circle-left"></i> {% trans %}Back{% endtrans %}
+</a>
+{% endblock %}

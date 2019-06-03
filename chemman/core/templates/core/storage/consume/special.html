@@ -1,0 +1,78 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as macros with context %}
+
+{% set chem=package.stored_chemical.chemical %}
+
+{% block content %}
+<h1 class="uk-text-center cmr">
+    {% trans %}Consume Toxic Chemical{% endtrans %}
+</h1>
+<h2 class="uk-text-center cmr">
+    {{ package }} {{ macros.risk_info(chem) }}
+</h2>
+{% if package.place.storage.type == 'through' %}
+<h2 class="uk-text-center uk-text-danger">
+    {% trans %}This package is in a storage of type 'Through' and cannot be consumed!{% endtrans %}
+</h2>
+{% else %}
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <h3>
+            {% trans %}Current brutto mass:{% endtrans %}
+            {{ package.current_brutto }}
+            <button type="button" id="wrong_brutto" class="uk-button uk-button-mini uk-button-danger" title="{% trans %}Report wrong brutto mass.{% endtrans %}">
+                <i class="uk-icon-exclamation-triangle"></i>
+            </button>
+        </h3>
+        {% include 'core/storage/consume/form.inc.html' with context %}
+    </div>
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Consumes{% endtrans %}</h3>
+        <h4>
+            {% trans %}Current Stock{% endtrans %}: {{ package.get_inventory() }}
+        </h4>
+        <ul class="uk-list uk-list-line">
+            {% for u in package.usage.all().order_by('-usage_date') %}
+            <li>[{{ u.usage_date|date('SHORT_DATETIME_FORMAT') }}] {% trans %}Brutto mass{% endtrans %}: {{ u.brutto }}, {% trans %}Removed{% endtrans %}: -{{ u.removed_mass }}, {{ u.used_by }}</li>
+            {% else %}
+            <li>{% trans %}No consumes listed{% endtrans %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script>
+    function report_wrong_brutto() {
+        $('#wrong_brutto').prop('disabled', true);
+        var url = '{{ url("core:api-consume-wrong-brutto") }}';
+        var params = {
+            'mass': '{{ package.current_brutto.value }}',
+            'unit': '{{ package.current_brutto.unit }}',
+            'pid': '{{ package.id }}',
+            'uid': '{{ user.id }}'
+        };
+        $.getJSON(url, params).done(function(data) {
+            if (data['success'] === true) {
+                icon = '<i class="uk-icon-check"></i> ';
+                status = 'success';
+            } else {
+                icon = '<i class="uk-icon-exclamation"></i> ';
+                status = 'warning';
+            }
+            UIkit.notify({
+                message: icon + data['msg'],
+                status: status,
+                timeout: 5000,
+                pos: 'top-center'
+            });
+        });
+    }
+
+    $(document).ready(function() {
+        $('#wrong_brutto').click(report_wrong_brutto);
+    });
+</script>
+{% endblock %}

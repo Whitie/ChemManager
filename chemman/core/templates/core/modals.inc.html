@@ -1,0 +1,58 @@
+{% if user.is_authenticated %}
+<div id="dlg-bookmark" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-modal-header">
+            <h2>{% trans %}Bookmark this page{% endtrans %}</h2>
+        </div>
+        <form class="uk-form uk-form-horizontal">
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="bm_name">
+                    {% trans %}Name:{% endtrans %}
+                </label>
+                <div class="uk-form-controls">
+                    <input type="text" name="bm_name" id="bm_name" placeholder="{% trans %}Name{% endtrans %}" maxlength="100" onkeydown="if (event.keyCode == 13){document.getElementById('dlg-bookmark-submit').click();event.preventDefault();}">
+                </div>
+            </div>
+        </form>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="uk-button uk-button-primary" onclick="add_bookmark('#dlg-bookmark', '{{ url('core:api-add-bookmark') }}');" id="dlg-bookmark-submit">
+                {% trans %}OK{% endtrans %}
+            </button>
+        </div>
+    </div>
+</div>
+{% else %}
+<div id="dlg-login" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-modal-header">
+            <h2>{% trans %}Login Dialog{% endtrans %}</h2>
+        </div>
+        <form class="uk-form uk-form-horizontal">
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="username">
+                    {% trans %}Username{% endtrans %}:
+                </label>
+                <div class="uk-form-controls">
+                    <input type="text" id="username" name="username" maxlength="150" required>
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="passwd">
+                    {% trans %}Password{% endtrans %}:
+                </label>
+                <div class="uk-form-controls">
+                    <input type="password" id="passwd" name="passwd" maxlength="150" required>
+                </div>
+            </div>
+        </form>
+        <p id="error"></p>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="uk-button uk-button-primary" onclick="try_login();" id="btn-login">
+                {% trans %}Login{% endtrans %}
+            </button>
+        </div>
+    </div>
+</div>
+{% endif %}

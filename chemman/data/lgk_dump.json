@@ -1,0 +1,299 @@
+[
+{
+  "model": "core.storagerestriction",
+  "pk": 1,
+  "fields": {
+    "ref_num": 1,
+    "text": "Die spezifischen gesetzlichen Lagervorschriften sind zu beachten:<br>\r\n<dl>\r\n\t<dt>LGK 1 und LGK 4.1A</dt>\r\n\t<dd>2. SprengV;</dd>\r\n\t<dt>LGK 5.1C</dt>\r\n\t<dd>GefStoffV Anhang I Nummer 5 Ammoniumnitrat sowie TRGS 511;</dd>\r\n\t<dt>LGK 5.2</dt>\r\n\t<dd>\r\n        BGV B4 \"Organische Peroxide\"; Hinweis: Die hier genannten Regelungen\r\n        f\u00fcr die Zusammenlagerung sind sinngem\u00e4\u00df auch f\u00fcr selbstzersetzliche\r\n        Gefahrstoffe anzuwenden;\r\n    </dd>\r\n\t<dt>LGK 7</dt>\r\n\t<dd>StrlSchV und DIN 25422.</dd>\r\n</dl>",
+    "is_html": true
+  }
+},
+{
+  "model": "core.storagerestriction",
+  "pk": 2,
+  "fields": {
+    "ref_num": 2,
+    "text": "Zusammenlagerung in R\u00e4umen ist nur zul\u00e4ssig wenn,<br>\r\n<ol>\r\n    <li>\r\n        maximal 50 gef\u00fcllte Druckgasbeh\u00e4lter, darunter nicht mehr als 25 gef\u00fcllte\r\n        Druckgasbeh\u00e4lter mit entz\u00fcndbaren/entz\u00fcndlichen,\r\n        oxidierenden/brandf\u00f6rdernden oder akut toxischen, gekennzeichnet mit\r\n        H331 bzw. giftigen Gasen, gelagert werden und diese\r\n    </li>\r\n    <li>\r\n        durch eine mindestens 2 m hohe Wand aus nichtbrennbaren Baustoffen\r\n        abgetrennt sind und\r\n    </li>\r\n    <li>\r\n        zwischen Wand und den brennbaren Stoffen ein Abstand von mindestens 5 m\r\n        eingehalten wird.\r\n    </li>\r\n</ol>",
+    "is_html": true
+  }
+},
+{
+  "model": "core.storagerestriction",
+  "pk": 3,
+  "fields": {
+    "ref_num": 3,
+    "text": "Mit verschiedenen Gasen gef\u00fcllte Druckgasbeh\u00e4lter d\u00fcrfen unter folgenden Bedingungen\r\ngemeinsam in einem Lagerraum gelagert werden:<br>\r\n<ol>\r\n\t<li>\r\n\t\tDruckgasbeh\u00e4lter mit entz\u00fcndbaren/entz\u00fcndlichen,\r\n        oxidierenden/brandf\u00f6rdernden oder akut toxischen, gekennzeichnet mit\r\n        H331 bzw. giftigen Gasen, wenn dabei die Gesamtzahl 150 Druckgasbeh\u00e4lter\r\n        oder 15 Druckf\u00e4sser nicht \u00fcbersteigt. Zus\u00e4tzlich d\u00fcrfen Druckgasbeh\u00e4lter\r\n        mit inerten Gasen in beliebiger Menge gelagert werden.\r\n\t</li>\r\n\t<li>\r\n\t\tDruckgasbeh\u00e4lter mit entz\u00fcndbaren/entz\u00fcndlichen und Druckgasbeh\u00e4lter mit\r\n        inerten Gasen in beliebiger Menge.\r\n\t</li>\r\n\t<li>\r\n\t\tDruckgasbeh\u00e4lter mit oxidierenden/brandf\u00f6rdernden und Druckgasbeh\u00e4lter\r\n        mit inerten Gasen in beliebiger Menge.\r\n\t</li>\r\n\t<li>\r\n\t\tDruckgasbeh\u00e4lter mit akut toxischen Gefahrstoffen der Kategorie 1, 2\r\n        oder 3/sehr giftigen, giftigen und Druckgasbeh\u00e4lter mit inerten Gasen\r\n        in beliebiger Menge.\r\n\t</li>\r\n    <li>\r\n        In den F\u00e4llen 1 bis 3 d\u00fcrfen zus\u00e4tzlich 15 Druckgasbeh\u00e4lter oder ein\r\n        Druckfass mit akut toxischen, gekennzeichnet mit H330, bzw. sehr\r\n        giftigen Gasen gelagert werden. Gr\u00f6\u00dfere Mengen von Druckgasbeh\u00e4ltern\r\n        mit akut giftigen Gasen m\u00fcssen in einem besonderen Lagerraum gelagert\r\n        werden.\r\n    </li>\r\n    <li>\r\n        Zwischen Druckgasbeh\u00e4ltern mit entz\u00fcndbaren/entz\u00fcndlichen und\r\n        Druckgasbeh\u00e4ltern mit oxidierenden/brandf\u00f6rdernden Gasen muss ein\r\n        Abstand von mindestens 2m eingehalten werden.\r\n    </li>\r\n    <li>\r\n        F\u00fcr die Lagerung im Freien bestehen keine Einschr\u00e4nkungen.\r\n    </li>\r\n</ol>",
+    "is_html": true
+  }
+},
+{
+  "model": "core.storagerestriction",
+  "pk": 4,
+  "fields": {
+    "ref_num": 4,
+    "text": "Eine Zusammenlagerung ist erlaubt, wenn\r\n<ol>\r\n    <li>bei LGK 3, 5.1B, 6.1A und 6.1B die Einschr\u00e4nkungen von Tabelle 3,</li>\r\n    <li>bei LGK 4.1B mit LGK 6.1A die Einschr\u00e4nkungen der Tabelle 4</li>\r\n</ol>\r\neingehalten sind.\r\n<table class=\"uk-table\">\r\n    <caption>\r\n        <strong>Tabelle 3:</strong> Voraussetzung zur Zusammenlagerung von\r\n        LGK 3, 5.1B, 6.1A und 6.1B\r\n    </caption>\r\n    <thead>\r\n        <tr>\r\n            <th>Gesamtmenge</th>\r\n            <th>Einschr\u00e4nkungen</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr>\r\n            <td>bis 1t</td>\r\n            <td>ohne Einschr\u00e4nkungen</td>\r\n        </tr>\r\n        <tr>\r\n            <td>bis 20t</td>\r\n            <td>\r\n                In Geb\u00e4uden, wenn\r\n                <ul>\r\n                    <li>eine automatische Feuerl\u00f6schanlage oder</li>\r\n                    <li>\r\n                        eine automatische Brandmeldeanlage in Verbindung mit\r\n                        einer nicht automatischen Feuerl\u00f6schanlage und eine\r\n                        anerkannte Werkfeuerwehr vorhanden ist.\r\n                    </li>\r\n                </ul>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n\r\n<table class=\"uk-table\">\r\n    <caption>\r\n        <strong>Tabelle 3:</strong> Voraussetzung zur Zusammenlagerung von\r\n        LGK 4.1B mit 6.1A\r\n    </caption>\r\n    <thead>\r\n        <tr>\r\n            <th>Gesamtmenge</th>\r\n            <th>Einschr\u00e4nkungen</th>\r\n        </tr>\r\n    </thead>\r\n    <tbody>\r\n        <tr>\r\n            <td>bis 10t</td>\r\n            <td>Ohne Einschr\u00e4nkungen</td>\r\n        </tr>\r\n        <tr>\r\n            <td>bis 20t</td>\r\n            <td>\r\n                wenn\r\n                <ul>\r\n                    <li>in Geb\u00e4uden eine automatische Brandmeldeanlage vorhanden,</li>\r\n                    <li>\r\n                        im Freien die Branderkennung und Brandmeldung durch\r\n                        <ul>\r\n                            <li>\r\n                                st\u00fcndliche Kontrolle mit Meldem\u00f6glichkeit\r\n                                (wie Telefon, Feuermelder, Funkger\u00e4t usw.)\r\n                                gew\u00e4hrleistet oder\r\n                            </li>\r\n                            <li>\r\n                                eine nachweislich geeignete automatische\r\n                                Brandmeldeanlage\r\n                            </li>\r\n                        </ul>\r\n                        vorhanden ist.\r\n                    </li>\r\n                </ul>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td>bis 50t</td>\r\n            <td>\r\n                wenn\r\n                <ul>\r\n                    <li>eine automatische Brandmeldeanlage vorhanden ist und</li>\r\n                    <li>\r\n                        die Feuerwehr die Brandstelle innerhalb von zehn\r\n                        Minuten nach Alarmierung erreicht.\r\n                    </li>\r\n                </ul>\r\n            </td>\r\n        </tr>\r\n        <tr>\r\n            <td>bis 100t</td>\r\n            <td>\r\n                wenn\r\n                <ul>\r\n                    <li>eine automatische Feuerl\u00f6schanlage oder</li>\r\n                    <li>\r\n                        eine automatische Brandmeldeanlage in Verbindung mit\r\n                        einer nicht automatischen Feuerl\u00f6schanlage und eine\r\n                        anerkannte Werkfeuerwehr vorhanden ist.\r\n                    </li>\r\n                </ul>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>",
+    "is_html": true
+  }
+},
+{
+  "model": "core.storagerestriction",
+  "pk": 5,
+  "fields": {
+    "ref_num": 5,
+    "text": "Materialien, die ihrer Art und Menge nach geeignet sind, zur Entstehung oder\r\nschnellen Ausbreitung von Br\u00e4nden beizutragen, wie z. B. Papier, Textilien,\r\nHolz, Holzwolle, Heu, Stroh, Kartonagen, brennbare Verpackungsf\u00fcllstoffe,\r\nd\u00fcrfen im Lagerabschnitt nicht gelagert werden, sofern sie nicht zur Lagerung\r\nund dem Transport eine Einheit mit den ortsbeweglichen Beh\u00e4ltern bilden.",
+    "is_html": false
+  }
+},
+{
+  "model": "core.storagerestriction",
+  "pk": 6,
+  "fields": {
+    "ref_num": 6,
+    "text": "Verschiedene Lagerg\u00fcter d\u00fcrfen miteinander oder mit anderen Materialien nur\r\nzusammen gelagert werden, soweit hierdurch eine wesentliche Gef\u00e4hrdungserh\u00f6hung\r\nnicht eintreten kann. Eine wesentliche Gef\u00e4hrdungserh\u00f6hung kann durch eine\r\nGetrenntlagerung vermieden werden.",
+    "is_html": false
+  }
+},
+{
+  "model": "core.storagerestriction",
+  "pk": 7,
+  "fields": {
+    "ref_num": 7,
+    "text": "Oxidierende/brandf\u00f6rdernde Gefahrstoffe d\u00fcrfen mit brennbaren Lagerg\u00fctern\r\nzusammengelagert werden<br>\r\n<ol>\r\n    <li>in Lagermengen bis zu insgesamt 1t ohne Einschr\u00e4nkungen,</li>\r\n    <li>\r\n        in Lagermengen von mehr als 1t unter den Einschr\u00e4nkungen der\r\n        Erl\u00e4uterung, Nr. 1.\r\n    </li>\r\n</ol>\r\nDie Anforderungen von Erl\u00e4uterung 5 sind ebenfalls zu beachten.\r\n\r\n<h4>Erl\u00e4uterung 1</h4>\r\n<p>Die spezifischen gesetzlichen Lagervorschriften sind zu beachten:<br>\r\n<dl>\r\n\t<dt>LGK 1 und LGK 4.1A</dt>\r\n\t<dd>2. SprengV;</dd>\r\n\t<dt>LGK 5.1C</dt>\r\n\t<dd>GefStoffV Anhang I Nummer 5 Ammoniumnitrat sowie TRGS 511;</dd>\r\n\t<dt>LGK 5.2</dt>\r\n\t<dd>\r\n        BGV B4 \"Organische Peroxide\"; Hinweis: Die hier genannten Regelungen\r\n        f\u00fcr die Zusammenlagerung sind sinngem\u00e4\u00df auch f\u00fcr selbstzersetzliche\r\n        Gefahrstoffe anzuwenden;\r\n    </dd>\r\n\t<dt>LGK 7</dt>\r\n\t<dd>StrlSchV und DIN 25422.</dd>\r\n</dl>\r\n</p>\r\n\r\n<h4>Erl\u00e4uterung 5</h4>\r\n<p>Materialien, die ihrer Art und Menge nach geeignet sind, zur Entstehung oder\r\nschnellen Ausbreitung von Br\u00e4nden beizutragen, wie z. B. Papier, Textilien,\r\nHolz, Holzwolle, Heu, Stroh, Kartonagen, brennbare Verpackungsf\u00fcllstoffe,\r\nd\u00fcrfen im Lagerabschnitt nicht gelagert werden, sofern sie nicht zur Lagerung\r\nund dem Transport eine Einheit mit den ortsbeweglichen Beh\u00e4ltern bilden.</p>",
+    "is_html": true
+  }
+},
+{
+  "model": "core.storagerestriction",
+  "pk": 8,
+  "fields": {
+    "ref_num": 0,
+    "text": "Keine Beschr\u00e4nkungen.",
+    "is_html": false
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 1,
+  "fields": {
+    "value": "1",
+    "description": "Explosive Stoffe",
+    "store_with": "{\n  \"1\": 1\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 2,
+  "fields": {
+    "value": "2A",
+    "description": "Gase",
+    "store_with": "{\n  \"8A\": 2,\n  \"12\": 0,\n  \"2B\": 2,\n  \"8B\": 0,\n  \"11\": 2,\n  \"2A\": 3,\n  \"5.1C\": 1,\n  \"10-13\": 2,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 3,
+  "fields": {
+    "value": "2B",
+    "description": "Aerosolpackungen",
+    "store_with": "{\n  \"10\": 0,\n  \"8A\": 0,\n  \"2B\": 0,\n  \"3\": 0,\n  \"8B\": 0,\n  \"5.1C\": 1,\n  \"13\": 0,\n  \"12\": 0,\n  \"6.1C\": 0,\n  \"11\": 0,\n  \"6.1A\": 0,\n  \"6.1D\": 0,\n  \"6.1B\": 0,\n  \"10-13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 4,
+  "fields": {
+    "value": "3",
+    "description": "Entz\u00fcndbare fl\u00fcssige Stoffe",
+    "store_with": "{\n  \"10\": 0,\n  \"8A\": 0,\n  \"3\": 0,\n  \"5.1B\": 4,\n  \"12\": 0,\n  \"8B\": 0,\n  \"11\": 5,\n  \"6.1A\": 0,\n  \"6.1D\": 6,\n  \"13\": 0,\n  \"10-13\": 5,\n  \"6.1C\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 5,
+  "fields": {
+    "value": "4.1A",
+    "description": "Sonstige explosionsgef\u00e4hrliche Stoffe",
+    "store_with": "{\n  \"10\": 1,\n  \"8A\": 1,\n  \"12\": 1,\n  \"10-13\": 1,\n  \"4.1A\": 1,\n  \"11\": 1,\n  \"5.2\": 1,\n  \"8B\": 1,\n  \"4.1B\": 1,\n  \"13\": 1\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 6,
+  "fields": {
+    "value": "4.1B",
+    "description": "Entz\u00fcndbare feste oder desensibilisierter explosiver Stoffe",
+    "store_with": "{\n  \"10\": 0,\n  \"8A\": 0,\n  \"10-13\": 0,\n  \"4.3\": 6,\n  \"4.2\": 6,\n  \"5.2\": 1,\n  \"5.1B\": 4,\n  \"8B\": 0,\n  \"12\": 0,\n  \"6.1C\": 0,\n  \"11\": 0,\n  \"6.1A\": 4,\n  \"6.1D\": 6,\n  \"13\": 0,\n  \"4.1B\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 7,
+  "fields": {
+    "value": "4.2",
+    "description": "Pyrophore oder selbsterhitzungsf\u00e4hige Stoffe",
+    "store_with": "{\n  \"10\": 6,\n  \"8A\": 6,\n  \"12\": 0,\n  \"6.1C\": 6,\n  \"4.3\": 6,\n  \"4.2\": 0,\n  \"11\": 6,\n  \"6.1D\": 6,\n  \"8B\": 6,\n  \"10-13\": 6,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 8,
+  "fields": {
+    "value": "4.3",
+    "description": "Stoffe, die in Ber\u00fchrung mit Wasser entz\u00fcndliche Gase bilden",
+    "store_with": "{\n  \"10\": 6,\n  \"8B\": 6,\n  \"12\": 6,\n  \"6.1C\": 6,\n  \"4.3\": 0,\n  \"11\": 6,\n  \"6.1D\": 6,\n  \"8A\": 6,\n  \"10-13\": 6,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 9,
+  "fields": {
+    "value": "5.1A",
+    "description": "Stark oxidierende Stoffe",
+    "store_with": "{\n  \"12\": 0,\n  \"5.1B\": 0,\n  \"5.1A\": 0,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 10,
+  "fields": {
+    "value": "5.1B",
+    "description": "Oxidierende Stoffe",
+    "store_with": "{\n  \"10\": 7,\n  \"8A\": 7,\n  \"5.1B\": 0,\n  \"8B\": 0,\n  \"6.1B\": 4,\n  \"13\": 0,\n  \"12\": 0,\n  \"6.1C\": 6,\n  \"11\": 7,\n  \"6.1A\": 4,\n  \"6.1D\": 6,\n  \"5.1C\": 1,\n  \"10-13\": 7\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 11,
+  "fields": {
+    "value": "5.1C",
+    "description": "Ammoniumnitrat und ammoniumnitrathaltige Zubereitungen",
+    "store_with": "{\n  \"10\": 1,\n  \"8A\": 1,\n  \"12\": 1,\n  \"8B\": 1,\n  \"11\": 1,\n  \"5.1C\": 1,\n  \"10-13\": 1,\n  \"13\": 1\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 12,
+  "fields": {
+    "value": "5.2",
+    "description": "Organische Peroxide und selbstzersetzliche Stoffe",
+    "store_with": "{\n  \"10\": 1,\n  \"12\": 0,\n  \"11\": 1,\n  \"5.2\": 0,\n  \"13\": 0,\n  \"10-13\": 1\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 13,
+  "fields": {
+    "value": "6.1A",
+    "description": "Brennbare akut toxische Stoffe",
+    "store_with": "{\n  \"10\": 0,\n  \"8A\": 0,\n  \"12\": 0,\n  \"6.1C\": 0,\n  \"8B\": 0,\n  \"11\": 5,\n  \"6.1A\": 0,\n  \"6.1D\": 0,\n  \"6.1B\": 0,\n  \"10-13\": 5,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 14,
+  "fields": {
+    "value": "6.1B",
+    "description": "Nichtbrennbare akut toxische Stoffe",
+    "store_with": "{\n  \"10\": 0,\n  \"8A\": 0,\n  \"12\": 0,\n  \"8B\": 0,\n  \"11\": 5,\n  \"13\": 0,\n  \"6.1D\": 0,\n  \"6.1B\": 0,\n  \"10-13\": 5,\n  \"6.1C\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 15,
+  "fields": {
+    "value": "6.1C",
+    "description": "Brennbare akut toxische oder chronisch wirkende Stoffe",
+    "store_with": "{\n  \"10\": 0,\n  \"8A\": 0,\n  \"12\": 0,\n  \"6.1C\": 0,\n  \"11\": 0,\n  \"6.1D\": 0,\n  \"8B\": 0,\n  \"10-13\": 0,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 16,
+  "fields": {
+    "value": "6.1D",
+    "description": "Nichtbrennbare akut toxische oder chronisch wirkende Stoffe",
+    "store_with": "{\n  \"10\": 0,\n  \"8A\": 0,\n  \"12\": 0,\n  \"11\": 0,\n  \"6.1D\": 0,\n  \"8B\": 0,\n  \"10-13\": 0,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 17,
+  "fields": {
+    "value": "6.2",
+    "description": "Ansteckungsgef\u00e4hrliche Stoffe",
+    "store_with": "{\n  \"6.2\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 18,
+  "fields": {
+    "value": "7",
+    "description": "Radioaktive Stoffe",
+    "store_with": "{\n  \"7\": 1\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 19,
+  "fields": {
+    "value": "8A",
+    "description": "Brennbare \u00e4tzende Stoffe",
+    "store_with": "{\n  \"10\": 0,\n  \"8A\": 0,\n  \"8B\": 0,\n  \"11\": 0,\n  \"12\": 0,\n  \"10-13\": 0,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 20,
+  "fields": {
+    "value": "8B",
+    "description": "Nichtbrennbare \u00e4tzende Stoffe",
+    "store_with": "{\n  \"10\": 0,\n  \"8B\": 0,\n  \"11\": 0,\n  \"12\": 0,\n  \"10-13\": 0,\n  \"13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 21,
+  "fields": {
+    "value": "10",
+    "description": "Brennbare Fl\u00fcssigkeiten (soweit nicht LGK 3)",
+    "store_with": "{\n  \"10\": 0,\n  \"11\": 0,\n  \"12\": 0,\n  \"13\": 0,\n  \"10-13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 22,
+  "fields": {
+    "value": "11",
+    "description": "Brennbare Feststoffe",
+    "store_with": "{\n  \"11\": 0,\n  \"12\": 0,\n  \"13\": 0,\n  \"10-13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 23,
+  "fields": {
+    "value": "12",
+    "description": "Nichtbrennbare Fl\u00fcssigkeiten",
+    "store_with": "{\n  \"12\": 0,\n  \"13\": 0,\n  \"10-13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 24,
+  "fields": {
+    "value": "13",
+    "description": "Nichtbrennbare Feststoffe",
+    "store_with": "{\n  \"13\": 0,\n  \"10-13\": 0\n}"
+  }
+},
+{
+  "model": "core.storageclass",
+  "pk": 25,
+  "fields": {
+    "value": "10-13",
+    "description": "Sonstige brennbare und nichtbrennbare Stoffe",
+    "store_with": "{\n  \"10-13\": 0\n}"
+  }
+}
+]

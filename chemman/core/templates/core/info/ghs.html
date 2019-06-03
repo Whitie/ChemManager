@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}GHS Pictograms{% endtrans %}</h1>
+
+<div class="uk-container-center">
+    <table class="uk-table">
+        <thead>
+            <tr>
+                <th>{% trans %}Symbol{% endtrans %}</th>
+                <th>{% trans %}Reference{% endtrans %}</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Num. in DB{% endtrans %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ref, info in ghs.items() %}
+            <tr>
+                <td>
+                    <a class="uk-thumbnail" href="{{ info['obj'].image.url }}" title="{{ info['obj'] }}" data-uk-lightbox>
+                        <img src="{{ info['obj'].image.url }}" width="100">
+                    </a>
+                </td>
+                <td>{{ ref }}</td>
+                <td>{{ info['obj'].name }}</td>
+                <td>
+                    {% if info['count'] %}<a href="{{ info['spec']|list_url(name=ref) }}" class="uk-badge uk-badge-notification">{{ info['count'] }}</a>{% else %}<span class="uk-badge uk-badge-notification">0</span>{% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<a class="uk-button uk-button-primary uk-margin-top" href="{{ url('core:info') }}">
+    <i class="uk-icon-chevron-circle-left"></i> {% trans %}Back{% endtrans %}
+</a>
+{% endblock %}

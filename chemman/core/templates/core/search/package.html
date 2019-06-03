@@ -1,0 +1,94 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Package Search{% endtrans %}</h1>
+<h2 class="uk-text-center">{{ chem.display_name }} {{ m.risk_info(chem) }}</h2>
+<p>
+    {% trans c=packages.count() %}Packages: {{ c }}{% endtrans %}<br>
+    {% trans %}Search criteria:{% endtrans %} {{ query|join(', ') }}
+</p>
+
+<table id="result" class="uk-table uk-table-hover uk-table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Department{% endtrans %}</th>
+            <th>{% trans %}Package ID{% endtrans %}</th>
+            <th>{% trans %}Stored{% endtrans %}</th>
+            <th>{% trans %}Storage{% endtrans %}</th>
+            <th>{% trans %}Place{% endtrans %}</th>
+            <th>{% trans %}Size{% endtrans %}</th>
+            <th>{% trans %}Current Stock{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Department{% endtrans %}</th>
+            <th>{% trans %}Package ID{% endtrans %}</th>
+            <th>{% trans %}Stored{% endtrans %}</th>
+            <th>{% trans %}Storage{% endtrans %}</th>
+            <th>{% trans %}Place{% endtrans %}</th>
+            <th>{% trans %}Size{% endtrans %}</th>
+            <th>{% trans %}Current Stock{% endtrans %}</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for p in packages %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ p.place.storage.department|default('-', true) }}</td>
+            <td>
+                <a href="{{ url('core:package-info', pid=p.id) }}" title="{% trans %}Click for package details{% endtrans %}">
+                    {{ p.package_id }}
+                </a>
+            </td>
+            <td title="{% trans %}Stored by{% endtrans %} {{ p.stored_by }}">
+                {{ p.stored|date('SHORT_DATETIME_FORMAT') }}
+            </td>
+            <td title="{% trans %}Click to see the whole storage{% endtrans %}">
+                <a href="{{ url('core:storage-inventory', storage_id=p.place.storage.id) }}">
+                    {{ p.place.storage.name }}
+                    ({{ p.place.storage.get_type_display() }})
+                </a>
+            </td>
+            <td>{{ p.place }}</td>
+            <td class="uk-text-right">{{ p.content_obj }}</td>
+            <td class="uk-text-right">{{ p.get_inventory() }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td></td>
+            <td>{% trans %}No results{% endtrans %}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    dt_opts = {
+        'columns': [
+            {'searchable': false},
+            null,
+            null,
+            null,
+            null,
+            null,
+            {'orderable': false},
+            {'orderable': false, 'searchable': false}
+        ]
+    };
+    make_datatable($('#result'), dt_opts);
+});
+</script>
+{% endblock %}

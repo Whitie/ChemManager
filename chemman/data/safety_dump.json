@@ -1,0 +1,2402 @@
+[
+{
+  "model": "core.hazardstatement",
+  "pk": 1,
+  "fields": {
+    "ref": "200",
+    "text": "Instabil, explosiv.",
+    "sortorder": 200,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 2,
+  "fields": {
+    "ref": "201",
+    "text": "Explosiv, Gefahr der Massenexplosion.",
+    "sortorder": 201,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 3,
+  "fields": {
+    "ref": "202",
+    "text": "Explosiv; gro\u00dfe Gefahr durch Splitter, Spreng- und Wurfst\u00fccke.",
+    "sortorder": 202,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 4,
+  "fields": {
+    "ref": "203",
+    "text": "Explosiv; Gefahr durch Feuer, Luftdruck oder Splitter, Spreng- und Wurfst\u00fccke.",
+    "sortorder": 203,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 5,
+  "fields": {
+    "ref": "204",
+    "text": "Gefahr durch Feuer oder Splitter, Spreng- und Wurfst\u00fccke.",
+    "sortorder": 204,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 6,
+  "fields": {
+    "ref": "205",
+    "text": "Gefahr der Massenexplosion bei Feuer.",
+    "sortorder": 205,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 7,
+  "fields": {
+    "ref": "220",
+    "text": "Extrem entz\u00fcndbares Gas.",
+    "sortorder": 220,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 8,
+  "fields": {
+    "ref": "221",
+    "text": "Entz\u00fcndbares Gas.",
+    "sortorder": 221,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 9,
+  "fields": {
+    "ref": "222",
+    "text": "Extrem entz\u00fcndbares Aerosol.",
+    "sortorder": 222,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 10,
+  "fields": {
+    "ref": "223",
+    "text": "Entz\u00fcndbares Aerosol.",
+    "sortorder": 223,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 11,
+  "fields": {
+    "ref": "224",
+    "text": "Fl\u00fcssigkeit und Dampf extrem entz\u00fcndbar.",
+    "sortorder": 224,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 12,
+  "fields": {
+    "ref": "225",
+    "text": "Fl\u00fcssigkeit und Dampf leicht entz\u00fcndbar.",
+    "sortorder": 225,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 13,
+  "fields": {
+    "ref": "226",
+    "text": "Fl\u00fcssigkeit und Dampf entz\u00fcndbar.",
+    "sortorder": 226,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 14,
+  "fields": {
+    "ref": "228",
+    "text": "Entz\u00fcndbarer Feststoff.",
+    "sortorder": 228,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 15,
+  "fields": {
+    "ref": "229",
+    "text": "Beh\u00e4lter steht unter Druck: kann bei Erw\u00e4rmung bersten.",
+    "sortorder": 229,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 16,
+  "fields": {
+    "ref": "230",
+    "text": "Kann auch in Abwesenheit von Luft explosionsartig reagieren.",
+    "sortorder": 230,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 17,
+  "fields": {
+    "ref": "231",
+    "text": "Kann auch in Abwesenheit von Luft bei erh\u00f6htem Druck und/oder erh\u00f6hter Temperatur explosionsartig reagieren.",
+    "sortorder": 231,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 18,
+  "fields": {
+    "ref": "240",
+    "text": "Erw\u00e4rmung kann Explosion verursachen.",
+    "sortorder": 240,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 19,
+  "fields": {
+    "ref": "241",
+    "text": "Erw\u00e4rmung kann Brand oder Explosion verursachen.",
+    "sortorder": 241,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 20,
+  "fields": {
+    "ref": "242",
+    "text": "Erw\u00e4rmung kann Brand verursachen.",
+    "sortorder": 242,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 21,
+  "fields": {
+    "ref": "250",
+    "text": "Entz\u00fcndet sich in Ber\u00fchrung mit Luft von selbst.",
+    "sortorder": 250,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 22,
+  "fields": {
+    "ref": "251",
+    "text": "Selbsterhitzungsf\u00e4hig; kann in Brand geraten.",
+    "sortorder": 251,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 23,
+  "fields": {
+    "ref": "252",
+    "text": "In gro\u00dfen Mengen selbsterhitzungsf\u00e4hig; kann in Brand geraten.",
+    "sortorder": 252,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 24,
+  "fields": {
+    "ref": "260",
+    "text": "In Ber\u00fchrung mit Wasser entstehen entz\u00fcndbare Gase, die sich spontan entz\u00fcnden k\u00f6nnen.",
+    "sortorder": 260,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 25,
+  "fields": {
+    "ref": "261",
+    "text": "In Ber\u00fchrung mit Wasser entstehen entz\u00fcndbare Gase.",
+    "sortorder": 261,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 26,
+  "fields": {
+    "ref": "270",
+    "text": "Kann Brand verursachen oder verst\u00e4rken; Oxidationsmittel.",
+    "sortorder": 270,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 27,
+  "fields": {
+    "ref": "271",
+    "text": "Kann Brand oder Explosion verursachen; starkes Oxidationsmittel.",
+    "sortorder": 271,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 28,
+  "fields": {
+    "ref": "272",
+    "text": "Kann Brand verst\u00e4rken; Oxidationsmittel.",
+    "sortorder": 272,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 29,
+  "fields": {
+    "ref": "280",
+    "text": "Enth\u00e4lt Gas unter Druck; kann bei Erw\u00e4rmung explodieren.",
+    "sortorder": 280,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 30,
+  "fields": {
+    "ref": "281",
+    "text": "Enth\u00e4lt tiefgek\u00fchltes Gas; kann K\u00e4lteverbrennungen oder \u2013Verletzungen verursachen.",
+    "sortorder": 281,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 31,
+  "fields": {
+    "ref": "290",
+    "text": "Kann gegen\u00fcber Metallen korrosiv sein.",
+    "sortorder": 290,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 32,
+  "fields": {
+    "ref": "300+330",
+    "text": "Lebensgefahr bei Verschlucken oder Einatmen.",
+    "sortorder": 300,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 33,
+  "fields": {
+    "ref": "300+310",
+    "text": "Lebensgefahr bei Verschlucken oder Hautkontakt.",
+    "sortorder": 300,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 34,
+  "fields": {
+    "ref": "300",
+    "text": "Lebensgefahr bei Verschlucken.",
+    "sortorder": 300,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 35,
+  "fields": {
+    "ref": "300+310+330",
+    "text": "Lebensgefahr bei Verschlucken, Hautkontakt oder Einatmen.",
+    "sortorder": 300,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 36,
+  "fields": {
+    "ref": "301+311+331",
+    "text": "Giftig bei Verschlucken, Hautkontakt oder Einatmen.",
+    "sortorder": 301,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 37,
+  "fields": {
+    "ref": "301+311",
+    "text": "Giftig bei Verschlucken oder Hautkontakt.",
+    "sortorder": 301,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 38,
+  "fields": {
+    "ref": "301",
+    "text": "Giftig bei Verschlucken.",
+    "sortorder": 301,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 39,
+  "fields": {
+    "ref": "301+331",
+    "text": "Giftig bei Verschlucken oder Einatmen.",
+    "sortorder": 301,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 40,
+  "fields": {
+    "ref": "302+312",
+    "text": "Gesundheitssch\u00e4dlich bei Verschlucken oder Hautkontakt.",
+    "sortorder": 302,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 41,
+  "fields": {
+    "ref": "302+332",
+    "text": "Gesundheitssch\u00e4dlich bei Verschlucken oder Einatmen.",
+    "sortorder": 302,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 42,
+  "fields": {
+    "ref": "302+312+332",
+    "text": "Gesundheitssch\u00e4dlich bei Verschlucken, Hautkontakt oder Einatmen.",
+    "sortorder": 302,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 43,
+  "fields": {
+    "ref": "302",
+    "text": "Gesundheitssch\u00e4dlich bei Verschlucken.",
+    "sortorder": 302,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 44,
+  "fields": {
+    "ref": "304",
+    "text": "Kann bei Verschlucken und Eindringen in die Atemwege t\u00f6dlich sein.",
+    "sortorder": 304,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 45,
+  "fields": {
+    "ref": "310+330",
+    "text": "Lebensgefahr bei Hautkontakt oder Einatmen.",
+    "sortorder": 310,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 46,
+  "fields": {
+    "ref": "310",
+    "text": "Lebensgefahr bei Hautkontakt.",
+    "sortorder": 310,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 47,
+  "fields": {
+    "ref": "311",
+    "text": "Giftig bei Hautkontakt.",
+    "sortorder": 311,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 48,
+  "fields": {
+    "ref": "311+331",
+    "text": "Giftig bei Hautkontakt oder Einatmen.",
+    "sortorder": 311,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 49,
+  "fields": {
+    "ref": "312+332",
+    "text": "Gesundheitssch\u00e4dlich bei Hautkontakt oder Einatmen.",
+    "sortorder": 312,
+    "combined": true
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 50,
+  "fields": {
+    "ref": "312",
+    "text": "Gesundheitssch\u00e4dlich bei Hautkontakt.",
+    "sortorder": 312,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 51,
+  "fields": {
+    "ref": "314",
+    "text": "Verursacht schwere Ver\u00e4tzungen der Haut und schwere Augensch\u00e4den.",
+    "sortorder": 314,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 52,
+  "fields": {
+    "ref": "315",
+    "text": "Verursacht Hautreizungen.",
+    "sortorder": 315,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 53,
+  "fields": {
+    "ref": "317",
+    "text": "Kann allergische Hautreaktionen verursachen.",
+    "sortorder": 317,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 54,
+  "fields": {
+    "ref": "318",
+    "text": "Verursacht schwere Augensch\u00e4den.",
+    "sortorder": 318,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 55,
+  "fields": {
+    "ref": "319",
+    "text": "Verursacht schwere Augenreizung.",
+    "sortorder": 319,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 56,
+  "fields": {
+    "ref": "330",
+    "text": "Lebensgefahr bei Einatmen.",
+    "sortorder": 330,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 57,
+  "fields": {
+    "ref": "331",
+    "text": "Giftig bei Einatmen.",
+    "sortorder": 331,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 58,
+  "fields": {
+    "ref": "332",
+    "text": "Gesundheitssch\u00e4dlich bei Einatmen.",
+    "sortorder": 332,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 59,
+  "fields": {
+    "ref": "334",
+    "text": "Kann bei Einatmen Allergie, asthmaartige Symptome oder Atembeschwerden verursachen.",
+    "sortorder": 334,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 60,
+  "fields": {
+    "ref": "335",
+    "text": "Kann die Atemwege reizen.",
+    "sortorder": 335,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 61,
+  "fields": {
+    "ref": "336",
+    "text": "Kann Schl\u00e4frigkeit und Benommenheit verursachen.",
+    "sortorder": 336,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 62,
+  "fields": {
+    "ref": "340",
+    "text": "Kann genetische Defekte verursachen (Expositionsweg angeben, sofern schl\u00fcssig belegt ist, dass diese Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 340,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 63,
+  "fields": {
+    "ref": "341",
+    "text": "Kann vermutlich genetische Defekte verursachen (Expositionsweg angeben, sofern schl\u00fcssig belegt ist, dass diese Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 341,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 64,
+  "fields": {
+    "ref": "350",
+    "text": "Kann Krebs erzeugen (Expositionsweg angeben, sofern schl\u00fcssig belegt ist, dass diese Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 350,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 65,
+  "fields": {
+    "ref": "350i",
+    "text": "Kann bei Einatmen Krebs erzeugen.",
+    "sortorder": 350,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 66,
+  "fields": {
+    "ref": "351",
+    "text": "Kann vermutlich Krebs erzeugen (Expositionsweg angeben, sofern schl\u00fcssig belegt ist, dass diese Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 351,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 67,
+  "fields": {
+    "ref": "360Df",
+    "text": "Kann das Kind im Mutterleib sch\u00e4digen. Kann vermutlich die Fruchtbarkeit beeintr\u00e4chtigen.",
+    "sortorder": 360,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 68,
+  "fields": {
+    "ref": "360",
+    "text": "Kann die Fruchtbarkeit beeintr\u00e4chtigen oder das Kind im Mutterleib sch\u00e4digen (konkrete Wirkung angeben, sofern bekannt) (Expositionsweg angeben, sofern schl\u00fcssig belegt ist, dass die Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 360,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 69,
+  "fields": {
+    "ref": "360F",
+    "text": "Kann die Fruchtbarkeit beeintr\u00e4chtigen.",
+    "sortorder": 360,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 70,
+  "fields": {
+    "ref": "360D",
+    "text": "Kann das Kind im Mutterleib sch\u00e4digen.",
+    "sortorder": 360,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 71,
+  "fields": {
+    "ref": "360Fd",
+    "text": "Kann die Fruchtbarkeit beeintr\u00e4chtigen. Kann vermutlich das Kind im Mutterleib sch\u00e4digen.",
+    "sortorder": 360,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 72,
+  "fields": {
+    "ref": "360FD",
+    "text": "Kann die Fruchtbarkeit beeintr\u00e4chtigen. Kann das Kind im Mutterleib sch\u00e4digen.",
+    "sortorder": 360,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 73,
+  "fields": {
+    "ref": "361d",
+    "text": "Kann vermutlich das Kind im Mutterleib sch\u00e4digen.",
+    "sortorder": 361,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 74,
+  "fields": {
+    "ref": "361",
+    "text": "Kann vermutlich die Fruchtbarkeit beeintr\u00e4chtigen oder das Kind im Mutterleib sch\u00e4digen (konkrete Wirkung angeben, sofern bekannt) (Expositionsweg angeben, sofern schl\u00fcssig belegt ist, dass die Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 361,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 75,
+  "fields": {
+    "ref": "361f",
+    "text": "Kann vermutlich die Fruchtbarkeit beeintr\u00e4chtigen.",
+    "sortorder": 361,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 76,
+  "fields": {
+    "ref": "361fd",
+    "text": "Kann vermutlich die Fruchtbarkeit beeintr\u00e4chtigen. Kann vermutlich das Kind im Mutterleib sch\u00e4digen.",
+    "sortorder": 361,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 77,
+  "fields": {
+    "ref": "362",
+    "text": "Kann S\u00e4uglinge \u00fcber die Muttermilch sch\u00e4digen.",
+    "sortorder": 362,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 78,
+  "fields": {
+    "ref": "370",
+    "text": "Sch\u00e4digt die Organe (oder alle betroffenen Organe nennen, sofern bekannt) (Expositionsweg angeben, sofern schl\u00fcssig belegt ist, dass diese Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 370,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 79,
+  "fields": {
+    "ref": "371",
+    "text": "Kann die Organe sch\u00e4digen (oder alle betroffenen Organe nennen, sofern bekannt) (Expositionsweg angeben, sofern schl\u00fcssig belegt ist, dass diese Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 371,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 80,
+  "fields": {
+    "ref": "372",
+    "text": "Sch\u00e4digt die Organe (alle betroffenen Organe nennen) bei l\u00e4ngerer oder wiederholter Exposition (Expositionsweg angeben, wenn schl\u00fcssig belegt ist, dass diese Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 372,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 81,
+  "fields": {
+    "ref": "373",
+    "text": "Kann die Organe sch\u00e4digen (alle betroffenen Organe nennen, sofern bekannt) bei l\u00e4ngerer oder wiederholter Exposition (Expositionsweg angeben, wenn schl\u00fcssig belegt ist, dass diese Gefahr bei keinem anderen Expositionsweg besteht).",
+    "sortorder": 373,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 82,
+  "fields": {
+    "ref": "400",
+    "text": "Sehr giftig f\u00fcr Wasserorganismen.",
+    "sortorder": 400,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 83,
+  "fields": {
+    "ref": "410",
+    "text": "Sehr giftig f\u00fcr Wasserorganismen mit langfristiger Wirkung.",
+    "sortorder": 410,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 84,
+  "fields": {
+    "ref": "411",
+    "text": "Giftig f\u00fcr Wasserorganismen, mit langfristiger Wirkung.",
+    "sortorder": 411,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 85,
+  "fields": {
+    "ref": "412",
+    "text": "Sch\u00e4dlich f\u00fcr Wasserorganismen, mit langfristiger Wirkung.",
+    "sortorder": 412,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 86,
+  "fields": {
+    "ref": "413",
+    "text": "Kann f\u00fcr Wasserorganismen sch\u00e4dlich sein, mit langfristiger Wirkung.",
+    "sortorder": 413,
+    "combined": false
+  }
+},
+{
+  "model": "core.hazardstatement",
+  "pk": 87,
+  "fields": {
+    "ref": "420",
+    "text": "Sch\u00e4digt die \u00f6ffentliche Gesundheit und die Umwelt durch Ozonabbau in der \u00e4u\u00dferen Atmosph\u00e4re.",
+    "sortorder": 420,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 1,
+  "fields": {
+    "ref": "001",
+    "text": "In trockenem Zustand explosiv.",
+    "sortorder": 1,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 2,
+  "fields": {
+    "ref": "014",
+    "text": "Reagiert heftig mit Wasser.",
+    "sortorder": 14,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 3,
+  "fields": {
+    "ref": "018",
+    "text": "Kann bei Verwendung explosionsf\u00e4hige / entz\u00fcndbare Dampf /Luft-Gemische bilden.",
+    "sortorder": 18,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 4,
+  "fields": {
+    "ref": "019",
+    "text": "Kann explosionsf\u00e4hige Peroxide bilden.",
+    "sortorder": 19,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 5,
+  "fields": {
+    "ref": "029",
+    "text": "Entwickelt bei Ber\u00fchrung mit Wasser giftige Gase.",
+    "sortorder": 29,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 6,
+  "fields": {
+    "ref": "031",
+    "text": "Entwickelt bei Ber\u00fchrung mit S\u00e4ure giftige Gase.",
+    "sortorder": 31,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 7,
+  "fields": {
+    "ref": "032",
+    "text": "Entwickelt bei Ber\u00fchrung mit S\u00e4ure sehr giftige Gase.",
+    "sortorder": 32,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 8,
+  "fields": {
+    "ref": "044",
+    "text": "Explosionsgefahr bei Erhitzen unter Einschluss.",
+    "sortorder": 44,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 9,
+  "fields": {
+    "ref": "066",
+    "text": "Wiederholter Kontakt kann zu spr\u00f6der oder rissiger Haut f\u00fchren.",
+    "sortorder": 66,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 10,
+  "fields": {
+    "ref": "070",
+    "text": "Giftig bei Ber\u00fchrung mit den Augen.",
+    "sortorder": 70,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 11,
+  "fields": {
+    "ref": "071",
+    "text": "Wirkt \u00e4tzend auf die Atemwege.",
+    "sortorder": 71,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 12,
+  "fields": {
+    "ref": "201",
+    "text": "Enth\u00e4lt Blei. Nicht f\u00fcr den Anstrich von Gegenst\u00e4nden verwenden, die von Kindern gekaut oder gelutscht werden k\u00f6nnten.",
+    "sortorder": 201,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 13,
+  "fields": {
+    "ref": "201A",
+    "text": "Achtung! Enth\u00e4lt Blei.",
+    "sortorder": 201,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 14,
+  "fields": {
+    "ref": "202",
+    "text": "Cyanacrylat. Gefahr. Klebt innerhalb von Sekunden Haut und Augenlider zusammen. Darf nicht in die H\u00e4nde von Kindern gelangen.",
+    "sortorder": 202,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 15,
+  "fields": {
+    "ref": "203",
+    "text": "Enth\u00e4lt Chrom(VI). Kann allergische Reaktionen hervorrufen.",
+    "sortorder": 203,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 16,
+  "fields": {
+    "ref": "204",
+    "text": "Enth\u00e4lt Isocyanate. Kann allergische Reaktionen hervorrufen.",
+    "sortorder": 204,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 17,
+  "fields": {
+    "ref": "205",
+    "text": "Enth\u00e4lt epoxidhaltige Verbindungen. Kann allergische Reaktionen hervorrufen.",
+    "sortorder": 205,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 18,
+  "fields": {
+    "ref": "206",
+    "text": "Achtung! Nicht zusammen mit anderen Produkten verwenden, da gef\u00e4hrliche Gase (Chlor) freigesetzt werden k\u00f6nnen.",
+    "sortorder": 206,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 19,
+  "fields": {
+    "ref": "207",
+    "text": "Achtung! Enth\u00e4lt Cadmium. Bei der Verwendung entstehen gef\u00e4hrliche D\u00e4mpfe. Hinweise des Herstellers beachten. Sicherheitsanweisungen einhalten.",
+    "sortorder": 207,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 20,
+  "fields": {
+    "ref": "208",
+    "text": "Enth\u00e4lt (Name des sensibilisierenden Stoffes). Kann allergische Reaktionen hervorrufen.",
+    "sortorder": 208,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 21,
+  "fields": {
+    "ref": "209",
+    "text": "Kann bei Verwendung leicht entz\u00fcndbar werden.",
+    "sortorder": 209,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 22,
+  "fields": {
+    "ref": "209A",
+    "text": "Kann bei Verwendung entz\u00fcndbar werden.",
+    "sortorder": 209,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 23,
+  "fields": {
+    "ref": "210",
+    "text": "Sicherheitsdatenblatt auf Anfrage erh\u00e4ltlich.",
+    "sortorder": 210,
+    "combined": false
+  }
+},
+{
+  "model": "core.euhazardstatement",
+  "pk": 24,
+  "fields": {
+    "ref": "401",
+    "text": "Zur Vermeidung von Risiken f\u00fcr Mensch und Umwelt die Gebrauchsanleitung einhalten.",
+    "sortorder": 401,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 1,
+  "fields": {
+    "ref": "101",
+    "text": "Ist \u00e4rztlicher Rat erforderlich, Verpackung oder Kennzeichnungsetikett bereithalten.",
+    "sortorder": 101,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 2,
+  "fields": {
+    "ref": "102",
+    "text": "Darf nicht in die H\u00e4nde von Kindern gelangen.",
+    "sortorder": 102,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 3,
+  "fields": {
+    "ref": "103",
+    "text": "Vor Gebrauch Kennzeichnungsetikett lesen.",
+    "sortorder": 103,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 4,
+  "fields": {
+    "ref": "201",
+    "text": "Vor Gebrauch besondere Anweisungen einholen.",
+    "sortorder": 201,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 5,
+  "fields": {
+    "ref": "202",
+    "text": "Vor Gebrauch alle Sicherheitsratschl\u00e4ge lesen und verstehen.",
+    "sortorder": 202,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 6,
+  "fields": {
+    "ref": "210",
+    "text": "Von Hitze, heissen Oberfl\u00e4chen, Funken, offenen Flammen sowie anderen Z\u00fcndquellenarten fernhalten. Nicht rauchen.",
+    "sortorder": 210,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 7,
+  "fields": {
+    "ref": "211",
+    "text": "Nicht gegen offene Flamme oder andere Z\u00fcndquelle spr\u00fchen.",
+    "sortorder": 211,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 8,
+  "fields": {
+    "ref": "220",
+    "text": "Von Kleidung /\u2026/ brennbaren Materialien fernhalten/entfernt aufbewahren.",
+    "sortorder": 220,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 9,
+  "fields": {
+    "ref": "221",
+    "text": "Mischen mit brennbaren Stoffen /\u2026 unbedingt verhindern.",
+    "sortorder": 221,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 10,
+  "fields": {
+    "ref": "222",
+    "text": "Kontakt mit Luft nicht zulassen.",
+    "sortorder": 222,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 11,
+  "fields": {
+    "ref": "223",
+    "text": "Keinen Kontakt mit Wasser zulassen.",
+    "sortorder": 223,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 12,
+  "fields": {
+    "ref": "230",
+    "text": "Feucht halten mit \u2026.",
+    "sortorder": 230,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 13,
+  "fields": {
+    "ref": "231+232",
+    "text": "Unter inertem Gas handhaben. Vor Feuchtigkeit sch\u00fctzen.",
+    "sortorder": 231,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 14,
+  "fields": {
+    "ref": "231",
+    "text": "Unter inertem Gas handhaben.",
+    "sortorder": 231,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 15,
+  "fields": {
+    "ref": "232",
+    "text": "Vor Feuchtigkeit sch\u00fctzen.",
+    "sortorder": 232,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 16,
+  "fields": {
+    "ref": "233",
+    "text": "Beh\u00e4lter dicht verschlossen halten.",
+    "sortorder": 233,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 17,
+  "fields": {
+    "ref": "234",
+    "text": "Nur im Originalbeh\u00e4lter aufbewahren.",
+    "sortorder": 234,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 18,
+  "fields": {
+    "ref": "235+410",
+    "text": "K\u00fchl halten. Vor Sonnenbestrahlung sch\u00fctzen.",
+    "sortorder": 235,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 19,
+  "fields": {
+    "ref": "235",
+    "text": "K\u00fchl halten.",
+    "sortorder": 235,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 20,
+  "fields": {
+    "ref": "240",
+    "text": "Beh\u00e4lter und zu bef\u00fcllende Anlage erden.",
+    "sortorder": 240,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 21,
+  "fields": {
+    "ref": "241",
+    "text": "Explosionsgesch\u00fctzte elektrische Betriebsmittel / L\u00fcftungsanlagen / Beleuchtung /\u2026 verwenden.",
+    "sortorder": 241,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 22,
+  "fields": {
+    "ref": "242",
+    "text": "Nur funkenfreies Werkzeug verwenden.",
+    "sortorder": 242,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 23,
+  "fields": {
+    "ref": "243",
+    "text": "Ma\u00dfnahmen gegen elektrostatische Aufladungen treffen.",
+    "sortorder": 243,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 24,
+  "fields": {
+    "ref": "244",
+    "text": "Druckminderer frei von Fett und \u00d6l halten.",
+    "sortorder": 244,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 25,
+  "fields": {
+    "ref": "250",
+    "text": "Nicht schleifen / sto\u00dfen /\u2026/ reiben.",
+    "sortorder": 250,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 26,
+  "fields": {
+    "ref": "251",
+    "text": "Nicht durchstechen oder verbrennen, auch nicht nach Gebrauch.",
+    "sortorder": 251,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 27,
+  "fields": {
+    "ref": "260",
+    "text": "Staub / Rauch / Gas / Nebel / Dampf / Aerosol nicht einatmen.",
+    "sortorder": 260,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 28,
+  "fields": {
+    "ref": "261",
+    "text": "Einatmen von Staub / Rauch / Gas / Nebel / Dampf / Aerosol vermeiden.",
+    "sortorder": 261,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 29,
+  "fields": {
+    "ref": "262",
+    "text": "Nicht in die Augen, auf die Haut oder auf die Kleidung gelangen lassen.",
+    "sortorder": 262,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 30,
+  "fields": {
+    "ref": "263",
+    "text": "Kontakt w\u00e4hrend der Schwangerschaft / und der Stillzeit vermeiden.",
+    "sortorder": 263,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 31,
+  "fields": {
+    "ref": "264",
+    "text": "Nach Gebrauch \u2026 gr\u00fcndlich waschen.",
+    "sortorder": 264,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 32,
+  "fields": {
+    "ref": "270",
+    "text": "Bei Gebrauch nicht essen, trinken oder rauchen.",
+    "sortorder": 270,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 33,
+  "fields": {
+    "ref": "271",
+    "text": "Nur im Freien oder in gut bel\u00fcfteten R\u00e4umen verwenden.",
+    "sortorder": 271,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 34,
+  "fields": {
+    "ref": "272",
+    "text": "Kontaminierte Arbeitskleidung nicht au\u00dferhalb des Arbeitsplatzes tragen.",
+    "sortorder": 272,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 35,
+  "fields": {
+    "ref": "273",
+    "text": "Freisetzung in die Umwelt vermeiden.",
+    "sortorder": 273,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 36,
+  "fields": {
+    "ref": "280",
+    "text": "Schutzhandschuhe / Schutzkleidung / Augenschutz / Gesichtsschutz tragen.",
+    "sortorder": 280,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 37,
+  "fields": {
+    "ref": "282",
+    "text": "Schutzhandschuhe / Gesichtsschild / Augenschutz mit K\u00e4lteisolierung tragen.",
+    "sortorder": 282,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 38,
+  "fields": {
+    "ref": "283",
+    "text": "Schwer entflammbare / flammhemmende Kleidung tragen.",
+    "sortorder": 283,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 39,
+  "fields": {
+    "ref": "284",
+    "text": "Atemschutz tragen.",
+    "sortorder": 284,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 40,
+  "fields": {
+    "ref": "301",
+    "text": "BEI VERSCHLUCKEN:",
+    "sortorder": 301,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 41,
+  "fields": {
+    "ref": "301+310",
+    "text": "BEI VERSCHLUCKEN: Sofort GIFTINFORMATIONSZENTRUM / Arzt / ... anrufen.",
+    "sortorder": 301,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 42,
+  "fields": {
+    "ref": "301+312",
+    "text": "BEI VERSCHLUCKEN: Bei Unwohlsein GIFTINFORMATIONSZENTRUM / Arzt / ... anrufen.",
+    "sortorder": 301,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 43,
+  "fields": {
+    "ref": "301+330+331",
+    "text": "BEI VERSCHLUCKEN: Mund aussp\u00fclen. Kein Erbrechen herbeif\u00fchren.",
+    "sortorder": 301,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 44,
+  "fields": {
+    "ref": "302",
+    "text": "BEI BER\u00dcHRUNG MIT DER HAUT:",
+    "sortorder": 302,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 45,
+  "fields": {
+    "ref": "302+334",
+    "text": "BEI BER\u00dcHRUNG MIT DER HAUT: In kaltes Wasser tauchen / nassen Verband anlegen.",
+    "sortorder": 302,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 46,
+  "fields": {
+    "ref": "302+352",
+    "text": "BEI BER\u00dcHRUNG MIT DER HAUT: Mit viel Wasser / ... waschen.",
+    "sortorder": 302,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 47,
+  "fields": {
+    "ref": "303",
+    "text": "BEI BER\u00dcHRUNG MIT DER HAUT (oder dem Haar):",
+    "sortorder": 303,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 48,
+  "fields": {
+    "ref": "303+361+353",
+    "text": "BEI BER\u00dcHRUNG MIT DER HAUT (oder dem Haar): Alle beschmutzten, getr\u00e4nkten Kleidungsst\u00fccke sofort ausziehen. Haut mit Wasser abwaschen/duschen.",
+    "sortorder": 303,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 49,
+  "fields": {
+    "ref": "304",
+    "text": "BEI EINATMEN:",
+    "sortorder": 304,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 50,
+  "fields": {
+    "ref": "304+340",
+    "text": "BEI EINATMEN: Die Person an die frische Luft bringen und f\u00fcr ungehinderte Atmung sorgen.",
+    "sortorder": 304,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 51,
+  "fields": {
+    "ref": "305",
+    "text": "BEI BER\u00dcHRUNG MIT DEN AUGEN:",
+    "sortorder": 305,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 52,
+  "fields": {
+    "ref": "305+351+338",
+    "text": "BEI BER\u00dcHRUNG MIT DEN AUGEN: Einige Minuten lang behutsam mit Wasser sp\u00fclen. Vorhandene Kontaktlinsen nach M\u00f6glichkeit entfernen. Weiter sp\u00fclen.",
+    "sortorder": 305,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 53,
+  "fields": {
+    "ref": "306",
+    "text": "BEI BER\u00dcHRUNG MIT DER KLEIDUNG:",
+    "sortorder": 306,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 54,
+  "fields": {
+    "ref": "306+360",
+    "text": "BEI BER\u00dcHRUNG MIT DER KLEIDUNG: Kontaminierte Kleidung und Haut sofort mit viel Wasser abwaschen und danach Kleidung ausziehen.",
+    "sortorder": 306,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 55,
+  "fields": {
+    "ref": "308",
+    "text": "BEI Exposition oder falls betroffen:",
+    "sortorder": 308,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 56,
+  "fields": {
+    "ref": "308+313",
+    "text": "BEI Exposition oder falls betroffen: \u00c4rztlichen Rat einholen / \u00e4rztliche Hilfe hinzuziehen.",
+    "sortorder": 308,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 57,
+  "fields": {
+    "ref": "310",
+    "text": "Sofort GIFTINFORMATIONSZENTRUM / Arzt / ... anrufen.",
+    "sortorder": 310,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 58,
+  "fields": {
+    "ref": "311",
+    "text": "GIFTINFORMATIONSZENTRUM / Arzt / ... anrufen.",
+    "sortorder": 311,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 59,
+  "fields": {
+    "ref": "312",
+    "text": "Bei Unwohlsein GIFTINFORMATIONSZENTRUM / Arzt / ... anrufen.",
+    "sortorder": 312,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 60,
+  "fields": {
+    "ref": "313",
+    "text": "\u00c4rztlichen Rat einholen / \u00e4rztliche Hilfe hinzuziehen.",
+    "sortorder": 313,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 61,
+  "fields": {
+    "ref": "314",
+    "text": "Bei Unwohlsein \u00e4rztlichen Rat einholen / \u00e4rztliche Hilfe hinzuziehen.",
+    "sortorder": 314,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 62,
+  "fields": {
+    "ref": "315",
+    "text": "Sofort \u00e4rztlichen Rat einholen / \u00e4rztliche Hilfe hinzuziehen.",
+    "sortorder": 315,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 63,
+  "fields": {
+    "ref": "320",
+    "text": "Besondere Behandlung dringend erforderlich (siehe \u2026 auf diesem Kennzeichnungsetikett).",
+    "sortorder": 320,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 64,
+  "fields": {
+    "ref": "321",
+    "text": "Besondere Behandlung (siehe \u2026 auf diesem Kennzeichnungsetikett).",
+    "sortorder": 321,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 65,
+  "fields": {
+    "ref": "330",
+    "text": "Mund aussp\u00fclen.",
+    "sortorder": 330,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 66,
+  "fields": {
+    "ref": "331",
+    "text": "KEIN Erbrechen herbeif\u00fchren.",
+    "sortorder": 331,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 67,
+  "fields": {
+    "ref": "332",
+    "text": "Bei Hautreizung:",
+    "sortorder": 332,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 68,
+  "fields": {
+    "ref": "332+313",
+    "text": "Bei Hautreizung: \u00c4rztlichen Rat einholen / \u00e4rztliche Hilfe hinzuziehen.",
+    "sortorder": 332,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 69,
+  "fields": {
+    "ref": "333",
+    "text": "Bei Hautreizung oder -ausschlag:",
+    "sortorder": 333,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 70,
+  "fields": {
+    "ref": "333+313",
+    "text": "Bei Hautreizung oder -ausschlag: \u00c4rztlichen Rat einholen / \u00e4rztliche Hilfe hinzuziehen.",
+    "sortorder": 333,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 71,
+  "fields": {
+    "ref": "334",
+    "text": "In kaltes Wasser tauchen / nassen Verband anlegen.",
+    "sortorder": 334,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 72,
+  "fields": {
+    "ref": "335",
+    "text": "Lose Partikel von der Haut abb\u00fcrsten.",
+    "sortorder": 335,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 73,
+  "fields": {
+    "ref": "335+334",
+    "text": "Lose Partikel von der Haut abb\u00fcrsten. In kaltes Wasser tauchen /nassen Verband anlegen.",
+    "sortorder": 335,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 74,
+  "fields": {
+    "ref": "336",
+    "text": "Vereiste Bereiche mit lauwarmem Wasser auftauen. Betroffenen Bereich nicht reiben.",
+    "sortorder": 336,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 75,
+  "fields": {
+    "ref": "337",
+    "text": "Bei anhaltender Augenreizung:",
+    "sortorder": 337,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 76,
+  "fields": {
+    "ref": "337+313",
+    "text": "Bei anhaltender Augenreizung: \u00c4rztlichen Rat einholen / \u00e4rztliche Hilfe hinzuziehen.",
+    "sortorder": 337,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 77,
+  "fields": {
+    "ref": "338",
+    "text": "Eventuell vorhandene Kontaktlinsen nach M\u00f6glichkeit entfernen. Weiter aussp\u00fclen.",
+    "sortorder": 338,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 78,
+  "fields": {
+    "ref": "340",
+    "text": "Die betroffene Person an die frische Luft bringen und f\u00fcr ungehinderte Atmung sorgen.",
+    "sortorder": 340,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 79,
+  "fields": {
+    "ref": "342",
+    "text": "Bei Symptomen der Atemwege:",
+    "sortorder": 342,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 80,
+  "fields": {
+    "ref": "342+311",
+    "text": "Bei Symptomen der Atemwege: GIFTINFORMATIONSZENTRUM / Arzt / ... anrufen.",
+    "sortorder": 342,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 81,
+  "fields": {
+    "ref": "351",
+    "text": "Einige Minuten lang behutsam mit Wasser aussp\u00fclen.",
+    "sortorder": 351,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 82,
+  "fields": {
+    "ref": "352",
+    "text": "Mit viel Wasser / ... waschen.",
+    "sortorder": 352,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 83,
+  "fields": {
+    "ref": "353",
+    "text": "Haut mit Wasser abwaschen / duschen.",
+    "sortorder": 353,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 84,
+  "fields": {
+    "ref": "360",
+    "text": "Kontaminierte Kleidung und Haut sofort mit viel Wasser abwaschen und danach Kleidung ausziehen.",
+    "sortorder": 360,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 85,
+  "fields": {
+    "ref": "361",
+    "text": "Alle kontaminierten Kleidungsst\u00fccke sofort ausziehen.",
+    "sortorder": 361,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 86,
+  "fields": {
+    "ref": "362",
+    "text": "Kontaminierte Kleidung ausziehen.",
+    "sortorder": 362,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 87,
+  "fields": {
+    "ref": "363",
+    "text": "Kontaminierte Kleidung vor erneutem Tragen waschen.",
+    "sortorder": 363,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 88,
+  "fields": {
+    "ref": "364",
+    "text": "Und vor erneutem Tragen waschen.",
+    "sortorder": 364,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 89,
+  "fields": {
+    "ref": "361+364",
+    "text": "Alle kontaminierten Kleidungsst\u00fccke sofort ausziehen und vor erneutem Tragen waschen.",
+    "sortorder": 361,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 90,
+  "fields": {
+    "ref": "362+364",
+    "text": "Kontaminierte Kleidung ausziehen und vor erneutem Tragen waschen.",
+    "sortorder": 362,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 91,
+  "fields": {
+    "ref": "370",
+    "text": "Bei Brand:",
+    "sortorder": 370,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 92,
+  "fields": {
+    "ref": "370+376",
+    "text": "Bei Brand: Undichtigkeit beseitigen, wenn gefahrlos m\u00f6glich.",
+    "sortorder": 370,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 93,
+  "fields": {
+    "ref": "370+378",
+    "text": "Bei Brand: \u2026 zum L\u00f6schen verwenden.",
+    "sortorder": 370,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 94,
+  "fields": {
+    "ref": "370+380",
+    "text": "Bei Brand: Umgebung r\u00e4umen.",
+    "sortorder": 370,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 95,
+  "fields": {
+    "ref": "370+380+375",
+    "text": "Bei Brand: Umgebung r\u00e4umen. Wegen Explosionsgefahr Brand aus der Entfernung bek\u00e4mpfen.",
+    "sortorder": 370,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 96,
+  "fields": {
+    "ref": "371",
+    "text": "Bei Gro\u00dfbrand und gro\u00dfen Mengen:",
+    "sortorder": 371,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 97,
+  "fields": {
+    "ref": "371+380+375",
+    "text": "Bei Gro\u00dfbrand und gro\u00dfen Mengen: Umgebung r\u00e4umen. Wegen Explosionsgefahr Brand aus der Entfernung bek\u00e4mpfen.",
+    "sortorder": 371,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 98,
+  "fields": {
+    "ref": "372",
+    "text": "Explosionsgefahr bei Brand.",
+    "sortorder": 372,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 99,
+  "fields": {
+    "ref": "373",
+    "text": "Keine Brandbek\u00e4mpfung, wenn das Feuer explosive Stoffe / Gemische / Erzeugnisse erreicht.",
+    "sortorder": 373,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 100,
+  "fields": {
+    "ref": "374",
+    "text": "Brandbek\u00e4mpfung mit \u00fcblichen Vorsichtsma\u00dfnahmen aus angemessener Entfernung.",
+    "sortorder": 374,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 101,
+  "fields": {
+    "ref": "375",
+    "text": "Wegen Explosionsgefahr Brand aus der Entfernung bek\u00e4mpfen.",
+    "sortorder": 375,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 102,
+  "fields": {
+    "ref": "376",
+    "text": "Undichtigkeit beseitigen, wenn gefahrlos m\u00f6glich.",
+    "sortorder": 376,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 103,
+  "fields": {
+    "ref": "377",
+    "text": "Nicht l\u00f6schen, bis Undichtigkeit gefahrlos beseitigt werden kann.",
+    "sortorder": 377,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 104,
+  "fields": {
+    "ref": "378",
+    "text": "\u2026 zum L\u00f6schen verwenden.",
+    "sortorder": 378,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 105,
+  "fields": {
+    "ref": "380",
+    "text": "Umgebung r\u00e4umen.",
+    "sortorder": 380,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 106,
+  "fields": {
+    "ref": "381",
+    "text": "Alle Z\u00fcndquellen entfernen, wenn gefahrlos m\u00f6glich.",
+    "sortorder": 381,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 107,
+  "fields": {
+    "ref": "390",
+    "text": "Versch\u00fcttete Mengen aufnehmen, um Materialsch\u00e4den zu vermeiden.",
+    "sortorder": 390,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 108,
+  "fields": {
+    "ref": "391",
+    "text": "Versch\u00fcttete Mengen aufnehmen.",
+    "sortorder": 391,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 109,
+  "fields": {
+    "ref": "401",
+    "text": "\u2026 aufbewahren.",
+    "sortorder": 401,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 110,
+  "fields": {
+    "ref": "402+404",
+    "text": "In einem geschlossenen Beh\u00e4lter an einem trockenen Ort aufbewahren.",
+    "sortorder": 402,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 111,
+  "fields": {
+    "ref": "402",
+    "text": "An einem trockenen Ort aufbewahren.",
+    "sortorder": 402,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 112,
+  "fields": {
+    "ref": "403+235",
+    "text": "K\u00fchl an einem gut bel\u00fcfteten Ort aufbewahren.",
+    "sortorder": 403,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 113,
+  "fields": {
+    "ref": "403",
+    "text": "An einem gut bel\u00fcfteten Ort aufbewahren.",
+    "sortorder": 403,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 114,
+  "fields": {
+    "ref": "403+233",
+    "text": "Beh\u00e4lter dicht verschlossen an einem gut bel\u00fcfteten Ort aufbewahren.",
+    "sortorder": 403,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 115,
+  "fields": {
+    "ref": "404",
+    "text": "In einem geschlossenen Beh\u00e4lter aufbewahren.",
+    "sortorder": 404,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 116,
+  "fields": {
+    "ref": "405",
+    "text": "Unter Verschluss aufbewahren.",
+    "sortorder": 405,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 117,
+  "fields": {
+    "ref": "406",
+    "text": "In korrosionsbest\u00e4ndigem /\u2026 Beh\u00e4lter mit korrosionsbest\u00e4ndiger Auskleidung aufbewahren.",
+    "sortorder": 406,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 118,
+  "fields": {
+    "ref": "407",
+    "text": "Luftspalt zwischen Stapeln / Paletten lassen.",
+    "sortorder": 407,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 119,
+  "fields": {
+    "ref": "410+412",
+    "text": "Vor Sonnenbestrahlung sch\u00fctzen und nicht Temperaturen von mehr als 50&nbsp;\u00b0C aussetzen.",
+    "sortorder": 410,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 120,
+  "fields": {
+    "ref": "410",
+    "text": "Vor Sonnenbestrahlung sch\u00fctzen.",
+    "sortorder": 410,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 121,
+  "fields": {
+    "ref": "410+403",
+    "text": "Vor Sonnenbestrahlung gesch\u00fctzt an einem gut bel\u00fcfteten Ort aufbewahren.",
+    "sortorder": 410,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 122,
+  "fields": {
+    "ref": "411+235",
+    "text": "K\u00fchl und bei Temperaturen von nicht mehr als \u2026 \u00b0C aufbewahren.",
+    "sortorder": 411,
+    "combined": true
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 123,
+  "fields": {
+    "ref": "411",
+    "text": "Bei Temperaturen von nicht mehr als \u2026 \u00b0C / \u2026 aufbewahren.",
+    "sortorder": 411,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 124,
+  "fields": {
+    "ref": "412",
+    "text": "Nicht Temperaturen von mehr als 50\u00b0C aussetzen.",
+    "sortorder": 412,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 125,
+  "fields": {
+    "ref": "413",
+    "text": "Sch\u00fcttgut in Mengen von mehr als \u2026 kg bei Temperaturen von nicht mehr als \u2026 \u00b0C aufbewahren.",
+    "sortorder": 413,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 126,
+  "fields": {
+    "ref": "420",
+    "text": "Von anderen Materialien entfernt aufbewahren.",
+    "sortorder": 420,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 127,
+  "fields": {
+    "ref": "422",
+    "text": "Inhalt in / unter \u2026 aufbewahren",
+    "sortorder": 422,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 128,
+  "fields": {
+    "ref": "501",
+    "text": "Inhalt / Beh\u00e4lter \u2026 zuf\u00fchren.",
+    "sortorder": 501,
+    "combined": false
+  }
+},
+{
+  "model": "core.precautionarystatement",
+  "pk": 129,
+  "fields": {
+    "ref": "502",
+    "text": "Informationen zur Wiederverwendung/Wiederverwertung beim Hersteller/Lieferanten erfragen.",
+    "sortorder": 502,
+    "combined": false
+  }
+}
+]

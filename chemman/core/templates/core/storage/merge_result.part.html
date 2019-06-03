@@ -1,0 +1,24 @@
+<h4>{% trans %}Transfers:{% endtrans %}</h4>
+<p>
+    {% trans count=removed.count() %}
+    The content of {{ count }} package ({{ moved }}) was moved to
+    package {{ filled }}.
+    {% pluralize %}
+    The content of {{ count }} packages ({{ moved }}) was moved to
+    package {{ filled }}.
+    {% endtrans %}
+</p>
+<dl class="uk-description-list-horizontal">
+    <dt>{% trans %}Filled up{% endtrans %}</dt>
+    <dd>{{ filled }}</dd>
+    <dt>{% trans %}Removed{% endtrans %}</dt>
+    <dd>
+        {% for p in removed %}
+        <i class="uk-icon uk-icon-caret-right"></i> {{ p }}
+        {% endfor %}
+    </dd>
+</dl>
+<hr>
+<a href="{{ url('core:package-info', pid=filled.id) }}" class="uk-button uk-button-primary uk-align-center">
+    {% trans %}Show package info{% endtrans %}
+</a>

@@ -1,0 +1,64 @@
+<form class="uk-form uk-form-horizontal" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="which" value="{{ which }}">
+    <legend>
+        {% trans %}All filled fields are linked with AND{% endtrans %}
+    </legend>
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ form.chemical.auto_id }}">
+            {{ form.chemical.label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ form.chemical }}
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ form.storage.auto_id }}">
+            {{ form.storage.label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ form.storage }}
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ form.department.auto_id }}">
+            {{ form.department.label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ form.department }}
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ form.content.auto_id }}">
+            {{ form.content.label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ form.exp }}
+            {{ form.content }}
+            {{ form.unit }}
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ form.composition.auto_id }}">
+            {{ form.composition.label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ form.composition }}
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="{{ form.container_material.auto_id }}">
+            {{ form.container_material.label }}
+        </label>
+        <div class="uk-form-controls">
+            {{ form.container_material }}
+        </div>
+    </div>
+    <div class="uk-form-row">
+        <div class="uk-form-controls">
+            <button type="submit" class="uk-button uk-button-success">
+                {% trans %}Search{% endtrans %}
+            </button>
+        </div>
+    </div>
+</form>

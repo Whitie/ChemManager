@@ -1,0 +1,30 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Consume{% endtrans %}</h1>
+<h2 class="uk-text-center">{{ package }}</h2>
+{% if package.place.storage.type == 'through' %}
+<h2 class="uk-text-center uk-text-danger">
+    {% trans %}This package is in a storage of type 'Through' and cannot be consumed!{% endtrans %}
+</h2>
+{% else %}
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        {% include 'core/storage/consume/form.inc.html' with context %}
+    </div>
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Consumes{% endtrans %}</h3>
+        <h4>
+            {% trans %}Current Stock{% endtrans %}: {{ package.get_inventory() }}
+        </h4>
+        <ul class="uk-list uk-list-line">
+            {% for u in package.usage.all().order_by('-usage_date') %}
+            <li>{{ u }}</li>
+            {% else %}
+            <li>{% trans %}No consumes listed{% endtrans %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

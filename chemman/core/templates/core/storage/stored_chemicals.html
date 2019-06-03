@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as macros with context %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Stored Chemicals{% endtrans %}</h1>
+<p class="uk-text-center">
+    {% trans m=thresholds['mass'], v=thresholds['vol'] %}The threshold for displaying stored chemicals in this table is set to {{ m }} / {{ v }}.{% endtrans %}
+</p>
+<table id="dtable" class="uk-table uk-table-hover uk-table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Quality{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}MSDS{% endtrans %}</th>
+            {% if perms.core.can_review %}
+            <th>{% trans %}up to date{% endtrans %}</th>
+            {% endif %}
+            <th>{% trans %}Package Count{% endtrans %}</th>
+            <th>{% trans %}Current Stock{% endtrans %}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Quality{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}MSDS{% endtrans %}</th>
+            {% if perms.core.can_review %}
+            <th>{% trans %}up to date{% endtrans %}</th>
+            {% endif %}
+            <th>{% trans %}Package Count{% endtrans %}</th>
+            <th>{% trans %}Current Stock{% endtrans %}</th>
+            <th></th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for c in chems %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', cid=c.chemical.id) }}">
+                    {{ c.chemical.display_name }}
+                    {% if c.name_extra %}({{ c.name_extra }}){% endif %}
+                </a>
+            </td>
+            <td>{{ c.get_quality_display() }}</td>
+            <td>{{ c.company|default('-') }}</td>
+            <td>
+                {% if c.msds %}<a href="{{ c.msds.document.url }}" target="_blank">{% trans %}MSDS{% endtrans %}</a> <i class="uk-icon-external-link"></i>{% else %}-{% endif %}
+            </td>
+            {% if perms.core.can_review %}
+            <td{% if c.msds %} title="{% trans %}Last updated{% endtrans %}: {{ c.msds.last_updated|date('SHORT_DATE_FORMAT') }}"{% endif %}>
+                {% if c.msds %}
+                {% if c.msds.review_required %}<div class="uk-badge uk-badge-danger">{% trans %}NO{% endtrans %}</div>
+                {% else %}<div class="uk-badge uk-badge-success">{% trans %}YES{% endtrans %}</div>{% endif %}
+                {% else %}-{% endif %}
+            </td>
+            {% endif %}
+            <td class="uk-text-center"{% if c.places %} title="{{ c.places|join(' | ') }}"{% endif %}>
+                {{ c.places_count }}
+            </td>
+            <td class="uk-text-right">{{ c.inv }}</td>
+            <td>{{ macros.operating_instruction(c.chemical) }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    make_datatable($('#dtable'));
+})
+</script>
+{% endblock %}

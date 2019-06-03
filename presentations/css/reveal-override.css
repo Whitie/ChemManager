@@ -1,0 +1,64 @@
+/* Overrides for original reveal CSS */
+
+@media screen {
+    .logo {
+        width: 150px;
+        box-shadow: 5px 5px 10px #000;
+        float: left;
+        margin-right: 20px;
+    }
+
+    #footer {
+    	font-family: Verdana, sans-serif;
+    	position: fixed;
+    	bottom: 1em;
+    	left: 1em;
+    }
+
+    #footer > .text {
+        position: relative;
+        left: 0px;
+        /* Use 40px if there are 2 rows to display */
+        top: 60px;
+        color: white;
+        text-shadow: 5px 5px 10px #000;
+    }
+}
+
+@media print {
+    .logo {
+        width: 100px;
+        float: left;
+        margin-right: 20px;
+    }
+
+    #footer {
+        font-family: Verdana, sans-serif;
+        position: fixed;
+        bottom: 0.5em;
+        left: 0.5em;
+    }
+
+    #footer > .text {
+        position: relative;
+        left: 0px;
+        top: 30px;
+        color: black;
+    }
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.no-upper {
+    text-transform: none !important;
+}

@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<form class="uk-form">
+    <div class="uk-form-controls uk-form-controls-text">
+        <input type="hidden" name="pid" value="{{ pid|default(0, true) }}">
+        <p class="uk-form-controls-condensed">
+            {% trans %}QR-Code size:{% endtrans %}
+            <select name="size" size="1">
+                <option value="0">{% trans %}no code{% endtrans %}</option>
+                {% for n in range(50, 310, 10) %}
+                <option value="{{ n }}"{% if n == size %} selected{% endif %}>{{ n }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="uk-button uk-button-success uk-button-small">
+                {% trans %}GO{% endtrans %}
+            </button>
+        </p>
+    </div>
+</form>
+<ul class="uk-grid uk-margin-top" data-uk-grid-margin>
+    {% for p in packages %}
+    <li class="uk-width-1-4 uk-text-center">
+        <div class="uk-panel uk-panel-box">
+            <i class="uk-icon uk-icon-close uk-align-right no-print hide" title="{% trans %}Click to hide this element{% endtrans %}"></i>
+            {% if size %}
+            <a href="{{ url('core:qr-print-packages') }}?size={{ size }}&pid={{ p.id }}" title="{% trans %}Click here to print only this code{% endtrans %}">
+                <img src="{{ url('core:qr-package', 'png', p.package_id) }}" width="{{ size }}">
+            </a>
+            <br>
+            {% endif %}
+            <small>
+                {{ p.package_id }} | {{ p.content|floatformat(2) }} {{ p.get_unit_display() }}<br>
+                {{ p.place.storage.department }} |
+                {{ p.place.storage.name }} | {{ p.place }}<br>
+                {{ p.stored_chemical.chemical.display_name }}
+            </small>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        $('.hide').click(function() {
+            $(this).parent().parent().fadeOut('slow');
+        });
+    });
+</script>
+{% endblock %}

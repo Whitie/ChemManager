@@ -1,0 +1,136 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">{{ storage.name }} ({{ storage.department.name }})</h1>
+{% for place in storage.places.all() %}
+<a name="{{ place.name }}">
+    <h2 class="uk-text-center">
+        {% trans %}Storage Place{% endtrans %}: {{ place.name }}
+    </h2>
+</a>
+<table id="storage-table-{{ place.id }}" class="uk-table uk-table-hover uk-table-striped storage-table" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}GHS{% endtrans %}</th>
+            <th>{% trans %}Package Size{% endtrans %}</th>
+            <th>{% trans %}Stock{% endtrans %}</th>
+            <th>{% trans %}Brutto{% endtrans %}</th>
+            <th>{% trans %}Limits min./max.{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}GHS{% endtrans %}</th>
+            <th>{% trans %}Package Size{% endtrans %}</th>
+            <th>{% trans %}Stock{% endtrans %}</th>
+            <th>{% trans %}Brutto{% endtrans %}</th>
+            <th>{% trans %}Limits{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for p in place.packages.filter(empty=False) %}
+        {% set chem=p.stored_chemical.chemical %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', chem.id) }}">
+                    {{ chem.name }}
+                </a>
+                {% if chem.signal_word or chem.cmr %}
+                <span class="uk-badge uk-badge-{{ chem.signal_word }}">
+                    {{ chem.get_signal_word_display() }}
+                    {% if chem.cmr %}| {% trans %}CMR{% endtrans %}{% endif %}
+                </span>
+                {% endif %}
+            </td>
+            <td>{{ chem.identifiers.cas|default('-', true) }}</td>
+            <td>
+                {% for pic in chem.pictograms.all() %}
+                <img src="{{ pic.image.url }}" width="25" alt="{{ pic.short }}" title="{{ pic }}">
+                {% endfor %}
+            </td>
+            <td class="uk-text-right">{{ p.content }} {{ p.unit|unit }}</td>
+            <td class="uk-text-center storage-data" data-url="{{ url('core:api-inventory-package', package_id=p.id) }}">
+                <i class="uk-icon-spinner uk-icon-spin"></i>
+            </td>
+            <td>{% if chem.special_log %}{{ p.brutto }}{% endif %}</td>
+            <td class="uk-text-center limit-data" data-url="{{ url('core:api-limit', stored_chem_id=p.stored_chemical.id, storage_id=storage.id) }}">
+                <i class="uk-icon-spinner uk-icon-spin"></i>
+            </td>
+            <td>
+                <a href="{{ url('core:chem-inventory', chem.id) }}" class="uk-button uk-button-primary uk-button-small" title="{% trans %}Stock Information{% endtrans %}">
+                    <i class="uk-icon-info"></i>
+                </a>
+                {{ m.actions(perms, p.id, size='small') }}
+                {% if perms.core.can_transfer %}
+                <a href="{{ url('core:packages-merge', p.place.storage.id, chem.id) }}" class="uk-button uk-button-small" title="{% trans %}Merge packages{% endtrans %}">
+                    <i class="uk-icon-object-group"></i>
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td></td>
+            <td>{% trans %}No results{% endtrans %}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>{% trans %}No places in this storage yet{% endtrans %}</p>
+{% endfor %}
+<a href="{{ url('core:qr-print-packages') }}" class="uk-button uk-button-large">
+    <i class="uk-icon-qrcode"></i>
+    {% trans %}Print QR-Codes{% endtrans %}
+</a>
+<a href="{{ url('core:info-observe', storage_id=storage.id) }}" class="uk-button uk-button-large">
+    <i class="uk-icon-eye"></i>
+    {% trans %}Check storage classes{% endtrans %}
+</a>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    dt_opts = {
+        'columns': [
+            {'searchable': false},
+            null,
+            null,
+            null,
+            {'orderable': false, 'searchable': false},
+            {'searchable': false},
+            {'searchable': false},
+            {'searchable': false},
+            {'orderable': false, 'searchable': false}
+        ]
+    };
+    $('.storage-table').each(function() {
+        make_datatable($(this), dt_opts);
+        $(this).on('draw.dt', function() {
+            load_inventory();
+            load_limit();
+        });
+    });
+    load_inventory();
+    load_limit();
+});
+</script>
+{% endblock %}

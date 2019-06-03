@@ -1,0 +1,148 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Make Inventory{% endtrans %}</h1>
+<h2 class="uk-text-center">{{ storage }}</h2>
+
+<p class="uk-text-center cmr">
+    {% trans %}Packages marked in this color are toxic. They must be handled
+    with their brutto masses!{% endtrans %}
+</p>
+
+<form class="uk-form" method="post">
+    {% csrf_token %}
+    {% for place in places %}
+    <table class="uk-table">
+        <caption>{% trans %}Storage place{% endtrans %} -> {{ place }}</caption>
+        <thead>
+            <tr>
+                <th>{% trans %}No.{% endtrans %}</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Quality{% endtrans %}</th>
+                <th>{% trans %}Supplier{% endtrans %}</th>
+                <th>{% trans %}ID{% endtrans %}</th>
+                <th class="uk-text-center">
+                    {% trans %}Brutto/Inventory{% endtrans %}
+                </th>
+                <th class="uk-text-center">
+                    {% trans %}New Brutto/New Inventory{% endtrans %}
+                </th>
+                <th>{% trans %}OK{% endtrans %}</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in place.packages.filter(empty=False) %}
+            {% set sc=p.stored_chemical %}
+            {% set inv=p.get_inventory() %}
+            {% if p.unit|is_mass %}{% set units=mass %}{% else %}{% set units=vol %}{% endif %}
+            {{ m.inventory_row(loop.index, p, sc, inv, units) }}
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+    <p class="uk-text-center" id="buttons">
+        <button type="button" class="uk-button uk-button-success uk-button-large" onclick="save_results();">
+            <i class="uk-icon-cubes"></i>
+            {% trans %}Save Inventory{% endtrans %}
+        </button>
+    </p>
+</form>
+{% endblock %}
+
+{% block js %}
+<script>
+function add_note(pid) {
+    var elem = $('#note_' + pid);
+    var old = elem.val();
+    var btn = $('#btn-note-' + pid);
+    UIkit.modal.prompt('{% trans %}Note:{% endtrans %}', old, function(val) {
+        elem.val(val);
+        if (val != '') {
+            btn.addClass('uk-button-success');
+        } else {
+            btn.removeClass('uk-button-success');
+        }
+    });
+}
+
+function get_row_data(pid) {
+    var data = {
+        'package': pid,
+        'special_log': $('#sl_' + pid).val() == 'yes',
+        'old_value': $('#before_val_' + pid).val(),
+        'old_unit': $('#before_unit_' + pid).val(),
+        'note': $('#note_' + pid).val(),
+        'value': $('#val_' + pid).val(),
+        'unit': $('#unit_' + pid).val(),
+        'ok': $('#ok_' + pid).is(':checked')
+    };
+    return data;
+}
+
+function disable_row(pid) {
+    $('#val_' + pid).prop('disabled', true);
+    $('#unit_' + pid).prop('disabled', true);
+    $('#ok_' + pid).prop('disabled', true);
+    $('#btn-note-' + pid).prop('disabled', true);
+}
+
+var show_next = function() {
+    var row_count = $('.inv-row').length;
+    var url = '{{ url("core:storage-inventory-result", storage_id=storage.id) }}';
+    var btns = $('#buttons');
+    if (row_count < 1) {
+        btns.html('');
+        btns.removeClass('uk-text-center');
+        btns.addClass('uk-text-right');
+        btns.html(
+            '<a class="uk-button uk-button-success" href="' + url + '">' +
+            '{% trans %}Show Result{% endtrans %} ' +
+            '<i class="uk-icon-chevron-circle-right"></i>' +
+            '</a>'
+        );
+    }
+}
+
+var save_results = function() {
+    var promises = [];
+    var url = '{{ url("core:api-inventory-save") }}';
+    var spin = '<i class="uk-icon-spinner uk-icon-spin uk-icon-small"></i>';
+    var err = '<i class="uk-icon-exclamation-circle uk-icon-small"></i>';
+    var success = '<i class="uk-icon-check-circle uk-icon-small"></i>';
+    var title = '{% trans %}You must either set the OK checkbox (if all is correct) or enter the new stock / brutto mass!{% endtrans %}';
+    $('.inv-row').each(function() {
+        var pid = $(this).data('pid');
+        var result = $('#result_' + pid);
+        var tr = $(this);
+        data = get_row_data(pid);
+        result.html('');
+        if (data['value'] == '' && data['ok'] == false) {
+            result.html(err);
+            result.attr('title', title);
+            result.css('background-color', 'red');
+        } else {
+            result.css('background-color', '');
+            result.html(spin);
+            var req = $.post(url, data);
+            promises.push(req);
+            req.done(function(res) {
+                if (res['success'] == true) {
+                    result.html(success);
+                    result.attr('title', res['message']);
+                    result.css('background-color', res['color']);
+                    disable_row(pid);
+                    tr.removeClass('inv-row');
+                } else {
+                    result.html(err);
+                    result.attr('title', res['error']);
+                    result.css('background-color', 'red');
+                }
+            });
+        }
+    });
+    $.when.apply(null, promises).done(show_next);
+}
+</script>
+{% endblock %}

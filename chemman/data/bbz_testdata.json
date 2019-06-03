@@ -1,0 +1,298 @@
+[
+{
+  "model": "core.department",
+  "pk": 1,
+  "fields": {
+    "name": "Pharmakanten",
+    "description": "",
+    "users": [
+      1
+    ]
+  }
+},
+{
+  "model": "core.department",
+  "pk": 2,
+  "fields": {
+    "name": "Chemikanten",
+    "description": "",
+    "users": [
+      1
+    ]
+  }
+},
+{
+  "model": "core.department",
+  "pk": 3,
+  "fields": {
+    "name": "Chemielaboranten",
+    "description": "",
+    "users": [
+      1
+    ]
+  }
+},
+{
+  "model": "core.department",
+  "pk": 4,
+  "fields": {
+    "name": "Mibi",
+    "description": "",
+    "users": []
+  }
+},
+{
+  "model": "core.building",
+  "pk": 1,
+  "fields": {
+    "name": "bbz Hauptgeb\u00e4ude",
+    "identifier": "bbz",
+    "street": "Adlergestell 333",
+    "zip_code": "12489",
+    "city": "Berlin",
+    "country": "Deutschland",
+    "notes": ""
+  }
+},
+{
+  "model": "core.storage",
+  "pk": 2,
+  "fields": {
+    "name": "PVT Vorratslager",
+    "building": 1,
+    "department": 1,
+    "type": "general",
+    "consumption": false,
+    "observe": true,
+    "lockable": true
+  }
+},
+{
+  "model": "core.storage",
+  "pk": 3,
+  "fields": {
+    "name": "PRL",
+    "building": 1,
+    "department": 3,
+    "type": "general",
+    "consumption": false,
+    "observe": false,
+    "lockable": false
+  }
+},
+{
+  "model": "core.storage",
+  "pk": 4,
+  "fields": {
+    "name": "IAL",
+    "building": 1,
+    "department": 3,
+    "type": "general",
+    "consumption": false,
+    "observe": false,
+    "lockable": false
+  }
+},
+{
+  "model": "core.storage",
+  "pk": 5,
+  "fields": {
+    "name": "Mibi",
+    "building": 1,
+    "department": 4,
+    "type": "general",
+    "consumption": false,
+    "observe": false,
+    "lockable": false
+  }
+},
+{
+  "model": "core.storage",
+  "pk": 6,
+  "fields": {
+    "name": "PVT",
+    "building": 1,
+    "department": 1,
+    "type": "general",
+    "consumption": false,
+    "observe": false,
+    "lockable": false
+  }
+},
+{
+  "model": "core.storage",
+  "pk": 7,
+  "fields": {
+    "name": "CVT",
+    "building": 1,
+    "department": 2,
+    "type": "general",
+    "consumption": false,
+    "observe": false,
+    "lockable": false
+  }
+},
+{
+  "model": "core.storage",
+  "pk": 8,
+  "fields": {
+    "name": "CVT L\u00f6semittel",
+    "building": 1,
+    "department": 2,
+    "type": "solvents",
+    "consumption": false,
+    "observe": true,
+    "lockable": true
+  }
+},
+{
+  "model": "core.storageplace",
+  "pk": 1,
+  "fields": {
+    "name": "L\u00f6semittelschrank",
+    "description": "",
+    "storage": 6,
+    "room": 1,
+    "lockable": true
+  }
+},
+{
+  "model": "core.storageplace",
+  "pk": 2,
+  "fields": {
+    "name": "S\u00e4urenschrank",
+    "description": "",
+    "storage": 6,
+    "room": 1,
+    "lockable": true
+  }
+},
+{
+  "model": "core.storageplace",
+  "pk": 3,
+  "fields": {
+    "name": "Laugenschrank",
+    "description": "",
+    "storage": 6,
+    "room": 1,
+    "lockable": true
+  }
+},
+{
+  "model": "core.storageplace",
+  "pk": 4,
+  "fields": {
+    "name": "Rohstoffe",
+    "description": "",
+    "storage": 6,
+    "room": 1,
+    "lockable": false
+  }
+},
+{
+  "model": "core.storageplace",
+  "pk": 5,
+  "fields": {
+    "name": "Giftschrank",
+    "description": "",
+    "storage": 3,
+    "room": null,
+    "lockable": true
+  }
+},
+{
+  "model": "core.storageplace",
+  "pk": 6,
+  "fields": {
+    "name": "Regal",
+    "description": "",
+    "storage": 8,
+    "room": null,
+    "lockable": false
+  }
+},
+{
+  "model": "core.storageplace",
+  "pk": 7,
+  "fields": {
+    "name": "Paletten",
+    "description": "",
+    "storage": 8,
+    "room": null,
+    "lockable": false
+  }
+},
+{
+  "model": "core.room",
+  "pk": 1,
+  "fields": {
+    "name": "PVT",
+    "number": "113",
+    "building": 1,
+    "storage": 6
+  }
+},
+{
+  "model": "core.group",
+  "pk": 1,
+  "fields": {
+    "name": "CL 2015a",
+    "notes": "",
+    "active": true
+  }
+},
+{
+  "model": "core.group",
+  "pk": 2,
+  "fields": {
+    "name": "PK 2014a",
+    "notes": "",
+    "active": true
+  }
+},
+{
+  "model": "core.group",
+  "pk": 3,
+  "fields": {
+    "name": "CK 2015",
+    "notes": "",
+    "active": true
+  }
+},
+{
+  "model": "core.company",
+  "pk": 1,
+  "fields": {
+    "street": "",
+    "zip_code": "",
+    "city": "",
+    "country": "",
+    "phone": "",
+    "email": "",
+    "name": "Carl Roth GmbH",
+    "short_name": "ROTH",
+    "logo": "",
+    "fax": "",
+    "url": "http://www.carlroth.de",
+    "customer_number": ""
+  }
+},
+{
+  "model": "core.company",
+  "pk": 2,
+  "fields": {
+    "street": "",
+    "zip_code": "",
+    "city": "",
+    "country": "",
+    "phone": "",
+    "email": "",
+    "name": "Caesar & Loretz GmbH",
+    "short_name": "CAELO",
+    "logo": "",
+    "fax": "",
+    "url": "http://www.caelo.de/",
+    "customer_number": ""
+  }
+}
+]

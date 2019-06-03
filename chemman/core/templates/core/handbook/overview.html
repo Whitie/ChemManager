@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Available Handbooks{% endtrans %}</h1>
+<ul class="uk-list uk-list-striped">
+    {% for book in handbooks %}
+    <li>
+        <a href="{{ url('core:hb-handbook', book.id) }}">{{ book.title }}</a>
+        {% if perms.core.delete_handbook %}
+        <button type="button" class="uk-button uk-button-danger uk-button-mini" onclick="delete_handbook({{ book.id }});" title="{% trans %}Delete handbook{% endtrans %}">
+            <i class="uk-icon-trash"></i>
+        </button>
+        {% endif %}
+    </li>
+    {% else %}
+    <li>{% trans %}No handbooks listed yet{% endtrans %}</li>
+    {% endfor %}
+</ul>
+{% if perms.core.add_handbook %}
+<button type="button" class="uk-button uk-button-success" onclick="add_handbook();">
+    <i id="add" class="uk-icon-plus"></i>
+    {% trans %}Add new handbook{% endtrans %}
+</button>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script>
+function delete_handbook(book_id) {
+    var text = '{% trans %}Are you sure?{% endtrans %}';
+    var url = '{{ url("core:hb-delete") }}';
+    UIkit.modal.confirm(text, function() {
+        $.get(url, {'book_id': book_id}).done(function(res) {
+            window.location.reload();
+        });
+    });
+}
+function add_handbook() {
+    var text = '{% trans %}Title{% endtrans %}:';
+    var url = '{{ url("core:hb-create") }}';
+    var spin = '<i id="add" class="uk-icon-refresh uk-icon-spin"></i>';
+    var add = '<i id="add" class="uk-icon-plus"></i>';
+    $('#add').replaceWith(spin);
+    UIkit.modal.prompt(text, '', function(value) {
+        var title = $.trim(value);
+        if (title != '') {
+            $.get(url, {'title': title}).done(function(res) {
+                window.location.reload();
+            });
+        } else {
+            $('#add').replaceWith(add);
+        }
+    });
+}
+</script>
+{% endblock %}

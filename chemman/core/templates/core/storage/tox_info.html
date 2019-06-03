@@ -1,0 +1,200 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Usage of (toxic) substances{% endtrans %}
+</h1>
+{% if submitted %}
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <dl class="uk-description-list-horizontal">
+            {% if group %}
+            <dt>{% trans %}Group{% endtrans %}</dt>
+            <dd>{{ group }}</dd>
+            {% else %}
+            <dt>{% trans %}Instructor{% endtrans %}</dt>
+            <dd>{{ instructor }}</dd>
+            {% endif %}
+            <dt>{% trans %}From Date{% endtrans %}</dt>
+            <dd>{{ from_date|date('SHORT_DATE_FORMAT') }}</dd>
+            <dt>{% trans %}To Date{% endtrans %}</dt>
+            <dd>{{ to_date|date('SHORT_DATE_FORMAT') }}</dd>
+            <dt>{% trans %}Show only toxic{% endtrans %}</dt>
+            <dd>{{ m.show_bool(only_tox) }}</dd>
+        </dl>
+    </div>
+    <div class="uk-width-1-2">
+        <a href="{{ url('core:info-usage') }}" class="uk-button uk-button-large uk-button-primary">
+            {% trans %}Make new choice{% endtrans %}
+        </a>
+    </div>
+</div>
+
+<table id="dtable" class="uk-table uk-table-striped" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}Date{% endtrans %}</th>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}Package ID{% endtrans %}</th>
+            <th>{% trans %}Used Mass{% endtrans %}</th>
+            <th>{% trans %}Task{% endtrans %}</th>
+            {% if group %}
+            <th>{% trans %}Instructor{% endtrans %}</th>
+            {% else %}
+            <th>{% trans %}Group{% endtrans %}</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>{% trans %}Date{% endtrans %}</th>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}Package ID{% endtrans %}</th>
+            <th>{% trans %}Used Mass{% endtrans %}</th>
+            <th>{% trans %}Task{% endtrans %}</th>
+            {% if group %}
+            <th>{% trans %}Instructor{% endtrans %}</th>
+            {% else %}
+            <th>{% trans %}Group{% endtrans %}</th>
+            {% endif %}
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for use in usages %}
+        {% set chem=use.package.stored_chemical.chemical %}
+        <tr>
+            <td>{{ use.usage_date|date('SHORT_DATETIME_FORMAT') }}</td>
+            <td title="CAS: {{ chem.identifiers.cas| default('-', true) }}">
+                <a href="{{ url('core:detail-by-id', chem.id) }}">
+                    {{ chem.display_name }}
+                </a>
+            </td>
+            <td>
+                <a href="{{ url('core:package-info', use.package.id) }}">
+                    {{ use.package.package_id }}
+                </a>
+            </td>
+            <td class="uk-text-right">
+                {{ use.removed_quantity }}
+                {{ use.get_removed_quantity_unit_display() }}
+            </td>
+            <td>
+                {% if use.task %}{{ use.task }}{% else %}
+                {% trans %}No task given!{% endtrans %}{% endif %}
+            </td>
+            {% if group %}
+            <td title="{% trans %}Used account{% endtrans %}: {{ use.user }}">
+                {{ use.used_by|default('-', true) }}
+            </td>
+            {% else %}
+            <td>{{ use.group|default('-', true) }}</td>
+            {% endif %}
+        </tr>
+        {% else %}
+        <tr>
+            <td></td>
+            <td>{% trans %}No results{% endtrans %}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<form class="uk-form uk-form-horizontal" method="post">
+    {% csrf_token %}
+    <fieldset data-uk-margin>
+        <legend>
+            {% trans %}Please choose either Group or Instructor{% endtrans %}
+        </legend>
+        <div class="uk-form-row">
+            <label class="uk-form-label" for="{{ form.group.auto_id }}">
+                {{ form.group.label }}
+            </label>
+            <div class="uk-form-controls">
+                {{ form.group }}
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" for="{{ form.instructor.auto_id }}">
+                {{ form.instructor.label }}
+            </label>
+            <div class="uk-form-controls">
+                {{ form.instructor }}
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" for="{{ form.from_date.auto_id }}">
+                {{ form.from_date.label }}
+            </label>
+            <div class="uk-form-controls">
+                <div class="uk-form-icon">
+                    <i class="uk-icon-calendar"></i>
+                    {{ form.from_date }}
+                </div>
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" for="{{ form.to_date.auto_id }}">
+                {{ form.to_date.label }}
+            </label>
+            <div class="uk-form-controls">
+                <div class="uk-form-icon">
+                    <i class="uk-icon-calendar"></i>
+                    {{ form.to_date }}
+                </div>
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <label class="uk-form-label" for="{{ form.only_tox.auto_id }}">
+                {{ form.only_tox.label }}
+            </label>
+            <div class="uk-form-controls">
+                {{ form.only_tox }}
+            </div>
+        </div>
+        <div class="uk-form-row">
+            <div class="uk-form-controls">
+                <button type="submit" class="uk-button uk-button-success">
+                    {% trans %}Show{% endtrans %}
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+{% endif %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function(){
+    var options = {format: 'DD.MM.YYYY'};
+    var dp1 = UIkit.datepicker($('#id_from_date'), options);
+    var dp2 = UIkit.datepicker($('#id_to_date'), options);
+    $('form').submit(function(){
+        var group = $.trim($('#id_group').val());
+        var inst = $.trim($('#id_instructor').val());
+        if (group === '' && inst === '') {
+            UIkit.modal.alert('{% trans %}Please enter group or instructor.{% endtrans %}');
+            return false;
+        }
+    });
+    dt_opts = {
+        'aaSorting': [],
+        'columns': [
+            null,
+            null,
+            null,
+            {'searchable': false},
+            null,
+            null
+        ]
+    };
+    make_datatable($('#dtable'), dt_opts);
+})
+</script>
+{% endblock %}

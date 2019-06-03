@@ -1,0 +1,22 @@
+{% extends 'core/manage/base.html' %}
+
+{% block left %}
+<h3>{% trans %}Old Notifications{% endtrans %}</h3>
+<ul class="uk-list uk-list-line">
+    {% for n in notices %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        <span data-uk-tooltip="{animation: true}" title="{{ n.message }}">
+            {{ n.get_type_display() }} -
+            {{ n.added|date('SHORT_DATETIME_FORMAT') }} -
+            {{ n.added_by }}
+        </span>
+    </li>
+    {% else %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        {% trans %}No notifications found{% endtrans %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

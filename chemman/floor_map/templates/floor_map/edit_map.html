@@ -1,0 +1,149 @@
+{% extends 'floor_map/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Edit Map{% endtrans %}
+</h1>
+<dl class="uk-description-list-horizontal">
+    <dt>{% trans %}Building{% endtrans %}</dt>
+    <dd>{{ building.name }}</dd>
+    <dt>{%trans %}Level{% endtrans %}</dt>
+    <dd>{{ floor.level }}</dd>
+    <dt>{% trans %}Name{% endtrans %}</dt>
+    <dd>{{ floor.name|default('-', true) }}</dd>
+    <dt>{% trans %}Usage{% endtrans %}</dt>
+    <dd>{% trans %}Click to see the name, drag to position{% endtrans %}</dd>
+</dl>
+<div id="floor_map"></div>
+<table class="uk-table uk-margin-top uk-form">
+    <caption>{% trans %}Storages{% endtrans %}</caption>
+    <thead>
+        <tr>
+            <th></th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}X{% endtrans %}</th>
+            <th>{% trans %}Y{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+            <th class="uk-width-1-5"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in floor.storages.all() %}
+        {% set active=s.x > 0 or s.y > 0 %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ s.storage.name }}</td>
+            <td>
+                <input type="text" id="x-{{ s.id }}" value="{{ s.x }}" class="uk-form-width-mini">
+            </td>
+            <td>
+                <input type="text" id="y-{{ s.id }}" value="{{ s.y }}" class="uk-form-width-mini">
+            </td>
+            <td>
+                <button id="btn-add-{{ s.id }}" type="button" class="uk-button uk-button-success btn-add" data-sid="{{ s.id }}" title="{% trans %}Add Marker{% endtrans %}"{% if active %} disabled{% endif %}>
+                    <i class="uk-icon-plus"></i>
+                </button>
+                <button id="btn-save-{{ s.id }}" type="button" class="uk-button uk-button-primary btn-save" data-sid="{{ s.id }}" data-url="{{ url('fm:save-coords') }}" disabled>
+                    <i class="uk-icon-save"></i>
+                    {% trans %}Save{% endtrans %}
+                </button>
+                <button id="btn-remove-{{ s.id }}" type="button" class="uk-button uk-button-danger btn-remove" data-sid="{{ s.id }}" title="{% trans %}Remove Marker{% endtrans %}"{% if not active %} disabled{% endif %}>
+                    <i class="uk-icon-trash"></i>
+                </button>
+            </td>
+            <td><span id="saved-{{ s.id }}"></span></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6">
+                {% trans %}No storage found on this floor!{% endtrans %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p class="uk-margin-top">
+    <a href="{{ url('fm:index') }}?building={{ building.id }}&level={{ floor.level }}" class="uk-button">
+        {% trans %}Back{% endtrans %}
+    </a>
+</p>
+{% endblock %}
+
+{% block scripts %}
+<script>
+var markers = {};
+
+function update_pos(sid, x, y) {
+    $('#x-' + sid).val(x);
+    $('#y-' + sid).val(y);
+}
+
+function add_marker(map, x, y, sid, label) {
+    var pos = xy(x, y);
+    var marker = L.marker(pos, {draggable: true}).addTo(map).bindPopup(label);
+    update_pos(sid, x, y);
+    marker.on('dragend', function(event) {
+        m = event.target;
+        update_pos(sid, m.getLatLng().lng, m.getLatLng().lat);
+        $('#btn-save-' + sid).prop('disabled', false);
+    });
+    markers[sid] = marker;
+}
+
+$(document).ready(function() {
+    $('#floor_map').css('height', '600px');
+    var storages = {{ storages|safe }};
+    var map = L.map('floor_map', {
+        crs: L.CRS.Simple,
+        minZoom: -1,
+        maxZoom: 1,
+        center: [0, 0],
+        zoom: -1
+    });
+    var w = {{ floor.map_w }};
+    var h = {{ floor.map_h }};
+    var url = '{{ floor.map.url }}';
+    var bounds = [[0, 0], [h, w]];
+    var img = L.imageOverlay(url, bounds).addTo(map);
+    map.setMaxBounds(bounds);
+    $.each(storages, function(k, obj) {
+        if (obj.x > 0 || obj.y > 0) {
+            add_marker(map, obj.x, obj.y, obj.sid, obj.name);
+        }
+    });
+    $('.btn-save').click(function() {
+        var sid = $(this).data('sid');
+        var url = $(this).data('url');
+        var saved = $('#saved-' + sid);
+        var data = {
+            sid: sid,
+            x: $('#x-' + sid).val(),
+            y: $('#y-' + sid).val()
+        };
+        saved.html('');
+        $.getJSON(url, data, function(res) {
+            saved.html(res.message);
+        });
+        $(this).prop('disabled', true);
+    });
+    $('.btn-add').click(function() {
+        var sid = $(this).data('sid');
+        var label = storages[sid].name;
+        add_marker(map, 10, 10, sid, label);
+        update_pos(sid, 10, 10);
+        $('#btn-remove-' + sid).prop('disabled', false);
+        $(this).prop('disabled', true);
+    });
+    $('.btn-remove').click(function() {
+        var sid = $(this).data('sid');
+        var marker = markers[sid];
+        marker.remove();
+        update_pos(sid, 0, 0);
+        $('#btn-add-' + sid).prop('disabled', false);
+        $(this).prop('disabled', true);
+        delete markers[sid];
+        $('#btn-save-' + sid).click();
+    });
+});
+</script>
+{% endblock %}

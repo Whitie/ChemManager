@@ -1,0 +1,24 @@
+<h2 class="uk-text-center">
+    {% trans %}Select Storage(place) for consume{% endtrans %}
+</h2>
+<h3 class="uk-text-center">{{ stchem }}</h3>
+<form class="uk-form">
+    <select id="places" size="10" class="uk-form-width-large">
+        {% for p in places %}
+        <option value="{{ p.id }}">{{ p }}, {{ p.storage }}</option>
+        {% endfor %}
+    </select>
+</form>
+<hr>
+<h3>{% trans %}Operating Instructions{% endtrans %}</h3>
+{% for dep, ois in opinsts.items() %}
+<strong>{{ dep }}</strong><br>
+{% for oi in ois %}
+<a href="{{ oi.document.url }}" target="_blank">
+    {{ loop.index }}
+</a>
+<i class="uk-icon-external-link"></i>
+{% else %}{% trans %}no found{% endtrans %}
+{% endfor %}
+<br>
+{% endfor %}

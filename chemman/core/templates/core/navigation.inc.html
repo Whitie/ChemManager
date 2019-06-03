@@ -1,0 +1,84 @@
+<div class="uk-container uk-container-center uk-margin-top">
+    <nav class="uk-navbar" data-uk-sticky="{clsactive: 'uk-navbar-attached', top: -100, animation: 'uk-animation-slide-top'}">
+        <a href="{{ url('core:index') }}" class="uk-navbar-brand uk-hidden-small">
+            ChemManager
+        </a>
+        <ul class="uk-navbar-nav">
+            {% for menu in menus %}
+            <li class="uk-parent" data-uk-dropdown="{mode: 'click'}">
+                <a href="#">
+                    {{ menu.name }} <i class="uk-icon-caret-down"></i>
+                </a>
+                <div class="uk-dropdown uk-dropdown-navbar">
+                    <ul class="uk-nav uk-nav-navbar">
+                        <!-- Dropdown content -->
+                        {% for url, text in menu %}
+                        <li><a href="{{ url }}">{{ text }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="uk-navbar-flip">
+            <!-- Search -->
+            <div class="uk-navbar-content">
+                <form class="uk-search" data-uk-search="{flipDropdown: true, source: '{{ url('core:api-search') }}', msgResultsHeader: '{% trans %}Search Results{% endtrans %}', msgMoreResults: '{% trans %}More Results{% endtrans %}', msgNoResults: '{% trans %}No Results found{% endtrans %}'}" action="{{ url('core:search') }}" method="post">
+                    <input class="uk-search-field" type="search" placeholder="{% trans %}Search...{% endtrans %}" name="search" style="border:1px solid blue;border-radius:5px;">
+                    {% csrf_token %}
+                </form>
+            </div>
+            <!-- User menu -->
+            <ul class="uk-navbar-nav">
+                <li>
+                    {% if user.is_authenticated %}
+                    <a href="{{ url('core:profile') }}" class="uk-navbar-nav-subtitle" title="{% trans %}Profile{% endtrans %}">
+                        <i class="uk-icon-user"></i> {{ user.username }}
+                        <div>{{ user.email }}</div>
+                    </a>
+                    {% else %}
+                    <a href="#dlg-login" class="uk-navbar-nav" data-uk-modal>
+                        {% trans %}Login{% endtrans %}
+                        <i class="uk-icon-paper-plane"></i>
+                    </a>
+                    {% endif %}
+                </li>
+                {% if user.is_authenticated %}
+                <li class="uk-parent" data-uk-dropdown="{mode: 'click'}">
+                    <a href="#" title="{% trans %}Bookmarks{% endtrans %}">
+                        <i class="uk-icon-bookmark"></i>
+                    </a>
+                    <div class="uk-dropdown uk-dropdown-navbar">
+                        <ul class="uk-nav uk-nav-navbar" id="bookmarks">
+                            {% for bm in bookmarks %}
+                            <li><a href="{{ bm.url }}">{{ bm.text }}</a></li>
+                            {% endfor %}
+                            <li class="uk-nav-divider"></li>
+                            <li>
+                                <a href="#dlg-bookmark" data-uk-modal>
+                                    {% trans %}Add bookmark{% endtrans %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="{{ url('core:logout') }}" title="{% trans %}Logout{% endtrans %}">
+                        <i class="uk-icon-power-off"></i>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        <!-- Logo -->
+        <div class="uk-navbar-content uk-navbar-center uk-hidden-small">
+            {% if debug %}
+            <button type="button" class="uk-button uk-button-danger">
+                <i class="uk-icon-bug"></i> DEBUG MODE <i class="uk-icon-bug"></i>
+            </button>
+            {% else %}
+            <img src="{{ static('core/img/logo_ghs08.png') }}" width="35" alt="ChemManager Logo">
+            {% endif %}
+        </div>
+    </nav>
+</div>

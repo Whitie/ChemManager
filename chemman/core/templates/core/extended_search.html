@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Extended Search{% endtrans %}</h1>
+<form class="uk-form">
+    <div class="uk-form-controls uk-form-controls-text">
+        <p class="uk-form-controls-condensed">
+            {% trans %}Search in:{% endtrans %}
+            <select id="which" size="1">
+                <option value="">{% trans %}--------{% endtrans %}</option>
+                <option value="chems">{% trans %}Chemicals{% endtrans %}</option>
+                <option value="storage">{% trans %}Storage{% endtrans %}</option>
+            </select>
+        </p>
+    </div>
+</form>
+<hr>
+<div id="form">
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $('#which').change(function() {
+        var which = $(this).val();
+        var url = '{{ url("core:api-search-form") }}';
+        $.get(url, {'which': which}, function(res) {
+            $('#form').html('');
+            $('#form').html(res);
+        });
+    });
+})
+</script>
+{% endblock %}

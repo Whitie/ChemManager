@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<p class="uk-text-right uk-text-muted">
+    <a href="{{ url('msds:list') }}" class="uk-button uk-button-mini">
+        {% trans %}Show uploaded{% endtrans %}
+    </a>
+</p>
+<h1 class="uk-text-center">
+    {% trans %}Upload new MSDS's{% endtrans %}
+</h1>
+{% if perms.msds_collector.upload %}
+<div id="upload-drop" class="uk-placeholder uk-text-center">
+    <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i>
+    {% trans %}Attach MSDS by dropping or{% endtrans %}
+    <a class="uk-form-file">
+        {% trans %}selecting one{% endtrans %}
+        <input id="upload-select" type="file">
+    </a>
+</div>
+<div id="progressbar" class="uk-progress">
+    <div class="uk-progress-bar" style="width:0%;">...</div>
+</div>
+{% else %}
+<h3 class="uk-text-center">
+    {% trans %}You don't have the permission to upload documents{% endtrans %}
+</h3>
+{% endif %}
+<ul id="uploaded" class="uk-list uk-list-line"></ul>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    var progressbar = $('#progressbar');
+    var bar = progressbar.find('.uk-progress-bar');
+    var settings = {
+        action: '{{ url("msds:upload") }}',
+        allow: '*.(pdf|PDF)',
+        param: 'msds_file',
+        loadstart: function() {
+            bar.css('width', '0%').text('0%');
+        },
+        progress: function(percent) {
+            percent = Math.ceil(percent);
+            bar.css('width', percent + '%').text(percent + '%');
+        },
+        allcomplete: function(response) {
+            bar.css('width', '100%').text('100%');
+            setTimeout(function() {
+                bar.css('width', '0%').text('0%');
+            }, 1000);
+            $('#uploaded').prepend('<li>' + response + '</li>');
+        }
+    };
+    var select = UIkit.uploadSelect($('#upload-select'), settings);
+    var drop = UIkit.uploadDrop($('#upload-drop'), settings);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'core/editor.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Edit Paragraph{% endtrans %}</h1>
+<h2 class="uk-text-center">{{ paragraph }}</h2>
+
+<div class="uk-grid">
+    <div class="uk-width-9-10">
+        <form class="uk-form" method="post" action="">
+            {% csrf_token %}
+            <h3>{% trans %}Lead (optional){% endtrans %}</h3>
+            <textarea name="lead" data-uk-htmleditor>
+                {{ paragraph.lead }}
+            </textarea>
+            <h3 class="uk-margin-top">{% trans %}Text{% endtrans %}</h3>
+            <textarea name="text" data-uk-htmleditor>
+                {{ paragraph.text }}
+            </textarea>
+            <p class="uk-text-center">
+                <button type="submit" class="uk-button uk-button-large uk-button-primary">
+                    {% trans %}Save{% endtrans %}
+                </button>
+        </form>
+    </div>
+    <div class="uk-width-1-10 uk-text-center">
+        <p><strong>{% trans %}Available Images{% endtrans %}</strong></p>
+        {% for img in images %}
+        <img src="{{ img.image.url }}" alt="{{ img.image.name }}" width="150" title="Click 'Copy Picture Address' and insert the address in the src attribute of the img tag.">
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

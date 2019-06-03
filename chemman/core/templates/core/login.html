@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Login page{% endtrans %}
+</h1>
+
+<div class="uk-grid">
+    <div class="uk-width-1-3"></div>
+    <div class="uk-width-1-3">
+        {% if form.errors %}
+        <p>
+            {% trans %}Username and/or password do not match. Please try
+            again{% endtrans %}
+        </p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p>
+                {% trans %}Your account does not have the permissions to
+                visit this page. Please login with an account, which has
+                the permissions.{% endtrans %}
+            </p>
+            {% else %}
+            <p>
+                {% trans %}Please login to visit this page.{% endtrans %}
+            </p>
+            {% endif %}
+        {% endif %}
+
+        <form method="post" action="" class="uk-form uk-form-horizontal">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="{{ form.username.auto_id }}">
+                    {{ form.username.label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ form.username }}
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="{{ form.password.auto_id }}">
+                    {{ form.password.label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ form.password }}
+                </div>
+            </div>
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button type="submit" class="uk-button uk-button-primary">
+                        {% trans %}Login{% endtrans %}
+                        <i class="uk-icon-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uk-width-1-3"></div>
+</div>
+{% endblock %}

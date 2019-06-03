@@ -1,0 +1,85 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros_details.inc.html' as m with context %}
+{% import 'core/macros.inc.html' as macros with context %}
+
+{% block content %}
+<div class="uk-grid">
+    <div class="uk-width-8-10">
+        <h1 class="uk-text-center{% if chem.cmr %} cmr{% endif %}">
+            {{ chem.display_name }}
+            {{ macros.risk_info(chem) }}
+        </h1>
+        <p class="uk-text-muted uk-text-center">
+            {% if chem.flammable %}
+            <span class="uk-badge uk-badge-danger">
+                <i class="uk-icon-fire"></i>
+                {% trans %}Flammable{% endtrans %}
+                <i class="uk-icon-fire"></i>
+            </span>
+            <br>
+            {% endif %}
+            {% trans %}Last updated:{% endtrans %} {{ chem.last_updated|date('SHORT_DATETIME_FORMAT') }}
+            {{ macros.operating_instruction(chem) }}
+        </p>
+        {{ m.general(chem) }}
+        <ul class="uk-tab" data-uk-tab="{connect:'#chem-data', animation: 'fade'}">
+            <li class="uk-active">
+                <a href="">{% trans %}Safety{% endtrans %}</a>
+            </li>
+            <li><a href="">{% trans %}Phy/Chem{% endtrans %}</a></li>
+            <li><a href="">{% trans %}Disposal{% endtrans %}</a></li>
+            <li><a href="">{% trans %}Legal{% endtrans %}</a></li>
+            <li><a href="">{% trans %}References{% endtrans %}</a></li>
+            <li><a href="">{% trans %}Firefighting{% endtrans %}</a></li>
+            <li><a href="">{% trans %}Storage{% endtrans %}</a></li>
+            <li><a href="">{% trans %}MSDS's{% endtrans %}</a></li>
+            <li><a href="">{% trans %}Op. Inst.{% endtrans %}</a></li>
+        </ul>
+        <ul id="chem-data" class="uk-switcher uk-margin">
+            <li>{{ m.safety_data(chem, True) }}</li>
+            <li>{{ m.physical_chemical_data(chem) }}</li>
+            <li>{{ m.disposal_data(chem.disposal_instructions) }}</li>
+            <li>{{ m.legislation_data(chem) }}</li>
+            <li>{{ m.reference_data(chem) }}</li>
+            <li>{{ m.firefighting(chem) }}</li>
+            <li>
+                <h2>
+                    <i class="uk-icon-archive"></i>
+                    {% trans %}Storage hints and own storage{% endtrans %}
+                </h2>
+                {{ m.storage(chem, packages, false) }}
+            </li>
+            <li>
+                {{ m.msdss(chem.storage.all()) }}
+            </li>
+            <li>{{ m.operating_instructions(chem) }}</li>
+        </ul>
+    </div>
+    <div class="uk-width-2-10">
+        <div class="data-uk-margin">
+            {{ m.safety_pictograms(chem.pictograms, 150) }}
+            {% if chem.structure %}
+            <a class="uk-thumbnail" href="{{ chem.structure.url }}" data-uk-lightbox>
+                <img src="{{ chem.structure.url }}" class="uk-border-circle" width="150">
+                <div class="uk-thumbnail-caption">
+                    {% trans %}Structure{% endtrans %}
+                </div>
+            </a>
+            {% endif %}
+            <a class="uk-thumbnail" href="{{ url('core:qr-info', 'svg', chem.slug) }}" data-uk-lightbox>
+                <img src="{{ url('core:qr-info', 'svg', chem.slug) }}" width="150">
+                <div class="uk-thumbnail-caption">
+                    {% trans %}QR-Code{% endtrans %}
+                </div>
+            </a>
+            {% if perms.core.manage %}
+            <a class="uk-button uk-button-large uk-button-danger" href="{{ url('admin:core_chemical_change', chem.id) }}">
+                <i class="uk-icon-edit"></i>
+                {% trans %}Edit{% endtrans %}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

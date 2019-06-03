@@ -1,0 +1,79 @@
+{
+  "agw": null,
+  "art_name": "Bariumchlorid 99.995 Suprapur\u00ae",
+  "art_num": "",
+  "betrsichv": "",
+  "bgw": null,
+  "boiling": [
+    null,
+    null
+  ],
+  "bulk_density": null,
+  "cas": "10361-37-2",
+  "cmr": false,
+  "color": "",
+  "density": [
+    null,
+    null
+  ],
+  "eg_num": "233-788-1",
+  "euh": [],
+  "ext_agents": "",
+  "fire_misc": "",
+  "formula": "BaCl2",
+  "h": [
+    "301",
+    "332"
+  ],
+  "inchi": "InChI=1S/Ba.2ClH/h;2*1H/q+2;;/p-2",
+  "inchikey": "WDIHJSXYQDMJHN-UHFFFAOYSA-L",
+  "ioelv": null,
+  "iupac_de": "",
+  "iupac_en": "barium(2+);dichloride",
+  "kemler": "",
+  "lgk_trgs510": "",
+  "melting": [
+    null,
+    null
+  ],
+  "molmass": 208.227,
+  "name": "Bariumchlorid",
+  "name_en": "barium chloride",
+  "no_ext_agents": "",
+  "odor": "",
+  "p": [
+    "308"
+  ],
+  "pc_cid": 25204,
+  "producer": "Merck KGaA * 64271 Darmstadt * Deutschland * Tel: +49 (0)6151 72-0",
+  "review_date": "2015-12-21",
+  "signal": "SICHERHEITSDATENBLATT",
+  "smiles": "[Cl-].[Cl-].[Ba+2]",
+  "solubility_h2o": [
+    null,
+    null
+  ],
+  "state": "",
+  "structure": "iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAAE5pE7RAAAAulBMVEX19fUyzTLr8uvh8OGQ35BO0k7z9PNE0EQ/zz9q2GpT01M5zTnk8eRJ0Umx57Gy57JI0Eg3zTfm8eY0zDSh46FW1FY6zjo1zTWK3oro8ehQ0lB/3H9H0Ufg7+B523nM68zP7M/s8+yd451i1mLR7dHx9PHc79xc1Vw9zz0yzDK457if4p/u8+6s5axk1mRd1V2N341f1V922na257Zn12fK68o8zjyI3YjB6sHN7M3J68ma4pqD3YPA6cCHZ90AAAACPElEQVR4nO3d53KbQBQG0L1y793pPS7pvSfv/1qRIjsjElllDQJJ5/xgMLDeb69YbEbDkBLUYzMKPy5dcdhW8bDHFaW5jjisOwHAZBQv1f9cx/8qXqm3rjiqNtG0QAAwVSIN+FM6cOeY3cwk/4cAAABQvZVW7s6+Bt7LjnOj+/Aod+fUmZv7/yYPdK3uAAAAAAAAAMAci5T7jWp+y0p/eaWxcjUu0OQpwUxp8scZ8bruCP1EvElnJ40rXOfRqq2vjYsFAAAAAAAAAAAAAAAAANDPnb3FzAdd81sOt7idMp+/zW85go3llPmevvyWI1i6lzLHnN9yBLd29zNHnN9ydI19GrixwZgRQ8+wuk7B0l6KUjZz8voaWUOhhorYOK07Qx+RWseXaw2qWEQspJ1vu02LlfbPU3xvTqCuSK/ep/jRtFgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA42rdvvvg0WGspZjcmxrr6LMU67HQXZlg8Dr6LMWNWO6uTDB4HX2W4mbsdFcmGLyOPsuxcH/1YPXJ04kGr6PPClSefrrL87/KxjNrhbpQ/vyY8hk3THmjm/FClUihRjSHhcoc8vxOvjEHPr+FujByAea9UJeG1kGhiq6sh0JRgs4V7HmcFbf1LOnRKdZ2vE3p9OPnvaNff7a0XSwpaFfk5EW8a699+rIeB91tPUt6dE6fl3Ge0nG0Ws6lwdqT7dnx2mZKH1ZWfioWAAAAAAAAAAAAAAAAAAAAAAAA5PsNuF0MbTnhqcoAAAAASUVORK5CYII=",
+  "symbols": [
+    7,
+    6
+  ],
+  "synonyms": [
+    "Chlorbarium",
+    "Bariumchlorid (BaCl2)",
+    "Salzsaures Barium",
+    "Muriate de barium",
+    "NSC 146181",
+    "Barium chloride",
+    "Barium chloride (BaCl2)",
+    "Muriate of barium",
+    "Barium dichloride",
+    "Chlorure de baryum",
+    "Bariumdichlorid",
+    "Barium muriate",
+    "Chloride of barium"
+  ],
+  "vwvws": null,
+  "wgk": 1
+}

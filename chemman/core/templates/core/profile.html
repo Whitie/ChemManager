@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{{ user.username }}</h1>
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Profile data{% endtrans %}</h3>
+        <form class="uk-form uk-form-horizontal" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="{{ field.auto_id }}">
+                    {{ field.label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ field }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button type="submit" class="uk-button uk-button-success">
+                        {% trans %}Save{% endtrans %}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Bookmarks{% endtrans %}</h3>
+        <table class="uk-table uk-table-striped">
+            <thead>
+                <tr>
+                    <th>{% trans %}Text{% endtrans %}</th>
+                    <th>{% trans %}URL{% endtrans %}</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in user.bookmarks.all() %}
+                <tr id="bm-{{ b.id }}">
+                    <td><a href="{{ b.url }}">{{ b.text }}</a></td>
+                    <td>{{ b.url }}</td>
+                    <td class="uk-text-right">
+                        <button type="button" class="uk-button uk-button-danger uk-button-mini btn-del" data-bid="{{ b.id }}" title="{% trans %}Click to remove this bookmark{% endtrans %}">
+                            <i class="uk-icon uk-icon-remove"></i>
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+var url = '{{ url("core:api-del-bookmark") }}';
+
+$(document).ready(function() {
+    $('.btn-del').click(function() {
+        var data = {bookmark_id: $(this).data('bid')};
+        $.get(url, data).done(function(res) {
+            $('#bm-' + data.bookmark_id).remove();
+        });
+    });
+});
+</script>
+{% endblock %}

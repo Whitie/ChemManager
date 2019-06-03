@@ -1,0 +1,67 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Handbook{% endtrans %} - {{ handbook.title }}
+</h1>
+
+<h2>{% trans %}Contents{% endtrans %}</h2>
+
+<ul class="uk-list">
+    {% for chap in handbook.chapters.all() %}
+    <li>
+        <a href="{{ url('core:hb-chapter', handbook.id, chap.number) }}">
+            {{ chap.number }} - {{ chap.title }}
+        </a>
+        {% if perms.core.can_write_handbook %}
+        <a href="{{ url('core:hb-add-paragraph', chap.id) }}" class="uk-button uk-button-success uk-button-mini" title="{% trans %}Add paragraph to this chapter{% endtrans %}">
+            <i class="uk-icon-plus"></i>
+        </a>
+        <button type="button" class="uk-button uk-button-danger uk-button-mini" onclick="delete_chapter({{ chap.id }});" title="{% trans %}Delete chapter{% endtrans %}">
+            <i class="uk-icon-trash"></i>
+        </button>
+        {% endif %}
+        {% if chap.paragraphs.all().count() %}
+        <ul class="uk-list">
+            {% for p in chap.paragraphs.all() %}
+            <li>
+                {{ chap.number }}.{{ p.number }} - {{ p.title }}
+                <span class="uk-text-muted">
+                    ({{ p.author.username }},
+                    {{ p.added|date('SHORT_DATETIME_FORMAT') }})
+                </span>
+                {% if perms.core.can_write_handbook %}
+                <a href="{{ url('core:hb-edit-paragraph', p.id) }}" class="uk-button uk-button-mini" title="{% trans %}Edit this paragraph{% endtrans %}">
+                    <i class="uk-icon-edit"></i>
+                </a>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </li>
+    {% else %}
+    <li>{% trans %}No chapters added yet.{% endtrans %}</li>
+    {% endfor %}
+</ul>
+{% if perms.core.can_write_handbook %}
+<a href="{{ url('core:hb-add-chapter', handbook.id) }}" class="uk-button uk-button-success">
+    <i id="add" class="uk-icon-plus"></i>
+    {% trans %}Add new Chapter{% endtrans %}
+</a>
+{% endif %}
+{% endblock %}
+
+{% block js %}
+<script>
+function delete_chapter(chap_id) {
+    var text = '{% trans %}Are you sure?{% endtrans %}';
+    var url = '{{ url("core:hb-delete-chapter") }}';
+    UIkit.modal.confirm(text, function() {
+        $.get(url, {'chapter_id': chap_id}).done(function(res) {
+            window.location.reload();
+        });
+    });
+}
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}New Packages{% endtrans %}</h1>
+<table class="uk-table uk-table-striped">
+    <thead>
+        <tr>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}Package ID{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}Content{% endtrans %}</th>
+            <th>{% trans %}Storage Place{% endtrans %}</th>
+            <th>{% trans %}Stored by{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in packages %}
+        {% set chem=p.stored_chemical.chemical %}
+        {% set sc=p.stored_chemical %}
+        <tr>
+            <td>
+                {{ chem.display_name }}, {{ sc.get_quality_display() }}
+                {% if sc.name_extra %}({{ sc.name_extra }}){% endif %}
+            </td>
+            <td>{{ p.package_id }}</td>
+            <td>{{ sc.company|default('-', true) }}</td>
+            <td>{{ p.content_obj }}</td>
+            <td>{{ p.place }}</td>
+            <td>{{ p.stored_by }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url('core:delivery-initial') }}" class="uk-button uk-button-primary uk-button-large">
+    {% trans %}Store more packages{% endtrans %}
+</a>
+<a href="{{ url('core:qr-print-packages') }}" class="uk-button uk-button-large">
+    <i class="uk-icon-qrcode"></i>
+    {% trans %}Print package ID's{% endtrans %}
+</a>
+{% endblock %}

@@ -1,0 +1,92 @@
+[
+  [
+    [
+      "pictograms",
+      "GHS01.svg"
+    ],
+    {
+      "ref_num": 1,
+      "name": "Explodierende Bombe"
+    }
+  ],
+  [
+    [
+      "pictograms",
+      "GHS02.svg"
+    ],
+    {
+      "ref_num": 2,
+      "name": "Flamme"
+    }
+  ],
+  [
+    [
+      "pictograms",
+      "GHS03.svg"
+    ],
+    {
+      "ref_num": 3,
+      "name": "Flamme \u00fcber einem Kreis"
+    }
+  ],
+  [
+    [
+      "pictograms",
+      "GHS04.svg"
+    ],
+    {
+      "ref_num": 4,
+      "name": "Gasflasche"
+    }
+  ],
+  [
+    [
+      "pictograms",
+      "GHS05.svg"
+    ],
+    {
+      "ref_num": 5,
+      "name": "\u00c4tzwirkung"
+    }
+  ],
+  [
+    [
+      "pictograms",
+      "GHS06.svg"
+    ],
+    {
+      "ref_num": 6,
+      "name": "Totenkopf mit gekreuzten Knochen"
+    }
+  ],
+  [
+    [
+      "pictograms",
+      "GHS07.svg"
+    ],
+    {
+      "ref_num": 7,
+      "name": "dickes Ausrufezeichensymbol"
+    }
+  ],
+  [
+    [
+      "pictograms",
+      "GHS08.svg"
+    ],
+    {
+      "ref_num": 8,
+      "name": "Gesundheitsgefahr"
+    }
+  ],
+  [
+    [
+      "pictograms",
+      "GHS09.svg"
+    ],
+    {
+      "ref_num": 9,
+      "name": "Umwelt"
+    }
+  ]
+]

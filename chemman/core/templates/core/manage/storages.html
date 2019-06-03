@@ -1,0 +1,27 @@
+{% extends 'core/manage/base.html' %}
+
+{% block left %}
+<h3>{% trans %}Existing Storages{% endtrans %}</h3>
+{% for b in buildings %}
+<h4>{{ b.name }}</h4>
+<ul class="uk-list uk-list-line">
+    {% for s in b.storages.all() %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        <a href="{{ url('core:manage-storages', storage_id=s.id) }}" title="{% trans %}Click to edit this storage{% endtrans %}">
+            {{ s.name }} ({{ s.department.name }})
+        </a>
+    </li>
+    {% else %}
+    <li>
+        <i class="uk-icon-angle-double-right"></i>
+        {% trans %}No storage defined in this building.{% endtrans %}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<div class="uk-alert uk-alert-warning">
+    {% trans %}No building defined.{% endtrans %}
+</div>
+{% endfor %}
+{% endblock %}

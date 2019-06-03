@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% trans %}Open information and storage system for chemicals{% endtrans %}">
+        <meta name="author" content="Thorsten Weimann">
+        <title>{{ title|default('Home', true) }} | ChemManager</title>
+        <!-- Icon -->
+        <link rel="shortcut icon" href="{{ static('core/img/ghs07.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ static('core/img/ghs07.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ static('core/img/ghs07.ico') }}" type="image/vnd.microsoft.icon">
+        <!-- UIkit styles -->
+        <link href="{{ static('core/css/uikit.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/sticky.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/search.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/autocomplete.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/datepicker.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/notify.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/tooltip.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/form-file.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/placeholder.almost-flat.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/components/progress.almost-flat.min.css') }}" rel="stylesheet">
+        <!-- Custom ChemManager styles -->
+        <link href="{{ static('core/css/dataTables.uikit.min.css') }}" rel="stylesheet">
+        <link href="{{ static('core/css/styles.css') }}" rel="stylesheet">
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        <!-- Navigation -->
+        {% include 'core/navigation.inc.html' %}
+        <!-- Main page content -->
+        {% block main %}
+        <div class="uk-container uk-container-center uk-margin-top">
+            {% if messages %}
+            {% for msg in messages %}
+            <div class="uk-alert {{ msg.tags }}" data-uk-alert>
+                <a href="" class="uk-alert-close uk-close"></a>
+                <p>{{ msg|safe }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% block content %}{% endblock %}
+        </div>
+        {% endblock %}
+        {% include 'core/modals.inc.html' %}
+        {% block modals %}{% endblock %}
+        <!-- Base javascripts -->
+        <script src="{{ static('core/js/jquery.min.js') }}"></script>
+        <script src="{{ static('core/js/uikit.min.js') }}"></script>
+        <script src="{{ static('core/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ static('core/js/dataTables.uikit.min.js') }}"></script>
+        <script src="{{ static('core/js/components/autocomplete.min.js') }}"></script>
+        <script src="{{ static('core/js/components/sticky.min.js') }}"></script>
+        <script src="{{ static('core/js/components/search.min.js') }}"></script>
+        <script src="{{ static('core/js/components/datepicker.min.js') }}"></script>
+        <script src="{{ static('core/js/components/lightbox.min.js') }}"></script>
+        <script src="{{ static('core/js/components/notify.min.js') }}"></script>
+        <script src="{{ static('core/js/components/tooltip.min.js') }}"></script>
+        <script src="{{ static('core/js/components/upload.min.js') }}"></script>
+        <!-- Custom javascripts -->
+        <script src="{{ url('core:javascript-catalog') }}"></script>
+        <script src="{{ static('core/js/cm.js') }}"></script>
+        {% if not user.is_authenticated() %}
+        <script>
+            function try_login() {
+                var data = {'username': $('#username').val(),
+                            'passwd': $('#passwd').val()};
+                var error = $('#error');
+                var posting = $.post('{{ url("core:api-login") }}', data);
+                posting.done(function(data) {
+                    if (data['success'] == true) {
+                        UIkit.modal('#dlg-login').hide();
+                        window.location.reload();
+                    } else {
+                        error.text(data['msg']);
+                    }
+                });
+            }
+            $(document).ready(function() {
+                $('#passwd').keypress(function(e) {
+                    if (e.keyCode == 13) {
+                        $('#btn-login').click();
+                    }
+                });
+            });
+        </script>
+        {% endif %}
+        {% block js %}{% endblock %}
+    </body>
+</html>

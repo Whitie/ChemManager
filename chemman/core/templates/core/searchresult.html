@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">
+{% if searchstring %}
+{% trans %}Searchresults for{% endtrans %} "{{ searchstring }}"
+{% else %}
+{{ name }}
+{% endif %}
+</h1>
+<p class="uk-text-center uk-text-muted">
+    {% trans count=chems|length %}{{ count }} Result{% pluralize %}{{ count }} Results{% endtrans %}
+</p>
+<ul class="uk-tab" data-uk-tab="{connect:'#result-data', animation: 'fade'}">
+    <li{% if searchstring %} class="uk-active"{% endif %}>
+        <a href="">{% trans %}List{% endtrans %}</a>
+    </li>
+    <li{% if not searchstring %} class="uk-active"{% endif %}>
+        <a href="">{% trans %}Table{% endtrans %}</a>
+    </li>
+</ul>
+<ul id="result-data" class="uk-switcher uk-margin">
+    <li>
+        <div class="uk-grid uk-grid-match" data-uk-grid-margin data-uk-grid-match="{target:'.uk-panel'}">
+            {% for chem in chems %}
+            {{ m.chem_as_panel(chem) }}
+            {% endfor %}
+        </div>
+    </li>
+    <li>
+        {{ m.chems_as_datatable(chems, 'list-table') }}
+    </li>
+</ul>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $('.sr').highlight('{{ searchstring }}');
+    dt_opts = {
+        'columns': [
+            {'searchable': false},
+            null,
+            null,
+            null,
+            {'orderable': false, 'searchable': false},
+            {'searchable': false},
+            {'orderable': false, 'searchable': false}
+        ]
+    };
+    make_datatable($('#list-table'), dt_opts);
+    load_inventory();
+    $('#list-table').on('draw.dt', function() {
+        load_inventory();
+    });
+});
+</script>
+{% endblock %}

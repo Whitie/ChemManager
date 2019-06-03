@@ -1,0 +1,147 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Stocklimits for storage:{% endtrans %} {{ storage.name }}
+</h1>
+<p class="uk-text-center">
+    {% trans %}These limits are only for handling your inventory. Nothing
+    happens if you violate these limits.{% endtrans %}
+</p>
+<table class="uk-table uk-table-striped">
+    <caption>{% trans %}Chemicals in this storage{% endtrans %}</caption>
+    <thead>
+        <tr>
+            <th>{% trans %}Nr.{% endtrans %}</th>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}Current limit{% endtrans %}</th>
+            <th>{% trans %}Current inventory{% endtrans %}</th>
+            <th>{% trans %}New limit{% endtrans %}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for id, spec in chems.items() %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', cid=id) }}">
+                    {{ spec['chem'].display_name }}
+                </a>
+            </td>
+            <td>
+                {% trans %}Minimum:{% endtrans %}
+                <span id="current-min-{{ loop.index }}">{% if spec['min'] %}{{ spec['min'] }}{% else %}{% trans %}not set{% endtrans %}{% endif %}</span>
+                <br>
+                {% trans %}Maximum:{% endtrans %}
+                <span id="current-max-{{ loop.index }}">{% if spec['max'] %}{{ spec['max'] }}{% else %}{% trans %}not set{% endtrans %}{% endif %}</span>
+            </td>
+            <td class="uk-text-center">{{ spec['inv'] }}</td>
+            <td class="uk-form">
+                {% trans %}Minimum:{% endtrans %}
+                <input id="min-{{ loop.index }}" type="number" step="0.1" data-index="{{ loop.index }}" class="limits" min="0"> {{ spec['unit'] }}
+                <br>
+                {% trans %}Maximum:{% endtrans %}
+                <input id="max-{{ loop.index }}" type="number" step="0.1" data-index="{{ loop.index }}" class="limits" min="0"> {{ spec['unit'] }}
+                <input type="hidden" id="unit-{{ loop.index }}" value="{{ spec['unit'] }}"> 
+            </td>
+            <td class="uk-text-center">
+                <button id="save-{{ loop.index }}" class="uk-button uk-button-success save" data-index="{{ loop.index }}" data-chem="{{ id }}" data-storage="{{ storage.id }}" disabled>
+                    <i class="uk-icon-save"></i> {% trans %}Save{% endtrans %}
+                </button>
+                <button id="reset-{{ loop.index }}" class="uk-button uk-button-danger reset" data-index="{{ loop.index }}" data-chem="{{ id }}" data-storage="{{ storage.id }}" {% if not spec['min'] and not spec['max'] %}disabled{% endif %}>
+                    <i class="uk-icon-remove"></i> {% trans %}Reset{% endtrans %}
+                </button>
+                <br>
+                <span id="res-{{ loop.index }}"></span>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url('core:storage-index') }}" class="uk-button uk-button-primary uk-margin-top">
+    <i class="uk-icon-arrow-circle-left"></i> {% trans %}Back{% endtrans %}
+</a>
+{% endblock %}
+
+{% block js %}
+<script>
+function enable_button(id) {
+    var btn = $('#save-' + id);
+    var min = $('#min-' + id).val();
+    var max = $('#max-' + id).val();
+    if (max != '' || min != '') {
+        btn.prop('disabled', false);
+        $('#res-' + id).text('');
+    } else {
+        btn.prop('disabled', true);
+    }
+}
+
+function reset_fields(id, min, max) {
+    var span_min = $('#current-min-' + id);
+    var span_max = $('#current-max-' + id);
+    $('#min-' + id).val('');
+    $('#max-' + id).val('');
+    span_min.text(min);
+    span_max.text(max);
+    $('#reset-' + id).prop('disabled', false);
+}
+
+function save_limit(id, chem, storage) {
+    var url = '{{ url("core:api-set-stocklimit") }}';
+    var btn = $('#save-' + id);
+    var data = {
+        unit: $('#unit-' + id).val(),
+        min: $('#min-' + id).val(),
+        max: $('#max-' + id).val(),
+        chem_id: chem,
+        storage_id: storage
+    };
+    $.post(url, data).done(function(res) {
+        if (res['success'] == true) {
+            btn.prop('disabled', true);
+            reset_fields(id, res.min, res.max);
+            $('#res-' + id).append('Saved');
+        }
+    });
+}
+
+function reset_limit(id, chem, storage) {
+    var url = '{{ url("core:api-set-stocklimit") }}';
+    var btn = $('#reset-' + id);
+    var data = {
+        reset: 'yes',
+        chem_id: chem,
+        storage_id: storage
+    };
+    $.post(url, data).done(function(res) {
+        if (res['success'] == true) {
+            reset_fields(id, res.min, res.max);
+            btn.prop('disabled', true);
+        }
+    });
+}
+
+$(document).ready(function() {
+    $('.limits').change(function() {
+        var id = $(this).data('index');
+        enable_button(id);
+    });
+    $('.save').click(function() {
+        var btn = $(this);
+        var id = btn.data('index');
+        var chem = btn.data('chem');
+        var storage = btn.data('storage');
+        save_limit(id, chem, storage);
+    });
+    $('.reset').click(function() {
+        var btn = $(this);
+        var id = btn.data('index');
+        var chem = btn.data('chem');
+        var storage = btn.data('storage');
+        reset_limit(id, chem, storage);
+    });
+})
+</script>
+{% endblock %}

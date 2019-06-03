@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %}
+
+{% block head %}
+<link href="{{ static('floor_map/css/leaflet.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+<script src="{{ static('floor_map/js/leaflet.js') }}"></script>
+<script>
+var yx = L.latLng;
+var xy = function(x, y) {
+    if (L.Util.isArray(x)) {
+        return yx(x[1], x[0]);
+    }
+    return yx(y, x)
+}
+</script>
+{% block scripts %}{% endblock %}
+{% endblock %}

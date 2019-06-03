@@ -1,0 +1,52 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<p class="uk-text-right uk-text-muted">
+    {% trans %}Currently {{ all_count }} chemicals are listed
+    ({{ active_count }} active / {{ cmr_count }} CMR).{% endtrans %}
+    {% if user.is_staff %}
+    <br>
+    <a href="{{ url('admin:index') }}" class="uk-button uk-button-mini">
+        {% trans %}Backend{% endtrans %}
+    </a>
+    {% endif %}
+</p>
+{% if mirror_db %}
+<div class="uk-alert uk-alert-warning" data-uk-alert>
+    <a href="" class="uk-alert-close uk-close"></a>
+    <p>
+        <i class="uk-icon-exclamation-triangle"></i>
+        {% trans %}Attention! You are working on mirrored Data. All changes made are not persistent.{% endtrans %}
+    </p>
+</div>
+{% endif %}
+<h1 class="uk-text-center">
+    {% trans %}Interesting handbook paragraphs{% endtrans %}
+</h1>
+<ul class="uk-grid uk-grid-divider" data-uk-grid-margin>
+    {% for p in paragraphs %}
+    <li class="uk-width-1-3">
+        {{ m.render_paragraph(p) }}
+    </li>
+    {% else %}
+    <li class="uk-width-1-1">
+        {% trans %}No paragraphs added yet. Please contact the Administrator.{% endtrans %}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+{% block js %}
+{% if user.is_authenticated and notes %}
+<script>
+$(document).ready(function() {
+    var notes = [{{ notes|join(',', attribute='uikit') }}];
+    $.each(notes, function(i, obj) {
+        UIkit.notify(obj);
+    });
+})
+</script>
+{% endif %}
+{% endblock %}

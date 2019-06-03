@@ -1,0 +1,50 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}New Package{% endtrans %}: {{ stored.chemical.display_name }},
+    {{ stored.get_quality_display() }}
+</h1>
+<h2 class="uk-text-center">{{ stored.company.name|default(no_comp, true) }}</h2>
+<h3 class="uk-text-center">{{ storage }}</h3>
+<div class="uk-grid">
+    <div class="uk-width-1-6"></div>
+    <div class="uk-width-4-6">
+        <form class="uk-form uk-form-horizontal" method="post">
+            {% csrf_token %}
+            {% set with_comp=['supplier_ident', 'supplier_code', 'supplier_batch'] %}
+            {% for field in form %}
+            <div class="uk-form-row{% if field.name in with_comp and not stored.company %} uk-hidden{% endif %}">
+                <label class="uk-form-label" for="{{ field.auto_id }}">
+                    {{ field.label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ field }}
+                    {% if field.help_text %}
+                    <p class="uk-form-help-block">{{ field.help_text }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button type="submit" class="uk-button uk-button-success">
+                        <i class="uk-icon-floppy-o"></i>
+                        {% trans %}Save{% endtrans %}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uk-width-1-6"></div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    var opts = {'format': 'DD.MM.YYYY'};
+    var dp2 = UIkit.datepicker($('#id_best_before'), opts);
+});
+</script>
+{% endblock %}

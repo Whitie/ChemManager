@@ -1,0 +1,159 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <h1 class="uk-text-center{% if chem.cmr %} cmr{% endif %}">
+            {{ chem.display_name }}
+            {{ m.risk_info(chem) }}
+        </h1>
+    </div>
+</div>
+
+{% if max_limits %}
+{{ max_limits }}
+{% endif %}
+{% if min_limits %}
+{{ min_limits }}
+{% endif %}
+
+{% if packages %}
+<ul class="uk-tab" data-uk-tab="{connect:'#result-data', animation: 'fade'}">
+    <li class="uk-active">
+        <a href="">{% trans %}Overview{% endtrans %}</a>
+    </li>
+    <li>
+        <a href="">{% trans %}Detail{% endtrans %}</a>
+    </li>
+</ul>
+<ul id="result-data" class="uk-switcher uk-margin">
+    <li>
+        <table class="uk-table uk-table-hover uk-table-striped package-table-min" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>{% trans %}No.{% endtrans %}</th>
+                    <th>{% trans %}Storage{% endtrans %}</th>
+                    <th>{% trans %}Package Count{% endtrans %}</th>
+                    <th>{% trans %}Current Stock{% endtrans %}</th>
+                    <th>{% trans %}Limits min./max.{% endtrans %}</th>
+                    <th title="{% trans %}Operating Instructions{% endtrans %}">
+                        {% trans %}Op. Inst.{% endtrans %}
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>{% trans %}No.{% endtrans %}</th>
+                    <th>{% trans %}Storage{% endtrans %}</th>
+                    <th>{% trans %}Package Count{% endtrans %}</th>
+                    <th>{% trans %}Current Stock{% endtrans %}</th>
+                    <th>{% trans %}Limits{% endtrans %}</th>
+                    <th>{% trans %}Op. Inst.{% endtrans %}</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for storage, vals in sorted_packages.items() %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ storage }}</td>
+                    <td>{{ vals['count'] }}</td>
+                    <td>{{ vals['inventory'] }}</td>
+                    <td class="uk-text-center limit-data" data-url="{{ url('core:api-limit', stored_chem_id=vals['id'], storage_id=storage.id) }}">
+                        <i class="uk-icon-spinner uk-icon-spin"></i>
+                    </td>
+                    <td>
+                        {% for op in vals['opinst'] %}
+                        <a href="{{ op.document.url }}" target="_blank">
+                            {{ loop.index }}
+                        </a>
+                        <i class="uk-icon-external-link"></i>
+                        {% else %}-{% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </li>
+    <li>
+        <table class="uk-table uk-table-hover uk-table-striped package-table" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th>{% trans %}No.{% endtrans %}</th>
+                    <th>{% trans %}Storage{% endtrans %}</th>
+                    <th>{% trans %}Storage Place{% endtrans %}</th>
+                    <th>{% trans %}Package Size{% endtrans %}</th>
+                    <th>{% trans %}Current Stock{% endtrans %}</th>
+                    <th>{% trans %}Actions{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>{% trans %}No.{% endtrans %}</th>
+                    <th>{% trans %}Storage{% endtrans %}</th>
+                    <th>{% trans %}Storage Place{% endtrans %}</th>
+                    <th>{% trans %}Package Size{% endtrans %}</th>
+                    <th>{% trans %}Current Stock{% endtrans %}</th>
+                    <th>{% trans %}Actions{% endtrans %}</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for p in packages %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        <a href="{{ url('core:storage-inventory', p.place.storage.id) }}">
+                            {{ p.place.storage.name }}
+                            ({{ p.place.storage.department.name }})
+                        </a>
+                    </td>
+                    <td>{{ p.place.name }}</td>
+                    <td class="uk-text-right">{{ p.content }} {{ p.unit|unit }}</td>
+                    <td class="uk-text-center storage-data" data-url="{{ url('core:api-inventory-package', package_id=p.id) }}">
+                        <i class="uk-icon-spinner uk-icon-spin"></i>
+                    </td>
+                    <td>
+                        {{ m.actions(perms, p.id, size='small') }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </li>
+</ul>
+{% else %}
+<h3>{% trans %}No packages found{% endtrans %}</h3>
+{% endif %}
+
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $('.package-table-min').each(function() {
+        make_datatable($(this));
+        $(this).on('draw.dt', function() {
+            load_limit();
+        });
+    });
+    dt_opts = {
+        'columns': [
+            {'searchable': false},
+            null,
+            null,
+            null,
+            {'searchable': false},
+            {'orderable': false, 'searchable': false}
+        ]
+    };
+    $('.package-table').each(function() {
+        make_datatable($(this), dt_opts);
+        $(this).on('draw.dt', function() {
+            load_inventory();
+        });
+    });
+    load_inventory();
+    load_limit();
+});
+</script>
+{% endblock %}

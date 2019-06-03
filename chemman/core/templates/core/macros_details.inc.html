@@ -1,0 +1,425 @@
+{% macro general(chem) -%}
+<dl class="uk-description-list-horizontal">
+    <dt>{% trans %}Synonyms{% endtrans %}</dt>
+    <dd class="more">{{ chem.synonyms.all()|join(', ', attribute='name')|default('-', true) }}</dd>
+    <dt>{% trans %}IUPAC Name{% endtrans %}</dt>
+    <dd>{{ chem.iupac_name|default('-', true) }}</dd>
+    <dt>{% trans %}CAS Number{% endtrans %}</dt>
+    <dd>
+    	{% if chem.identifiers.cas %}
+    	<a href="{{ chem.identifiers.url_for('cas') }}">
+    		{{ chem.identifiers.cas }}
+    	</a>
+    	{% else %}-{% endif %}
+    </dd>
+    <dt>{% trans %}EC Number{% endtrans %}</dt>
+    <dd>{{ chem.identifiers.einecs|default('-', true) }}</dd>
+    {% if chem.identifiers.un %}
+    <dt>{% trans %}UN Number{% endtrans %}</dt>
+    <dd>{{ chem.identifiers.un }}</dd>
+    {% endif %}
+    <dt>{% trans %}Formula{% endtrans %}</dt>
+    <dd class="formula">{{ chem.formula|default('-', true) }}</dd>
+    <dt>{% trans %}InChI{% endtrans %}</dt>
+    <dd>{{ chem.identifiers.inchi|default('-', true) }}</dd>
+    <dt>{% trans %}InChI-KEY{% endtrans %}</dt>
+    <dd>{{ chem.identifiers.inchi_key|default('-', true) }}</dd>
+    <dt>{% trans %}SMILES{% endtrans %}</dt>
+    <dd>{{ chem.identifiers.smiles|default('-', true) }}</dd>
+</dl>
+{%- endmacro %}
+
+{% macro safety_pictograms(pics, width) -%}
+{% for pic in pics.all().order_by('ref_num') %}
+<a class="uk-thumbnail" href="{{ pic.image.url }}" title="{{ pic }}" data-uk-lightbox>
+    <img src="{{ pic.image.url }}" width="{{ width }}">
+    <div class="uk-thumbnail-caption">{{ pic.short }}</div>
+</a>
+{% endfor %}
+{%- endmacro %}
+
+{% macro safety_data(chem, show_other=true, headline=true) -%}
+{% if headline %}
+<h2>
+    <i class="uk-icon-plus-square"></i>
+    {% trans %}Safety hints{% endtrans %}
+</h2>
+{% endif %}
+<h3></h3>
+{% if chem.signal_word %}
+<p class="uk-text-bold">
+    {% trans %}Signal Word{% endtrans %}:
+    <span class="uk-text-danger">{{ chem.get_signal_word_display() }}</span>
+</p>
+{% endif %}
+<h3>{% trans %}Hazard Statements{% endtrans %}</h3>
+<dl class="uk-description-list-horizontal">
+	{% if chem.hazard_statements or chem.eu_hazard_statements %}
+	{% for h in chem.hazard_statements.all().order_by('sortorder') %}
+    <dt>{{ h.fullref }}</dt><dd>{{ h.text }}</dd>
+    {% endfor %}
+    {% for euh in chem.eu_hazard_statements.all().order_by('sortorder') %}
+    <dt>{{ euh.fullref }}</dt><dd>{{ euh.text }}</dd>
+    {% endfor %}
+    {% else %}
+    <dt>{% trans %}No{% endtrans %}</dt><dd></dd>
+    {% endif %}
+</dl>
+<h3>{% trans %}Precautionary Statements{% endtrans %}</h3>
+<dl class="uk-description-list-horizontal">
+	{% for p in chem.precautionary_statements.all().order_by('sortorder') %}
+    <dt>{{ p.fullref }}</dt><dd>{{ p.text }}</dd>
+    {% else %}
+    <dt>{% trans %}No{% endtrans %}</dt><dd></dd>
+    {% endfor %}
+</dl>
+{% if show_other %}
+<h3>{% trans %}Other Hazards{% endtrans %}</h3>
+{% trans %}
+All chemicals are potentially dangerous. They are therefore only be handled by specially trained personnel with the necessary care.
+{% endtrans %}
+{% endif %}
+{%- endmacro %}
+
+{% macro physical_chemical_data(chem, headline=true) -%}
+{% if headline %}
+<h2>
+    <i class="uk-icon-flask"></i>
+    {% trans %}Physical and chemical characteristics{% endtrans %}
+</h2>
+{% endif %}
+<table class="uk-table uk-table-hover">
+    <tbody>
+        <tr>
+	       <td class="uk-text-bold">{% trans %}Molar Mass{% endtrans %}</td>
+	       <td>{{ chem.molar_mass|default('- ', true) }}g/mol</td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}Physical State{% endtrans %}</td>
+            <td>{{ chem.physical_data.get_physical_state_display()|default('-', true) }}</td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}Color{% endtrans %}</td>
+            <td>{{ chem.physical_data.color|default('-', true) }}</td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}Odor{% endtrans %}</td>
+            <td>{{ chem.physical_data.odor|default('-', true) }}</td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}Melting Point{% endtrans %}</td>
+            <td>{{ chem.physical_data.melting_point|default('-', true) }}</td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}Boiling Point{% endtrans %}</td>
+            <td>{{ chem.physical_data.boiling_point|default('-', true) }}</td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}Density{% endtrans %}</td>
+            <td>
+            	{% if chem.physical_data.density %}
+            	{{ chem.physical_data.density|round(4) }} g/cm<sup>3</sup>
+                {% if chem.physical_data.density_temp %}
+            	@ {{ chem.physical_data.density_temp }} °C
+                {% endif %}
+            	{% else %}-{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}Bulk Density{% endtrans %}</td>
+            <td>
+            	{% if chem.physical_data.bulk_density.value %}
+            	{{ chem.physical_data.bulk_density|round(4) }} kg/m<sup>3</sup>
+            	{% else %}-{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}Solubility (Water){% endtrans %}</td>
+            <td>
+            	{% if chem.physical_data.solubility_h2o %}
+            	{{ chem.physical_data.solubility_h2o|round(4) }} g/100g
+                {% if chem.physical_data.solubility_h2o_temp %}
+            	@ {{ chem.physical_data.solubility_h2o_temp }} °C
+                {% endif %}
+            	{% else %}-{% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+{%- endmacro %}
+
+{% macro disposal_data(disp, headline=true) -%}
+{% if headline %}
+<h2>
+    <i class="uk-icon-recycle"></i>
+    {% trans %}Disposal Instructions{% endtrans %}
+</h2>
+{% endif %}
+<h3>{% trans %}Method{% endtrans %}</h3>
+<p>{{ disp.method|default('-', true) }}</p>
+{%- endmacro %}
+
+{% macro legislation_data(chem, headline=true) -%}
+{% if headline %}
+<h2>
+    <i class="uk-icon-legal"></i>
+    {% trans %}Legislation{% endtrans %}
+</h2>
+{% endif %}
+<table class="uk-table uk-table-hover">
+    <tbody>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Storage Class{% endtrans %}
+            </td>
+            <td>
+                {% if chem.storage_class.value %}
+                <a href="{{ url('core:storage-classes-info') }}#{{ chem.storage_class.value }}">
+                    {{ chem.storage_class.value }}
+                    ({{ chem.storage_class.description }})
+                </a>
+                {% else %}-{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Water Hazard Class{% endtrans %}
+            </td>
+            <td>{{ chem.get_whc_display() }}</td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Maximum Allowable Concentration{% endtrans %}
+            </td>
+            {% if chem.mac %}
+            <td>{{ chem.mac|round(4) }} {{ chem.get_mac_unit_display() }}</td>
+            {% else %}<td>-</td>{% endif %}
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Maximum Allowable Biological Concentration{% endtrans %}
+            </td>
+            {% if chem.mabc %}
+            <td>{{ chem.mabc|round(4) }} {{ chem.get_mabc_unit_display() }}</td>
+            {% else %}<td>-</td>{% endif %}
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Maximum Allowable Concentration (old){% endtrans %}
+            </td>
+            {% if chem.mac_old %}
+            <td>{{ chem.mac_old|round(4) }} {{ chem.get_mac_old_unit_display() }}</td>
+            {% else %}<td>-</td>{% endif %}
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Binding Occupational Exposure Limit{% endtrans %}
+            </td>
+            {% if chem.boelv %}
+            <td>{{ chem.boelv|round(4) }} mg/m<sup>3</sup></td>
+            {% else %}<td>-</td>{% endif %}
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Indicative Occupational Exposure Limit{% endtrans %}
+            </td>
+            {% if chem.ioelv %}
+            <td>{{ chem.ioelv|round(4) }} mg/m<sup>3</sup></td>
+            {% else %}<td>-</td>{% endif %}
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Hazard Identification Number{% endtrans %}
+            </td>
+            <td>{{ chem.hin|default('-', true) }}</td>
+        </tr>
+    </tbody>
+</table>
+{%- endmacro %}
+
+{% macro msdss(stchems, headline=true) -%}
+{% if headline %}
+<h2 class="bg-primary">
+    <i class="uk-icon-book"></i>
+    {% trans %}Material Safety Data Sheets{% endtrans %}
+</h2>
+{% endif %}
+<ul class="uk-list uk-list-striped">
+    {% for c in stchems %}
+    {% if c.msds %}
+    <li>
+        <a href="{{ c.msds.document.url }}" target="_blank">
+            {{ c.company.name|default(_('No Company')) }}
+        </a>
+        <i class="uk-icon-external-link"></i>
+        ({{ c.msds.published|date('SHORT_DATE_FORMAT') }})
+        {% if c.msds.review_required and user.has_right('manage') %}
+        <span class="label label-warning">
+            {% trans %}Sheet to old! Review required.{% endtrans %}
+        </span>
+        {% endif %}
+    </li>
+    {% endif %}
+    {% else %}
+    <li>{% trans %}No sheets saved.{% endtrans %}</li>
+    {% endfor %}
+</ul>
+{%- endmacro %}
+
+{% macro reference_data(chem, headline=true) -%}
+{% if headline %}
+<h2>
+    <i class="uk-icon-link"></i>
+    {% trans %}References{% endtrans %}
+</h2>
+{% endif %}
+<table class="uk-table uk-table-hover">
+    <tbody>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Wikipedia{% endtrans %}
+            </td>
+            <td><a href="{{ chem.wiki_link }}">{{ chem.name }}</a></td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">{% trans %}PUBCHEM{% endtrans %}</td>
+            <td>
+                {% if chem.identifiers.pubchem_id %}
+    	        <a href="{{ chem.identifiers.url_for('pubchem_id') }}">
+                    {{ chem.identifiers.pubchem_id }}
+    	       </a>
+               {% else %}-{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Drugbank{% endtrans %}
+            </td>
+            <td>
+                {% if chem.identifiers.drugbank %}
+                <a href="{{ chem.identifiers.url_for('drugbank') }}">
+                    {{ chem.identifiers.drugbank }}
+                </a>
+                {% else %}-{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}KEGG{% endtrans %}
+            </td>
+            <td>
+                {% if chem.identifiers.kegg %}
+                <a href="{{ chem.identifiers.url_for('kegg') }}">
+                    {{ chem.identifiers.kegg }}
+                </a>
+                {% else %}-{% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="uk-text-bold">
+                {% trans %}Imported from{% endtrans %}
+            </td>
+            <td>
+                {% if chem.identifiers.imported_from %}
+                <a href="{{ chem.identifiers.imported_from.url }}" target="_blank">
+                    {{ chem.identifiers.imported_from.name }}
+                </a>
+                <i class="uk-icon-external-link"></i>
+                {% else %}-{% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+{%- endmacro %}
+
+{% macro firefighting(chem, headline=true) -%}
+{% if headline %}
+<h2>
+    <i class="uk-icon-fire-extinguisher"></i>
+    {% trans %}Firefighting measures{% endtrans %}
+</h2>
+{% endif %}
+<dl>
+    <dt>{% trans %}Extinguishing media{% endtrans %}</dt>
+    <dd>{{ chem.ext_media|default('-', true) }}</dd>
+    <dt>{% trans %}Unsuitable extinguishing media{% endtrans %}</dt>
+    <dd>{{ chem.un_ext_media|default('-', true) }}</dd>
+    <dt>{% trans %}Advice for firefighters{% endtrans %}</dt>
+    <dd>{{ chem.fire_advice|default('-', true) }}</dd>
+</dl>
+{%- endmacro %}
+
+{% macro storage(chem, packages, headline=true) -%}
+{% if headline %}
+<h2>
+    <i class="uk-icon-archive"></i>
+    {% trans %}Storage hints{% endtrans %}
+</h2>
+{% endif %}
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <dl class="uk-description-list-horizontal">
+            <dt>{% trans %}Storage Class{% endtrans %}</dt>
+            <dd>{% if chem.storage_class %}<a href="{{ url('core:storage-classes-info') }}#{{ chem.storage_class.value }}">{{ chem.storage_class }}</a><br><a href="{{ chem.sc_info_url }}" target="_blank">{% trans %}External Info (ger){% endtrans %}</a>
+            {% else %}-{% endif %}</dd>
+            <dt>{% trans %}Storage Temperature{% endtrans %}</dt>
+            <dd>{% if chem.storage_temperature == 'special' %}
+            {{ chem.storage_temperature_special }} °C
+            {% else %}{{ chem.get_storage_temperature_display() }}
+            {% endif %}</dd>
+        </dl>
+    </div>
+    <div class="uk-width-1-2">
+        <h3 class="uk-text-center">
+            {% trans %}Inventory{% endtrans %}
+            <a href="{{ url('core:chem-inventory', chem.id) }}" class="uk-button uk-button-mini uk-button-primary">
+                {% trans %}Overview{% endtrans %}
+            </a>
+        </h3>
+        <ul class="uk-list uk-list-striped">
+            {% for p in packages %}
+            <li>
+                <a href="{{ url('core:storage-inventory', storage_id=p.place.storage.id) }}#{{ p.place.name }}" title="{% trans %}Storage{% endtrans %}: {{ p.place.storage }}">
+                    {{ p.place }}:
+                </a>
+                {{ p.get_inventory() }} / {{ p.content }}
+                {{ p.unit|unit }},
+                {% trans %}ID{% endtrans %}:
+                <a href="{{ url('core:package-info', pid=p.id) }}" title="{% trans %}Click to show package details{% endtrans %}">
+                    {{ p.package_id }}
+                </a>
+            </li>
+            {% else %}
+            <li>{% trans %}Nothing listed{% endtrans %}</li>
+            {% endfor %}
+        </ul>
+        {% if perms.core.can_store %}
+        <a class="uk-button uk-button-primary" href="{{ url('core:package-new', chem_id=chem.id) }}">
+            {% trans %}Store new package{% endtrans %}
+        </a>
+        {% endif %}
+    </div>
+</div>
+{%- endmacro %}
+
+{% macro operating_instructions(chem, headline=true) -%}
+{% if headline %}
+<h2>
+    <i class="uk-icon-gears"></i>
+    {% trans %}Operating Instructions{% endtrans %}
+</h2>
+{% endif %}
+<ul class="uk-list uk-list-striped">
+    {% for oi in chem.operating_instructions.all().order_by('department__name') %}
+    <li title="{{ oi.notes }}">
+        <a href="{{ oi.document.url }}" target="_blank">
+            {{ oi.department.name }}
+            ({{ oi.last_updated|date('SHORT_DATE_FORMAT') }})
+        </a>
+        <i class="uk-icon-external-link"></i>
+    </li>
+    {% else %}
+    <li>{% trans %}Nothing saved{% endtrans %}</li>
+    {% endfor %}
+</ul>
+{%- endmacro %}

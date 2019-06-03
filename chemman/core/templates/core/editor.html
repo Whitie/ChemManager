@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block head %}
+<link href="{{ static('codemirror/lib/codemirror.css') }}" rel="stylesheet">
+<link href="{{ static('core/css/components/htmleditor.almost-flat.min.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}{% endblock %}
+
+{% block js %}
+<script src="{{ static('codemirror/lib/codemirror.js') }}"></script>
+<script src="{{ static('codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
+<script src="{{ static('codemirror/lib/marked.min.js') }}"></script>
+<script src="{{ static('core/js/components/htmleditor.min.js') }}"></script>
+{% endblock %}
+
+{% block init_editor %}{% endblock %}

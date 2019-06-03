@@ -1,0 +1,130 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}List of uploaded MSDS's{% endtrans %}
+</h1>
+<a href="{{ url('msds:index') }}" class="uk-button">
+{% trans %}Back{% endtrans %}
+</a>
+<table class="uk-table uk-table-striped uk-form">
+    <thead>
+        <tr>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Document{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}Added by{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for upl in uploads %}
+        <tr id="row_{{ loop.index }}">
+            <td>
+                {% if upl.processed %}
+                <input type="text" id="name_{{ loop.index }}" value="{{ upl.name|default('-', true) }}">
+                {% else %}
+                {% trans %}Not processed{% endtrans %}
+                {% endif %}
+            </td>
+            <td>
+                <a href="{{ upl.document.url }}" target="_blank">
+                    {{ upl.document.name|basename }}
+                </a>
+            </td>
+            <td>
+                {% if upl.processed %}
+                <input type="text" id="cas_{{ loop.index }}" value="{{ upl.cas|default('-', true) }}">
+                {% else %}
+                {% trans %}Not processed{% endtrans %}
+                {% endif %}
+            </td>
+            <td>
+                {{ upl.added_by }} ({{ upl.added|date() }})
+            </td>
+            <td>
+                {% if upl.processed %}
+                <a href="{{ url('msds:detail', upl.id) }}" class="uk-button" title="{% trans %}Edit processed data{% endtrans %}">
+                    <i class="uk-icon-edit"></i>
+                </a>
+                <button type="button" class="uk-button uk-button-primary" title="{% trans %}Save name and CAS{% endtrans %}" onclick="save('{{ loop.index }}', '{{ upl.id }}');">
+                    <i class="uk-icon-save"></i>
+                </button>
+                {% if perms.core.manage %}
+                <a href="{{ url('msds:transfer', upl.id) }}" class="uk-button uk-button-success" title="{% trans %}Transfer data to the ChemManager database{% endtrans %}">
+                    <i class="uk-icon-arrow-right"></i>
+                    <i class="uk-icon-database"></i>
+                </a>
+                {% endif %}
+                <button type="button" class="uk-button uk-button-danger" title="{% trans %}Delete upload and parsed data{% endtrans %}" onclick="delete_data('{{ loop.index }}', '{{ upl.parsed.first().id }}');">
+                    <i class="uk-icon-minus-circle"></i>
+                </button>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Document{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}Added by{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </tfoot>
+</table>
+<ul class="uk-pagination">
+    {% if uploads.has_previous() %}
+    <li class="uk-pagination-previous">
+        <a href="?page={{ uploads.previous_page_number() }}">
+            <i class="uk-icon-angle-double-left"></i>
+            {% trans %}previous{% endtrans %}
+        </a>
+    </li>
+    {% endif %}
+    {% if uploads.has_next() %}
+    <li class="uk-pagination-next">
+        <a href="?page={{ uploads.next_page_number() }}">
+            {% trans %}next{% endtrans %}
+            <i class="uk-icon-angle-double-right"></i>
+        </a>
+    </li>
+    {% endif %}
+</ul>
+{% endblock %}
+
+{% block js %}
+<script>
+    function save(line, obj_id) {
+        var url = '{{ url("msds:save") }}';
+        var params = {
+            name: $('#name_' + line).val(),
+            cas: $('#cas_' + line).val(),
+            id: obj_id
+        };
+        $.getJSON(url, params).done(function(data) {
+            if (data['success'] === true) {
+                UIkit.notify('<i class="uk-icon-check"></i> ' + data['msg'],
+                    {'status': 'success', 'pos': 'bottom-right'});
+            } else {
+                UIkit.notify('<i class="uk-icon-exclamation"></i> ' + data['msg'],
+                    {'status': 'danger', 'pos': 'bottom-right'});
+            }
+        });
+    }
+    function delete_data(row, pid) {
+        var url = '{{ url("msds:delete") }}';
+        $.getJSON(url, {'pid': pid}).done(function(data) {
+            if (data['success'] === true) {
+                UIkit.notify('<i class="uk-icon-check"></i> ' + data['msg'],
+                    {'status': 'success', 'pos': 'bottom-right'});
+                $('#row_' + row).remove();
+            } else {
+                UIkit.notify('<i class="uk-icon-exclamation"></i> ' + data['msg'],
+                    {'status': 'danger', 'pos': 'bottom-right'});
+            }
+        });
+    }
+</script>
+{% endblock %}

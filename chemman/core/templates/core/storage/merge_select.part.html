@@ -1,0 +1,15 @@
+<h4>{% trans %}Select package to fill up:{% endtrans %}</h4>
+<ul class="uk-list uk-form">
+    {% for p in packages %}
+    <li>
+        <label>
+            <input type="radio" class="fillup" data-pid="{{ p.id }}" data-id="{{ p.package_id }}"{% if loop.first %} checked{% endif %}>
+            {{ p }}
+        </label>
+    </li>
+    {% endfor %}
+</ul>
+<button type="button" class="uk-button uk-button-success uk-align-right" id="btn-2">
+    <i class="uk-icon uk-icon-save"></i>
+    {% trans %}Save{% endtrans %}
+</button>

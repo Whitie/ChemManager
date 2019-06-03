@@ -1,0 +1,98 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}New Package{% endtrans %}: {{ chem.display_name }}
+</h1>
+<div class="uk-grid">
+    <div class="uk-width-1-6"></div>
+    <div class="uk-width-4-6">
+        <form class="uk-form uk-form-horizontal" method="post" enctype="multipart/form-data">
+            {% set fields=['quality', 'name_extra', 'storage'] %}
+            {% csrf_token %}
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="{{ form['company'].auto_id }}">
+                    {{ form['company'].label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ form['company'] }}
+                </div>
+            </div>
+            <div class="uk-form-row msds-data">
+                <label class="uk-form-label" for="{{ form['msds'].auto_id }}">
+                    {{ form['msds'].label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ form['msds'] }}
+                    <p class="uk-form-help-block">{{ form['msds'].help_text }}</p>
+                </div>
+            </div>
+            <div class="uk-form-row msds-data">
+                <label class="uk-form-label" for="{{ form['published'].auto_id }}">
+                    {{ form['published'].label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ form['published'] }}
+                </div>
+            </div>
+            <div class="uk-form-row msds-data">
+                <label class="uk-form-label" for="{{ form['old_msds'].auto_id }}">
+                    {{ form['old_msds'].label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ form['old_msds'] }}
+                </div>
+            </div>
+            {% for name in fields %}
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="{{ form[name].auto_id }}">
+                    {{ form[name].label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ form[name] }}
+                    {% if form[name].help_text %}
+                    <p class="uk-form-help-block">{{ form[name].help_text }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button type="submit" class="uk-button uk-button-success">
+                        <i class="uk-icon-arrow-circle-right"></i>
+                        {% trans %}continue{% endtrans %}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uk-width-1-6"></div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    var elem = $('#id_published');
+    var opts = {'format': 'DD.MM.YYYY'};
+    var dp = UIkit.datepicker(elem, opts);
+    var extra = $('#id_name_extra');
+    var msds = $('.msds-data');
+    msds.hide();
+    $('#id_quality').change(function() {
+        if ($(this).val() == 'special') {
+            extra.attr('required', 'required');
+        } else {
+            extra.removeAttr('required');
+        }
+    });
+    $('#id_company').change(function() {
+        if ($(this).val() != '') {
+            msds.show();
+        } else {
+            msds.hide();
+        }
+    });
+})
+</script>
+{% endblock %}

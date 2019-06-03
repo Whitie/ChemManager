@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}H+P - Statements{% endtrans %}</h1>
+<p class="uk-text-center">
+    <a href="#H" class="uk-button">
+        {% trans %}H - Statements{% endtrans %}
+    </a>
+    <a href="#EUH" class="uk-button">
+        {% trans %}EUH - Statements{% endtrans %}
+    </a>
+    <a href="#P" class="uk-button">
+        {% trans %}P - Statements{% endtrans %}
+    </a>
+</p>
+
+<a name="H"></a>
+<h2>{% trans %}H - Statements{% endtrans %}</h2>
+<ul class="uk-list uk-list-line">
+    {% for ref, info in hs.items() %}
+    <li>
+        <span class="uk-badge">{{ ref }}</span> {{ info['text'] }}
+        {% if info['count'] %}<a href="{{ info['spec']|list_url(name=ref) }}" class="uk-badge uk-badge-danger uk-badge-notification">{{ info['count'] }}</a>{% else %}<span class="uk-badge uk-badge-warning uk-badge-notification">0</span>{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<a href="#H" class="uk-button uk-button-primary">
+    <i class="uk-icon-arrow-up"></i> {% trans %}Up{% endtrans %}
+</a>
+
+<a name="EUH"></a>
+<h2>{% trans %}EUH - Statements{% endtrans %}</h2>
+<ul class="uk-list uk-list-line">
+    {% for ref, info in euh.items() %}
+    <li>
+        <span class="uk-badge">{{ ref }}</span> {{ info['text'] }}
+        {% if info['count'] %}<a href="{{ info['spec']|list_url(name=ref) }}" class="uk-badge uk-badge-danger uk-badge-notification">{{ info['count'] }}</a>{% else %}<span class="uk-badge uk-badge-warning uk-badge-notification">0</span>{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<a href="#H" class="uk-button uk-button-primary">
+    <i class="uk-icon-arrow-up"></i> {% trans %}Up{% endtrans %}
+</a>
+
+<a name="P"></a>
+<h2>{% trans %}P - Statements{% endtrans %}</h2>
+<ul class="uk-list uk-list-line">
+    {% for ref, info in ps.items() %}
+    <li>
+        <span class="uk-badge">{{ ref }}</span> {{ info['text'] }}
+        {% if info['count'] %}<a href="{{ info['spec']|list_url(name=ref) }}" class="uk-badge uk-badge-danger uk-badge-notification">{{ info['count'] }}</a>{% else %}<span class="uk-badge uk-badge-warning uk-badge-notification">0</span>{% endif %}
+    </li>
+    {% endfor %}
+</ul>
+<a href="#H" class="uk-button uk-button-primary">
+    <i class="uk-icon-arrow-up"></i> {% trans %}Up{% endtrans %}
+</a>
+<br>
+<a class="uk-button uk-button-primary uk-margin-top" href="{{ url('core:info') }}">
+    <i class="uk-icon-chevron-circle-left"></i> {% trans %}Back{% endtrans %}
+</a>
+{% endblock %}

@@ -1,0 +1,33 @@
+<td class="uk-text-center">
+{% if limit_min %}
+    {% if limit_min.reached() %}
+    <span class="uk-badge uk-badge-notification uk-badge-warning" title="{% trans %}Stock below minimum limit ({{ limit_min }}){% endtrans %}">
+        <i class="uk-icon-exclamation"></i>
+    </span>
+    {% else %}
+    <span class="uk-badge uk-badge-notification uk-badge-success" title="{% trans %}Minimum stock not reached ({{ limit_min }}){% endtrans %}">
+        <i class="uk-icon-check"></i>
+    </span>
+    {% endif %}
+{% else %}
+<span class="uk-badge uk-badge-notification" title="{% trans %}No minimum limit set{% endtrans %}">
+    <i class="uk-icon-info"></i>
+</span>
+{% endif %}
+/
+{% if limit_max %}
+    {% if limit_max.reached() %}
+    <span class="uk-badge uk-badge-notification uk-badge-danger" title="{% trans %}Maximum stock limit exceeded ({{ limit_max }}){% endtrans %}">
+        <i class="uk-icon-exclamation"></i>
+    </span>
+    {% else %}
+    <span class="uk-badge uk-badge-notification uk-badge-success" title="{% trans %}Maximum stock not reached ({{ limit_max }}){% endtrans %}">
+        <i class="uk-icon-check"></i>
+    </span>
+    {% endif %}
+{% else %}
+<span class="uk-badge uk-badge-notification" title="{% trans %}No maximum limit set{% endtrans %}">
+    <i class="uk-icon-info"></i>
+</span>
+{% endif %}
+</td>

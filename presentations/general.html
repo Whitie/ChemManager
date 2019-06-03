@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>ChemManager - Übersicht</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/moon.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		</script>
+		<link rel="stylesheet" href="css/reveal-override.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1 class="no-upper">ChemManager</h1>
+                    <h2>Übersicht</h2>
+                    <img src="img/logo_ghs07.png" width="150">
+					<h3>&copy; bbz Chemie 2017</h3>
+				</section>
+                <section>
+                    <h1>Allgemeine Funktionen</h1>
+                    <ul>
+                        <li>
+                            Bereitstellen von Informationen zu Chemikalien
+                        </li>
+                        <li class="fragment">
+                            Verwalten von Gebäuden, Lagern und Beständen
+                        </li>
+                        <li class="fragment">
+                            besondere Verwaltung von <em>giftigen</em>
+                            Chemikalien (Giftbuch)
+                        </li>
+                        <li class="fragment">
+                            Bestellwesen
+                        </li>
+                        <li class="fragment">
+                            Online - Handbücher (erweiterbar)
+                        </li>
+                    </ul>
+                </section>
+                <section data-external="general/tech.html"></section>
+                <section data-external="general/concepts.html"></section>
+                <section data-external="general/usage.html"></section>
+                <section>
+                    <h1>Ende</h1>
+                </section>
+			</div>
+		</div>
+
+		<div id="footer">
+            <img class="logo" src="img/bbz_logo.png">
+            <span class="text">ChemManager</span>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+                slideNumber: 'c/t',
+                dependencies: [
+                    {src: 'plugin/external/external.js', condition: function() { return !!document.querySelector('[data-external]'); }},
+                    {src: 'plugin/print-pdf/print-pdf.js', async: true}
+                ]
+            });
+		</script>
+	</body>
+</html>

@@ -1,0 +1,96 @@
+{% extends 'core/base.html' %}
+{% import 'core/macros.inc.html' as m with context %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Observation{% endtrans %} -
+    {{ storage.name }} ({{ storage.department.name }})
+</h1>
+<table class="uk-table uk-table-striped">
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}GHS{% endtrans %}</th>
+            <th>{% trans %}Storage Class{% endtrans %}</th>
+            <th>{% trans %}Stock in storage{% endtrans %}</th>
+            <th>{% trans %}Storage OK{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in chems %}
+        {% set sc=c.storage_class %}
+        <tr class="cm-row" data-chemid="{{ c.id }}">
+            <td>{{ loop.index }}</td>
+            <td{% if c.special_log %} class="cmr"{% endif %}>
+                <a href="{{ url('core:detail-by-id', c.id) }}">
+                    {{ c.display_name }}
+                </a>
+                {% if c.signal_word or c.cmr %}
+                <span class="uk-badge uk-badge-{{ c.signal_word }}">
+                    {{ c.get_signal_word_display() }}
+                    {% if c.cmr %}| {% trans %}CMR{% endtrans %}{% endif %}
+                </span>
+                {% endif %}
+                <small id="msg-{{ c.id }}" class="uk-display-block"></small>
+            </td>
+            <td>{{ c.identifiers.cas|default('-', true) }}</td>
+            <td>
+                {% for pic in c.pictograms.all() %}
+                <img src="{{ pic.image.url }}" width="25" alt="{{ pic.short }}" title="{{ pic }}">
+                {% endfor %}
+            </td>
+            <td{% if sc %} title="{{ sc }}"{% endif %}>
+                {% if sc %}
+                <a href="{{ url('core:storage-classes-info') }}#{{ sc.value }}">
+                    {{ sc.value }}
+                </a>
+                {% else %}-{% endif %}
+            </td>
+            <td class="uk-text-right" id="inventory-{{ c.id }}">
+                <i class="uk-icon-spinner uk-icon-spin"></i>
+            </td>
+            <td id="icons-{{ c.id }}" class="uk-text-center">
+                <i class="uk-icon-question-circle"></i>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7">{% trans %}No results{% endtrans %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    var url = '{{ url("core:api-observe") }}';
+    var spin = '<i class="uk-icon-spinner uk-icon-spin"></i>';
+    var err = '<i class="uk-icon-exclamation-circle"></i>';
+    var ok = '<i class="uk-icon-check-circle"></i>';
+    $('.cm-row').each(function() {
+        var tr = $(this);
+        var cid = tr.data('chemid');
+        var data = {'chem_id': cid, 'storage_id': {{ storage.id }} };
+        var result = $('#msg-' + cid);
+        var icon = $('#icons-' + cid);
+        var inventory = $('#inventory-' + cid);
+        icon.html(spin);
+        $.getJSON(url, data, function(res) {
+            result.html(res['msg']);
+            inventory.html(res['inventory']);
+            if (res['ok'] === true) {
+                icon.html(ok);
+                icon.css('background-color', 'green');
+            } else {
+                icon.html(err);
+                icon.css('background-color', 'orange');
+            }
+        });
+    });
+})
+</script>
+{% endblock %}

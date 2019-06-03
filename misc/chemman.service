@@ -1,0 +1,13 @@
+[Unit]
+Description=ChemManager (Open Source Chemical Management System)
+After=network.target
+
+[Service]
+ExecStart=/home/bbz/environments/ChemManager-env/bin/python /home/bbz/environments/ChemManager-env/ChemManager/chemman/standalone.py -d
+Type=forking
+PIDFile=/home/bbz/environments/ChemManager-env/ChemManager/chemman/chemman.pid
+User=bbz
+Group=users
+
+[Install]
+WantedBy=multi-user.target

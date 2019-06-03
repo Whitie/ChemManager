@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Add new chapter{% endtrans %}
+</h1>
+<h2 class="uk-text-center">
+    {% trans %}Handbook{% endtrans %}: {{ hb.title }}
+</h2>
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Enter chapter data{% endtrans %}</h3>
+        <form class="uk-form uk-form-horizontal" method="post">
+            {% csrf_token %}
+            {% for f in form %}
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="{{ f.auto_id }}">
+                    {{ f.label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ f }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button type="submit" class="uk-button uk-button-success">
+                        {% trans %}Save{% endtrans %}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Existing chapters{% endtrans %}</h3>
+        <ul class="uk-list">
+            {% for c in hb.chapters.all() %}
+            <li>{{ c.number }} - {{ c.title }}</li>
+            {% else %}
+            <li>{% trans %}No chapters added yet.{% endtrans %}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

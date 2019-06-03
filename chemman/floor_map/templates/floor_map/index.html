@@ -1,0 +1,92 @@
+{% extends 'floor_map/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Storage Maps{% endtrans %}
+</h1>
+<form class="uk-form">
+    <fieldset data-uk-margin>
+        {{ form.building }}
+        {% trans %}Level{% endtrans %} {{ form.level }}
+        <button type="submit" class="uk-button uk-button-success">
+            {% trans %}Show{% endtrans %}
+        </button>
+    </fieldset>
+</form>
+{% if show %}
+<dl class="uk-description-list-horizontal">
+    <dt>{% trans %}Building{% endtrans %}</dt>
+    <dd>{{ building.name }}</dd>
+    <dt>{%trans %}Level{% endtrans %}</dt>
+    <dd>{{ floor.level }}</dd>
+    <dt>{% trans %}Name{% endtrans %}</dt>
+    <dd>{{ floor.name|default('-', true) }}</dd>
+    <dt>{% trans %}Usage{% endtrans %}</dt>
+    <dd>{% trans %}Click to see the name, doubleclick to go to the inventory{% endtrans %}</dd>
+</dl>
+<div id="floor_map"></div>
+{% if user.is_staff %}
+<p class="uk-text-right uk-margin-top">
+    <a href="{{ url('admin:app_list', app_label='floor_map') }}" class="uk-button">
+        {% trans %}Add floors and levels{% endtrans %}
+    </a>
+    <a href="{{ url('fm:edit-map', floor_id=floor.id) }}" class="uk-button">
+        {% trans %}Edit Map{% endtrans %}
+    </a>
+</p>
+{% endif %}
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+function set_levels(elem, choices) {
+    elem.html('');
+    $.each(choices, function(i, val) {
+        elem.append(new Option(val, val));
+    });
+}
+{% if show %}
+function show_floor_map() {
+    var storages = {{ storages|safe }};
+    var map = L.map('floor_map', {
+        crs: L.CRS.Simple,
+        minZoom: -1,
+        maxZoom: 1,
+        center: [0, 0],
+        zoom: -1
+    });
+    var w = {{ floor.map_w }};
+    var h = {{ floor.map_h }};
+    var url = '{{ floor.map.url }}';
+    var bounds = [[0, 0], [h, w]];
+    var img = L.imageOverlay(url, bounds).addTo(map);
+    map.setMaxBounds(bounds);
+    $.each(storages, function(k, obj) {
+        if (obj.x > 0 || obj.y > 0) {
+            var pos = xy(obj.x, obj.y);
+            var marker = L.marker(pos).addTo(map).bindPopup(obj.name);
+            marker.on('dblclick', function(e) {
+                window.location.href = obj.url;
+            });
+        }
+    });
+}
+{% endif %}
+$(document).ready(function() {
+    var buildings_levels = {{ json_data|safe }};
+    var building = $('#id_building');
+    var levels = $('#id_level');
+    var choices = buildings_levels[building.val()];
+    set_levels(levels, choices);
+    building.change(function() {
+        choices = buildings_levels[$(this).val()];
+        set_levels(levels, choices);
+    });
+    {% if show %}
+    $('#floor_map').css('height', '600px');
+    show_floor_map();
+    {% endif %}
+});
+</script>
+{% endblock %}

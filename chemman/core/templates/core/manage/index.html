@@ -1,0 +1,97 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Management{% endtrans %}</h1>
+
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Buildings, Storages, Rooms{% endtrans %}</h3>
+        {% if perms.core.manage_storage %}
+        <ul class="uk-list uk-list-line">
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-buildings') }}">
+                    {% trans %}Manage Buildings{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-departments') }}">
+                    {% trans %}Manage Departments{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-storages') }}">
+                    {% trans %}Manage Storages{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-places') }}">
+                    {% trans %}Manage Storageplaces{% endtrans %}
+                </a>
+            </li>
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-rooms') }}">
+                    {% trans %}Manage Rooms{% endtrans %}
+                </a>
+            </li>
+        </ul>
+        {% endif %}
+        <h3>{% trans %}Legal Limits{% endtrans %}</h3>
+        {% if perms.core.manage_storage %}
+        <ul class="uk-list uk-list-line">
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-limits') }}">
+                    {% trans %}Set / Remove Limits{% endtrans %}
+                </a>
+            </li>
+        </ul>
+        {% endif %}
+        <h3>{% trans %}Notify Users{% endtrans %}</h3>
+        {% if perms.core.manage %}
+        <ul class="uk-list uk-list-line">
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-notices') }}">
+                    {% trans %}Manage Notifications{% endtrans %}
+                </a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
+    <div class="uk-width-1-2">
+        <h3>{% trans %}Chemicals{% endtrans %}</h3>
+        {% if perms.core.change_chemical %}
+        <ul class="uk-list uk-list-line">
+            {% if perms.core.manage %}
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('admin:core_chemical_add') }}">
+                    {% trans %}Add Chemical{% endtrans %}
+                </a>
+            </li>
+            {% endif %}
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-chemicals-edit') }}">
+                    {% trans %}Edit Chemical{% endtrans %}
+                </a>
+            </li>
+        </ul>
+        {% endif %}
+        <h3>{% trans %}Misc{% endtrans %}</h3>
+        <ul class="uk-list uk-list-line">
+            <li>
+                <i class="uk-icon-angle-double-right"></i>
+                <a href="{{ url('core:manage-rights') }}">
+                    {% trans %}Show special permissions{% endtrans %}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

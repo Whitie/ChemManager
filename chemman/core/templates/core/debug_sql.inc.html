@@ -1,0 +1,10 @@
+<div class="uk-container uk-container-center uk-margin-top">
+    <div class="uk-panel uk-panel-box uk-panel-box-primary">
+        <h3 class="uk-panel-title"><i class="uk-icon-bug"></i> SQL queries</h3>
+        <ul>
+            {% for q in con.queries %}
+            <li>SQL: {{ q['sql'] }}, Time: {{ q['time'] }}s</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+name: ChemManager
+dependencies:
+  - Cherrypy
+  - cryptography
+  - Django
+  - Pillow
+  - Pygments
+  - python=3
+  - requests
+  - Sphinx
+  - pip
+  - pip:
+    - django-contrib-comments
+    - django-jinja
+    - django-spaghetti-and-meatballs
+    - python3-ldap
+    - qrcode

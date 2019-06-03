@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Management{% endtrans %}</h1>
+<h2 class="uk-text-center">{{ title }}</h2>
+
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        {% block left %}{% endblock %}
+    </div>
+    <div class="uk-width-1-2">
+        <h3>{% if edit %}{% trans %}Edit{% endtrans %}{% else %}{% trans %}Add{% endtrans %}{% endif %}</h3>
+        <form class="uk-form uk-form-horizontal" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="uk-form-row">
+                <label class="uk-form-label" for="{{ field.auto_id }}">
+                    {{ field.label }}
+                </label>
+                <div class="uk-form-controls">
+                    {{ field }}
+                    {% if field.help_text %}
+                    <p class="uk-form-help-block uk-text-small">
+                        {{ field.help_text }}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button class="uk-button uk-button-success">
+                        {% trans %}Save{% endtrans %}
+                    </button>
+                    {% if edit %}
+                    <a class="uk-button" href="{{ url(reset_url) }}">
+                        {% trans %}Reset{% endtrans %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<a class="uk-button uk-button-primary uk-margin-top" href="{{ url('core:manage') }}">
+    <i class="uk-icon-chevron-circle-left"></i> {% trans %}Back{% endtrans %}
+</a>
+{% endblock %}

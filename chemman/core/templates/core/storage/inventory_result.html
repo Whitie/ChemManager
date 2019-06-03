@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Inventory Result{% endtrans %}</h1>
+<h2 class="uk-text-center">{{ storage }}</h2>
+<p class="uk-text-center cmr">
+    {% trans %}Packages marked in this color are toxic.{% endtrans %}
+</p>
+{% for place, packages in diffs.items() %}
+<table class="uk-table">
+    <caption>{% trans %}Storage place{% endtrans %} -> {{ place }}</caption>
+    <thead>
+        <tr>
+            <th>{% trans %}No.{% endtrans %}</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}Quality{% endtrans %}</th>
+            <th>{% trans %}Supplier{% endtrans %}</th>
+            <th>{% trans %}ID{% endtrans %}</th>
+            <th>{% trans %}Saved{% endtrans %}</th>
+            <th class="uk-text-center">
+                {% trans %}Inventory Diff.{% endtrans %}
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for package, diff in packages.items() %}
+        {% set sc=package.stored_chemical %}
+        <tr{% if sc.chemical.special_log %} class="cmr"{% endif %}>
+            <td>{{ loop.index }}</td>
+            <td>{{ sc.chemical.display_name }}</td>
+            <td>{{ sc.get_quality_display() }}</td>
+            <td>{{ sc.company|default('-', true) }}</td>
+            <td>
+                <a href="{{ url('core:package-info', pid=package.id) }}">
+                    {{ package.package_id }}
+                </a>
+            </td>
+            {% if diff.to_old %}
+            <td title="{% trans age=diff.age %}Inventory date to old ({{ age }} days)!{% endtrans %}">
+                <mark>{{ diff.saved|date('SHORT_DATETIME_FORMAT') }}</mark>
+            </td>
+            {% else %}
+            <td title="{% trans age=diff.age %}Age: {{ age }} days{% endtrans %}">
+                {{ diff.saved|date('SHORT_DATETIME_FORMAT') }}
+            </td>
+            {% endif %}
+            <td class="uk-text-right">{{ diff.get_obj() }}</td>
+            <td></td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="8">
+                {% trans %}No inventory data saved!{% endtrans %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+{% endblock %}
