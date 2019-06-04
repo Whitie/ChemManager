@@ -42,8 +42,10 @@ class Handbook(models.Model):
 
 
 class Chapter(models.Model):
-    handbook = models.ForeignKey(Handbook, verbose_name=_('Handbook'),
-                                 related_name='chapters')
+    handbook = models.ForeignKey(
+        Handbook, verbose_name=_('Handbook'), related_name='chapters',
+        on_delete=models.CASCADE
+    )
     title = models.CharField(_('Title'), max_length=100)
     number = models.PositiveIntegerField(_('Number'))
     synopsis = models.TextField(_('Synopsis'), blank=True)
@@ -65,19 +67,24 @@ class Chapter(models.Model):
 
 
 class Paragraph(models.Model):
-    chapter = models.ForeignKey(Chapter, verbose_name=_('Chapter'),
-                                related_name='paragraphs')
+    chapter = models.ForeignKey(
+        Chapter, verbose_name=_('Chapter'), related_name='paragraphs',
+        on_delete=models.CASCADE
+    )
     title = models.CharField(_('Title'), max_length=100)
     number = models.PositiveIntegerField(_('Number'))
     lead = models.TextField(_('Lead'), blank=True)
     text = models.TextField(_('Text'), blank=True)
-    author = models.ForeignKey(User, verbose_name=_('Author'), editable=False,
-                               related_name='added_paragraphs')
+    author = models.ForeignKey(
+        User, verbose_name=_('Author'), editable=False, blank=True, null=True,
+        related_name='added_paragraphs', on_delete=models.SET_NULL
+    )
     added = models.DateTimeField(_('Added'), auto_now_add=True)
     last_modified = models.DateTimeField(_('Last modified'), auto_now=True)
     last_modified_by = models.ForeignKey(
         User, verbose_name=_('Last modified by'), editable=False, blank=True,
-        null=True, related_name='modified_paragraphs', default=None
+        null=True, related_name='modified_paragraphs', default=None,
+        on_delete=models.SET_NULL
     )
 
     def __str__(self):
@@ -103,12 +110,16 @@ class Paragraph(models.Model):
 
 
 class ChapterComment(models.Model):
-    chapter = models.ForeignKey(Chapter, verbose_name=_('Chapter'),
-                                related_name='comments')
+    chapter = models.ForeignKey(
+        Chapter, verbose_name=_('Chapter'), related_name='comments',
+        on_delete=models.CASCADE
+    )
     title = models.CharField(_('Title'), max_length=50, blank=True)
     text = models.TextField(_('Text'))
-    author = models.ForeignKey(User, verbose_name=_('Author'), editable=False,
-                               related_name='paragraph_comments')
+    author = models.ForeignKey(
+        User, verbose_name=_('Author'), editable=False, blank=True, null=True,
+        related_name='paragraph_comments', on_delete=models.SET_NULL
+    )
     added = models.DateTimeField(_('Added'), auto_now_add=True)
 
     def __str__(self):

@@ -5,6 +5,8 @@ from django.conf.urls import url
 from . import views
 
 
+app_name = 'msds_collector'
+
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^upload/$', views.upload, name='upload'),

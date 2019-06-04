@@ -32,8 +32,10 @@ def check_map_size(image_path):
 # Create your models here.
 
 class Floor(models.Model):
-    building = models.ForeignKey(Building, verbose_name=_('Building'),
-                                 related_name='floors')
+    building = models.ForeignKey(
+        Building, verbose_name=_('Building'), related_name='floors',
+        on_delete=models.CASCADE
+    )
     level = models.IntegerField(_('Level'), default=0)
     name = models.CharField(_('Name'), max_length=100, blank=True)
     map = models.ImageField(_('Map'), upload_to=get_floor_image_path)
@@ -59,10 +61,14 @@ class Floor(models.Model):
 
 
 class FloorStorage(models.Model):
-    floor = models.ForeignKey(Floor, verbose_name=_('Floor'),
-                              related_name='storages')
-    storage = models.OneToOneField(Storage, verbose_name=_('Storage'),
-                                   related_name='floor')
+    floor = models.ForeignKey(
+        Floor, verbose_name=_('Floor'), related_name='storages',
+        on_delete=models.CASCADE
+    )
+    storage = models.OneToOneField(
+        Storage, verbose_name=_('Storage'), related_name='floor',
+        on_delete=models.CASCADE
+    )
     x = models.IntegerField(_('X'), default=0)
     y = models.IntegerField(_('Y'), default=0)
 

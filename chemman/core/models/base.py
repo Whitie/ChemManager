@@ -19,8 +19,10 @@ NOTIFICATION_TYPE_CHOICES = (
 
 
 class Bookmark(models.Model):
-    user = models.ForeignKey(User, verbose_name=_('User'),
-                             related_name='bookmarks')
+    user = models.ForeignKey(
+        User, verbose_name=_('User'), related_name='bookmarks',
+        on_delete=models.CASCADE
+    )
     url = models.CharField(_('URL'), max_length=100)
     text = models.CharField(_('Text'), max_length=100)
 
@@ -50,8 +52,10 @@ class Notification(models.Model):
         User, blank=True, verbose_name=_('Seen by'),
         related_name='seen_notifications'
     )
-    added_by = models.ForeignKey(User, verbose_name=_('Author'),
-                                 related_name='notifications')
+    added_by = models.ForeignKey(
+        User, verbose_name=_('Author'), related_name='notifications',
+        on_delete=models.CASCADE
+    )
     added = models.DateTimeField(_('Added'), auto_now_add=True)
 
     def __str__(self):
@@ -131,8 +135,10 @@ class Company(ContactData):
 
 
 class ContactPerson(models.Model):
-    company = models.ForeignKey(Company, verbose_name=_('Company'),
-                                related_name='contact_persons')
+    company = models.ForeignKey(
+        Company, verbose_name=_('Company'), related_name='contact_persons',
+        on_delete=models.CASCADE
+    )
     last_name = models.CharField(_('Last Name'), max_length=50)
     first_name = models.CharField(_('First Name'), max_length=50, blank=True)
     direct_dialing = models.CharField(_('Direct Dialing'), max_length=30,
@@ -207,10 +213,13 @@ class JournalType(models.Model):
 
 
 class JournalEntry(models.Model):
-    type = models.ForeignKey(JournalType, verbose_name=_('Type'),
-                             related_name='entries')
+    type = models.ForeignKey(
+        JournalType, verbose_name=_('Type'), related_name='entries',
+        on_delete=models.CASCADE
+    )
     user = models.ForeignKey(User, verbose_name=_('User'),
-                             related_name='journal_entries')
+        related_name='journal_entries', on_delete=models.CASCADE
+    )
     message = models.TextField(_('Message'))
     user_message = models.CharField(_('User Message'), max_length=200,
                                     blank=True)

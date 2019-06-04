@@ -62,7 +62,7 @@
         <!-- Custom javascripts -->
         <script src="{{ url('core:javascript-catalog') }}"></script>
         <script src="{{ static('core/js/cm.js') }}"></script>
-        {% if not user.is_authenticated() %}
+        {% if not user.is_authenticated %}
         <script>
             function try_login() {
                 var data = {'username': $('#username').val(),

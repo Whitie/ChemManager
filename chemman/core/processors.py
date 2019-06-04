@@ -8,7 +8,7 @@ from .models import Bookmark
 
 def add_bookmarks(req):
     ctx = dict(bookmarks=[])
-    if req.user.is_authenticated():
+    if req.user.is_authenticated:
         ctx['bookmarks'] = Bookmark.objects.filter(user=req.user).order_by(
             Lower('text'))
     return ctx

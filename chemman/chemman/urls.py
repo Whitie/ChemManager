@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(pattern_name=settings.START_VIEW)),
     url(r'^admin/', admin.site.urls),
     url(r'^core/', include('core.urls', namespace='core')),
-    url(r'^accounts/login/$', views.login,
+    url(r'^accounts/login/$', views.LoginView.as_view(),
         {'template_name': 'core/login.html'}),
     url(r'^model_graph/$', Plate.as_view(
         plate_template_name='3rd_party/django_spaghetti/plate.html',

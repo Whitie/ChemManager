@@ -91,10 +91,14 @@ class Building(models.Model):
 
 class Storage(models.Model):
     name = models.CharField(_('Name'), max_length=100, unique=True)
-    building = models.ForeignKey(Building, verbose_name=_('Building'),
-                                 related_name='storages')
-    department = models.ForeignKey(Department, verbose_name=_('Department'),
-                                   related_name='storages')
+    building = models.ForeignKey(
+        Building, verbose_name=_('Building'), related_name='storages',
+        on_delete=models.CASCADE
+    )
+    department = models.ForeignKey(
+        Department, verbose_name=_('Department'), related_name='storages',
+        on_delete=models.CASCADE
+    )
     type = models.CharField(_('Type'), max_length=10, choices=TYPE_CHOICES)
     consumption = models.BooleanField(_('Consumption'), default=False)
     observe = models.BooleanField(_('Observe'), default=False)
@@ -126,10 +130,14 @@ class Storage(models.Model):
 class Room(models.Model):
     name = models.CharField(_('Name'), max_length=100, blank=True)
     number = models.CharField(_('Number'), max_length=15, blank=True)
-    building = models.ForeignKey(Building, verbose_name=_('Building'),
-                                 related_name='rooms')
-    storage = models.ForeignKey(Storage, verbose_name=_('Storage'),
-                                related_name='rooms')
+    building = models.ForeignKey(
+        Building, verbose_name=_('Building'), related_name='rooms',
+        on_delete=models.CASCADE
+    )
+    storage = models.ForeignKey(
+        Storage, verbose_name=_('Storage'), related_name='rooms',
+        on_delete=models.CASCADE
+    )
 
     def __str__(self):
         tmp = [self.name or '-', self.number or '-', self.building.name,
@@ -159,10 +167,14 @@ class Room(models.Model):
 class StoragePlace(models.Model):
     name = models.CharField(_('Name'), max_length=100)
     description = models.TextField(_('Description'), blank=True)
-    storage = models.ForeignKey(Storage, verbose_name=_('Storage'),
-                                related_name='places')
-    room = models.ForeignKey(Room, verbose_name=_('Room'), blank=True,
-                             null=True, related_name='places')
+    storage = models.ForeignKey(
+        Storage, verbose_name=_('Storage'), related_name='places',
+        on_delete=models.CASCADE
+    )
+    room = models.ForeignKey(
+        Room, verbose_name=_('Room'), blank=True, null=True,
+        related_name='places', on_delete=models.CASCADE
+    )
     lockable = models.BooleanField(_('Lockable'), default=False)
 
     def __str__(self):
@@ -202,11 +214,13 @@ class MaterialSafetyDataSheet(models.Model):
 
 
 class StoredChemical(models.Model):
-    chemical = models.ForeignKey(Chemical, verbose_name=_('Chemical'),
-                                 related_name='storage')
+    chemical = models.ForeignKey(
+        Chemical, verbose_name=_('Chemical'), related_name='storage',
+        on_delete=models.CASCADE
+    )
     company = models.ForeignKey(
         Company, verbose_name=_('Company'), related_name='stored_chemicals',
-        blank=True, null=True
+        blank=True, null=True, on_delete=models.SET_NULL
     )
     name_extra = models.CharField(
         _('Name extra'), max_length=100, blank=True
@@ -218,7 +232,8 @@ class StoredChemical(models.Model):
     )
     msds = models.ForeignKey(
         MaterialSafetyDataSheet, verbose_name=_('Material Safety Data Sheet'),
-        related_name='stored_chemicals', blank=True, null=True
+        related_name='stored_chemicals', blank=True, null=True,
+        on_delete=models.SET_NULL
     )
 
     def __str__(self):
@@ -251,8 +266,8 @@ class StoredChemical(models.Model):
 
 class Barcode(models.Model):
     chemical = models.ForeignKey(
-        Chemical, models.CASCADE, verbose_name=_('Chemical'),
-        related_name='barcodes'
+        Chemical, verbose_name=_('Chemical'),
+        related_name='barcodes', on_delete=models.CASCADE
     )
     stored_chemical = models.ForeignKey(
         StoredChemical, models.SET_NULL, verbose_name=_('Stored Chemical'),
@@ -287,11 +302,11 @@ class Barcode(models.Model):
 class StoredPackage(models.Model):
     stored_chemical = models.ForeignKey(
         StoredChemical, verbose_name=_('Stored Chemical'),
-        related_name='packages'
+        related_name='packages', on_delete=models.CASCADE
     )
     place = models.ForeignKey(
-        StoragePlace, models.CASCADE, verbose_name=_('Storage Place'),
-        related_name='packages'
+        StoragePlace, on_delete=models.CASCADE,
+        verbose_name=_('Storage Place'), related_name='packages'
     )
     content = models.DecimalField(_('Content'), max_digits=9,
                                   decimal_places=4)
@@ -322,8 +337,8 @@ class StoredPackage(models.Model):
     brutto_mass_unit = models.CharField(_('Brutto Mass Unit'), max_length=2,
                                         choices=MASS_CHOICES, default='g')
     stored_by = models.ForeignKey(
-        User, verbose_name=_('Stored by'), editable=False,
-        related_name='stored_packages'
+        User, verbose_name=_('Stored by'), editable=False, blank=True,
+        null=True, related_name='stored_packages', on_delete=models.SET_NULL
     )
     stored = models.DateTimeField(_('Stored'), auto_now_add=True)
     # This field is only for caching. No database lookups should be
@@ -331,8 +346,10 @@ class StoredPackage(models.Model):
     chemical_id = models.PositiveIntegerField(editable=False)
     empty = models.BooleanField(_('Empty'), default=False)
     consume_archived = models.BooleanField(editable=False, default=False)
-    disposed_by = models.ForeignKey(User, verbose_name=_('Stored by'),
-                                    editable=False, blank=True, null=True)
+    disposed_by = models.ForeignKey(
+        User, verbose_name=_('Stored by'), editable=False, blank=True,
+        null=True, on_delete=models.SET_NULL
+    )
     dispose_reason = models.CharField(_('Dispose Reason'), max_length=100,
                                       blank=True, default='')
 
@@ -443,8 +460,10 @@ class StoredPackage(models.Model):
 
 
 class PackageUsage(models.Model):
-    package = models.ForeignKey(StoredPackage, verbose_name=_('Package'),
-                                related_name='usage')
+    package = models.ForeignKey(
+        StoredPackage, verbose_name=_('Package'), related_name='usage',
+        on_delete=models.CASCADE
+    )
     mass_after = models.DecimalField(
         _('Mass after usage'), max_digits=9, decimal_places=4, blank=True,
         null=True
@@ -463,11 +482,15 @@ class PackageUsage(models.Model):
     # This field stores the user on special chemicals as given by
     # the web form.
     used_by = models.ForeignKey(User, blank=True, null=True, editable=False,
-                                default=None)
-    user = models.ForeignKey(User, verbose_name=_('User'),
-                             related_name='package_usages')
-    group = models.ForeignKey(Group, verbose_name=_('Group'), blank=True,
-                              related_name='used_packages', null=True)
+                                default=None, on_delete=models.SET_NULL)
+    user = models.ForeignKey(
+        User, verbose_name=_('User'), related_name='package_usages',
+        blank=True, null=True, on_delete=models.SET_NULL
+    )
+    group = models.ForeignKey(
+        Group, verbose_name=_('Group'), blank=True,
+        related_name='used_packages', null=True, on_delete=models.SET_NULL
+    )
     task = models.TextField(_('Task'), blank=True)
     is_inventory = models.BooleanField(_('Is Inventory'), default=False)
 
@@ -545,10 +568,12 @@ class PackageUsage(models.Model):
 class StockLimit(models.Model):
     chemical = models.ForeignKey(
         Chemical, verbose_name=_('Chemical'),
-        related_name='stock_limits'
+        related_name='stock_limits', on_delete=models.CASCADE
     )
-    storage = models.ForeignKey(Storage, verbose_name=_('Storage'),
-                                related_name='stock_limits')
+    storage = models.ForeignKey(
+        Storage, verbose_name=_('Storage'), related_name='stock_limits',
+        on_delete=models.CASCADE
+    )
     type = models.CharField(
         _('Type'), max_length=3, choices=LIMIT_CHOICES
     )
@@ -669,12 +694,15 @@ class LegalLimit(models.Model):
 
 
 class InventoryDifference(models.Model):
-    package = models.ForeignKey(StoredPackage, verbose_name=_('Package'),
-                                related_name='differences')
+    package = models.ForeignKey(
+        StoredPackage, verbose_name=_('Package'), related_name='differences',
+        on_delete=models.CASCADE
+    )
     value = models.DecimalField(_('Value'), max_digits=9, decimal_places=4)
     unit = models.CharField(_('Unit'), max_length=2, choices=UNIT_CHOICES)
     saved = models.DateTimeField(_('Saved'), auto_now_add=True)
-    user = models.ForeignKey(User, verbose_name=_('User'))
+    user = models.ForeignKey(User, verbose_name=_('User'), blank=True,
+                             null=True, on_delete=models.SET_NULL)
     note = models.TextField(_('Note'), blank=True)
 
     def __str__(self):
@@ -704,12 +732,12 @@ class InventoryDifference(models.Model):
 
 class Order(models.Model):
     barcode = models.ForeignKey(
-        Barcode, models.CASCADE, verbose_name=_('Barcode'),
+        Barcode, on_delete=models.CASCADE, verbose_name=_('Barcode'),
         related_name='orders'
     )
     count = models.PositiveSmallIntegerField(_('Count'), default=1)
     user = models.ForeignKey(
-        User, models.SET_NULL, verbose_name=_('User'),
+        User, on_delete=models.SET_NULL, verbose_name=_('User'),
         related_name='orders', blank=True, null=True
     )
     stored = models.DateTimeField(auto_now_add=True)
@@ -747,8 +775,8 @@ class Order(models.Model):
 
 class Consume(models.Model):
     stored_chemical = models.ForeignKey(
-        StoredChemical, models.CASCADE, verbose_name=_('Stored Chemical'),
-        related_name='consumes'
+        StoredChemical, on_delete=models.CASCADE,
+        verbose_name=_('Stored Chemical'), related_name='consumes'
     )
     quantity = models.DecimalField(_('Quantity'), max_digits=9,
                                    decimal_places=4)
@@ -757,7 +785,7 @@ class Consume(models.Model):
     stored = models.DateField(auto_now_add=True)
     department = models.ForeignKey(
         Department, verbose_name=_('Department'), blank=True, null=True,
-        default=None, related_name='consumes'
+        default=None, related_name='consumes', on_delete=models.SET_NULL
     )
 
     def __str__(self):

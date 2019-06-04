@@ -6,6 +6,7 @@ from django.views.i18n import JavaScriptCatalog
 from . import views
 from .views import handbook, management, orders
 
+app_name = 'core'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),

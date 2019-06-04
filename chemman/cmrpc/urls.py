@@ -4,6 +4,7 @@ from django.conf.urls import url
 
 from .views import ChemicalView, DeliveryView, LabelPrinterView
 
+app_name = 'cmrpc'
 
 urlpatterns = [
     url(r'^chemicals/$', ChemicalView.as_view()),

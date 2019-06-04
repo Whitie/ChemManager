@@ -136,7 +136,7 @@ class Chemical(models.Model):
     # DE: LGK
     storage_class = models.ForeignKey(
         StorageClass, verbose_name=_('Storage Class'), blank=True, null=True,
-        related_name='chemicals'
+        related_name='chemicals', on_delete=models.SET_NULL
     )
     # EU: Binding Occupational Exposure Limit (mg/m3)
     boelv = models.DecimalField(
@@ -168,8 +168,10 @@ class Chemical(models.Model):
                                                'displayed in lists.')
     )
     added = models.DateTimeField(_('Added'), auto_now_add=True)
-    added_by = models.ForeignKey(User, verbose_name=_('Added by'),
-                                 editable=False)
+    added_by = models.ForeignKey(
+        User, verbose_name=_('Added by'), blank=True, null=True,
+        editable=False, on_delete=models.SET_NULL
+    )
     last_updated = models.DateTimeField(_('Last Updated'), auto_now=True)
 
     def __str__(self):
@@ -220,8 +222,10 @@ class Chemical(models.Model):
 
 
 class Identifiers(models.Model):
-    chemical = models.OneToOneField(Chemical, verbose_name=_('Chemical'),
-                                    related_name='identifiers')
+    chemical = models.OneToOneField(
+        Chemical, verbose_name=_('Chemical'), related_name='identifiers',
+        on_delete=models.CASCADE
+    )
     cas = models.CharField(
         _('CAS Registry Number'), max_length=12, blank=True,
         help_text=_('CAS = Chemical Abstract Service'),
@@ -266,8 +270,10 @@ class Identifiers(models.Model):
 
 
 class PhysicalData(models.Model):
-    chemical = models.OneToOneField(Chemical, verbose_name=_('Chemical'),
-                                    related_name='physical_data')
+    chemical = models.OneToOneField(
+        Chemical, verbose_name=_('Chemical'), related_name='physical_data',
+        on_delete=models.CASCADE
+    )
     physical_state = models.CharField(_('Physical State'), max_length=1,
                                       choices=STATE_CHOICES, blank=True)
     # DE: Farbe
@@ -344,8 +350,10 @@ class PhysicalData(models.Model):
 
 
 class Synonym(models.Model):
-    chemical = models.ForeignKey(Chemical, verbose_name=_('Chemical'),
-                                 related_name='synonyms')
+    chemical = models.ForeignKey(
+        Chemical, verbose_name=_('Chemical'), related_name='synonyms',
+        on_delete=models.CASCADE
+    )
     name = models.CharField(_('Name'), max_length=200)
 
     def __str__(self):
@@ -358,8 +366,10 @@ class Synonym(models.Model):
 
 
 class DisposalInstructions(models.Model):
-    chemical = models.ForeignKey(Chemical, verbose_name=_('Chemical'),
-                                 related_name='disposal_instructions')
+    chemical = models.ForeignKey(
+        Chemical, verbose_name=_('Chemical'),
+        related_name='disposal_instructions', on_delete=models.CASCADE
+    )
     method = models.CharField(_('Method'), max_length=50)
 
     def __str__(self):
@@ -367,10 +377,14 @@ class DisposalInstructions(models.Model):
 
 
 class OperatingInstruction(models.Model):
-    chemical = models.ForeignKey(Chemical, verbose_name=_('Chemical'),
-                                 related_name='operating_instructions')
-    department = models.ForeignKey(Department, verbose_name=_('Department'),
-                                   related_name='operating_instructions')
+    chemical = models.ForeignKey(
+        Chemical, verbose_name=_('Chemical'),
+        related_name='operating_instructions', on_delete=models.CASCADE
+    )
+    department = models.ForeignKey(
+        Department, verbose_name=_('Department'),
+        related_name='operating_instructions', on_delete=models.CASCADE
+    )
     notes = models.TextField(_('Notes'), blank=True)
     document = models.FileField(
         _('Document'), upload_to='operating_instructions/%Y'
@@ -378,7 +392,8 @@ class OperatingInstruction(models.Model):
     added = models.DateField(auto_now_add=True)
     last_updated = models.DateField(auto_now=True)
     last_updated_by = models.ForeignKey(
-        User, verbose_name=_('Last updated by')
+        User, verbose_name=_('Last updated by'), blank=True, null=True,
+        on_delete=models.CASCADE
     )
 
     def __str__(self):

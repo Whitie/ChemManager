@@ -18,8 +18,9 @@ class UploadedMSDS(models.Model):
     document = models.FileField(_('Document'), upload_to='uploaded_msds/%Y/')
     hash = models.CharField(max_length=64, editable=False, unique=True)
     added = models.DateTimeField(_('Added'), auto_now_add=True)
-    added_by = models.ForeignKey(User, verbose_name=_('Added by'),
-                                 related_name='uploads')
+    added_by = models.ForeignKey(
+        User, verbose_name=_('Added by'), related_name='uploads', blank=True,
+        null=True, on_delete=models.SET_NULL)
     processed = models.BooleanField(_('Processed'), default=False)
     data = JSONField(_('Extracted Data'), blank=True, editable=False)
     name = models.CharField(_('Name'), max_length=200, blank=True)
@@ -47,8 +48,10 @@ class UploadedMSDS(models.Model):
 
 
 class ParsedData(models.Model):
-    upload = models.ForeignKey(UploadedMSDS, verbose_name=_('Upload'),
-                               related_name='parsed')
+    upload = models.ForeignKey(
+        UploadedMSDS, verbose_name=_('Upload'), related_name='parsed',
+        on_delete=models.CASCADE
+    )
     name_en = models.CharField(_('Name (en)'), max_length=200, blank=True)
     producer = models.CharField(_('Producer'), max_length=200, blank=True)
     article_name = models.CharField(_('Article name'), max_length=200,

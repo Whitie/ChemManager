@@ -128,3 +128,6 @@ dmypy.json
 # Own stuff
 SDB_Test/*
 test/*
+*/cp_static/*
+*/.secret
+*/uploads/*
