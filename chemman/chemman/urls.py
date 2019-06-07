@@ -15,10 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth import views
+from django.urls import include, path
 from django.views.generic import RedirectView
 
 from django_spaghetti.views import Plate
@@ -27,16 +27,16 @@ from core.utils import is_active
 
 
 urlpatterns = [
-    url(r'^$', RedirectView.as_view(pattern_name=settings.START_VIEW)),
-    url(r'^admin/', admin.site.urls),
-    url(r'^core/', include('core.urls', namespace='core')),
-    url(r'^accounts/login/$', views.LoginView.as_view(),
-        {'template_name': 'core/login.html'}),
-    url(r'^model_graph/$', Plate.as_view(
-        plate_template_name='3rd_party/django_spaghetti/plate.html',
-        meatball_template_name='3rd_party/django_spaghetti/meatball.html'
+    path('', RedirectView.as_view(pattern_name=settings.START_VIEW)),
+    path('admin/', admin.site.urls),
+    path('core/', include('core.urls', namespace='core')),
+    path('accounts/login/', views.LoginView.as_view(),
+         {'template_name': 'core/login.html'}),
+    path('model_graph/', Plate.as_view(
+         plate_template_name='3rd_party/django_spaghetti/plate.html',
+         meatball_template_name='3rd_party/django_spaghetti/meatball.html'
     )),
-    url(r'^rpc/', include('cmrpc.urls')),
+    path('rpc/', include('cmrpc.urls')),
 ]
 
 if settings.DEBUG:
@@ -45,11 +45,11 @@ if settings.DEBUG:
 
 if is_active('floor_map'):
     urlpatterns += [
-        url(r'^floor-map/', include('floor_map.urls', namespace='fm')),
+        path('floor-map/', include('floor_map.urls', namespace='fm')),
     ]
 
 if is_active('msds_collector'):
     urlpatterns += [
-        url(r'^msds_collector/', include('msds_collector.urls',
+        path('^msds_collector/', include('msds_collector.urls',
                                          namespace='msds'))
     ]

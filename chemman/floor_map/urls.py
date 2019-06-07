@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
@@ -8,7 +8,7 @@ from . import views
 app_name = 'floor_map'
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^edit/(?P<floor_id>\d+)/$', views.edit_map, name='edit-map'),
-    url(r'^save/$', views.save_coords, name='save-coords'),
+    path('', views.index, name='index'),
+    path('edit/<int:floor_id>/', views.edit_map, name='edit-map'),
+    path('save/', views.save_coords, name='save-coords'),
 ]

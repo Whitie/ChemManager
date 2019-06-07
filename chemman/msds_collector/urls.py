@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls import url
+from django.urls import path
 
 from . import views
 
@@ -8,16 +8,16 @@ from . import views
 app_name = 'msds_collector'
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^upload/$', views.upload, name='upload'),
-    url(r'^list/$', views.list_uploads, name='list'),
-    url(r'^detail/(?P<upload_id>\d+)/$', views.detail, name='detail'),
-    url(r'^parsing_finished/(?P<upload_id>\d+)/$', views.parsing_finished,
-        name='parsing-finished'),
-    url(r'^save/$', views.save_basics, name='save'),
-    url(r'^transfer/(?P<uid>\d+)/$', views.transfer, name='transfer'),
-    url(r'^add-to-db/(?P<pid>\d+)/$', views.add_to_db, name='add'),
-    url(r'^compare/(?P<pid>\d+)/(?P<chem_id>\d+)/$', views.compare,
-        name='compare'),
-    url(r'^delete/$', views.delete_upload, name='delete'),
+    path('', views.index, name='index'),
+    path('upload/', views.upload, name='upload'),
+    path('list/', views.list_uploads, name='list'),
+    path('detail/<int:upload_id>/', views.detail, name='detail'),
+    path('parsing_finished/<int:upload_id>/', views.parsing_finished,
+         name='parsing-finished'),
+    path('save/', views.save_basics, name='save'),
+    path('transfer/<int:uid>/', views.transfer, name='transfer'),
+    path('add-to-db/<int:pid>/', views.add_to_db, name='add'),
+    path('compare/<int:pid>/<int:chem_id>/', views.compare,
+         name='compare'),
+    path('delete/', views.delete_upload, name='delete'),
 ]
