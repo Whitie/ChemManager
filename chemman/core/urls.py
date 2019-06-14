@@ -88,7 +88,7 @@ urlpatterns += [
 urlpatterns += [
     path('storage/package/<int:pid>/', views.package_info,
          name='package-info'),
-    path('storage/package/by-uid/<int:package_id>/',
+    path('storage/package/by-uid/<package_id>/',
          views.package_info_by_uid, name='package-info-by-uid'),
     path('storage/packages/history/', views.packages_history,
          name='packages-history'),

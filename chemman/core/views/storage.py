@@ -59,7 +59,7 @@ def package_info_by_uid(req, package_id):
 
 def chem_inventory(req, chem_id):
     # Inventory for one chemical (all storage places)
-    chem = Chemical.objects.select_related().get(pk=int(chem_id))
+    chem = Chemical.objects.select_related().get(pk=chem_id)
     packages = StoredPackage.objects.select_related().filter(
         stored_chemical__id__in=chem.storage.all(), empty=False
     ).order_by('place__storage', 'stored_chemical__chemical__name')
@@ -89,7 +89,7 @@ def chem_inventory(req, chem_id):
 
 def storage_inventory(req, storage_id):
     # Inventory for one storage (all chemicals/packages)
-    storage = Storage.objects.select_related().get(pk=int(storage_id))
+    storage = Storage.objects.select_related().get(pk=storage_id)
     pids = []
     for place in StoragePlace.objects.filter(storage=storage):
         for package in StoredPackage.objects.filter(place=place, empty=False):
@@ -146,7 +146,7 @@ def info_stored_chemicals(req):
 
 @login_required
 def check_observe(req, storage_id):
-    storage = Storage.objects.select_related().get(pk=int(storage_id))
+    storage = Storage.objects.select_related().get(pk=storage_id)
     chems = Chemical.objects.select_related().filter(
         storage__packages__place__storage=storage,
         storage__packages__empty=False
@@ -191,7 +191,7 @@ def packages_history(req):
 
 @permission_required('core.can_dispose')
 def dispose(req, package_id):
-    package = StoredPackage.objects.select_related().get(pk=int(package_id))
+    package = StoredPackage.objects.select_related().get(pk=package_id)
     stock = package.get_inventory()
     chem = package.stored_chemical.chemical
     if req.method == 'POST':
@@ -213,7 +213,7 @@ def dispose(req, package_id):
 
 @permission_required('core.can_transfer')
 def transfer(req, package_id):
-    package = StoredPackage.objects.select_related().get(pk=int(package_id))
+    package = StoredPackage.objects.select_related().get(pk=package_id)
     if req.method == 'POST':
         new_place = int(req.POST.get('places', 0))
         if new_place:
@@ -247,8 +247,8 @@ def transfer(req, package_id):
 
 @permission_required('core.can_transfer')
 def merge_packages(req, storage_id, chem_id):
-    storage = Storage.objects.get(pk=int(storage_id))
-    chem = Chemical.objects.get(pk=int(chem_id))
+    storage = Storage.objects.get(pk=storage_id)
+    chem = Chemical.objects.get(pk=chem_id)
     packages = StoredPackage.objects.filter(
         place__storage=storage, stored_chemical__chemical=chem,
         empty=False
@@ -301,7 +301,7 @@ def choose_removal(req):
 
 @permission_required('core.can_store')
 def store_new_package(req, chem_id):
-    chem = Chemical.objects.select_related().get(pk=int(chem_id))
+    chem = Chemical.objects.select_related().get(pk=chem_id)
     if req.method == 'POST':
         form = NewPackageForm(chem, req.POST, req.FILES)
         if form.is_valid():
@@ -320,9 +320,9 @@ def store_new_package(req, chem_id):
 @permission_required('core.can_store')
 def store_new_package_2(req, stored_chem_id, storage_id):
     stored = StoredChemical.objects.select_related().get(
-        pk=int(stored_chem_id)
+        pk=stored_chem_id
     )
-    storage = Storage.objects.select_related().get(pk=int(storage_id))
+    storage = Storage.objects.select_related().get(pk=storage_id)
     if req.method == 'POST':
         form = helpers.get_package_form(stored.chemical, storage, req.POST)
         if form.is_valid():
@@ -434,7 +434,7 @@ def consume_normal(req, package, inv):
 def consume(req, package_id):
     try:
         package = StoredPackage.objects.select_related().get(
-            pk=int(package_id)
+            pk=package_id
         )
     except StoredPackage.DoesNotExist:
         messages.error(
@@ -451,7 +451,7 @@ def consume(req, package_id):
 
 @permission_required('core.inventory')
 def make_inventory(req, storage_id):
-    storage = Storage.objects.select_related().get(pk=int(storage_id))
+    storage = Storage.objects.select_related().get(pk=storage_id)
     if req.method == 'POST':
         try:
             helpers.save_inventory(req.POST, req.user)
@@ -467,7 +467,7 @@ def make_inventory(req, storage_id):
 
 @login_required
 def inventory_result(req, storage_id):
-    storage = Storage.objects.select_related().get(pk=int(storage_id))
+    storage = Storage.objects.select_related().get(pk=storage_id)
     diffs = OrderedDict()
     for place in storage.places.all():
         diffs[place] = OrderedDict()
@@ -499,7 +499,7 @@ def print_package_ids(req):
 
 @permission_required('core.set_limits')
 def set_stocklimits(req, storage_id):
-    storage = Storage.objects.select_related().get(pk=int(storage_id))
+    storage = Storage.objects.select_related().get(pk=storage_id)
     chems = OrderedDict()
     for package in StoredPackage.objects.filter(
         place__storage=storage, empty=False
@@ -545,7 +545,7 @@ def api_get_special_log_list(req):
 
 
 def api_inventory_package(req, package_id):
-    package = StoredPackage.objects.get(pk=int(package_id))
+    package = StoredPackage.objects.get(pk=package_id)
     stock = package.get_inventory()
     result = dict(
         value='{:.2f}'.format(stock.value), unit=stock.unit,
@@ -555,9 +555,9 @@ def api_inventory_package(req, package_id):
 
 
 def api_stock_limit(req, stored_chem_id, storage_id):
-    stored_chem = StoredChemical.objects.get(pk=int(stored_chem_id))
+    stored_chem = StoredChemical.objects.get(pk=stored_chem_id)
     chem = stored_chem.chemical
-    storage = Storage.objects.get(pk=int(storage_id))
+    storage = Storage.objects.get(pk=storage_id)
     limit_min = StockLimit.objects.filter(
         chemical=chem, storage=storage, type='min'
     ).first()
@@ -571,7 +571,7 @@ def api_stock_limit(req, stored_chem_id, storage_id):
 def api_storages(req, chem_id):
     special_log = Chemical.objects.values_list(
         'special_log', flat=True
-    ).get(pk=int(chem_id))
+    ).get(pk=chem_id)
     storages = {}
     _storages = Storage.objects.select_related().all()
     for s in _storages.order_by('department', 'name'):
@@ -680,7 +680,7 @@ def api_wrong_brutto(req):
         package = StoredPackage.objects.get(pk=int(req.GET.get('pid')))
         mass = units.Mass(req.GET.get('mass'), req.GET.get('unit'))
         info_to = [
-            x.email for x in 
+            x.email for x in
             User.objects.filter(username__in=settings.INFO_WRONG_BRUTTO)
             if x.email
         ]

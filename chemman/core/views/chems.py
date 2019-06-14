@@ -158,7 +158,7 @@ def detail(req, chem):
 
 
 def detail_by_id(req, cid):
-    chem = Chemical.objects.get(pk=int(cid))
+    chem = Chemical.objects.get(pk=cid)
     return detail(req, chem)
 
 
@@ -288,7 +288,7 @@ def api_autocomplete(req):
 
 
 def api_inventory_chemical(req, chem_id):
-    chem = Chemical.objects.select_related().get(pk=int(chem_id))
+    chem = Chemical.objects.select_related().get(pk=chem_id)
     packages = get_packages_for_chemical(chem)
     if not packages:
         return render_json(req, {'value': '0.0', 'unit': 'g', 'url': '#'})
