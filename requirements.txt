@@ -22,7 +22,7 @@ Jinja2==2.10.1
 MarkupSafe==1.1.1
 more-itertools==7.0.0
 packaging==19.0
-Pillow==6.0.0
+Pillow==6.2.0
 portend==2.4
 psycopg2==2.8.2
 pyasn1==0.4.5
