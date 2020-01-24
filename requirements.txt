@@ -5,11 +5,11 @@ backports.functools-lru-cache==1.5
 certifi==2019.3.9
 cffi==1.12.3
 chardet==3.0.4
-cheroot==6.5.5
-CherryPy==18.1.1
+cheroot==8.2.1
+CherryPy==18.5.0
 cryptography==2.7
 Django==2.2.9
-django-background-tasks==1.2.0
+django-background-tasks==1.2.5
 django-compat==1.0.15
 django-contrib-comments==1.9.1
 django-jinja==2.4.1
@@ -17,7 +17,10 @@ django-spaghetti-and-meatballs==0.2.2
 docutils==0.14
 idna==2.8
 imagesize==1.1.0
+jaraco.classes==3.1.0
+jaraco.collections==3.0.0
 jaraco.functools==2.0
+jaraco.text==3.2.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
 more-itertools==7.0.0
