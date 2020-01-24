@@ -2,7 +2,7 @@
 
 from django.forms import ModelForm
 
-from .models import ParsedData, UploadedMSDS
+from .models import ParsedData
 
 
 class ParsedEditForm(ModelForm):

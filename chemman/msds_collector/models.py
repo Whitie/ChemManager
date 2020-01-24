@@ -3,7 +3,6 @@
 import json
 
 from django.contrib.auth.models import User
-from django.core.files.base import ContentFile
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -62,8 +61,10 @@ class ParsedData(models.Model):
     security = models.CharField(_('Extra security'), max_length=100,
                                 blank=True)
     # DE: AGW
-    mac = models.DecimalField(_('MAC (mg/m3)'), max_digits=10, decimal_places=4,
-                              blank=True, null=True)
+    mac = models.DecimalField(
+        _('MAC (mg/m3)'), max_digits=10, decimal_places=4,
+        blank=True, null=True
+    )
     # DE: BGW
     mabc = models.DecimalField(
         _('MABC (mg/L)'), max_digits=10, decimal_places=4, blank=True,

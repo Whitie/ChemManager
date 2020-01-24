@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import json
-import os
 import requests
 import time
 
@@ -32,10 +31,6 @@ action_menu.add(action_item)
 
 
 def send_to_worker(req, id_, url, token):
-    download_url = req.build_absolute_uri(url)
-    result_url = req.build_absolute_uri(
-        reverse('msds:parsing-finished', args=(id_,))
-    )
     payload = {
         'download_url': req.build_absolute_uri(url),
         'result_url': req.build_absolute_uri(
@@ -129,13 +124,16 @@ def parsing_finished(req, upload_id):
         return HttpResponse('Failed, token not known')
     source.data = data
     source.processed = True
-    source.name = data.get('name', '') or data.get('name_en', '') or \
-                  data.get('art_name', 'no name found (please edit)')
+    source.name = (
+        data.get('name', '') or data.get('name_en', '')
+        or data.get('art_name', 'no name found (please edit)')
+    )
     source.cas = data.get('cas', '')
     source.save()
     try:
         utils.import_data(source)
-    except:
+    except Exception as error:
+        print(error)
         obj, created = ParsedData.objects.get_or_create(upload=source,
                                                         cmr=False)
         if created:

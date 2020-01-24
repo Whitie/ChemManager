@@ -50,7 +50,7 @@ def _parse_date(val):
         try:
             dt = datetime.strptime(val, f)
             return dt.date()
-        except:
+        except Exception:
             pass
 
 
@@ -118,8 +118,8 @@ def find_similar(parsed):
     exact = Chemical.objects.select_related(
         ).filter(exact_query).order_by('name')
     similar_query = (
-        Q(name__icontains=parsed.upload.name) |
-        Q(name_en__icontains=parsed.upload.name)
+        Q(name__icontains=parsed.upload.name)
+        | Q(name_en__icontains=parsed.upload.name)
     )
     if parsed.name_en:
         similar_query |= Q(name_en__icontains=parsed.name_en)
@@ -146,8 +146,8 @@ def get_data(chem, parsed):
     data = [
         verbose(chem, 'name') + (chem.name, parsed.upload.name),
         verbose(chem, 'name_en') + (chem.name_en, parsed.name_en),
-        verbose(chem.identifiers, 'cas') + (chem.identifiers.cas,
-            parsed.upload.cas),
+        verbose(chem.identifiers, 'cas') + (
+            chem.identifiers.cas, parsed.upload.cas),
         verbose(chem, 'mac') + (chem.mac, parsed.mac),
         verbose(chem, 'mabc') + (chem.mabc, parsed.mabc),
         verbose(chem.physical_data, 'boiling_point_low') + (
@@ -164,8 +164,8 @@ def get_data(chem, parsed):
             chem.physical_data.density, parsed.density),
         verbose(chem.physical_data, 'density_temp') + (
             chem.physical_data.density_temp, parsed.density_temp),
-        verbose(chem.identifiers, 'einecs') + (chem.identifiers.einecs,
-            parsed.einecs),
+        verbose(chem.identifiers, 'einecs') + (
+            chem.identifiers.einecs, parsed.einecs),
         verbose(chem, 'eu_hazard_statements') + (
             ', '.join([x.ref for x in chem.eu_hazard_statements.all()]),
             parsed.euh),
@@ -180,28 +180,28 @@ def get_data(chem, parsed):
                       chem.pictograms.all()]),
             parsed.symbols),
         verbose(chem, 'ext_media') + (chem.ext_media, parsed.ext_agents),
-        verbose(chem, 'un_ext_media') + (chem.un_ext_media,
-            parsed.no_ext_agents),
+        verbose(chem, 'un_ext_media') + (
+            chem.un_ext_media, parsed.no_ext_agents),
         verbose(chem, 'fire_advice') + (chem.fire_advice, parsed.fire_misc),
         verbose(chem, 'formula') + (chem.formula, parsed.formula),
-        verbose(chem.identifiers, 'inchi') + (chem.identifiers.inchi,
-            parsed.inchi),
-        verbose(chem.identifiers, 'inchi_key') + (chem.identifiers.inchi_key,
-            parsed.inchi_key),
+        verbose(chem.identifiers, 'inchi') + (
+            chem.identifiers.inchi, parsed.inchi),
+        verbose(chem.identifiers, 'inchi_key') + (
+            chem.identifiers.inchi_key, parsed.inchi_key),
         verbose(chem, 'ioelv') + (chem.ioelv, parsed.ioelv),
         verbose(chem, 'iupac_name') + (chem.iupac_name, parsed.iupac_name),
-        verbose(chem, 'iupac_name_en') + (chem.iupac_name_en,
-            parsed.iupac_name_en),
+        verbose(chem, 'iupac_name_en') + (
+            chem.iupac_name_en, parsed.iupac_name_en),
         verbose(chem, 'hin') + (chem.hin, parsed.hin),
         verbose(chem.physical_data, 'melting_point_low') + (
             chem.physical_data.melting_point_low, parsed.melting_low),
         verbose(chem.physical_data, 'melting_point_high') + (
             chem.physical_data.melting_point_high, parsed.melting_high),
         verbose(chem, 'molar_mass') + (chem.molar_mass, parsed.molar_mass),
-        verbose(chem.identifiers, 'pubchem_id') + (chem.identifiers.pubchem_id,
-            parsed.pubchem_id),
-        verbose(chem.identifiers, 'smiles') + (chem.identifiers.smiles,
-            parsed.smiles),
+        verbose(chem.identifiers, 'pubchem_id') + (
+            chem.identifiers.pubchem_id, parsed.pubchem_id),
+        verbose(chem.identifiers, 'smiles') + (
+            chem.identifiers.smiles, parsed.smiles),
         verbose(chem.physical_data, 'solubility_h2o') + (
             chem.physical_data.solubility_h2o, parsed.solubility_h2o),
         verbose(chem.physical_data, 'solubility_h2o_temp') + (
@@ -214,8 +214,8 @@ def get_data(chem, parsed):
     ]
     if chem.storage_class:
         data.append(
-            verbose(chem, 'storage_class') + (chem.storage_class.value,
-            parsed.storage_class)
+            verbose(chem, 'storage_class') + (
+                chem.storage_class.value, parsed.storage_class)
         )
     return data
 
@@ -318,7 +318,7 @@ def add_new(parsed, user):
     _add_physical_data(c, parsed)
     for syn in parsed.synonyms.split(';'):
         if syn.strip():
-            s = Synonym.objects.create(chemical=c, name=syn.strip())
+            Synonym.objects.create(chemical=c, name=syn.strip())
     if parsed.structure and parsed.structure_fn:
         c.structure.save(
             parsed.structure_fn,
