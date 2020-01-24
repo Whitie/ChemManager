@@ -20,6 +20,7 @@ class UploadedMSDS(models.Model):
     added_by = models.ForeignKey(
         User, verbose_name=_('Added by'), related_name='uploads', blank=True,
         null=True, on_delete=models.SET_NULL)
+    in_progress = models.BooleanField(_('In Progress'), default=False)
     processed = models.BooleanField(_('Processed'), default=False)
     data = JSONField(_('Extracted Data'), blank=True, editable=False)
     name = models.CharField(_('Name'), max_length=200, blank=True)

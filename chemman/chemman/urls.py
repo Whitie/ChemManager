@@ -32,10 +32,12 @@ urlpatterns = [
     path('core/', include('core.urls', namespace='core')),
     path('accounts/login/', views.LoginView.as_view(),
          {'template_name': 'core/login.html'}),
-    path('model_graph/', Plate.as_view(
-         plate_template_name='3rd_party/django_spaghetti/plate.html',
-         meatball_template_name='3rd_party/django_spaghetti/meatball.html'
-    )),
+    path(
+        'model_graph/', Plate.as_view(
+            plate_template_name='3rd_party/django_spaghetti/plate.html',
+            meatball_template_name='3rd_party/django_spaghetti/meatball.html'
+         )
+    ),
     path('rpc/', include('cmrpc.urls')),
 ]
 
@@ -50,6 +52,6 @@ if is_active('floor_map'):
 
 if is_active('msds_collector'):
     urlpatterns += [
-        path('^msds_collector/', include('msds_collector.urls',
-                                         namespace='msds'))
+        path('msds_collector/', include('msds_collector.urls',
+                                        namespace='msds'))
     ]
