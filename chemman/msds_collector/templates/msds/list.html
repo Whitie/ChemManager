@@ -24,7 +24,11 @@
                 {% if upl.processed %}
                 <input type="text" id="name_{{ loop.index }}" value="{{ upl.name|default('-', true) }}">
                 {% else %}
-                {% trans %}Not processed{% endtrans %}
+                    {% if upl.in_progress %}
+                    {% trans %}In Progress...{% endtrans %}
+                    {% else %}
+                    {% trans %}Not processed{% endtrans %}
+                    {% endif %}
                 {% endif %}
             </td>
             <td>
@@ -35,8 +39,6 @@
             <td>
                 {% if upl.processed %}
                 <input type="text" id="cas_{{ loop.index }}" value="{{ upl.cas|default('-', true) }}">
-                {% else %}
-                {% trans %}Not processed{% endtrans %}
                 {% endif %}
             </td>
             <td>

@@ -22,6 +22,7 @@ from core.utils import action_menu, base_menu, MenuItem, render, render_json
 from . import utils
 from .forms import ParsedEditForm
 from .models import UploadedMSDS, ParsedData
+from .tasks import parse_new_msds
 
 
 msds_item = MenuItem(_('Upload MSDS'), urlname='msds:index')
@@ -77,6 +78,7 @@ def upload(req):
             'New object (<a href="{}">{}</a>) saved, processing started...'
         ).format(obj.document.url, obj.document.name)
         send_to_worker(req, obj.id, obj.document.url, obj.token)
+        # parse_new_msds(obj.id)
     return HttpResponse(txt)
 
 
