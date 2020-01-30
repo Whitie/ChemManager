@@ -217,8 +217,9 @@ class JournalEntry(models.Model):
         JournalType, verbose_name=_('Type'), related_name='entries',
         on_delete=models.CASCADE
     )
-    user = models.ForeignKey(User, verbose_name=_('User'),
-        related_name='journal_entries', on_delete=models.CASCADE
+    user = models.ForeignKey(
+        User, verbose_name=_('User'), related_name='journal_entries',
+        on_delete=models.CASCADE
     )
     message = models.TextField(_('Message'))
     user_message = models.CharField(_('User Message'), max_length=200,
