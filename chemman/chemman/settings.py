@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cmrpc',
     'floor_map',
     'msds_collector',
+    'operating_instruction_creator',
 ]
 
 MIDDLEWARE = [

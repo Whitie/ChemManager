@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from background_tasks import background
+from background_task import background
 from .models import UploadedMSDS
 
 
