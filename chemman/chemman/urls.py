@@ -55,3 +55,9 @@ if is_active('msds_collector'):
         path('msds_collector/', include('msds_collector.urls',
                                         namespace='msds'))
     ]
+
+if is_active('operating_instruction_creator'):
+    urlpatterns += [
+        path('oic/', include('operating_instruction_creator.urls',
+                             namespace='oic'))
+    ]

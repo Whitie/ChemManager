@@ -86,6 +86,7 @@ class OperatingInstructionDraft(models.Model):
     conduct = models.TextField(
         _('Conduct in case of danger'), default='-'
     )
+    green_cross = models.BooleanField(_('Green Cross'), default=True)
     first_aid = models.TextField(_('First aid'), default='-')
     skin = models.CharField(_('After skin contact'), max_length=150,
                             default='-')
@@ -101,6 +102,10 @@ class OperatingInstructionDraft(models.Model):
         _('Internal help number'), max_length=20, default='10'
     )
     language = models.CharField(_('Language'), max_length=5, default='de')
+    created = models.DateTimeField(_('Created'), auto_now_add=True)
+    edited = models.DateTimeField(_('Created'), auto_now=True)
+    released = models.DateField(_('Released'), blank=True, editable=False,
+                                default=None, null=True)
 
     def __str__(self):
         deps = [x.name for x in self.work_departments.all()]

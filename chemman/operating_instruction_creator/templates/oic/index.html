@@ -1,0 +1,93 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Operating Instructions{% endtrans %}
+</h1>
+<h2>{% trans %}Drafts{% endtrans %}</h2>
+<table class="uk-table uk-table-hover uk-table-striped dtable" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}Modified{% endtrans %}</th>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}Departments{% endtrans %}</th>
+            <th>{% trans %}User{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for draft in drafts %}
+        <tr>
+            <td>{{ draft.edited|date('SHORT_DATE_FORMAT') }}</td>
+            <td>{{ draft.chemical.name }}</td>
+            <td>{{ draft.work_departments.all()|join(', ', attribute='name') }}</td>
+            <td>{{ draft.responsible.username }}</td>
+            <td>
+                {% if perms.operating_instruction_creator.create %}
+                <a href="{{ url('oic:edit', draft.chemical.id) }}" class="uk-button uk-button-small" title="{% trans %}Edit{% endtrans %}">
+                    <i class="uk-icon-edit"></i>
+                </a>
+                {% endif %}
+                {% if perms.operating_instruction_creator.release %}
+                <a href="#" class="uk-button uk-button-small uk-button-success" title="{% trans %}Release{% endtrans %}">
+                    <i class="uk-icon-send"></i>
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<hr>
+<h2>{% trans %}Released{% endtrans %}</h2>
+<table class="uk-table uk-table-hover uk-table-striped dtable" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}Released{% endtrans %}</th>
+            <th>{% trans %}Chemical{% endtrans %}</th>
+            <th>{% trans %}Departments{% endtrans %}</th>
+            <th>{% trans %}User{% endtrans %}</th>
+            <th>{% trans %}Actions{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rel in released %}
+        <tr>
+            <td>{{ rel.released|date('SHORT_DATE_FORMAT') }}</td>
+            <td>{{ rel.chemical.name }}</td>
+            <td>{{ rel.work_departments.all()|join(', ', attribute='name') }}</td>
+            <td>{{ rel.responsible.username }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', rel.chemical.id) }}" class="uk-button uk-button-small uk-button-primary" title="{% trans %}Show{% endtrans %}">
+                    <i class="uk-icon-eye"></i>
+                </a>
+                {% if perms.operating_instruction_creator.create %}
+                <a href="{{ url('oic:edit', rel.chemical.id) }}" class="uk-button uk-button-small" title="{% trans %}Copy{% endtrans %}">
+                    <i class="uk-icon-copy"></i>
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    dt_opts = {
+        'columns': [
+            null,
+            null,
+            null,
+            null,
+            {'orderable': false, 'searchable': false}
+        ]
+    };
+    $('.dtable').each(function() {
+        make_datatable($(this), dt_opts);
+    });
+});
+</script>
+{% endblock %}

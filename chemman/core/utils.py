@@ -103,6 +103,7 @@ def render(request, template_name, context=None, content_type=None,
     ctx = context or {}
     _menus = list(menus)
     if 'menu' in ctx:
+        _menus = [_menus[0]]
         m = ctx.pop('menu')
         if isinstance(m, list):
             _menus.extend(m)
