@@ -229,7 +229,7 @@ SHOW_THRESHOLDS = {
 OBSERVE_AND_WARN = True
 INFO_WRONG_BRUTTO = ['admin']
 USE_OZONE = True
-OZONE_AUTH_URL = 'http://10.0.0.175:8003/external_auth/'
+OZONE_AUTH_URL = 'http://10.0.0.175:8003/external_auth2/'
 OZONE_AUTH_KEY = b''
 OZONE_AUTH_SEPARATOR = '~##~'
 

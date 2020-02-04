@@ -4,10 +4,9 @@ import logging
 
 import requests
 
+from base64 import b64encode
 from django.conf import settings
 from django.contrib.auth.models import User
-
-from cryptography.fernet import Fernet
 
 
 logger = logging.getLogger(__name__)
@@ -34,9 +33,8 @@ class OzoneAuthBackend:
             passwd=password
         )
         _token = _token.encode('utf-8')
-        fernet = Fernet(settings.OZONE_AUTH_KEY)
-        token = fernet.encrypt(_token)
-        r = requests.get(settings.OZONE_AUTH_URL, params={'token': token})
+        payload = b64encode(_token)
+        r = requests.get(settings.OZONE_AUTH_URL, params={'payload': payload})
         if r.status_code != 200:
             logger.error('Ozone auth URL request returned a status of '
                          '%d', r.status_code)
