@@ -1,0 +1,103 @@
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title>Inventur - {{ storage.name }}</title>
+    <meta name="author" content="{{ user.get_full_name() }}">
+    <meta name="description" content="Inventurliste - {{ storage.name }}">
+    <meta name="keywords" content="Inventur,Bestand,Lager,Chemikalien">
+    <meta name="dcterms.created" content="{{ now|date('Y-m-d') }}">
+		<style>
+            @page {
+            	size: A4 landscape;
+            	margin: 1.5cm 0.5cm 0.5cm 0.5cm;
+                counter-increment: page;
+                @bottom-right {
+                    content: "{{ now|date('SHORT_DATE_FORMAT') }} | Seite " counter(page) " von " counter(pages);
+                    border-top: 0.5pt solid grey;
+                    width: 30%;
+                }
+            }
+            body {
+                font-size: 14px;
+                font-family: Arial, sans-serif;
+            }
+            h1,h2,h3,h4 {
+            	margin: 3px;
+            }
+            table {
+            	width: 100%;
+                border-collapse: separate;
+                border-spacing: 10px;
+                page-break-after: always;
+            }
+            td, th {
+            	border-bottom: 1px dashed grey;
+                vertical-align: middle;
+            }
+            .center {
+                text-align: center;
+            }
+            .right {
+                text-align: right;
+            }
+            .pictogram {
+                width: 15px;
+            }
+            .overlay {
+                position: absolute;
+                display: block;
+                text-align: center;
+                background-color: blue;
+                color: white;
+                padding: 5px;
+                top: -30px;
+                right: 10px;
+            }
+		</style>
+	</head>
+	<body>
+    <h1 class="center">Inventur - {{ storage }}</h1>
+    {% for place in places %}
+	<table>
+      <caption>Lagerplatz -> {{ place }}</caption>
+      <tr>
+		<th>Nr.</th>
+        <th>Name</th>
+        <th>Qualität</th>
+        <th>Lieferant</th>
+        <th>ID</th>
+        <th>Brutto (Bestand)</th>
+        <th></th>
+        <th>Notizen</th>
+      </tr>
+      {% for p in place.packages.filter(empty=False) %}
+      {% set sc=p.stored_chemical %}
+      {% set inv=p.get_inventory() %}
+      {% set log=sc.chemical.special_log %}
+      {% if log %}
+      {% set value=p.current_brutto %}{% else %}{% set value=inv %}
+      {% endif %}
+      <tr>
+	    <td>{{ loop.index }}</td>
+	    <td>{{ sc.chemical.display_name }}</td>
+    	<td>{{ sc.get_quality_display() }}</td>
+    	<td>{{ sc.company|default('-', true) }}</td>
+    	<td>{{ p.package_id }}</td>
+        <td class="right">
+            {% if log %}{{ value }} ({{ inv }}){% else %}{{ value }}{% endif %}
+        </td>
+        <td>
+          {% for pic in sc.chemical.pictograms.all().order_by('ref_num')[:3] %}
+          <img class="pictogram" src="file:{{ root }}/{{ pic.image.name }}">
+          {% endfor %}
+        </td>
+        <td></td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endfor %}
+    <div class="overlay">
+      <strong>Bildungswerk<br>Nordostchemie e. V.</strong>
+    </div>
+  </body>
+</html>

@@ -4,7 +4,8 @@ from django.urls import path, re_path
 from django.views.i18n import JavaScriptCatalog
 
 from . import views
-from .views import handbook, management, orders
+from .views import handbook, management, orders, pdf
+
 
 app_name = 'core'
 
@@ -121,6 +122,9 @@ urlpatterns += [
          name='packages-merge-get'),
     path('storage/packages/merge/do/', views.do_merge,
          name='packages-merge-do'),
+    # PDF
+    path('storage/pdf/inventory/<int:storage_id>/', pdf.make_inventory_list,
+         name='storage-pdf-inventory'),
     # Info
     path('info/storage/classes/', views.storage_classes_info,
          name='storage-classes-info'),

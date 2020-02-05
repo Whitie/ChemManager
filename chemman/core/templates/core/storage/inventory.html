@@ -43,6 +43,9 @@
     </table>
     {% endfor %}
     <p class="uk-text-center" id="buttons">
+        <a href="{{ url('core:storage-pdf-inventory', storage.id) }}" class="uk-button uk-button-primary uk-button-large" target="_blank">
+            {% trans %}PDF{% endtrans %}
+        </a>
         <button type="button" class="uk-button uk-button-success uk-button-large" onclick="save_results();">
             <i class="uk-icon-cubes"></i>
             {% trans %}Save Inventory{% endtrans %}

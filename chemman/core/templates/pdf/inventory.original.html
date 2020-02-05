@@ -1,0 +1,98 @@
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title>Inventur - Lager xxx</title>
+    <meta name="author" content="Thorsten Weimann">
+    <meta name="description" content="Inventurliste - Lager xxx">
+    <meta name="keywords" content="Inventur,Bestand,Lager,Chemiekalien">
+    <meta name="dcterms.created" content="2020-02-05">
+    <meta name="dcterms.modified" content="2020-02-05">
+		<style>
+			@page {
+				size: A4 landscape;
+				margin: 1.5cm 0.5cm 0.5cm 0.5cm;
+        counter-increment: page;
+        @bottom-right {
+            content: "Seite " counter(page) " von " counter(pages);
+            border-top: 0.5pt solid grey;
+            width: 20%;
+        }
+			}
+      body {
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+      }
+			h1,h2,h3,h4 {
+				margin: 3px;
+			}
+			table {
+				width: 100%;
+        border-collapse: separate;
+        border-spacing: 10px;
+        page-break-after: always;
+			}
+			td, th {
+				border-bottom: 1px dashed grey;
+        vertical-align: middle;
+			}
+      .center {
+        text-align: center;
+      }
+      .pictogram {
+        width: 15px;
+      }
+      .overlay {
+        position: absolute;
+        display: block;
+        text-align: center;
+        background-color: blue;
+        color: white;
+        padding: 5px;
+        top: -30px;
+        right: 10px;
+      }
+		</style>
+	</head>
+	<body>
+    <h1 class="center">Inventur - Lager xxx</h1>
+		<table>
+      <caption>Lagerplatz -> xxx</caption>
+			<tr>
+				<th>Nr.</th>
+        <th>Name</th>
+        <th>Qualität</th>
+        <th>Lieferant</th>
+        <th>ID</th>
+        <th>Brutto (Bestand)</th>
+        <th></th>
+        <th>Notizen</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>Aceton</td>
+				<td>spezial</td>
+				<td>Carl Roth GmbH</td>
+				<td>#200130-78-333</td>
+				<td>790.000 g</td>
+        <td>
+          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/GHS02.svg">
+          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/GHS03.svg">
+        </td>
+        <td></td>
+			</tr>
+      <tr>
+        <td>2</td>
+        <td>Dichlormethan</td>
+        <td>spezial</td>
+        <td>Carl Roth GmbH</td>
+        <td>#200130-78-666</td>
+        <td>1126.4700 g (784.000 g)</td>
+        <td></td>
+        <td></td>
+      </tr>
+		</table>
+    <div class="overlay ol-name">
+      <strong>Bildungswerk<br>Nordostchemie e. V.</strong>
+    </div>
+	</body>
+</html>
