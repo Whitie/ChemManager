@@ -1,0 +1,9 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Edit Operating Instruction{% endtrans %}
+</h1>
+<h2 class="uk-text-center">{{ oi }}</h2>
+{{ form.as_p() }}
+{% endblock %}

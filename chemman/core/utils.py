@@ -9,6 +9,7 @@ from hashlib import md5
 import qrcode
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render as django_render
@@ -279,3 +280,32 @@ def check_flammable(chem):
         pic = GHSPictogram.objects.get(ref_num=2)
         if pic in chem.pictograms.all():
             chem.flammable = True
+
+
+def _get_users_by_permission(permission_name, include_superusers=True):
+    """ Returns the Q object suitable for querying users by permission.
+    If include_superusers is true (default) all superusers will be also
+    included. Otherwise only users with explicitely set permissions will
+    be included.
+    """
+    (appname, codename) = permission_name.split(".")
+    query = Q(
+        user_permissions__codename=codename,
+        user_permissions__content_type__app_label=appname
+    ) | Q(
+        groups__permissions__codename=codename,
+        groups__permissions__content_type__app_label=appname
+    )
+    if include_superusers:
+        query |= Q(is_superuser=True)
+    return {'pk__in': User.objects.filter(query).distinct().values('pk')}
+
+
+def get_users_by_permission(permission_name, include_superusers=True):
+    """ Returns the queryset of User objects with the given permission.
+    Permission name is in the form appname.permission similar to the format
+    required by django.contrib.auth.decorators.permission_required
+    """
+    return User.objects.filter(
+        _get_users_by_permission(permission_name, include_superusers)
+    )

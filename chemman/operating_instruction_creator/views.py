@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib.auth.decorators import permission_required
 from django.utils.translation import ugettext_lazy as _
 
 from core.utils import base_menu, Menu, MenuItem, render
+from .forms import OIForm
 from .models import OperatingInstructionDraft
 
 
@@ -23,5 +25,16 @@ def index(req):
     return render(req, 'oic/index.html', ctx)
 
 
+@permission_required('operating_instruction_creator.create')
 def edit_operating_instruction(req, id):
-    pass
+    oi = OperatingInstructionDraft.objects.select_related().get(pk=id)
+    chem = oi.chemical
+    form = OIForm()
+    ctx = dict(oi=oi, chem=chem, form=form)
+    return render(req, 'oic/edit.html', ctx)
+
+
+@permission_required('operating_instruction_creator.release')
+def release(req, id):
+    oi = OperatingInstructionDraft.objects.select_related().get(pk=id)
+    chem = oi.chemical

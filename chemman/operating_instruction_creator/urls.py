@@ -10,4 +10,5 @@ app_name = 'operating_instruction_creator'
 urlpatterns = [
     path('', views.index, name='index'),
     path('edit/<int:id>/', views.edit_operating_instruction, name='edit'),
+    path('release/<int:id>/', views.release, name='release'),
 ]

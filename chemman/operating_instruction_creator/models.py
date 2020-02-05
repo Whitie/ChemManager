@@ -81,8 +81,8 @@ class OperatingInstructionDraft(models.Model):
     protection_pics = models.ManyToManyField(
         ProtectionPictogram, verbose_name=_('Protection Pictograms')
     )
-    eye_protection = models.CharField(_('Eye protection'), max_length=30)
-    hand_protection = models.CharField(_('Hand protection'), max_length=30)
+    eye_protection = models.CharField(_('Eye protection'), max_length=60)
+    hand_protection = models.CharField(_('Hand protection'), max_length=60)
     conduct = models.TextField(
         _('Conduct in case of danger'), default='-'
     )
