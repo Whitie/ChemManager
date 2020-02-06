@@ -1,0 +1,248 @@
+<html>
+	<head>
+    <meta charset="utf-8">
+    <title>BA - {{ chem.display_name }}</title>
+		<style>
+			@page {
+				size: A4;
+				margin: 0.4cm;
+			}
+      body {
+        font-size: {{ font_size }}px;
+        font-family: Arial, sans-serif;
+      }
+			h1,h2,h3,h4 {
+				margin: 3px;
+			}
+			table {
+				width: 100%;
+        border-collapse: collapse;
+        border: 20px solid red;
+			}
+			td {
+				/*border: 1px dashed grey;*/
+        vertical-align: top;
+			}
+      .center {
+        text-align: center;
+      }
+      .divider {
+        background-color: red;
+        color: white;
+      }
+      .pictogram {
+        width: 80px;
+      }
+      .container {
+        position: relative;
+      }
+      .overlay {
+        position: absolute;
+        display: block;
+        text-align: center;
+        background-color: white;
+        color: black;
+      }
+      .ol-name {
+        right: 5px;
+        top: 5px;
+      }
+      .ol-ext {
+        right: 10px;
+        top: 5px;
+        width: 150px;
+      }
+      .ol-int {
+        right: 10px;
+        top: 5px;
+        width: 150px;
+      }
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td class="center container" colspan="6">
+          <h2>Betriebsanweisung</h2>
+          <div class="overlay ol-name">
+            <strong>Bildungswerk<br>Nordostchemie e. V.</strong>
+          </div>
+        </td>
+			</tr>
+      <tr>
+        <td class="center" colspan="6">gemäß GefStoffV §14</td>
+      </tr>
+			<tr>
+				<td><strong>Nummer:</strong></td>
+				<td>{{ chem.id }} -</td>
+				<td><strong>Abteilung</strong></td>
+				<td>{{ dep_1 }}</td>
+				<td><strong>Verantwortlich</strong></td>
+				<td>{{ user.last_name }}</td>
+			</tr>
+      <tr>
+        <td><strong>Datum:</strong></td>
+        <td>{{ now|date('SHORT_DATE_FORMAT') }}</td>
+        <td></td>
+        <td>{{ dep_2|default('', true) }}</td>
+        <td><strong>Unterschrift</strong></td>
+        <td>{{ signature.last_name }}</td>
+      </tr>
+      <tr class="divider">
+        <td class="center" colspan="6"><h3>Gefahrstoffbezeichnung</h3></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="center"><h3>{{ chem.identifiers.cas }}</h3></td>
+        <td colspan="4" class="center"><h3>{{ chem.display_name }}</h3></td>
+      </tr>
+      <tr>
+        <td><strong>Form:</strong></td>
+        <td>{{ chem.physical_data.get_physical_state_display() }}</td>
+        <td><strong>Farbe:</strong></td>
+        <td>{{ chem.physical_data.color|default('-', true) }}</td>
+        <td><strong>Geruch:</strong></td>
+        <td>{{ chem.physical_data.odor|default('-', true) }}</td>
+      </tr>
+      <tr class="divider">
+        <td class="center" colspan="6"><h3>Gefahren für Mensch und Umwelt</h3></td>
+      </tr>
+      <tr>
+        <td class="center">
+            {% if pictograms|length >= 1 %}
+            <img class="pictogram" src="file:{{ root }}/{{ pictograms[0].image.name }}">
+            {% endif %}
+            {% if pictograms|length >= 2 %}
+            <br>
+            <img class="pictogram" src="file:{{ root }}/{{ pictograms[1].image.name }}">
+            {% endif %}
+        </td>
+        <td colspan="4">
+          {{ hazards|join('<br>')|safe }}
+        </td>
+        <td class="center">
+            {% if pictograms|length > 2 %}
+            <img class="pictogram" src="file:{{ root }}/{{ pictograms[2].image.name }}">
+            <br>
+            {% endif %}
+            <h3>{{ _(chem.signal_word)|default('', true) }}</h3>
+        </td>
+      </tr>
+
+      <tr class="divider">
+        <td class="center" colspan="6">
+          <h3>Schutzmaßnahmen und Verhaltensregeln</h3>
+        </td>
+      </tr>
+      <tr>
+        <td class="center">
+            {% if protection_pics|length >= 1 %}
+            <img class="pictogram" src="file:{{ root }}/{{ protection_pics[0].icon.name }}">
+            {% endif %}
+        </td>
+        <td colspan="4">
+          {{ protection|join('<br>')|safe }}
+        </td>
+        <td class="center">
+            {% if protection_pics|length >= 2 %}
+            <img class="pictogram" src="file:{{ root }}/{{ protection_pics[1].icon.name }}">
+            {% endif %}
+        </td>
+      </tr>
+      {% if eye_protection and eye_protection != '-' %}
+      <tr>
+        <td></td>
+        <td><strong>Augenschutz:</strong></td>
+        <td colspan="3">{{ eye_protection }}</td>
+        <td></td>
+      </tr>
+      {% endif %}
+      {% if hand_protection and hand_protection != '-' %}
+      <tr>
+        <td></td>
+        <td><strong>Handschutz:</strong></td>
+        <td colspan="3">{{ hand_protection }}</td>
+        <td></td>
+      </tr>
+      {% endif %}
+      <tr class="divider">
+        <td class="center container" colspan="6">
+          <h3>Verhalten im Gefahrfall</h3>
+          <div class="overlay ol-ext">
+            <strong>{{ ext_phone }}</strong>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="4">
+            {{ conduct|join('<br>')|safe }}
+        </td>
+        <td></td>
+      </tr>
+
+      <tr class="divider">
+        <td class="center container" colspan="6">
+          <h3>Erste Hilfe</h3>
+          <div class="overlay ol-ext">
+            <strong>Hausapp. {{ int_phone }}</strong>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="center">
+            <img class="pictogram" src="file:{{ root }}/{{ fa1.icon.name }}">
+        </td>
+        <td colspan="4">
+          {{ first_aid|join('<br>')|safe }}
+        </td>
+        <td class="center">
+          <img class="pictogram" src="file:{{ root }}/{{ fa2.icon.name }}">
+        </td>
+      </tr>
+      {% if skin and skin != '-' %}
+      <tr>
+        <td></td>
+        <td><strong>Nach Hautkontakt:</strong></td>
+        <td colspan="3">{{ skin }}</td>
+        <td></td>
+      </tr>
+      {% endif %}
+      {% if eye and eye != '-' %}
+      <tr>
+        <td></td>
+        <td><strong>Nach Augenkontakt:</strong></td>
+        <td colspan="3">{{ eye }}</td>
+        <td></td>
+      </tr>
+      {% endif %}
+      {% if breathe and breathe != '-' %}
+      <tr>
+        <td></td>
+        <td><strong>Nach Einatmen:</strong></td>
+        <td colspan="3">{{ breathe }}</td>
+        <td></td>
+      </tr>
+      {% endif %}
+      {% if swallow and swallow != '-' %}
+      <tr>
+        <td></td>
+        <td><strong>Nach Verschlucken:</strong></td>
+        <td colspan="3">{{ swallow }}</td>
+        <td></td>
+      </tr>
+      {% endif %}
+      <tr class="divider">
+        <td class="center" colspan="6">
+          <h3>Sachgerechte Entsorgung</h3>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td colspan="4">
+          {{ disposal|join('<br>')|safe }}
+        </td>
+        <td></td>
+      </tr>
+		</table>
+	</body>
+</html>

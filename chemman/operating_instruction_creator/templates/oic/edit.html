@@ -1,9 +1,169 @@
 {% extends 'core/base.html' %}
 
+{%- macro form_row(field, label='') %}
+<div class="uk-form-row">
+    <label class="uk-form-label">
+        {% if label %}{{ label }}{% else %}{{ field.label }}{% endif %}
+    </label>
+    <div class="uk-form-controls">
+        {{ field }}
+    </div>
+</div>
+{% endmacro -%}
+
+{% block head %}
+<style>
+    #preview {
+        position: absolute;
+        display: none;
+        top: 150px;
+        right: 5px;
+        width: 30%;
+        border: 1px solid black;
+        background-color: white;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <h1 class="uk-text-center">
     {% trans %}Edit Operating Instruction{% endtrans %}
 </h1>
 <h2 class="uk-text-center">{{ oi }}</h2>
-{{ form.as_p() }}
+<form class="uk-form uk-form-horizontal" method="post" action="{{ url('oic:edit', oi.id) }}">
+    {% csrf_token %}
+    <fieldset data-uk-margin>
+        <legend class="uk-text-primary uk-text-bold">
+            {% trans %}Head{% endtrans %}
+            <button type="button" class="uk-button uk-button-small" onclick="update_preview();">
+                {% trans %}Preview{% endtrans %}
+                <i class="uk-icon-eye"></i>
+            </button>
+        </legend>
+        <div class="uk-form-row">
+            <div class="uk-form-controls uk-form-controls-text">
+                <strong>{% trans %}CAS:{% endtrans %}</strong> {{ chem.identifiers.cas }},
+                <strong>{% trans %}State:{% endtrans %}</strong> {{ chem.physical_data.get_physical_state_display() }},
+                <strong>{% trans %}Color:{% endtrans %}</strong> {{ chem.physical_data.color|default('-', true) }},
+                <strong>{% trans %}Odor:{% endtrans %}</strong> {{ chem.physical_data.odor|default('-', true) }},
+                <strong>{% trans %}Creator:{% endtrans %}</strong> {{ user.get_full_name() }}
+            </div>
+        </div>
+        {{ form_row(form.dep_1) }}
+        {{ form_row(form.dep_2) }}
+        {{ form_row(form.signature) }}
+    </fieldset>
+    <fieldset data-uk-margin>
+        <legend class="uk-text-primary uk-text-bold">
+            {% trans %}Hazards for people and the environment{% endtrans %}
+            <button type="button" class="uk-button uk-button-small" onclick="update_preview();">
+                {% trans %}Preview{% endtrans %}
+                <i class="uk-icon-eye"></i>
+            </button>
+        </legend>
+        {{ form_row(form.hazards, _('Text')) }}
+        {{ form_row(form.pictograms) }}
+    </fieldset>
+    <fieldset data-uk-margin>
+        <legend class="uk-text-primary uk-text-bold">
+            {% trans %}Protective measures and rules of conduct{% endtrans %}
+            <button type="button" class="uk-button uk-button-small" onclick="update_preview();">
+                {% trans %}Preview{% endtrans %}
+                <i class="uk-icon-eye"></i>
+            </button>
+        </legend>
+        {{ form_row(form.protection, _('Text')) }}
+        {{ form_row(form.protection_pics) }}
+        {{ form_row(form.eye_protection) }}
+        {{ form_row(form.hand_protection) }}
+    </fieldset>
+    <fieldset data-uk-margin>
+        <legend class="uk-text-primary uk-text-bold">
+            {% trans %}Conduct in case of danger{% endtrans %}
+            <button type="button" class="uk-button uk-button-small" onclick="update_preview();">
+                {% trans %}Preview{% endtrans %}
+                <i class="uk-icon-eye"></i>
+            </button>
+        </legend>
+        {{ form_row(form.conduct, _('Text')) }}
+        {{ form_row(form.ext_phone) }}
+    </fieldset>
+    <fieldset data-uk-margin>
+        <legend class="uk-text-primary uk-text-bold">
+            {% trans %}First aid{% endtrans %}
+            <button type="button" class="uk-button uk-button-small" onclick="update_preview();">
+                {% trans %}Preview{% endtrans %}
+                <i class="uk-icon-eye"></i>
+            </button>
+        </legend>
+        {{ form_row(form.first_aid, _('Text')) }}
+        {{ form_row(form.skin) }}
+        {{ form_row(form.eye) }}
+        {{ form_row(form.breathe) }}
+        {{ form_row(form.swallow) }}
+        {{ form_row(form.int_phone) }}
+    </fieldset>
+    <fieldset data-uk-margin>
+        <legend class="uk-text-primary uk-text-bold">
+            {% trans %}Disposal{% endtrans %}
+            <button type="button" class="uk-button uk-button-small" onclick="update_preview();">
+                {% trans %}Preview{% endtrans %}
+                <i class="uk-icon-eye"></i>
+            </button>
+        </legend>
+        {{ form_row(form.disposal, _('Text')) }}
+    </fieldset>
+    <fieldset data-uk-margin>
+        <legend></legend>
+        <div class="uk-form-row">
+            <div class="uk-form-controls">
+                <button type="submit" class="uk-button uk-button-success uk-button-large">
+                    {% trans %}Save{% endtrans %}
+                    <i class="uk-icon-save"></i>
+                </button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+<div id="preview"></div>
+{% endblock %}
+
+{% block js %}
+<script>
+$(document).ready(function() {
+    $('#id_dep_1 option[value="{{ deps[0].id }}"]').attr('selected', true);
+    {% if deps|length > 1 %}
+    $('#id_dep_2 option[value="{{ deps[1].id }}"]').attr('selected', true);
+    {% endif %}
+    $('#id_signature option[value="{{ oi.signature.id }}"]').attr('selected', true);
+    $('#id_hazards').val({{ oi.hazards|tojson }});
+    {% for id in hpics %}
+    $('#id_pictograms option[value="{{ id }}"]').attr('selected', true);
+    {% endfor %}
+    $('#id_protection').val({{ oi.protection|tojson }});
+    {% for id in ppics %}
+    $('#id_protection_pics option[value="{{ id }}"]').attr('selected', true);
+    {% endfor %}
+    $('#id_eye_protection').val('{{ oi.eye_protection }}');
+    $('#id_hand_protection').val('{{ oi.hand_protection }}');
+    $('#id_conduct').val({{ oi.conduct|tojson }});
+    $('#id_ext_phone').val('{{ oi.ext_phone }}');
+    $('#id_first_aid').val({{ oi.first_aid|tojson }});
+    $('#id_skin').val('{{ oi.skin }}');
+    $('#id_eye').val('{{ oi.eye }}');
+    $('#id_breathe').val('{{ oi.breathe }}');
+    $('#id_swallow').val('{{ oi.swallow }}');
+    $('#id_int_phone').val('{{ oi.int_phone }}');
+    $('#id_disposal').val({{ oi.disposal|tojson }});
+})
+function update_preview() {
+    var data = $('form').serialize();
+    var url = '{{ url("oic:preview", chem.id) }}';
+    $.post(url, data, function(res) {
+        $('#preview').css('display', 'block');
+        $('#preview').text('');
+        $('#preview').html('<img src="data:image/png;base64,'+res+'">');
+    });
+}
+</script>
 {% endblock %}

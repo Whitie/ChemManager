@@ -45,13 +45,30 @@ class WorkDepartment(models.Model):
 class ProtectionPictogram(models.Model):
     ident = models.CharField(_('Identifier'), max_length=10)
     icon = models.FileField(upload_to='oic')
+    description = models.CharField(_('Description'), max_length=30,
+                                   blank=True)
 
     def __str__(self):
-        return self.ident
+        return f'{self.ident} - {self.description}'
 
     class Meta:
         verbose_name = _('Protection Pictogram')
         verbose_name_plural = _('Protection Pictograms')
+        ordering = ['ident']
+
+
+class FirstAidPictogram(models.Model):
+    ident = models.CharField(_('Identifier'), max_length=10)
+    icon = models.FileField(upload_to='oic')
+    description = models.CharField(_('Description'), max_length=30,
+                                   blank=True)
+
+    def __str__(self):
+        return f'{self.ident} - {self.description}'
+
+    class Meta:
+        verbose_name = _('First Aid Pictogram')
+        verbose_name_plural = _('First Aid Pictograms')
         ordering = ['ident']
 
 

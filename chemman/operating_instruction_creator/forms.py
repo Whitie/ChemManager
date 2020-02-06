@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from core.utils import _get_users_by_permission
 from core.models.safety import GHSPictogram
 from .models import (
-    WorkDepartment, OperatingInstructionDraft, ProtectionPictogram
+    WorkDepartment, ProtectionPictogram
 )
 
 RELEASE_PERM = 'operating_instruction_creator.release'
@@ -27,7 +27,8 @@ class OIForm(forms.Form):
             **_get_users_by_permission(RELEASE_PERM, False))
     )
     pictograms = forms.ModelMultipleChoiceField(
-        label=_('Pictograms'), queryset=GHSPictogram.objects.all(),
+        label=_('Pictograms'),
+        queryset=GHSPictogram.objects.all().order_by('ref_num'),
         required=False
     )
     hazards = forms.CharField(
@@ -38,7 +39,7 @@ class OIForm(forms.Form):
         label=_('Protective measures and rules of conduct'),
         widget=forms.Textarea
     )
-    protection_pictograms = forms.ModelMultipleChoiceField(
+    protection_pics = forms.ModelMultipleChoiceField(
         label=_('Pictograms'), queryset=ProtectionPictogram.objects.all()
     )
     eye_protection = forms.CharField(label=_('Eye protection'), max_length=60)
@@ -75,3 +76,8 @@ class OIForm(forms.Form):
     int_phone = forms.CharField(
         label=_('Internal help number'), max_length=20
     )
+
+    def __init__(self, *args, **kw):
+        super().__init__(*args, **kw)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'uk-form-width-large'})
