@@ -8,7 +8,7 @@ chardet==3.0.4
 cheroot==8.2.1
 CherryPy==18.5.0
 cryptography==2.7
-Django==2.2.9
+Django==2.2.10
 django-background-tasks==1.2.5
 django-compat==1.0.15
 django-contrib-comments==1.9.1
