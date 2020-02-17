@@ -165,7 +165,7 @@ class ParsedData(models.Model):
     vwvws = models.IntegerField(_('DE: VWVWS'), blank=True, null=True)
     # DE: WGK
     whc = models.PositiveSmallIntegerField(
-        _('WHC'), default=0, choices=WHC_CHOICES,
+        _('WHC'), default=0, choices=WHC_CHOICES, null=True, blank=True,
         help_text=_('Water Hazard Class')
     )
 

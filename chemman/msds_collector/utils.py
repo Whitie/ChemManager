@@ -103,7 +103,8 @@ def import_data(source):
     pd.symbols = ', '.join([str(x) for x in d['symbols']])
     pd.synonyms = '; '.join(d['synonyms'])
     pd.vwvws = d['vwvws']
-    pd.whc = d['wgk']
+    if d['wgk']:
+        pd.whc = d['wgk']
     pd.save()
 
 

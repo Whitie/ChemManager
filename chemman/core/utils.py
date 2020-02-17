@@ -76,6 +76,7 @@ class MenuItem:
 base_menu = Menu(
     _('Menu'),
     MenuItem(_('Information'), urlname='core:info'),
+    MenuItem(_('Extended Search'), urlname='core:ext-search'),
     MenuItem(_('Lists'), urlname='core:choose-list'),
     MenuItem(_('Storage'), urlname='core:storage-index'),
     MenuItem(_('Management'), urlname='core:manage'),
@@ -83,7 +84,6 @@ base_menu = Menu(
 )
 action_menu = Menu(
     _('Actions'),
-    MenuItem(_('Extended Search'), urlname='core:ext-search'),
     MenuItem(_('Consume'), urlname='core:consume-select'),
     MenuItem(_('Delivery'), urlname='core:delivery'),
 )
