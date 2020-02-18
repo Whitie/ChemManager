@@ -42,7 +42,7 @@ def list_url(value, name='-'):
         value = dumps(value)
     param = b64encode(value.encode('utf-8'))
     return reverse('core:list-chemicals',
-                   kwargs={'name': name, 'param': param})
+                   kwargs={'name': name, 'param': param.decode()})
 
 
 def builtin_list(list_name):
