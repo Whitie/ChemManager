@@ -253,7 +253,7 @@ All chemicals are potentially dangerous. They are therefore only be handled by s
         </a>
         <i class="uk-icon-external-link"></i>
         ({{ c.msds.published|date('SHORT_DATE_FORMAT') }})
-        {% if c.msds.review_required and user.has_right('manage') %}
+        {% if c.msds.review_required and user.has_perm('manage') %}
         <span class="label label-warning">
             {% trans %}Sheet to old! Review required.{% endtrans %}
         </span>

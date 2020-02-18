@@ -131,3 +131,4 @@ test/*
 */cp_static/*
 */.secret
 */uploads/*
+*/cache/*
