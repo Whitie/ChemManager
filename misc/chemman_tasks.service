@@ -1,0 +1,15 @@
+[Unit]
+Description=Process ChemManager background tasks
+Requires=chemman.service
+After=chemman.service
+
+[Service]
+ExecStart=/home/bbz/environments/ChemManager-env/bin/python /home/bbz/environments/ChemManager-env/ChemManager/chemman/manage.py process_tasks
+Type=idle
+Restart=always
+RestartSec=5
+User=bbz
+Group=users
+
+[Install]
+WantedBy=multi-user.target

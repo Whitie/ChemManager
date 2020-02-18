@@ -42,7 +42,7 @@
         <tr>
             <td>{{ loop.index }}</td>
             <td>
-                <a href="{{ url('core:detail-by-id', chem.id) }}">
+                <a href="{{ url('core:detail-by-id', chem.id) }}" class="tt" title="{{ p.stored_chemical.quality }}">
                     {{ chem.name }}
                 </a>
                 {% if chem.signal_word or chem.cmr %}
