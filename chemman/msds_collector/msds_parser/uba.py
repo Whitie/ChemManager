@@ -3,6 +3,7 @@
 
 import json
 import os
+import shutil
 import time
 
 import requests
@@ -61,18 +62,19 @@ def download_and_extract_data(tmp_dir=None):
     :rtype: TemporaryDirectory
     """
     if tmp_dir is None:
-        tmp_dir = TemporaryDirectory(suffix='-sdb', prefix='tmp-')
+        tmp_dir = TemporaryDirectory(suffix='-uba', prefix='tmp-')
     zip_path = os.path.join(tmp_dir.name, ZIP_FILE)
     req = requests.get(UBA_URL)
     req.raise_for_status()
     with open(zip_path, 'wb') as fp:
         fp.write(req.content)
+    shutil.copy(zip_path, '/home/tweimann/Downloads/uba.zip')
     with ZipFile(zip_path) as zf:
         zf.extractall(tmp_dir.name)
     return tmp_dir
 
 
-def make_data_file(tmp_dir, data_dir='.', cleanup=True):
+def make_data_file(tmp_dir, data_dir='.'):
     """
     Reads all CSV files and stores the data in various ways in a JSON structure.
 
@@ -113,15 +115,13 @@ def make_data_file(tmp_dir, data_dir='.', cleanup=True):
                 name_de_en=name_de_en)
     with open(data_path, 'w', encoding='utf-8') as fp:
         json.dump(data, fp, indent=2, sort_keys=True)
-    if cleanup:
-        tmp_dir.cleanup()
     return data_path
 
 
-def main(data_dir='.', tmp_dir=None, max_data_age=MAX_DATA_AGE, cleanup=True):
+def main(data_dir='.', tmp_dir=None, max_data_age=MAX_DATA_AGE):
     if need_download(data_dir, max_data_age):
         tmp = download_and_extract_data(tmp_dir)
-        path = make_data_file(tmp, data_dir, cleanup)
+        path = make_data_file(tmp, data_dir)
     else:
         path = os.path.join(data_dir, DATA_FILE)
     with open(path, encoding='utf-8') as fp:
@@ -132,7 +132,8 @@ def main(data_dir='.', tmp_dir=None, max_data_age=MAX_DATA_AGE, cleanup=True):
 def _collect_data(tmp_dir):
     data = {}
     num = 0
-    with open(os.path.join(tmp_dir.name, 'Export_Cas_Nummern.csv')) as fp:
+    fname = os.path.join(tmp_dir.name, 'Export_Cas_Nummern.csv')
+    with open(fname, encoding='latin1') as fp:
         try:
             reader = DictReader(fp, delimiter='|')
             for row in reader:
@@ -145,7 +146,8 @@ def _collect_data(tmp_dir):
                 if num not in data:
                     data[num] = {}
                 data[num]['cas'] = ''
-    with open(os.path.join(tmp_dir.name, 'Export_EG_Nummern.csv')) as fp:
+    fname = os.path.join(tmp_dir.name, 'Export_EG_Nummern.csv')
+    with open(fname, encoding='latin1') as fp:
         try:
             reader = DictReader(fp, delimiter='|')
             for row in reader:
@@ -158,7 +160,8 @@ def _collect_data(tmp_dir):
                 if num not in data:
                     data[num] = {}
                 data[num]['einecs'] = ''
-    with open(os.path.join(tmp_dir.name, 'Export_Stofftabelle.csv')) as fp:
+    fname = os.path.join(tmp_dir.name, 'Export_Stofftabelle.csv')
+    with open(fname, encoding='latin1') as fp:
         try:
             reader = DictReader(fp, delimiter='|')
             for row in reader:
@@ -180,7 +183,8 @@ def _collect_data(tmp_dir):
                     data[num] = {}
                 data[num]['name'] = ''
                 data[num]['wgk'] = None
-    with open(os.path.join(tmp_dir.name, 'Export_Synonyme.csv')) as fp:
+    fname = os.path.join(tmp_dir.name, 'Export_Synonyme.csv')
+    with open(fname, encoding='latin1') as fp:
         try:
             reader = DictReader(fp, delimiter='|')
             for row in reader:
@@ -210,12 +214,9 @@ def _parse_commandline():
     p.add_argument('--max-age', '-m', type=int, default=MAX_DATA_AGE,
                    help='Max age (days) of local data before new download is '
                    'made (default: %(default)s days)')
-    p.add_argument('--no-cleanup', '-n', action='store_true', default=False,
-                   help="Don't remove temporary data (default: %(default)s)")
     return p.parse_args()
 
 
 if __name__ == '__main__':
     args = _parse_commandline()
-    main(args.data_dir, max_data_age=args.max_age, cleanup=not args.no_cleanup)
-
+    main(args.data_dir, max_data_age=args.max_age)

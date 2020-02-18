@@ -9,6 +9,7 @@ from .utils import ParserSpec
 
 SYMBOL_re = re.compile(r'GHS0\d')
 STRIPS = '~ca. <>E'
+DNEL = re.compile(r'DNEL\s+(\d+)\s+mg.+?(chronisch|akut)', re.I | re.S)
 
 
 def parse_temp_range(match):
@@ -42,7 +43,8 @@ EXPRESSIONS = (
     ParserSpec.simple('eg_num', 'EG-Nummer'),
     ParserSpec.simple('art_name', 'Handelsname'),
     ParserSpec.simple('art_name', 'Bezeichnung des Stoffs', r'\s*?'),
-    ParserSpec('name', r'CAS\-.+?\s+?Bezeichnung\s+?.+?\s+?(.+)\n', re.I),
+    ParserSpec('name', r'^Bezeichnung\s+?des\s+?Stoffs\s+?(.+?)\n',
+               re.I | re.M),
     ParserSpec.simple('art_num', 'Artikelnummer'),
     ParserSpec(
         'hazards_raw',
@@ -92,6 +94,9 @@ EXPRESSIONS = (
 def _parse_dnel(data):
     txt = data['params']
     del data['params']
+    data['dnel'] = []
+    for m in DNEL.finditer(txt):
+        data['dnel'].append({'value': m.group(1), 'what': m.group(2)})
     return data
 
 
@@ -142,7 +147,7 @@ def parse(text):
     for spec in EXPRESSIONS:
         if spec.id not in data or (spec.id in data and not data[spec.id]):
             data[spec.id] = spec(text)
-            print(spec.id, '-->', data[spec.id])
+            # print(spec.id, '-->', data[spec.id])
     data = _parse_dnel(data)
     data = _parse_hazards(data)
     data = _parse_fire(data)

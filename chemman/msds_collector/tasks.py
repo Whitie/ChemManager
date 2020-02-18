@@ -39,6 +39,7 @@ def parse_new_msds(upload_id):
     if not os.path.isfile(uba_file):
         uba.main(workdir)
     tmp = TemporaryDirectory(prefix='msds-')
+    print(tmp.name)
     json_file = os.path.join(tmp.name, 'all.json')
     result_file = os.path.join(tmp.name, 'single_chem.json')
     with open(os.path.join(tmp.name, '_sdb.pdf'), 'wb') as fp:

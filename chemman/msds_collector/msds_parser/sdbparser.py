@@ -181,12 +181,13 @@ def _translate(text, trans):
 
 
 def request_pubchem(cas, name, en_name, trans):
+    print(cas, name, en_name)
     if en_name:
         en_name = _translate(en_name, trans)
     else:
         en_name = _translate(name.capitalize(), trans)
     cas = cas.strip()
-    print(name, '-->', en_name, '(en), CAS: {}'.format(cas))
+    # print(name, '-->', en_name, '(en), CAS: {}'.format(cas))
     if cas:
         r = requests.get(PC_SEARCH, params={'term': 'CAS-{}'.format(cas)})
     else:
@@ -307,10 +308,21 @@ def run(filename, outdir, force=False, uba_data=None):
     if not data['name']:
         data['name'] = data['art_name'].split()[0].capitalize()
     try:
-        pubchem, structure, en = request_pubchem(data['cas'], data['name'],
-                                                 data['name_en'],
-                                                 uba_data['name_de_en'])
-    except:
+        pubchem, structure, en = request_pubchem(
+            data.get('cas', ''), data.get('name', ''),
+            data.get('name_en', ''), uba_data.get('name_de_en', {})
+        )
+    except Exception as err:
+        print(err)
+        raise
+        try:
+            # Workaround for some traffic problems
+            pubchem, structure, en = request_pubchem(
+                data.get('cas', ''), data.get('name', ''),
+                data.get('name_en', ''), uba_data.get('name_de_en', {})
+            )
+        except:
+            pass
         pubchem = {}
         structure = ''
         en = ''
@@ -329,6 +341,7 @@ def run(filename, outdir, force=False, uba_data=None):
     else:
         data['structure'] = ''
     # Combine with pubchem entry
+    print(pubchem)
     data = _combine_with_pubchem(data, pubchem)
     data['h'].sort()
     data['p'].sort()
