@@ -314,7 +314,6 @@ def run(filename, outdir, force=False, uba_data=None):
         )
     except Exception as err:
         print(err)
-        raise
         try:
             # Workaround for some traffic problems
             pubchem, structure, en = request_pubchem(
@@ -341,7 +340,6 @@ def run(filename, outdir, force=False, uba_data=None):
     else:
         data['structure'] = ''
     # Combine with pubchem entry
-    print(pubchem)
     data = _combine_with_pubchem(data, pubchem)
     data['h'].sort()
     data['p'].sort()
