@@ -21,6 +21,44 @@
     </p>
 </div>
 {% endif %}
+{% if user.is_authenticated %}
+<h1 class="uk-text-center">
+    {% trans %}Special chemicals{% endtrans %}
+</h1>
+<table class="uk-table uk-table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}Formula{% endtrans %}</th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}CAS{% endtrans %}</th>
+            <th>{% trans %}Formula{% endtrans %}</th>
+        </tr>
+    </tfoot>
+    <tbody>
+        {% for chem in chems %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', chem.id) }}">
+                    {{ chem.display_name }}
+                </a>
+                {{ m.risk_info(chem) }}
+            </td>
+            <td>{{ chem.identifiers.cas }}</td>
+            <td class="formula">{{ chem.formula }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
 <h1 class="uk-text-center">
     {% trans %}Interesting handbook paragraphs{% endtrans %}
 </h1>

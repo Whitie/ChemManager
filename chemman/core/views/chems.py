@@ -48,8 +48,10 @@ def index(req):
     paragraphs = Paragraph.objects.select_related().filter(
         id__in=settings.SHOW_HB_PARAGRAPHS
     )
+    chems = query.filter(special_log=True)
     ctx = dict(title=_('Mainpage'), all_count=all_count, cmr_count=cmr_count,
-               active_count=active_count, paragraphs=paragraphs, notes=[])
+               active_count=active_count, paragraphs=paragraphs, notes=[],
+               chems=chems)
     if req.user.is_authenticated:
         for note in Notification.objects.exclude(seen_by=req.user):
             note.seen_by.add(req.user)
