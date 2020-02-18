@@ -48,7 +48,7 @@ def index(req):
     paragraphs = Paragraph.objects.select_related().filter(
         id__in=settings.SHOW_HB_PARAGRAPHS
     )
-    chems = query.filter(special_log=True)
+    chems = query.filter(special_log=True, active=True)
     ctx = dict(title=_('Mainpage'), all_count=all_count, cmr_count=cmr_count,
                active_count=active_count, paragraphs=paragraphs, notes=[],
                chems=chems)
