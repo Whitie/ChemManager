@@ -182,16 +182,13 @@ def get_additional_packages(chemical, count, data):
         return []
     count = int(count)
     masses = [Decimal(x.replace(',', '.')) for x in data if x.strip()]
-    if chemical.special_log and len(masses) != count:
-        # Maybe raise an exception here
-        # For now we only store one package here and nothing from the
-        # additional
-        return []
     to_store = []
     for i in range(count):
         try:
             to_store.append(masses[i])
         except IndexError:
+            if chemical.special_log:
+                return to_store
             to_store.append(None)
     return to_store
 
