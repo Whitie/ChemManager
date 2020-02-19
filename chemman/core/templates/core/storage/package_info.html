@@ -34,7 +34,7 @@
             {% endif %}
             <dt>{% trans %}Current Stock{% endtrans %}</dt>
             <dd>{{ inventory.value|floatformat(4) }} {{ inventory.unit }}</dd>
-            {% if user.is_authenticated() %}
+            {% if user.is_authenticated %}
             <dt>{% trans %}Stored by{% endtrans %}</dt>
             <dd>{{ package.stored_by }}, {{ package.stored|date('SHORT_DATETIME_FORMAT') }}</dd>
             {% endif %}
