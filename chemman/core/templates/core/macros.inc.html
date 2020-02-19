@@ -228,33 +228,33 @@
 </tr>
 {% endmacro -%}
 
-{%- macro storage_actions(user, perms, storage_id, icon_only=true) %}
+{%- macro storage_actions(user, perms, storage, icon_only=true) %}
 {% if perms.core.inventory %}
-<a href="{{ url('core:storage-inventory-make', storage_id=storage_id) }}" class="uk-button" title="{% trans %}Make inventory{% endtrans %}">
+<a href="{{ url('core:storage-inventory-make', storage_id=storage.id) }}" class="uk-button" title="{% trans %}Make inventory{% endtrans %}">
     <i class="uk-icon-cubes"></i>
     {% if not icon_only %}{% trans %}Make inventory{% endtrans %}{% endif %}
 </a>
 {% endif %}
 {% if user.is_authenticated %}
-<a href="{{ url('core:storage-inventory-result', storage_id=storage_id) }}" class="uk-button" title="{% trans %}Show last inventory{% endtrans %}">
+<a href="{{ url('core:storage-inventory-result', storage_id=storage.id) }}" class="uk-button" title="{% trans %}Show last inventory{% endtrans %}">
     <i class="uk-icon-list-alt"></i>
     {% if not icon_only %}{% trans %}Show last inventory{% endtrans %}{% endif %}
 </a>
 {% endif %}
-{% if perms.core.can_store %}
-<a href="{{ url('core:delivery') }}?storage={{ storage_id }}" class="uk-button" title="{% trans %}Deliver new package here{% endtrans %}">
+{% if perms.core.can_store and storage.type == 'through' %}
+<a href="{{ url('core:delivery') }}?storage={{ storage.id }}" class="uk-button" title="{% trans %}Deliver new package here{% endtrans %}">
     <i class="uk-icon-truck"></i>
     {% if not icon_only %}{% trans %}Deliver new package here{% endtrans %}{% endif %}
 </a>
 {% endif %}
 {% if user.is_authenticated %}
-<a href="{{ url('core:info-observe', storage_id=storage_id) }}" class="uk-button" title="{% trans %}Check chemicals against storage classes{% endtrans %}">
+<a href="{{ url('core:info-observe', storage_id=storage.id) }}" class="uk-button" title="{% trans %}Check chemicals against storage classes{% endtrans %}">
     <i class="uk-icon-eye"></i>
     {% if not icon_only %}{% trans %}Check storage classes{% endtrans %}{% endif %}
 </a>
 {% endif %}
 {% if perms.core.set_limits %}
-<a href="{{ url('core:set-stocklimits', storage_id=storage_id) }}" class="uk-button" title="{% trans %}Set stocklimits for chemicals in this storage{% endtrans %}">
+<a href="{{ url('core:set-stocklimits', storage_id=storage.id) }}" class="uk-button" title="{% trans %}Set stocklimits for chemicals in this storage{% endtrans %}">
     <i class="uk-icon-balance-scale"></i>
     {% if not icon_only %}{% trans %}Set stocklimits{% endtrans %}{% endif %}
 </a>
