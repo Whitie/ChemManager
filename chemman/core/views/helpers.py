@@ -177,6 +177,25 @@ def initial_delivery(user, chemical, **data):
     return package
 
 
+def get_additional_packages(chemical, count, data):
+    if not count.strip():
+        return []
+    count = int(count)
+    masses = [Decimal(x.replace(',', '.')) for x in data if x.strip()]
+    if chemical.special_log and len(masses) != count:
+        # Maybe raise an exception here
+        # For now we only store one package here and nothing from the
+        # additional
+        return []
+    to_store = []
+    for i in range(count):
+        try:
+            to_store.append(masses[i])
+        except IndexError:
+            to_store.append(None)
+    return to_store
+
+
 def get_package_form(chem, storage, data=None):
     if chem.special_log:
         Form = NewSpecialPackageForm
@@ -202,11 +221,11 @@ def check_removal(package, inv, remove, remove_unit):
     threshold = get_threshold('g')
     if isinstance(to_remove, units.Volume):
         tmp = units.volume_to_mass(to_remove.value, to_remove.unit,
-                                         package.stored_package.chemical)
+                                   package.stored_package.chemical)
         to_remove = units.make_unit(tmp, 'g')
     if isinstance(current, units.Volume):
         tmp = units.volume_to_mass(current.value, current.unit,
-                                       package.stored_chemical.chemical)
+                                   package.stored_chemical.chemical)
         current = units.make_unit(tmp, 'g')
     if current >= to_remove:
         if (current - to_remove) <= threshold:

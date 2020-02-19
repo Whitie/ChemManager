@@ -15,6 +15,9 @@
             <button type="submit" class="uk-button uk-button-success">
                 {% trans %}GO{% endtrans %}
             </button>
+            <a href="{{ url('core:delivery-initial-box') }}" class="uk-button">
+                {% trans %}Deliver Box{% endtrans %}
+            </a>
         </p>
     </div>
 </form>
@@ -85,7 +88,7 @@ $(document).ready(function() {
         $('.chem').change(function() {
             var cid = $(this).val();
             var parent = $(this).parent().parent();
-            var row = parent.data('cmnum'); 
+            var row = parent.data('cmnum');
             if (chems[cid] === true) {
                 $('#id_form-' + row + '-brutto_mass').prop('required', true);
                 parent.addClass('cmr');

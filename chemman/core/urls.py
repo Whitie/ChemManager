@@ -142,6 +142,8 @@ urlpatterns += [
          name='delivery-initial'),
     path('delivery/initial/result/', orders.initial_delivery_result,
          name='delivery-initial-result'),
+    path('delivery/initial/box/', orders.deliver_box,
+         name='delivery-initial-box'),
     # Order
     path('order/old/<int:package_id>/', orders.new_order_old_package,
          name='order-old'),

@@ -62,8 +62,43 @@ def delivery_store_packages(req):
 
 
 @permission_required(('core.inventory', 'core.can_store'))
+def deliver_box(req):
+    if req.method == 'POST':
+        count = req.POST.get('package_count')
+        data = req.POST.getlist('packages')
+        form = InitialDeliveryForm(req.POST, req.FILES)
+        packages = []
+        if form.is_valid():
+            cd = form.cleaned_data
+            additional = helpers.get_additional_packages(
+                cd['chemical'], count, data
+            )
+            if helpers.can_store_here(cd['chemical'], cd['place']):
+                package = helpers.initial_delivery(req.user, **cd)
+                packages.append(package.id)
+                for add in additional:
+                    cd['brutto_mass'] = add
+                    p = helpers.initial_delivery(req.user, **cd)
+                    packages.append(p.id)
+            else:
+                messages.error(
+                    req, _('Chemical {} can not be stored in place {}. '
+                           'Place/Storage is not lockable!').format(
+                        cd['chemical'], cd['place']
+                    )
+                )
+        if packages:
+            req.session['new_packages'] = packages
+            return redirect('core:delivery-initial-result')
+    else:
+        form = InitialDeliveryForm()
+    ctx = dict(form=form)
+    return render(req, 'core/storage/deliver_box.html', ctx)
+
+
+@permission_required(('core.inventory', 'core.can_store'))
 def initial_delivery(req):
-    num = int(req.GET.get('num', 10))
+    num = int(req.GET.get('num', 12))
     if num > MAX_DELIVERY_FORMS:
         num = MAX_DELIVERY_FORMS
     DeliveryFormSet = formset_factory(InitialDeliveryForm, extra=num,

@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Deliver Box{% endtrans %}</h1>
+<div class="uk-grid">
+    <div class="uk-width-1-2">
+        <form class="uk-form uk-form-horizontal" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="uk-form-row">
+                <label class="uk-form-label uk-text-bold" for="{{ field.auto_id }}">{{ field.label }}</label>
+                <div class="uk-form-controls"{% if field.help_text %} title="{{ field.help_text }}"{% endif %}>
+                    {{ field }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="uk-form-row">
+                <div class="uk-form-controls">
+                    <button type="submit" class="uk-button uk-button-success uk-button-large">
+                        {% trans %}Save{% endtrans %}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="uk-width-1-2">
+        <h3 class="uk-text-center">
+            {% trans %}Additional packages{% endtrans %}
+        </h3>
+        <p class="tt" title="{% trans %}If brutto mass is not required, only give the count here and the fields empty.{% endtrans %}">
+            {% trans %}Count{% endtrans %}: <input type="number" id="package_count" class="uk-form-width-mini">
+        </p>
+        <ul class="uk-list uk-list-line" id='package-list'></ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+var _count = -1;
+var _log = false;
+
+$(document).ready(function() {
+    $.getJSON('{{ url("core:api-special_log-list") }}', function(data) {
+        var chems = data;
+        $('#id_chemical').change(function() {
+            var cid = $(this).val();
+            _log = chems[cid];
+            if (chems[cid] === true) {
+                $('#id_brutto_mass').prop('required', true);
+                $('#body-main').css('background-color', '#FFA07A');
+                UIkit.notify({
+                    'message': "<i class='uk-icon-info-circle'></i> {% trans %}Don't forget to enter the brutto mass!{% endtrans %}",
+                    'status': 'info',
+                    'timeout': 5000,
+                    'pos': 'top-center'
+                });
+            } else {
+                $('#id_brutto_mass').prop('required', false);
+                $('#body-main').css('background-color', 'white');
+            }
+        });
+    });
+    $('#package_count').on('input', function() {
+        var package_count = parseInt($(this).val());
+        var unit = $('#id_brutto_mass_unit').val();
+        if (package_count !== _count) {
+            _count = package_count;
+            $('#package-list').text('');
+            for (i = 2; i <= _count+1; i++) {
+                var inp = ' <input type="text" class="package"';
+                if (_log === true) {
+                    inp = inp + ' required> ';
+                } else {
+                    inp = inp + '> ';
+                }
+                inp = inp + unit;
+                $('#package-list').append('<li>'+ i + ')' + inp + '</li>');
+            }
+        }
+    });
+    $('form').submit(function(e) {
+        $('form').append('<input type="hidden" name="package_count" value="' + $('#package_count').val() + '">')
+        $('.package').each(function(index, value) {
+            $('form').append('<input type="hidden" name="packages" value="' + $(this).val() + '">');
+        });
+        return true;
+    });
+    var opts = {'format': 'DD.MM.YYYY'};
+    $('.dt').each(function() {
+        var dt = UIkit.datepicker($(this), opts);
+    });
+})
+</script>
+{% endblock %}
