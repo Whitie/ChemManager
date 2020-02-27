@@ -194,6 +194,7 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'chemman', 'locale'),
     os.path.join(BASE_DIR, 'core', 'locale'),
     os.path.join(BASE_DIR, 'floor_map', 'locale'),
     os.path.join(BASE_DIR, 'msds_collector', 'locale'),
