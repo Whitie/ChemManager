@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 16:28+0100\n"
+"POT-Creation-Date: 2020-02-27 17:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: operating_instruction_creator/forms.py:19
 msgid "Department 1"
 msgstr "Bereich 1"
@@ -37,11 +38,13 @@ msgstr "Piktogramme"
 
 #: operating_instruction_creator/forms.py:35
 #: operating_instruction_creator/models.py:93
+#: operating_instruction_creator/templates/oic/edit.html:58
 msgid "Hazards for people and the environment"
 msgstr "Gefahren für Mensch und Umwelt"
 
 #: operating_instruction_creator/forms.py:39
 #: operating_instruction_creator/models.py:96
+#: operating_instruction_creator/templates/oic/edit.html:69
 msgid "Protective measures and rules of conduct"
 msgstr "Schutzmaßnahmen und Verhaltensregeln"
 
@@ -57,6 +60,7 @@ msgstr "Handschutz"
 
 #: operating_instruction_creator/forms.py:50
 #: operating_instruction_creator/models.py:104
+#: operating_instruction_creator/templates/oic/edit.html:82
 msgid "Conduct in case of danger"
 msgstr "Verhalten im Gefahrfall"
 
@@ -66,6 +70,7 @@ msgstr "Weißes Kreuz anzeigen"
 
 #: operating_instruction_creator/forms.py:56
 #: operating_instruction_creator/models.py:107
+#: operating_instruction_creator/templates/oic/edit.html:93
 msgid "First aid"
 msgstr "Erste Hilfe"
 
@@ -145,6 +150,8 @@ msgid "First Aid Pictograms"
 msgstr "Erste Hilfe Symbole"
 
 #: operating_instruction_creator/models.py:77
+#: operating_instruction_creator/templates/oic/index.html:12
+#: operating_instruction_creator/templates/oic/index.html:46
 msgid "Chemical"
 msgstr "Chemikalie"
 
@@ -166,16 +173,18 @@ msgid "Created"
 msgstr "Erstellt"
 
 #: operating_instruction_creator/models.py:124
+#: operating_instruction_creator/templates/oic/index.html:7
+#: operating_instruction_creator/templates/oic/index.html:11
 msgid "Released"
 msgstr "Veröffentlicht"
 
 #: operating_instruction_creator/models.py:132
 msgid "Operating instruction draft"
-msgstr "Betriebsanweisung Vorlage"
+msgstr "Betriebsanweisung Entwurf"
 
 #: operating_instruction_creator/models.py:133
 msgid "Operating instruction drafts"
-msgstr "Betriebsanweisung Vorlagen"
+msgstr "Betriebsanweisung Entwürfe"
 
 #: operating_instruction_creator/models.py:136
 msgid "Can create operating instructions"
@@ -185,9 +194,102 @@ msgstr "Darf Betriebsanweisungen erstellen"
 msgid "Can release operating instructions"
 msgstr "Darf Betriebsanweisungen veröffentlichen"
 
+#: operating_instruction_creator/templates/oic/edit.html:30
+msgid "Edit Operating Instruction"
+msgstr "Betriebsanweisung bearbeiten"
+
+#: operating_instruction_creator/templates/oic/edit.html:37
+msgid "Head"
+msgstr "Kopf"
+
+#: operating_instruction_creator/templates/oic/edit.html:39
+#: operating_instruction_creator/templates/oic/edit.html:60
+#: operating_instruction_creator/templates/oic/edit.html:71
+#: operating_instruction_creator/templates/oic/edit.html:84
+#: operating_instruction_creator/templates/oic/edit.html:95
+#: operating_instruction_creator/templates/oic/edit.html:110
+msgid "Preview"
+msgstr "Vorschau"
+
+#: operating_instruction_creator/templates/oic/edit.html:45
+msgid "CAS:"
+msgstr ""
+
+#: operating_instruction_creator/templates/oic/edit.html:46
+msgid "State:"
+msgstr "Status:"
+
+#: operating_instruction_creator/templates/oic/edit.html:47
+msgid "Color:"
+msgstr "Farbe:"
+
+#: operating_instruction_creator/templates/oic/edit.html:48
+msgid "Odor:"
+msgstr "Geruch:"
+
+#: operating_instruction_creator/templates/oic/edit.html:49
+msgid "Creator:"
+msgstr "Ersteller:"
+
+#: operating_instruction_creator/templates/oic/edit.html:64
+#: operating_instruction_creator/templates/oic/edit.html:75
+#: operating_instruction_creator/templates/oic/edit.html:88
+#: operating_instruction_creator/templates/oic/edit.html:99
+#: operating_instruction_creator/templates/oic/edit.html:114
+msgid "Text"
+msgstr ""
+
+#: operating_instruction_creator/templates/oic/edit.html:108
+msgid "Disposal"
+msgstr "Entsorgung"
+
+#: operating_instruction_creator/templates/oic/edit.html:121
+msgid "Save"
+msgstr "Speichern"
+
+#: operating_instruction_creator/templates/oic/index.html:5
 #: operating_instruction_creator/views.py:21
 msgid "Operating Instructions"
 msgstr "Betriebsanweisungen"
+
+#: operating_instruction_creator/templates/oic/index.html:13
+#: operating_instruction_creator/templates/oic/index.html:47
+msgid "Departments"
+msgstr "Bereiche"
+
+#: operating_instruction_creator/templates/oic/index.html:14
+#: operating_instruction_creator/templates/oic/index.html:48
+msgid "User"
+msgstr "Benutzer"
+
+#: operating_instruction_creator/templates/oic/index.html:15
+#: operating_instruction_creator/templates/oic/index.html:49
+msgid "Actions"
+msgstr "Aktionen"
+
+#: operating_instruction_creator/templates/oic/index.html:26
+msgid "Show"
+msgstr "Anzeigen"
+
+#: operating_instruction_creator/templates/oic/index.html:30
+msgid "Copy"
+msgstr "Kopieren"
+
+#: operating_instruction_creator/templates/oic/index.html:41
+msgid "Drafts"
+msgstr "Entwürfe"
+
+#: operating_instruction_creator/templates/oic/index.html:45
+msgid "Modified"
+msgstr "Bearbeitet"
+
+#: operating_instruction_creator/templates/oic/index.html:61
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: operating_instruction_creator/templates/oic/index.html:66
+msgid "Release"
+msgstr "Veröffentlichen"
 
 #: operating_instruction_creator/views.py:24
 msgid "Op. Inst."

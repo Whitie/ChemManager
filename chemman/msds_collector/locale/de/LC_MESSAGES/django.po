@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 16:28+0100\n"
+"POT-Creation-Date: 2020-02-27 17:23+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: msds_collector/models.py:17
+#: msds_collector/models.py:17 msds_collector/templates/msds/list.html:14
+#: msds_collector/templates/msds/list.html:72
 msgid "Document"
 msgstr "Dokument"
 
@@ -26,7 +27,8 @@ msgstr "Dokument"
 msgid "Added"
 msgstr "Hinzugefügt"
 
-#: msds_collector/models.py:21
+#: msds_collector/models.py:21 msds_collector/templates/msds/list.html:16
+#: msds_collector/templates/msds/list.html:74
 msgid "Added by"
 msgstr "Hinzugefügt von"
 
@@ -42,7 +44,8 @@ msgstr "Verarbeitet"
 msgid "Extracted Data"
 msgstr "Daten extrahieren"
 
-#: msds_collector/models.py:26
+#: msds_collector/models.py:26 msds_collector/templates/msds/list.html:13
+#: msds_collector/templates/msds/list.html:71
 msgid "Name"
 msgstr "Name"
 
@@ -226,6 +229,7 @@ msgid "Last review"
 msgstr "Zuletzt überarbeitet"
 
 #: msds_collector/models.py:146
+#: msds_collector/templates/msds/transfer/compare.html:64
 msgid "Signal Word"
 msgstr "Signalwort"
 
@@ -246,6 +250,7 @@ msgid "Solubility at Temperature"
 msgstr "Löslichkeit bei Temperatur"
 
 #: msds_collector/models.py:158
+#: msds_collector/templates/msds/transfer/compare.html:75
 msgid "Physical State"
 msgstr "Aggregatzustand"
 
@@ -280,6 +285,203 @@ msgstr "Wassergefährdungsklasse"
 #: msds_collector/models.py:176 msds_collector/models.py:177
 msgid "Parsed upload data"
 msgstr "Verarbeitete Daten"
+
+#: msds_collector/templates/msds/detail.html:24
+#: msds_collector/templates/msds/list.html:8
+#: msds_collector/templates/msds/transfer/compare.html:8
+#: msds_collector/templates/msds/transfer/similar.html:38
+msgid "Back"
+msgstr "Zurück"
+
+#: msds_collector/templates/msds/detail.html:27
+msgid "Save"
+msgstr "Speichern"
+
+#: msds_collector/templates/msds/index.html:6
+msgid "Show uploaded"
+msgstr "Zeige hochgeladene"
+
+#: msds_collector/templates/msds/index.html:10
+msgid "Upload new MSDS's"
+msgstr "Neue hochgeladene SDB's"
+
+#: msds_collector/templates/msds/index.html:15
+msgid "Attach MSDS by dropping or"
+msgstr "SDB hochladen durch Raufziehen oder"
+
+#: msds_collector/templates/msds/index.html:17
+msgid "selecting one"
+msgstr "auswählen"
+
+#: msds_collector/templates/msds/index.html:26
+msgid "You don't have the permission to upload documents"
+msgstr "Sie haben nicht die Berechtigung, SDB's hochzuladen"
+
+#: msds_collector/templates/msds/list.html:5
+msgid "List of uploaded MSDS's"
+msgstr "Liste der hochgeladenen SDB's"
+
+#: msds_collector/templates/msds/list.html:15
+#: msds_collector/templates/msds/list.html:73
+msgid "CAS"
+msgstr ""
+
+#: msds_collector/templates/msds/list.html:17
+#: msds_collector/templates/msds/list.html:75
+#: msds_collector/templates/msds/transfer/compare.html:18
+#: msds_collector/templates/msds/transfer/compare.html:27
+msgid "Actions"
+msgstr "Aktionen"
+
+#: msds_collector/templates/msds/list.html:28
+msgid "In Progress..."
+msgstr "In Bearbeitung..."
+
+#: msds_collector/templates/msds/list.html:30
+msgid "Not processed"
+msgstr "Nicht verarbeitet"
+
+#: msds_collector/templates/msds/list.html:49
+msgid "Edit processed data"
+msgstr "Daten bearbeiten"
+
+#: msds_collector/templates/msds/list.html:52
+msgid "Save name and CAS"
+msgstr "Namen und CAS Nummer speichern"
+
+#: msds_collector/templates/msds/list.html:56
+msgid "Transfer data to the ChemManager database"
+msgstr "Daten in die ChemManager Datenbank übernehmen"
+
+#: msds_collector/templates/msds/list.html:61
+msgid "Delete upload and parsed data"
+msgstr "Fertig bearbeitete Daten löschen"
+
+#: msds_collector/templates/msds/list.html:84
+msgid "previous"
+msgstr "ältere"
+
+#: msds_collector/templates/msds/list.html:91
+msgid "next"
+msgstr "neuere"
+
+#: msds_collector/templates/msds/transfer/compare.html:5
+msgid "Compare data"
+msgstr "Daten vergleichen"
+
+#: msds_collector/templates/msds/transfer/compare.html:10
+#, python-format
+msgid ""
+"All data in the \"New Data\" column will be added to the existing database "
+"record (%(chem)s). Edit with care!"
+msgstr ""
+"Alle Daten aus der \"Neue Daten\" Spalte werden für den existierenden "
+"Datenbankeintrag übernommen (%(chem)s). Bitte mit VORSICHT bearbeiten!"
+
+#: msds_collector/templates/msds/transfer/compare.html:15
+#: msds_collector/templates/msds/transfer/compare.html:24
+msgid "Existing Data"
+msgstr "Vorhandene Daten"
+
+#: msds_collector/templates/msds/transfer/compare.html:16
+#: msds_collector/templates/msds/transfer/compare.html:25
+msgid "New Data"
+msgstr "Neue Daten"
+
+#: msds_collector/templates/msds/transfer/compare.html:43
+msgid "Copy old to new"
+msgstr "Alten Eintrag in neue Daten kopieren"
+
+#: msds_collector/templates/msds/transfer/compare.html:50
+msgid "CMR"
+msgstr ""
+
+#: msds_collector/templates/msds/transfer/compare.html:53
+msgid "YES"
+msgstr "JA"
+
+#: msds_collector/templates/msds/transfer/compare.html:55
+msgid "NO"
+msgstr "NEIN"
+
+#: msds_collector/templates/msds/transfer/compare.html:69
+msgid "Warning"
+msgstr "Achtung"
+
+#: msds_collector/templates/msds/transfer/compare.html:70
+msgid "Danger"
+msgstr "Gefahr"
+
+#: msds_collector/templates/msds/transfer/compare.html:80
+msgid "solid"
+msgstr "fest"
+
+#: msds_collector/templates/msds/transfer/compare.html:81
+msgid "liquid"
+msgstr "flüssig"
+
+#: msds_collector/templates/msds/transfer/compare.html:82
+msgid "gaseous"
+msgstr "gasförmig"
+
+#: msds_collector/templates/msds/transfer/similar.html:9
+msgid "Choose"
+msgstr "Auswählen"
+
+#: msds_collector/templates/msds/transfer/similar.html:19
+#, python-format
+msgid "Transfer %(name)s to Database"
+msgstr "%(name)s in Datenbank übernehmen"
+
+#: msds_collector/templates/msds/transfer/similar.html:21
+msgid "Exact matches in database"
+msgstr "Exakte Übereinstimmungen in der Datenbank"
+
+#: msds_collector/templates/msds/transfer/similar.html:23
+#, python-format
+msgid ""
+"We have one exact match, you can choose to edit this one instead of adding a "
+"new chemical."
+msgid_plural ""
+"We have %(count)s exact matches, you can choose to edit one instead of "
+"adding a new chemical."
+msgstr[0] ""
+"Es wurde ein exakter Treffer in der Datenbank gefunden. Sie können diesen "
+"bearbeiten, statt einen neuen anzulegen."
+msgstr[1] ""
+"Es wurden %(count)s sehr ähnliche Einträge gefunden. Evtl. können Sie einen "
+"davon bearbeiten, statt einen neuen anzulegen."
+
+#: msds_collector/templates/msds/transfer/similar.html:26
+msgid "No exact matches."
+msgstr "Kein exakten Treffer."
+
+#: msds_collector/templates/msds/transfer/similar.html:29
+msgid "Similar matches in database"
+msgstr "Ähnliche Übereinstimmungen in der Datenbank"
+
+#: msds_collector/templates/msds/transfer/similar.html:31
+#, python-format
+msgid ""
+"We have one similar match, you can choose to edit this one instead of adding "
+"a new chemical."
+msgid_plural ""
+"We have %(count)s similar matches, you can choose to edit one instead of "
+"adding a new chemical."
+msgstr[0] ""
+"Es wurde ein ähnlicher Treffer in der Datenbank gefunden. Sie können diesen "
+"bearbeiten, statt einen neuen anzulegen."
+msgstr[1] ""
+"Es wurden %(count)s ähnliche Einträge gefunden. Evtl. können Sie einen davon "
+"bearbeiten, statt einen neuen anzulegen."
+
+#: msds_collector/templates/msds/transfer/similar.html:34
+msgid "No similar matches."
+msgstr "Keine ähnlichen Treffer."
+
+#: msds_collector/templates/msds/transfer/similar.html:41
+msgid "Add as new chemical"
+msgstr "Als neue Chemikalie einfügen"
 
 #: msds_collector/views.py:23
 msgid "Upload MSDS"
@@ -330,16 +532,12 @@ msgid "Failed: {}"
 msgstr "Abgebrochen: {}"
 
 #: msds_collector/views.py:109
-#, fuzzy
-#| msgid "Save"
 msgid "Saved"
-msgstr "Speichern"
+msgstr "Gespeichert"
 
 #: msds_collector/views.py:118
-#, fuzzy
-#| msgid "Data merged"
 msgid "Data deleted"
-msgstr "Daten zusammengeführt"
+msgstr "Daten gelöscht"
 
 #: msds_collector/views.py:129
 msgid "Transfer to DB"
@@ -364,136 +562,3 @@ msgstr "Chemikalie wurde nicht angelegt. Fehler: {}"
 #: msds_collector/views.py:161
 msgid "Comparison"
 msgstr "Vergleich"
-
-#~ msgid "Back"
-#~ msgstr "Zurück"
-
-#~ msgid "Show uploaded"
-#~ msgstr "Zeige hochgeladene"
-
-#~ msgid "Upload new MSDS's"
-#~ msgstr "Neue hochgeladene SDB's"
-
-#~ msgid "Attach MSDS by dropping or"
-#~ msgstr "SDB hochladen durch Raufziehen oder"
-
-#~ msgid "selecting one"
-#~ msgstr "auswählen"
-
-#~ msgid "You don't have the permission to upload documents"
-#~ msgstr "Sie haben nicht die Berechtigung, SDB's hochzuladen"
-
-#~ msgid "List of uploaded MSDS's"
-#~ msgstr "Liste der hochgeladenen SDB's"
-
-#~ msgid "Actions"
-#~ msgstr "Aktionen"
-
-#~ msgid "Not processed"
-#~ msgstr "Nicht verarbeitet"
-
-#~ msgid "Edit processed data"
-#~ msgstr "Daten bearbeiten"
-
-#~ msgid "Save name and CAS"
-#~ msgstr "Namen und CAS Nummer speichern"
-
-#~ msgid "Transfer data to the ChemManager database"
-#~ msgstr "Daten in die ChemManager Datenbank übernehmen"
-
-#~ msgid "previous"
-#~ msgstr "ältere"
-
-#~ msgid "next"
-#~ msgstr "neuere"
-
-#~ msgid "Compare data"
-#~ msgstr "Daten vergleichen"
-
-#, python-format
-#~ msgid ""
-#~ "All data in the \"New Data\" column will be added to the existing "
-#~ "database record (%(chem)s). Edit with care!"
-#~ msgstr ""
-#~ "Alle Daten aus der \"Neue Daten\" Spalte werden für den existierenden "
-#~ "Datenbankeintrag übernommen (%(chem)s). Bitte mit VORSICHT bearbeiten!"
-
-#~ msgid "Existing Data"
-#~ msgstr "Vorhandene Daten"
-
-#~ msgid "New Data"
-#~ msgstr "Neue Daten"
-
-#~ msgid "Copy old to new"
-#~ msgstr "Alten Eintrag in neue Daten kopieren"
-
-#~ msgid "YES"
-#~ msgstr "JA"
-
-#~ msgid "NO"
-#~ msgstr "NEIN"
-
-#~ msgid "Warning"
-#~ msgstr "Achtung"
-
-#~ msgid "Danger"
-#~ msgstr "Gefahr"
-
-#~ msgid "solid"
-#~ msgstr "fest"
-
-#~ msgid "liquid"
-#~ msgstr "flüssig"
-
-#~ msgid "gaseous"
-#~ msgstr "gasförmig"
-
-#~ msgid "Choose"
-#~ msgstr "Auswählen"
-
-#, python-format
-#~ msgid "Transfer %(name)s to Database"
-#~ msgstr "%(name)s in Datenbank übernehmen"
-
-#~ msgid "Exact matches in database"
-#~ msgstr "Exakte Übereinstimmungen in der Datenbank"
-
-#, python-format
-#~ msgid ""
-#~ "We have one exact match, you can choose to edit this one instead of "
-#~ "adding a new chemical."
-#~ msgid_plural ""
-#~ "We have %(count)s exact matches, you can choose to edit one instead of "
-#~ "adding a new chemical."
-#~ msgstr[0] ""
-#~ "Es wurde ein exakter Treffer in der Datenbank gefunden. Sie können diesen "
-#~ "bearbeiten, statt einen neuen anzulegen."
-#~ msgstr[1] ""
-#~ "Es wurden %(count)s sehr ähnliche Einträge gefunden. Evtl. können Sie "
-#~ "einen davon bearbeiten, statt einen neuen anzulegen."
-
-#~ msgid "No exact matches."
-#~ msgstr "Kein exakten Treffer."
-
-#~ msgid "Similar matches in database"
-#~ msgstr "Ähnliche Übereinstimmungen in der Datenbank"
-
-#, python-format
-#~ msgid ""
-#~ "We have one similar match, you can choose to edit this one instead of "
-#~ "adding a new chemical."
-#~ msgid_plural ""
-#~ "We have %(count)s similar matches, you can choose to edit one instead of "
-#~ "adding a new chemical."
-#~ msgstr[0] ""
-#~ "Es wurde ein ähnlicher Treffer in der Datenbank gefunden. Sie können "
-#~ "diesen bearbeiten, statt einen neuen anzulegen."
-#~ msgstr[1] ""
-#~ "Es wurden %(count)s ähnliche Einträge gefunden. Evtl. können Sie einen "
-#~ "davon bearbeiten, statt einen neuen anzulegen."
-
-#~ msgid "No similar matches."
-#~ msgstr "Keine ähnlichen Treffer."
-
-#~ msgid "Add as new chemical"
-#~ msgstr "Als neue Chemikalie einfügen"

@@ -46,6 +46,8 @@ CONTAINER_MATERIAL_CHOICES = (
     ('alu', _('Aluminium')),
     ('carton', _('Carton')),
     ('bag', _('Bag')),
+    ('canister', _('Canister')),
+    ('hobbock', _('Hobbock')),
     ('barrel', _('Barrel')),
     ('pallet', _('Pallet')),
 )
