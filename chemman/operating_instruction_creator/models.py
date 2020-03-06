@@ -49,7 +49,7 @@ class ProtectionPictogram(models.Model):
                                    blank=True)
 
     def __str__(self):
-        return f'{self.ident} - {self.description}'
+        return '{} - {}'.format(self.ident, self.description)
 
     class Meta:
         verbose_name = _('Protection Pictogram')
