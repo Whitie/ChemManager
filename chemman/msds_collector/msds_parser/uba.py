@@ -68,7 +68,8 @@ def download_and_extract_data(tmp_dir=None):
     req.raise_for_status()
     with open(zip_path, 'wb') as fp:
         fp.write(req.content)
-    shutil.copy(zip_path, '/home/tweimann/Downloads/uba.zip')
+    backup = os.path.join(os.path.expanduser('~'), 'uba.zip')
+    shutil.copy(zip_path, backup)
     with ZipFile(zip_path) as zf:
         zf.extractall(tmp_dir.name)
     return tmp_dir
