@@ -248,9 +248,11 @@ AUTH_LDAP_USER_ATTR_MAP = {
     'last_name': 'sn',
     'email': 'mail',
 }
+AUTH_LDAP_BIND_AS_AUTHENTICATING_USER = True
+
 # Set in local_settings
-AUTH_LDAP_BIND_DN = ''
-AUTH_LDAP_BIND_PASSWORD = ''
+# AUTH_LDAP_BIND_DN = ''
+# AUTH_LDAP_BIND_PASSWORD = ''
 
 # Deprecated
 OZONE_AUTH_URL = 'http://10.0.0.175:8003/external_auth2/'
