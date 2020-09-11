@@ -235,7 +235,8 @@ SHOW_THRESHOLDS = {
 OBSERVE_AND_WARN = True
 INFO_WRONG_BRUTTO = ['admin']
 USE_OZONE = True
-OZONE_UID_URL = 'http://10.0.0.175:8003/core/api/uid/{username}/'
+OZONE_URL = 'http://10.0.0.175:8003/'
+OZONE_UID_URL = OZONE_URL + 'core/api/uid/{username}/'
 
 # LDAP
 AUTH_LDAP_SERVER_URI = 'ldap://10.0.0.10'
@@ -259,9 +260,9 @@ AUTH_LDAP_USER_ATTR_MAP = {
 # AUTH_LDAP_BIND_PASSWORD = ''
 
 # Deprecated
-OZONE_AUTH_URL = 'http://10.0.0.175:8003/external_auth2/'
-OZONE_AUTH_KEY = b''
-OZONE_AUTH_SEPARATOR = '~##~'
+# OZONE_AUTH_URL = 'http://10.0.0.175:8003/external_auth2/'
+# OZONE_AUTH_KEY = b''
+# OZONE_AUTH_SEPARATOR = '~##~'
 
 # if USE_OZONE:
 #     AUTHENTICATION_BACKENDS.insert(
@@ -269,9 +270,9 @@ OZONE_AUTH_SEPARATOR = '~##~'
 #     )
 
 # Now handled by background tasks
-MSDS_WORKER_URL = 'http://127.0.0.1:12012/'
-MSDS_WORKER_USER = 'cm'
-MSDS_WORKER_PASSWD = ''
+# MSDS_WORKER_URL = 'http://127.0.0.1:12012/'
+# MSDS_WORKER_USER = 'cm'
+# MSDS_WORKER_PASSWD = ''
 
 # Deprecation End
 

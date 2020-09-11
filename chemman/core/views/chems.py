@@ -25,6 +25,7 @@ from ..models.safety import (
     HazardStatement, EUHazardStatement, PrecautionaryStatement,
     GHSPictogram
 )
+from ..tasks import get_ozone_user_id
 from ..utils import make_qrcode, render, render_json
 from .helpers import (
     get_packages_for_chemical, search_chemical_by_name, search_package
@@ -239,6 +240,7 @@ def api_login(req):
         user = authenticate(username=username, password=passwd)
         if user is not None:
             login(req, user)
+            get_ozone_user_id(user.id)
             return render_json(req, {'success': True})
         else:
             return render_json(req, {'success': False, 'msg': ugettext(
