@@ -14,12 +14,12 @@
 {% block head %}
 <style>
     #preview {
-        position: absolute;
+        position: fixed;
         display: none;
-        top: 150px;
+        top: 75px;
         right: 5px;
         width: 30%;
-        border: 1px solid black;
+        border: 1px solid blue;
         background-color: white;
     }
 </style>
@@ -29,8 +29,8 @@
 <h1 class="uk-text-center">
     {% trans %}Edit Operating Instruction{% endtrans %}
 </h1>
-<h2 class="uk-text-center">{{ oi }}</h2>
-<form class="uk-form uk-form-horizontal" method="post" action="{{ url('oic:edit', oi.id) }}">
+<h2 class="uk-text-center">{{ oi or chem.display_name }}</h2>
+<form class="uk-form uk-form-horizontal" method="post" action="{% if edit %}{{ url('oic:edit', oi.id) }}{% else %}{{ url('oic:new', chem.id) }}{% endif %}">
     {% csrf_token %}
     <fieldset data-uk-margin>
         <legend class="uk-text-primary uk-text-bold">
@@ -96,6 +96,7 @@
                 <i class="uk-icon-eye"></i>
             </button>
         </legend>
+        {{ form_row(form.green_cross) }}
         {{ form_row(form.first_aid, _('Text')) }}
         {{ form_row(form.skin) }}
         {{ form_row(form.eye) }}
@@ -130,32 +131,6 @@
 
 {% block js %}
 <script>
-$(document).ready(function() {
-    $('#id_dep_1 option[value="{{ deps[0].id }}"]').attr('selected', true);
-    {% if deps|length > 1 %}
-    $('#id_dep_2 option[value="{{ deps[1].id }}"]').attr('selected', true);
-    {% endif %}
-    $('#id_signature option[value="{{ oi.signature.id }}"]').attr('selected', true);
-    $('#id_hazards').val({{ oi.hazards|tojson }});
-    {% for id in hpics %}
-    $('#id_pictograms option[value="{{ id }}"]').attr('selected', true);
-    {% endfor %}
-    $('#id_protection').val({{ oi.protection|tojson }});
-    {% for id in ppics %}
-    $('#id_protection_pics option[value="{{ id }}"]').attr('selected', true);
-    {% endfor %}
-    $('#id_eye_protection').val('{{ oi.eye_protection }}');
-    $('#id_hand_protection').val('{{ oi.hand_protection }}');
-    $('#id_conduct').val({{ oi.conduct|tojson }});
-    $('#id_ext_phone').val('{{ oi.ext_phone }}');
-    $('#id_first_aid').val({{ oi.first_aid|tojson }});
-    $('#id_skin').val('{{ oi.skin }}');
-    $('#id_eye').val('{{ oi.eye }}');
-    $('#id_breathe').val('{{ oi.breathe }}');
-    $('#id_swallow').val('{{ oi.swallow }}');
-    $('#id_int_phone').val('{{ oi.int_phone }}');
-    $('#id_disposal').val({{ oi.disposal|tojson }});
-})
 function update_preview() {
     var data = $('form').serialize();
     var url = '{{ url("oic:preview", chem.id) }}';
@@ -165,5 +140,69 @@ function update_preview() {
         $('#preview').html('<img src="data:image/png;base64,'+res+'">');
     });
 }
+
+{% if edit %}
+function fill_fields_on_edit() {
+    $('#id_dep_1 option[value="{{ deps[0].id }}"]').attr('selected', true);
+    {% if deps|length > 1 %}
+    $('#id_dep_2 option[value="{{ deps[1].id }}"]').attr('selected', true);
+    {% endif %}
+    $('#id_signature option[value="{{ oi.signature.id }}"]').attr('selected', true);
+    $('#id_hazards').val({{ oi.hazards|tojson }});
+    $('#id_protection').val({{ oi.protection|tojson }});
+    {% for id in ppics %}
+    $('#id_protection_pics option[value="{{ id }}"]').attr('selected', true);
+    {% endfor %}
+    $('#id_eye_protection').val('{{ oi.eye_protection }}');
+    $('#id_hand_protection').val('{{ oi.hand_protection }}');
+    $('#id_conduct').val({{ oi.conduct|tojson }});
+    $('#id_ext_phone').val('{{ oi.ext_phone }}');
+    $('#id_green_cross').prop('checked', {{ oi.green_cross|tojson }});
+    $('#id_first_aid').val({{ oi.first_aid|tojson }});
+    $('#id_skin').val('{{ oi.skin }}');
+    $('#id_eye').val('{{ oi.eye }}');
+    $('#id_breathe').val('{{ oi.breathe }}');
+    $('#id_swallow').val('{{ oi.swallow }}');
+    $('#id_int_phone').val('{{ oi.int_phone }}');
+    $('#id_disposal').val({{ oi.disposal|tojson }});
+}
+{% endif %}
+
+function add_related_text(entries, headline, id) {
+    $('#preview').append('<h3>'+headline+'</h3><pre id="'+id+'"></pre>');
+    $.each(entries, function(index, entry) {
+        $('#'+id).append(entry+'\n');
+    });
+}
+
+function add_focus_handler(){
+    var url = '{{ url("oic:api-related-text", chem.id) }}';
+    var fields = ['hazards', 'protection', 'eye_protection', 'hand_protection',
+                  'conduct', 'first_aid', 'skin', 'eye', 'breathe', 'swallow',
+                  'disposal'];
+    $.each(fields, function(index, value) {
+        $('#id_'+value).focus(function() {
+            $.getJSON(url, {'topic': value}).done(
+                function(data) {
+                    $('#preview').css('display', 'block');
+                    $('#preview').text('');
+                    $('#preview').append('<h2>{% trans %}Existing texts{% endtrans %}');
+                    add_related_text(data['same'], '{% trans %}Same Chemical{% endtrans %}', 'same');
+                    add_related_text(data['similar'], '{% trans %}Similar Chemicals{% endtrans %}', 'similar');
+                }
+            );
+        });
+    });
+}
+
+$(document).ready(function() {
+    {% if edit %}
+    fill_fields_on_edit();
+    {% endif %}
+    {% for id in hpics %}
+    $('#id_pictograms option[value="{{ id }}"]').attr('selected', true);
+    {% endfor %}
+    add_focus_handler();
+})
 </script>
 {% endblock %}

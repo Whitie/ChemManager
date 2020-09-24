@@ -240,7 +240,8 @@ def api_login(req):
         user = authenticate(username=username, password=passwd)
         if user is not None:
             login(req, user)
-            get_ozone_user_id(user.id)
+            if settings.USE_OZONE:
+                get_ozone_user_id(user.id)
             return render_json(req, {'success': True})
         else:
             return render_json(req, {'success': False, 'msg': ugettext(
