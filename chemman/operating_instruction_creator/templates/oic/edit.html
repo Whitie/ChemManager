@@ -186,7 +186,7 @@ function add_focus_handler(){
                 function(data) {
                     $('#preview').css('display', 'block');
                     $('#preview').text('');
-                    $('#preview').append('<h2>{% trans %}Existing texts{% endtrans %}');
+                    $('#preview').append('<h2>{% trans %}Existing texts{% endtrans %}</h2>');
                     add_related_text(data['same'], '{% trans %}Same Chemical{% endtrans %}', 'same');
                     add_related_text(data['similar'], '{% trans %}Similar Chemicals{% endtrans %}', 'similar');
                 }
