@@ -326,10 +326,10 @@ class PhysicalData(models.Model):
         return self.chemical.display_name
 
     def _format_range(self, low, high, unit):
-        if not low:
+        if low is None:
             return '-'
-        if not high:
-            return '{}{}'.format(high, unit)
+        if high is None:
+            return '{}{}'.format(low, unit)
         else:
             return '{} - {}{}'.format(low, high, unit)
 

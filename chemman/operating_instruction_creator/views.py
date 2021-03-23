@@ -7,13 +7,16 @@ from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from django.template.loader import render_to_string
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.csrf import csrf_exempt
 from PIL import Image, ImageDraw, ImageFont
 from weasyprint import HTML
 
+from core.views.helpers import search_chemical_by_name
 from core.models.chems import Chemical
-from core.utils import base_menu, Menu, MenuItem, render
+from core.utils import base_menu, Menu, MenuItem, render, render_json
 from .forms import OIForm
 from .models import OperatingInstructionDraft, FirstAidPictogram
 
@@ -68,7 +71,17 @@ def edit_operating_instruction(req, id):
     ppics = [x.id for x in oi.protection_pics.all()]
     form = OIForm()
     ctx = dict(oi=oi, chem=chem, form=form, deps=deps, hpics=hpics,
-               ppics=ppics)
+               ppics=ppics, menu=oic_menu, edit=True)
+    return render(req, 'oic/edit.html', ctx)
+
+
+@permission_required('operating_instruction_creator.create')
+def new_operating_instruction(req, chem_id):
+    chem = Chemical.objects.select_related().get(pk=chem_id)
+    hpics = [x.id for x in chem.pictograms.all()]
+    form = OIForm()
+    ctx = dict(oi=None, chem=chem, form=form, menu=oic_menu, edit=False,
+               hpics=hpics)
     return render(req, 'oic/edit.html', ctx)
 
 
@@ -89,10 +102,47 @@ def preview(req, chem_id):
             png.seek(0)
             return HttpResponse(b64encode(png.read()),
                                 content_type='image/png')
-        except Exception:
-            pass
+        except Exception as err:
+            print(err)
     img = get_error_image()
     png = BytesIO()
     img.save(png, format='PNG')
     png.seek(0)
     return HttpResponse(b64encode(png.read()), content_type='image/png')
+
+
+@csrf_exempt
+def select_chemical(req):
+    search = req.POST['search']
+    results = []
+    chems = search_chemical_by_name(search)
+    for chem in chems:
+        text = '{}, CAS: {}'.format(chem.formula or '-',
+                                    chem.identifiers.cas or '-')
+        results.append(
+            dict(title=chem.display_name, text=text,
+                 url=reverse('oic:new',
+                             kwargs={'chem_id': chem.id}))
+        )
+    return render_json(req, {'results': results})
+
+
+def get_related_text(req, chem_id):
+    topic = req.GET.get('topic', '')
+    chemical = Chemical.objects.select_related().get(pk=chem_id)
+    pic_ids = list(chemical.pictograms.all().values_list('id', flat=True))
+    data = dict(same=[], similar=[])
+    for entry in OperatingInstructionDraft.objects.filter(
+      chemical=chemical).values_list(topic, flat=True):
+        if entry.strip(' -') and entry not in data['same']:
+            data['same'].append(entry)
+    for entry in OperatingInstructionDraft.objects.select_related().filter(
+      chemical__pictograms__id__in=pic_ids).exclude(
+      chemical=chemical).values_list(topic, flat=True):
+        if entry.strip(' -') and entry not in data['similar']:
+            data['similar'].append(entry)
+    if not data['same']:
+        data['same'].append('-')
+    if not data['similar']:
+        data['similar'].append('-')
+    return render_json(req, data)

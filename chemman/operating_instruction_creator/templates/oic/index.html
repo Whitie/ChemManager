@@ -72,6 +72,20 @@
         {% endfor %}
     </tbody>
 </table>
+
+{% if perms.operating_instruction_creator.create %}
+<hr>
+<h2>{% trans %}Create new Operating Instruction{% endtrans %}</h2>
+<form class="uk-search uk-form-horizontal" data-uk-search="{flipDropdown: true, source: '{{ url('oic:api-select-chemical') }}', msgResultsHeader: '{% trans %}Search Results{% endtrans %}', msgMoreResults: '', msgNoResults: '{% trans %}No Results found{% endtrans %}'}" action="#" method="post">
+    <div class="uk-form-row">
+        <label class="uk-form-label" for="chemsearch">{% trans %}Chemical:{% endtrans %}</label>
+        <div class="uk-form-controls">
+            <input class="uk-search-field uk-form-width-large uk-form-success" type="search" placeholder="{% trans %}Search...{% endtrans %}" name="search" id="chemsearch" style="border-radius:5px;">
+        </div>
+    </div>
+    {% csrf_token %}
+</form>
+{% endif %}
 {% endif %}
 {% endblock %}
 
