@@ -11,16 +11,20 @@ import requests
 from argparse import ArgumentParser
 from csv import DictReader
 from tempfile import TemporaryDirectory
-from zipfile import ZipFile
 
 
 DATA_FILE = 'uba.json'
-ZIP_FILE = 'uba.zip'
 MAX_DATA_AGE = 30
-UBA_URL = (
-    'http://webrigoletto.uba.de/rigoletto/public/'
-    'searchRequest.do?event=zipDownload'
-)
+UBA_URL = 'http://webrigoletto.uba.de'
+UBA_FILES = [
+    '/Rigoletto/Home/GetClassificationFile/Export_Cas_Nummern',
+    '/Rigoletto/Home/GetClassificationFile/Export_EG_Nummern',
+    '/Rigoletto/Home/GetClassificationFile/Export_Einstufungsfussnoten',
+    '/Rigoletto/Home/GetClassificationFile/Export_Fussnoten',
+    '/Rigoletto/Home/GetClassificationFile/Export_Stofftabelle',
+    '/Rigoletto/Home/GetClassificationFile/Export_Synonyme',
+    '/Rigoletto/Home/GetClassificationFile/Export_Tabelle',
+]
 
 
 def need_download(data_dir='.', max_data_age=MAX_DATA_AGE):
@@ -63,15 +67,17 @@ def download_and_extract_data(tmp_dir=None):
     """
     if tmp_dir is None:
         tmp_dir = TemporaryDirectory(suffix='-uba', prefix='tmp-')
-    zip_path = os.path.join(tmp_dir.name, ZIP_FILE)
-    req = requests.get(UBA_URL)
-    req.raise_for_status()
-    with open(zip_path, 'wb') as fp:
-        fp.write(req.content)
-    backup = os.path.join(os.path.expanduser('~'), 'uba.zip')
-    shutil.copy(zip_path, backup)
-    with ZipFile(zip_path) as zf:
-        zf.extractall(tmp_dir.name)
+    for file in UBA_FILES:
+        url = '{}{}'.format(UBA_URL, file)
+        filename = '{}.csv'.format(file.split('/')[-1])
+        req = requests.get(url)
+        req.raise_for_status()
+        with open(os.path.join(tmp_dir.name, filename), 'wb') as fp:
+            fp.write(req.content)
+    backup = os.path.join(os.path.expanduser('~'), '_uba_tmp')
+    if os.path.exists(backup):
+        shutil.rmtree(backup)
+    shutil.copytree(tmp_dir.name, backup)
     return tmp_dir
 
 
@@ -134,7 +140,7 @@ def _collect_data(tmp_dir):
     data = {}
     num = 0
     fname = os.path.join(tmp_dir.name, 'Export_Cas_Nummern.csv')
-    with open(fname, encoding='latin1') as fp:
+    with open(fname, encoding='utf-8-sig') as fp:
         try:
             reader = DictReader(fp, delimiter='|')
             for row in reader:
@@ -148,7 +154,7 @@ def _collect_data(tmp_dir):
                     data[num] = {}
                 data[num]['cas'] = ''
     fname = os.path.join(tmp_dir.name, 'Export_EG_Nummern.csv')
-    with open(fname, encoding='latin1') as fp:
+    with open(fname, encoding='utf-8-sig') as fp:
         try:
             reader = DictReader(fp, delimiter='|')
             for row in reader:
@@ -162,7 +168,7 @@ def _collect_data(tmp_dir):
                     data[num] = {}
                 data[num]['einecs'] = ''
     fname = os.path.join(tmp_dir.name, 'Export_Stofftabelle.csv')
-    with open(fname, encoding='latin1') as fp:
+    with open(fname, encoding='utf-8-sig') as fp:
         try:
             reader = DictReader(fp, delimiter='|')
             for row in reader:
@@ -185,7 +191,7 @@ def _collect_data(tmp_dir):
                 data[num]['name'] = ''
                 data[num]['wgk'] = None
     fname = os.path.join(tmp_dir.name, 'Export_Synonyme.csv')
-    with open(fname, encoding='latin1') as fp:
+    with open(fname, encoding='utf-8-sig') as fp:
         try:
             reader = DictReader(fp, delimiter='|')
             for row in reader:
