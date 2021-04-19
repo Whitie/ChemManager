@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 17:23+0100\n"
+"POT-Creation-Date: 2021-04-19 11:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,287 +18,240 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: operating_instruction_creator/forms.py:19
+#: chemman/operating_instruction_creator/forms.py:19
 msgid "Department 1"
 msgstr "Bereich 1"
 
-#: operating_instruction_creator/forms.py:22
+#: chemman/operating_instruction_creator/forms.py:22
 msgid "Department 2"
 msgstr "Bereich 2"
 
-#: operating_instruction_creator/forms.py:26
-#: operating_instruction_creator/models.py:89
+#: chemman/operating_instruction_creator/forms.py:26
+#: chemman/operating_instruction_creator/models.py:89
 msgid "Signature"
 msgstr "Unterschrift"
 
-#: operating_instruction_creator/forms.py:30
-#: operating_instruction_creator/forms.py:43
+#: chemman/operating_instruction_creator/forms.py:30
+#: chemman/operating_instruction_creator/forms.py:43
 msgid "Pictograms"
 msgstr "Piktogramme"
 
-#: operating_instruction_creator/forms.py:35
-#: operating_instruction_creator/models.py:93
-#: operating_instruction_creator/templates/oic/edit.html:58
+#: chemman/operating_instruction_creator/forms.py:35
+#: chemman/operating_instruction_creator/models.py:93
 msgid "Hazards for people and the environment"
 msgstr "Gefahren für Mensch und Umwelt"
 
-#: operating_instruction_creator/forms.py:39
-#: operating_instruction_creator/models.py:96
-#: operating_instruction_creator/templates/oic/edit.html:69
+#: chemman/operating_instruction_creator/forms.py:39
+#: chemman/operating_instruction_creator/models.py:96
 msgid "Protective measures and rules of conduct"
 msgstr "Schutzmaßnahmen und Verhaltensregeln"
 
-#: operating_instruction_creator/forms.py:45
-#: operating_instruction_creator/models.py:101
+#: chemman/operating_instruction_creator/forms.py:45
+#: chemman/operating_instruction_creator/models.py:101
 msgid "Eye protection"
 msgstr "Augenschutz"
 
-#: operating_instruction_creator/forms.py:47
-#: operating_instruction_creator/models.py:102
+#: chemman/operating_instruction_creator/forms.py:47
+#: chemman/operating_instruction_creator/models.py:102
 msgid "Hand protection"
 msgstr "Handschutz"
 
-#: operating_instruction_creator/forms.py:50
-#: operating_instruction_creator/models.py:104
-#: operating_instruction_creator/templates/oic/edit.html:82
+#: chemman/operating_instruction_creator/forms.py:50
+#: chemman/operating_instruction_creator/models.py:104
 msgid "Conduct in case of danger"
 msgstr "Verhalten im Gefahrfall"
 
-#: operating_instruction_creator/forms.py:53
+#: chemman/operating_instruction_creator/forms.py:53
 msgid "Show green cross"
 msgstr "Weißes Kreuz anzeigen"
 
-#: operating_instruction_creator/forms.py:56
-#: operating_instruction_creator/models.py:107
-#: operating_instruction_creator/templates/oic/edit.html:93
+#: chemman/operating_instruction_creator/forms.py:56
+#: chemman/operating_instruction_creator/models.py:107
 msgid "First aid"
 msgstr "Erste Hilfe"
 
-#: operating_instruction_creator/forms.py:59
-#: operating_instruction_creator/models.py:108
+#: chemman/operating_instruction_creator/forms.py:59
+#: chemman/operating_instruction_creator/models.py:108
 msgid "After skin contact"
 msgstr "Nach Hautkontakt"
 
-#: operating_instruction_creator/forms.py:62
-#: operating_instruction_creator/models.py:110
+#: chemman/operating_instruction_creator/forms.py:62
+#: chemman/operating_instruction_creator/models.py:110
 msgid "After eye contact"
 msgstr "Nach Augenkontakt"
 
-#: operating_instruction_creator/forms.py:65
-#: operating_instruction_creator/models.py:111
+#: chemman/operating_instruction_creator/forms.py:65
+#: chemman/operating_instruction_creator/models.py:111
 msgid "After breathe in"
 msgstr "Nach Einatmen"
 
-#: operating_instruction_creator/forms.py:68
-#: operating_instruction_creator/models.py:113
+#: chemman/operating_instruction_creator/forms.py:68
+#: chemman/operating_instruction_creator/models.py:113
 msgid "After swallow"
 msgstr "Nach Verschlucken"
 
-#: operating_instruction_creator/forms.py:71
-#: operating_instruction_creator/models.py:114
+#: chemman/operating_instruction_creator/forms.py:71
+#: chemman/operating_instruction_creator/models.py:114
 msgid "Proper disposal"
 msgstr "Sachgerechte Entsorgung"
 
-#: operating_instruction_creator/forms.py:74
-#: operating_instruction_creator/models.py:116
+#: chemman/operating_instruction_creator/forms.py:74
+#: chemman/operating_instruction_creator/models.py:116
 msgid "External help number"
 msgstr "Externe Notrufnummer"
 
-#: operating_instruction_creator/forms.py:77
-#: operating_instruction_creator/models.py:119
+#: chemman/operating_instruction_creator/forms.py:77
+#: chemman/operating_instruction_creator/models.py:119
 msgid "Internal help number"
 msgstr "Interne Notrufnummer"
 
-#: operating_instruction_creator/models.py:34
+#: chemman/operating_instruction_creator/models.py:34
 msgid "Name"
 msgstr "Name"
 
-#: operating_instruction_creator/models.py:40
+#: chemman/operating_instruction_creator/models.py:40
 msgid "Work Department"
 msgstr "Arbeitsbereich"
 
-#: operating_instruction_creator/models.py:41
-#: operating_instruction_creator/models.py:81
+#: chemman/operating_instruction_creator/models.py:41
+#: chemman/operating_instruction_creator/models.py:81
 msgid "Work Departments"
 msgstr "Arbeitsbereiche"
 
-#: operating_instruction_creator/models.py:46
-#: operating_instruction_creator/models.py:61
+#: chemman/operating_instruction_creator/models.py:46
+#: chemman/operating_instruction_creator/models.py:61
 msgid "Identifier"
 msgstr "ID"
 
-#: operating_instruction_creator/models.py:48
-#: operating_instruction_creator/models.py:63
+#: chemman/operating_instruction_creator/models.py:48
+#: chemman/operating_instruction_creator/models.py:63
 msgid "Description"
 msgstr "Beschreibung"
 
-#: operating_instruction_creator/models.py:55
+#: chemman/operating_instruction_creator/models.py:55
 msgid "Protection Pictogram"
 msgstr "Sicherheitszeichen"
 
-#: operating_instruction_creator/models.py:56
-#: operating_instruction_creator/models.py:99
+#: chemman/operating_instruction_creator/models.py:56
+#: chemman/operating_instruction_creator/models.py:99
 msgid "Protection Pictograms"
 msgstr "Sicherheitszeichen"
 
-#: operating_instruction_creator/models.py:70
+#: chemman/operating_instruction_creator/models.py:70
 msgid "First Aid Pictogram"
 msgstr "Erste Hilfe Symbol"
 
-#: operating_instruction_creator/models.py:71
+#: chemman/operating_instruction_creator/models.py:71
 msgid "First Aid Pictograms"
 msgstr "Erste Hilfe Symbole"
 
-#: operating_instruction_creator/models.py:77
-#: operating_instruction_creator/templates/oic/index.html:12
-#: operating_instruction_creator/templates/oic/index.html:46
+#: chemman/operating_instruction_creator/models.py:77
 msgid "Chemical"
 msgstr "Chemikalie"
 
-#: operating_instruction_creator/models.py:85
+#: chemman/operating_instruction_creator/models.py:85
 msgid "Responsible"
 msgstr "Verantwortlich"
 
-#: operating_instruction_creator/models.py:106
+#: chemman/operating_instruction_creator/models.py:106
 msgid "Green Cross"
 msgstr "Grünes Kreuz"
 
-#: operating_instruction_creator/models.py:121
+#: chemman/operating_instruction_creator/models.py:121
 msgid "Language"
 msgstr "Sprache"
 
-#: operating_instruction_creator/models.py:122
-#: operating_instruction_creator/models.py:123
+#: chemman/operating_instruction_creator/models.py:122
+#: chemman/operating_instruction_creator/models.py:123
 msgid "Created"
 msgstr "Erstellt"
 
-#: operating_instruction_creator/models.py:124
-#: operating_instruction_creator/templates/oic/index.html:7
-#: operating_instruction_creator/templates/oic/index.html:11
+#: chemman/operating_instruction_creator/models.py:124
 msgid "Released"
 msgstr "Veröffentlicht"
 
-#: operating_instruction_creator/models.py:132
+#: chemman/operating_instruction_creator/models.py:132
 msgid "Operating instruction draft"
 msgstr "Betriebsanweisung Entwurf"
 
-#: operating_instruction_creator/models.py:133
+#: chemman/operating_instruction_creator/models.py:133
 msgid "Operating instruction drafts"
 msgstr "Betriebsanweisung Entwürfe"
 
-#: operating_instruction_creator/models.py:136
+#: chemman/operating_instruction_creator/models.py:136
 msgid "Can create operating instructions"
 msgstr "Darf Betriebsanweisungen erstellen"
 
-#: operating_instruction_creator/models.py:137
+#: chemman/operating_instruction_creator/models.py:137
 msgid "Can release operating instructions"
 msgstr "Darf Betriebsanweisungen veröffentlichen"
 
-#: operating_instruction_creator/templates/oic/edit.html:30
-msgid "Edit Operating Instruction"
-msgstr "Betriebsanweisung bearbeiten"
-
-#: operating_instruction_creator/templates/oic/edit.html:37
-msgid "Head"
-msgstr "Kopf"
-
-#: operating_instruction_creator/templates/oic/edit.html:39
-#: operating_instruction_creator/templates/oic/edit.html:60
-#: operating_instruction_creator/templates/oic/edit.html:71
-#: operating_instruction_creator/templates/oic/edit.html:84
-#: operating_instruction_creator/templates/oic/edit.html:95
-#: operating_instruction_creator/templates/oic/edit.html:110
-msgid "Preview"
-msgstr "Vorschau"
-
-#: operating_instruction_creator/templates/oic/edit.html:45
-msgid "CAS:"
-msgstr ""
-
-#: operating_instruction_creator/templates/oic/edit.html:46
-msgid "State:"
-msgstr "Status:"
-
-#: operating_instruction_creator/templates/oic/edit.html:47
-msgid "Color:"
-msgstr "Farbe:"
-
-#: operating_instruction_creator/templates/oic/edit.html:48
-msgid "Odor:"
-msgstr "Geruch:"
-
-#: operating_instruction_creator/templates/oic/edit.html:49
-msgid "Creator:"
-msgstr "Ersteller:"
-
-#: operating_instruction_creator/templates/oic/edit.html:64
-#: operating_instruction_creator/templates/oic/edit.html:75
-#: operating_instruction_creator/templates/oic/edit.html:88
-#: operating_instruction_creator/templates/oic/edit.html:99
-#: operating_instruction_creator/templates/oic/edit.html:114
-msgid "Text"
-msgstr ""
-
-#: operating_instruction_creator/templates/oic/edit.html:108
-msgid "Disposal"
-msgstr "Entsorgung"
-
-#: operating_instruction_creator/templates/oic/edit.html:121
-msgid "Save"
-msgstr "Speichern"
-
-#: operating_instruction_creator/templates/oic/index.html:5
-#: operating_instruction_creator/views.py:21
+#: chemman/operating_instruction_creator/views.py:24
 msgid "Operating Instructions"
 msgstr "Betriebsanweisungen"
 
-#: operating_instruction_creator/templates/oic/index.html:13
-#: operating_instruction_creator/templates/oic/index.html:47
-msgid "Departments"
-msgstr "Bereiche"
-
-#: operating_instruction_creator/templates/oic/index.html:14
-#: operating_instruction_creator/templates/oic/index.html:48
-msgid "User"
-msgstr "Benutzer"
-
-#: operating_instruction_creator/templates/oic/index.html:15
-#: operating_instruction_creator/templates/oic/index.html:49
-msgid "Actions"
-msgstr "Aktionen"
-
-#: operating_instruction_creator/templates/oic/index.html:26
-msgid "Show"
-msgstr "Anzeigen"
-
-#: operating_instruction_creator/templates/oic/index.html:30
-msgid "Copy"
-msgstr "Kopieren"
-
-#: operating_instruction_creator/templates/oic/index.html:41
-msgid "Drafts"
-msgstr "Entwürfe"
-
-#: operating_instruction_creator/templates/oic/index.html:45
-msgid "Modified"
-msgstr "Bearbeitet"
-
-#: operating_instruction_creator/templates/oic/index.html:61
-msgid "Edit"
-msgstr "Bearbeiten"
-
-#: operating_instruction_creator/templates/oic/index.html:66
-msgid "Release"
-msgstr "Veröffentlichen"
-
-#: operating_instruction_creator/views.py:24
+#: chemman/operating_instruction_creator/views.py:27
 msgid "Op. Inst."
 msgstr "BA"
 
-#: operating_instruction_creator/views.py:25
+#: chemman/operating_instruction_creator/views.py:28
 msgid "New"
 msgstr "Neu"
 
-#: operating_instruction_creator/views.py:43
+#: chemman/operating_instruction_creator/views.py:46
 msgid "! ERROR !"
 msgstr "! FEHLER !"
+
+#~ msgid "Edit Operating Instruction"
+#~ msgstr "Betriebsanweisung bearbeiten"
+
+#~ msgid "Head"
+#~ msgstr "Kopf"
+
+#~ msgid "Preview"
+#~ msgstr "Vorschau"
+
+#~ msgid "State:"
+#~ msgstr "Status:"
+
+#~ msgid "Color:"
+#~ msgstr "Farbe:"
+
+#~ msgid "Odor:"
+#~ msgstr "Geruch:"
+
+#~ msgid "Creator:"
+#~ msgstr "Ersteller:"
+
+#~ msgid "Disposal"
+#~ msgstr "Entsorgung"
+
+#~ msgid "Save"
+#~ msgstr "Speichern"
+
+#~ msgid "Departments"
+#~ msgstr "Bereiche"
+
+#~ msgid "User"
+#~ msgstr "Benutzer"
+
+#~ msgid "Actions"
+#~ msgstr "Aktionen"
+
+#~ msgid "Show"
+#~ msgstr "Anzeigen"
+
+#~ msgid "Copy"
+#~ msgstr "Kopieren"
+
+#~ msgid "Drafts"
+#~ msgstr "Entwürfe"
+
+#~ msgid "Modified"
+#~ msgstr "Bearbeitet"
+
+#~ msgid "Edit"
+#~ msgstr "Bearbeiten"
+
+#~ msgid "Release"
+#~ msgstr "Veröffentlichen"

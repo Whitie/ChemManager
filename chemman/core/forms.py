@@ -307,7 +307,7 @@ class InitialDeliveryForm(forms.Form):
         input_formats=['%Y-%m-%d', '%y-%m-%d', '%d.%m.%Y', '%d.%m.%y']
     )
     supplier_ident = forms.CharField(max_length=20, required=False,
-                                     label=_('Suppliert ID'))
+                                     label=_('Supplier ID'))
     supplier_code = forms.CharField(max_length=100, required=False,
                                     label=_('Supplier CODE'))
     supplier_batch = forms.CharField(max_length=30, required=False,

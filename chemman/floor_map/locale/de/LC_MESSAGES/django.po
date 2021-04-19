@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 17:23+0100\n"
+"POT-Creation-Date: 2021-04-19 11:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,133 +18,112 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: floor_map/admin.py:33
+#: chemman/floor_map/admin.py:33
 msgid "Lockable"
 msgstr "Abschließbar"
 
-#: floor_map/forms.py:27 floor_map/models.py:36
-#: floor_map/templates/floor_map/edit_map.html:8
-#: floor_map/templates/floor_map/index.html:18
+#: chemman/floor_map/forms.py:27 chemman/floor_map/models.py:36
 msgid "Building"
 msgstr "Gebäude"
 
-#: floor_map/forms.py:31 floor_map/models.py:39
-#: floor_map/templates/floor_map/edit_map.html:10
-#: floor_map/templates/floor_map/index.html:10
-#: floor_map/templates/floor_map/index.html:20
+#: chemman/floor_map/forms.py:31 chemman/floor_map/models.py:39
 msgid "Level"
 msgstr "Stock"
 
-#: floor_map/models.py:40 floor_map/templates/floor_map/edit_map.html:12
-#: floor_map/templates/floor_map/edit_map.html:23
-#: floor_map/templates/floor_map/index.html:22
+#: chemman/floor_map/models.py:40
 msgid "Name"
 msgstr "Name"
 
-#: floor_map/models.py:41
+#: chemman/floor_map/models.py:41
 msgid "Map"
 msgstr "Karte"
 
-#: floor_map/models.py:57 floor_map/models.py:65
+#: chemman/floor_map/models.py:57 chemman/floor_map/models.py:65
 msgid "Floor"
 msgstr "Etage"
 
-#: floor_map/models.py:58
+#: chemman/floor_map/models.py:58
 msgid "Floors"
 msgstr "Etagen"
 
-#: floor_map/models.py:69
+#: chemman/floor_map/models.py:69
 msgid "Storage"
 msgstr "Lager"
 
-#: floor_map/models.py:72 floor_map/templates/floor_map/edit_map.html:24
+#: chemman/floor_map/models.py:72
 msgid "X"
 msgstr "X"
 
-#: floor_map/models.py:73 floor_map/templates/floor_map/edit_map.html:25
+#: chemman/floor_map/models.py:73
 msgid "Y"
 msgstr "Y"
 
-#: floor_map/models.py:87
+#: chemman/floor_map/models.py:87
 msgid "Floor Storage"
 msgstr "Etagenlager"
 
-#: floor_map/models.py:88
+#: chemman/floor_map/models.py:88
 msgid "Floor Storages"
 msgstr "Etagenlager"
 
-#: floor_map/templates/floor_map/edit_map.html:5
-#: floor_map/templates/floor_map/index.html:34 floor_map/views.py:56
-msgid "Edit Map"
-msgstr "Karte bearbeiten"
-
-#: floor_map/templates/floor_map/edit_map.html:14
-#: floor_map/templates/floor_map/index.html:24
-msgid "Usage"
-msgstr "Benutzung"
-
-#: floor_map/templates/floor_map/edit_map.html:15
-msgid "Click to see the name, drag to position"
-msgstr ""
-"Klicken um den Namen zu sehen, halten und verschieben um die Position zu "
-"verändern"
-
-#: floor_map/templates/floor_map/edit_map.html:19
-msgid "Storages"
-msgstr "Lager"
-
-#: floor_map/templates/floor_map/edit_map.html:26
-msgid "Actions"
-msgstr "Aktionen"
-
-#: floor_map/templates/floor_map/edit_map.html:43
-msgid "Add Marker"
-msgstr "Marker hinzufügen"
-
-#: floor_map/templates/floor_map/edit_map.html:48
-msgid "Save"
-msgstr "Speichern"
-
-#: floor_map/templates/floor_map/edit_map.html:50
-msgid "Remove Marker"
-msgstr "Marker entfernen"
-
-#: floor_map/templates/floor_map/edit_map.html:59
-msgid "No storage found on this floor!"
-msgstr "Kein Lager auf dieser Etage gefunden!"
-
-#: floor_map/templates/floor_map/edit_map.html:67
-msgid "Back"
-msgstr "Zurück"
-
-#: floor_map/templates/floor_map/index.html:5
-msgid "Storage Maps"
-msgstr "Lagerkarten"
-
-#: floor_map/templates/floor_map/index.html:12
-msgid "Show"
-msgstr "Anzeigen"
-
-#: floor_map/templates/floor_map/index.html:25
-msgid "Click to see the name, doubleclick to go to the inventory"
-msgstr "Klicken um den Namen zu sehen, doppelklicken um zum Inventar zu kommen"
-
-#: floor_map/templates/floor_map/index.html:31
-msgid "Add floors and levels"
-msgstr "Etagen hinzufügen"
-
-#: floor_map/views.py:14
+#: chemman/floor_map/views.py:14
 msgid "Storage Map"
 msgstr "Lagerkarte"
 
-#: floor_map/views.py:41
+#: chemman/floor_map/views.py:41
 msgid "Floor Map"
 msgstr "Etagenkarte"
 
-#: floor_map/views.py:67
+#: chemman/floor_map/views.py:56
+msgid "Edit Map"
+msgstr "Karte bearbeiten"
+
+#: chemman/floor_map/views.py:67
 msgid "<b>Position saved</b>"
 msgstr "<b>Position gespeichert</b>"
 
-#: floor_map/views.py:69
+#: chemman/floor_map/views.py:69
 msgid "Error: {}"
 msgstr "Fehler: {}"
+
+#~ msgid "Usage"
+#~ msgstr "Benutzung"
+
+#~ msgid "Click to see the name, drag to position"
+#~ msgstr ""
+#~ "Klicken um den Namen zu sehen, halten und verschieben um die Position zu "
+#~ "verändern"
+
+#~ msgid "Storages"
+#~ msgstr "Lager"
+
+#~ msgid "Actions"
+#~ msgstr "Aktionen"
+
+#~ msgid "Add Marker"
+#~ msgstr "Marker hinzufügen"
+
+#~ msgid "Save"
+#~ msgstr "Speichern"
+
+#~ msgid "Remove Marker"
+#~ msgstr "Marker entfernen"
+
+#~ msgid "No storage found on this floor!"
+#~ msgstr "Kein Lager auf dieser Etage gefunden!"
+
+#~ msgid "Back"
+#~ msgstr "Zurück"
+
+#~ msgid "Storage Maps"
+#~ msgstr "Lagerkarten"
+
+#~ msgid "Show"
+#~ msgstr "Anzeigen"
+
+#~ msgid "Click to see the name, doubleclick to go to the inventory"
+#~ msgstr ""
+#~ "Klicken um den Namen zu sehen, doppelklicken um zum Inventar zu kommen"
+
+#~ msgid "Add floors and levels"
+#~ msgstr "Etagen hinzufügen"
