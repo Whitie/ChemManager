@@ -269,44 +269,53 @@ class ToxActionForm(forms.Form):
 class InitialDeliveryForm(forms.Form):
     chemical = forms.TypedChoiceField(
         coerce=get_chemical, choices=get_chemicals, empty_value=0,
-        required=False
+        required=False, label=_('Chemical')
     )
-    quality = forms.ChoiceField(choices=QUALITY_CHOICES)
+    quality = forms.ChoiceField(choices=QUALITY_CHOICES, label=_('Quality'))
     name_extra = forms.CharField(
-        required=False, max_length=100,
+        required=False, max_length=100, label=_('Name extra'),
         help_text=_('E. g. supplier specific name or label.')
     )
     place = PlaceChoiceField(
+        label=_('Place'),
         queryset=StoragePlace.objects.select_related().all(
             ).order_by('storage__department__name', 'storage__name', 'name')
     )
-    content = forms.DecimalField(max_digits=7, decimal_places=2)
-    unit = forms.ChoiceField(choices=UNIT_CHOICES)
-    composition = forms.ChoiceField(choices=COMPOSITION_CHOICES)
-    container_material = forms.ChoiceField(choices=CONTAINER_MATERIAL_CHOICES,
-                                           required=False)
+    content = forms.DecimalField(max_digits=7, decimal_places=2,
+                                 label=_('Content'))
+    unit = forms.ChoiceField(choices=UNIT_CHOICES, label=_('Unit'))
+    composition = forms.ChoiceField(choices=COMPOSITION_CHOICES,
+                                    label=_('Composition'))
+    container_material = forms.ChoiceField(
+        choices=CONTAINER_MATERIAL_CHOICES, required=False,
+        label=_('Container Material')
+    )
     best_before = forms.DateField(
-        required=False,
+        required=False, label=_('Best before'),
         input_formats=['%Y-%m-%d', '%y-%m-%d', '%d.%m.%Y', '%d.%m.%y']
     )
     company = forms.ModelChoiceField(
-        queryset=Company.objects.all(), required=False
+        queryset=Company.objects.all(), required=False, label=_('Company')
     )
     msds = forms.FileField(
+        label=_('MSDS'),
         required=False, help_text=_('Leave empty, to get the one from '
                                     'the choosen chemical.')
     )
     published = forms.DateField(
-        required=False,
+        required=False, label=_('Published'),
         input_formats=['%Y-%m-%d', '%y-%m-%d', '%d.%m.%Y', '%d.%m.%y']
     )
-    supplier_ident = forms.CharField(max_length=20, required=False)
-    supplier_code = forms.CharField(max_length=100, required=False)
-    supplier_batch = forms.CharField(max_length=30, required=False)
+    supplier_ident = forms.CharField(max_length=20, required=False,
+                                     label=_('Suppliert ID'))
+    supplier_code = forms.CharField(max_length=100, required=False,
+                                    label=_('Supplier CODE'))
+    supplier_batch = forms.CharField(max_length=30, required=False,
+                                     label=_('Supplier BATCH'))
     brutto_mass = forms.DecimalField(max_digits=7, decimal_places=2,
-                                     required=False)
+                                     required=False, label=_('Brutto mass'))
     brutto_mass_unit = forms.ChoiceField(choices=MASS_CHOICES,
-                                         required=False)
+                                         required=False, label=_('Unit'))
 
     def __init__(self, *args, **kw):
         super(InitialDeliveryForm, self).__init__(*args, **kw)
