@@ -137,8 +137,8 @@ def get_ref_msds(chem):
             )
         else:
             return None
-    except:
-        pass
+    except Exception as err:
+        print(err)
 
 
 def store_chemical(chem, data):
@@ -266,6 +266,9 @@ def _calculate_difference(data):
     before = units.make_unit(data['old_value'], data['old_unit'])
     current = units.make_unit(data['value'], data['unit'])
     diff = current - before
+    # Tolerate big positive diffs. Remove check, if system is up to date
+    if current > before:
+        return diff
     inv = data['package'].get_inventory()
     if abs(diff) > inv:
         msg = ugettext('Inventory difference greater than saved stock: '
