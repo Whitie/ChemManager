@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-27 17:23+0100\n"
+"POT-Creation-Date: 2021-04-19 11:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,10 +18,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: chemman/settings.py:184
+#: chemman/chemman/settings.py:189
 msgid "German"
 msgstr "Deutsch"
 
-#: chemman/settings.py:185
+#: chemman/chemman/settings.py:190
 msgid "English"
 msgstr "Englisch"
