@@ -55,6 +55,7 @@ QUALITY_CHOICES = (
     ('selfmade', _('Self made')),
     ('technical', _('technically')),
     ('synthesis', _('for synthesis')),
+    ('purest', _('purest')),
     ('pheur', _('Ph. Eur.')),
     ('analysis', _('for analysis')),
     ('special', _('special')),
