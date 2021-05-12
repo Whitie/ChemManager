@@ -268,6 +268,7 @@ def _calculate_difference(data):
     diff = current - before
     # Tolerate big positive diffs. Remove check, if system is up to date
     if current > before:
+        diff.value = -diff.value
         return diff
     inv = data['package'].get_inventory()
     if abs(diff) > inv:

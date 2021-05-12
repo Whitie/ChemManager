@@ -10,7 +10,7 @@ from django.contrib.messages import constants as messages
 from django.utils.translation import ugettext_lazy as _
 from django_auth_ldap.config import LDAPSearch
 
-from core.units import Mass, Volume
+from chemman.core.units import Mass, Volume
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -165,16 +165,20 @@ CACHES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': ('django.contrib.auth.password_validation.'
+                 'UserAttributeSimilarityValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': ('django.contrib.auth.password_validation.'
+                 'MinimumLengthValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': ('django.contrib.auth.password_validation.'
+                 'CommonPasswordValidator'),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': ('django.contrib.auth.password_validation.'
+                 'NumericPasswordValidator'),
     },
 ]
 
@@ -182,7 +186,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-#LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'de-de'
 
 LANGUAGES = [
@@ -203,6 +207,7 @@ LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'core', 'locale'),
     os.path.join(BASE_DIR, 'floor_map', 'locale'),
     os.path.join(BASE_DIR, 'msds_collector', 'locale'),
+    os.path.join(BASE_DIR, 'operating_instruction_creator', 'locale'),
 ]
 
 # Static files (CSS, JavaScript, Images)
