@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import csv
 import os
 
 from collections import OrderedDict
@@ -497,6 +498,33 @@ def print_package_ids(req):
     return render(req, 'core/storage/print_packages.html', ctx)
 
 
+@permission_required('core.can_store')
+def download_labels_as_csv(req):
+    package_ids = req.session.get('new_packages', [])
+    pid = int(req.GET.get('pid', 0))
+    if pid:
+        package_ids = [pid]
+    if not package_ids:
+        messages.error(req, _('No packages found.'))
+        return redirect('core:index')
+    packages = StoredPackage.objects.select_related().filter(
+        id__in=package_ids
+    ).order_by('stored_chemical__chemical__name')
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="labels.csv"'
+    writer = csv.writer(response, dialect='excel')
+    writer.writerow(['ID', 'Name', 'Content'])
+    for package in packages:
+        name = '{} ({})'.format(
+            package.stored_chemical.chemical.display_name,
+            package.stored_chemical.get_quality_display()
+        )
+        if package.stored_chemical.name_extra:
+            name = '{}, {}'.format(name, package.stored_chemical.name_extra)
+        writer.writerow([package.package_id, name, str(package.content_obj)])
+    return response
+
+
 @permission_required('core.set_limits')
 def set_stocklimits(req, storage_id):
     storage = Storage.objects.select_related().get(pk=storage_id)
@@ -678,7 +706,7 @@ def api_wrong_brutto(req):
     try:
         user = User.objects.get(pk=int(req.GET.get('uid')))
         package = StoredPackage.objects.get(pk=int(req.GET.get('pid')))
-        mass = units.Mass(req.GET.get('mass'), req.GET.get('unit'))
+        # mass = units.Mass(req.GET.get('mass'), req.GET.get('unit'))
         info_to = [
             x.email for x in
             User.objects.filter(username__in=settings.INFO_WRONG_BRUTTO)

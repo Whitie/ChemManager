@@ -83,6 +83,9 @@ urlpatterns += [
             views.package_qrcode, name='qr-package'),
     path('qr/print/packages/', views.print_package_ids,
          name='qr-print-packages'),
+    # Download package data as csv for labelprinter
+    path('csv/packages/download/', views.download_labels_as_csv,
+         name='download-packages-csv'),
 ]
 
 # Storage

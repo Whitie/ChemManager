@@ -1,6 +1,9 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
+<a href="{{ url('core:download-packages-csv') }}" class="uk-button uk-button-success">
+    {% trans %}Download labels (Excel){% endtrans %}
+</a>
 <form class="uk-form">
     <div class="uk-form-controls uk-form-controls-text">
         <input type="hidden" name="pid" value="{{ pid|default(0, true) }}">
@@ -31,9 +34,8 @@
             {% endif %}
             <small>
                 {{ p.package_id }} | {{ p.content|floatformat(2) }} {{ p.get_unit_display() }}<br>
-                {{ p.place.storage.department }} |
-                {{ p.place.storage.name }} | {{ p.place }}<br>
-                {{ p.stored_chemical.chemical.display_name }}
+                {{ p.place.storage.department }} | {{ p.stored_chemical.chemical.display_name }}<br>
+                {{ p.stored_chemical.get_quality_display() }}{% if p.stored_chemical.name_extra %} | {{ p.stored_chemical.name_extra }}{% endif %}
             </small>
         </div>
     </li>

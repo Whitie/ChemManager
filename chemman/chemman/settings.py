@@ -10,7 +10,7 @@ from django.contrib.messages import constants as messages
 from django.utils.translation import ugettext_lazy as _
 from django_auth_ldap.config import LDAPSearch
 
-from chemman.core.units import Mass, Volume
+from core.units import Mass, Volume
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
