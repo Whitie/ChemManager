@@ -411,9 +411,9 @@ All chemicals are potentially dangerous. They are therefore only be handled by s
 {% endif %}
 <ul class="uk-list uk-list-striped">
     {% for oi in chem.operating_instructions.all().order_by('department__name') %}
-    <li title="{{ oi.notes }}">
+    <li>
         <a href="{{ oi.document.url }}" target="_blank">
-            {{ oi.department.name }}
+            {{ oi.department.name }}{% if oi.notes %}, {{ oi.notes }}{% endif %}
             ({{ oi.last_updated|date('SHORT_DATE_FORMAT') }})
         </a>
         <i class="uk-icon-external-link"></i>
