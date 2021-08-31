@@ -254,7 +254,17 @@ class StoredChemical(models.Model):
             return units.Mass(0, 'g')
         start = stocks[0]
         for s in stocks[1:]:
-            start += s
+            try:
+                start += s
+            except AttributeError:
+                if units.is_mass(start.unit):
+                    conv = units.volume_to_mass
+                    unit = 'g'
+                else:
+                    conv = units.mass_to_volume
+                    unit = 'mL'
+                value = conv(s.value, s.unit, self.chemical)
+                start += units.make_unit(value, unit)
         return start
 
     def get_inventory_for_storage(self, storage):
