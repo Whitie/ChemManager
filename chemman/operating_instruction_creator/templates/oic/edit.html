@@ -29,7 +29,14 @@
 <h1 class="uk-text-center">
     {% trans %}Edit Operating Instruction{% endtrans %}
 </h1>
-<h2 class="uk-text-center">{{ oi or chem.display_name }}</h2>
+<h2 class="uk-text-center">
+    {{ oi or chem.display_name }}
+    {% if perms.core.manage %}
+    <a href="{{ url('admin:core_chemical_change', chem.id) }}" class="uk-button uk-button-small" title="{% trans %}Edit chemical{% endtrans %}">
+        <i class="uk-icon-edit"></i>
+    </a>
+    {% endif %}
+</h2>
 <form class="uk-form uk-form-horizontal" method="post" action="{% if edit %}{{ url('oic:edit', oi.id) }}{% else %}{{ url('oic:new', chem.id) }}{% endif %}">
     {% csrf_token %}
     <fieldset data-uk-margin>
