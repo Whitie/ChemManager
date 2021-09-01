@@ -77,7 +77,7 @@ MANUFACTURER_res = (
     re.compile(r'Bezeichnung des Unternehmens\s*?(.+)\n', re.I),
     re.compile(r'Carl\s+?(Roth)\s+?GmbH', re.I),
 )
-PC_COMPOUND_re = re.compile(r'.+?/compound/(\d+)/?'.format(PC_URL), re.I)
+PC_COMPOUND_re = re.compile(r'.+/compound/(\d+)/?', re.I)
 
 
 def _run_tesseract(pdf_file):
