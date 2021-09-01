@@ -1,0 +1,13 @@
+[Unit]
+Description=Run daily tasks for ChemManager
+
+[Service]
+Type=oneshot
+User=bbz
+Group=users
+ExecStart=/home/bbz/environments/ChemManager-env/bin/python /home/bbz/environments/ChemManager-env/ChemManager/chemman/manage.py cm_daily
+ExecStart=/home/bbz/environments/ChemManager-env/bin/python /home/bbz/environments/ChemManager-env/ChemManager/chemman/manage.py checkcmr
+
+[Install]
+WantedBy=multi-user.target
+

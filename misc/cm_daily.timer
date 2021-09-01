@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily tasks for ChemManager
+
+[Timer]
+OnCalendar=3:30
+Unit=cm_daily.service
+
+[Install]
+WantedBy=basic.target
