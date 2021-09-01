@@ -126,21 +126,12 @@ def storage_classes_info(req):
 
 def info_stored_chemicals(req):
     chems = []
-    for c in StoredChemical.objects.select_related().all(
-      ).order_by('chemical__name'):
-        inv = c.get_inventory()
-        if units.is_mass(inv.unit):
-            ref = settings.SHOW_THRESHOLDS['mass']
-        else:
-            ref = settings.SHOW_THRESHOLDS['vol']
-        if inv > ref:
-            c.inv = inv
-            places = [x.place.storage for x in
-                      c.packages.filter(empty=False)]
-            c.places_count = len(places)
-            c.places = set(places)
-            chems.append(c)
-    ctx = dict(title=_('Stored Chemicals'), chems=chems,
+    ids = []
+    for chem in Chemical.objects.select_related().all().order_by('name'):
+        if chem.has_inventory:
+            chems.append(chem)
+            ids.append(str(chem.id))
+    ctx = dict(title=_('Stored Chemicals'), chems=chems, ids=ids,
                thresholds=settings.SHOW_THRESHOLDS)
     return render(req, 'core/storage/stored_chemicals.html', ctx)
 

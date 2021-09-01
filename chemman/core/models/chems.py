@@ -204,6 +204,10 @@ class Chemical(models.Model):
     def has_oi(self):
         return bool(self.operating_instructions.all().count())
 
+    @property
+    def has_inventory(self):
+        return bool(self.storage.all().count())
+
     def update_wiki_link(self):
         url = settings.WIKI_LINK.format(name=self.display_name)
         r = requests.get(url)

@@ -13,7 +13,7 @@ from django.utils.translation import ugettext, ugettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 
-from .. import utils
+from .. import units, utils
 from ..filters import list_url
 from ..forms import ListGeneratorForm, ProfileForm, SearchPackageForm
 from ..models import (
@@ -296,13 +296,27 @@ def api_inventory_chemical(req, chem_id):
     chem = Chemical.objects.select_related().get(pk=chem_id)
     packages = get_packages_for_chemical(chem)
     if not packages:
-        return render_json(req, {'value': '0.0', 'unit': 'g', 'url': '#'})
+        return render_json(
+            req, {'value': '0.0', 'unit': 'g', 'url': '#', 'package_count': 0}
+        )
     tmp = packages[0].get_inventory()
     for package in packages[1:]:
-        tmp = tmp + package.get_inventory()
+        try:
+            tmp += package.get_inventory()
+        except AttributeError:
+            inv = package.get_inventory()
+            if units.is_mass(tmp.unit):
+                conv = units.volume_to_mass
+                unit = 'g'
+            else:
+                conv = units.mass_to_volume
+                unit = 'mL'
+            value = conv(inv.value, inv.unit, chem)
+            tmp += units.make_unit(value, unit)
     result = dict(
         value='{:.2f}'.format(tmp.value), unit=tmp.unit,
-        url=reverse('core:chem-inventory', kwargs={'chem_id': chem.id})
+        url=reverse('core:chem-inventory', kwargs={'chem_id': chem.id}),
+        package_count=len(packages)
     )
     return render_json(req, result)
 

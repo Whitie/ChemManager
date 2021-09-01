@@ -11,12 +11,7 @@
         <tr>
             <th>{% trans %}No.{% endtrans %}</th>
             <th>{% trans %}Name{% endtrans %}</th>
-            <th>{% trans %}Quality{% endtrans %}</th>
-            <th>{% trans %}Supplier{% endtrans %}</th>
             <th>{% trans %}MSDS{% endtrans %}</th>
-            {% if perms.core.can_review %}
-            <th>{% trans %}up to date{% endtrans %}</th>
-            {% endif %}
             <th>{% trans %}Package Count{% endtrans %}</th>
             <th>{% trans %}Current Stock{% endtrans %}</th>
             <th>{% trans %}OI{% endtrans %}</th>
@@ -26,12 +21,7 @@
         <tr>
             <th>{% trans %}No.{% endtrans %}</th>
             <th>{% trans %}Name{% endtrans %}</th>
-            <th>{% trans %}Quality{% endtrans %}</th>
-            <th>{% trans %}Supplier{% endtrans %}</th>
             <th>{% trans %}MSDS{% endtrans %}</th>
-            {% if perms.core.can_review %}
-            <th>{% trans %}up to date{% endtrans %}</th>
-            {% endif %}
             <th>{% trans %}Package Count{% endtrans %}</th>
             <th>{% trans %}Current Stock{% endtrans %}</th>
             <th>{% trans %}OI{% endtrans %}</th>
@@ -42,29 +32,18 @@
         <tr>
             <td>{{ loop.index }}</td>
             <td>
-                <a href="{{ url('core:detail-by-id', cid=c.chemical.id) }}">
-                    {{ c.chemical.display_name }}
-                    {% if c.name_extra %}({{ c.name_extra }}){% endif %}
+                <a href="{{ url('core:detail-by-id', cid=c.id) }}">
+                    {{ c.display_name }}
                 </a>
             </td>
-            <td>{{ c.get_quality_display() }}</td>
-            <td>{{ c.company|default('-') }}</td>
             <td>
-                {% if c.msds %}<a href="{{ c.msds.document.url }}" target="_blank">{% trans %}MSDS{% endtrans %}</a> <i class="uk-icon-external-link"></i>{% else %}-{% endif %}
+                {% if c.identifiers.imported_from %}<a href="{{ c.identifiers.imported_from.url }}" target="_blank">{% trans %}MSDS{% endtrans %}</a> <i class="uk-icon-external-link"></i>{% else %}-{% endif %}
             </td>
-            {% if perms.core.can_review %}
-            <td{% if c.msds %} title="{% trans %}Last updated{% endtrans %}: {{ c.msds.last_updated|date('SHORT_DATE_FORMAT') }}"{% endif %}>
-                {% if c.msds %}
-                {% if c.msds.review_required %}<div class="uk-badge uk-badge-danger">{% trans %}NO{% endtrans %}</div>
-                {% else %}<div class="uk-badge uk-badge-success">{% trans %}YES{% endtrans %}</div>{% endif %}
-                {% else %}-{% endif %}
+            <td class="uk-text-center" id="pc_{{ c.id }}">
             </td>
-            {% endif %}
-            <td class="uk-text-center"{% if c.places %} title="{{ c.places|join(' | ') }}"{% endif %}>
-                {{ c.places_count }}
+            <td class="uk-text-right" id="inv_{{ c.id }}">
             </td>
-            <td class="uk-text-right">{{ c.inv }}</td>
-            <td>{{ macros.operating_instruction(c.chemical) }}</td>
+            <td>{{ macros.operating_instruction(c) }}</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -73,8 +52,31 @@
 
 {% block js %}
 <script>
+var cache = {};
+function update_inventory(chem_id) {
+    var url = '{{ url("core:api-inventory-chemical", 0) }}'.replace('0', chem_id);
+    if (chem_id in cache) {
+        res = cache[chem_id];
+        $('#pc_'+chem_id).text(res['package_count']);
+        $('#inv_'+chem_id).html('<a href="'+res['url']+'">'+res['value']+res['unit']+'</a>');
+    } else {
+        $.get(url).done(function(res){
+            cache[chem_id] = res;
+            $('#pc_'+chem_id).text(res['package_count']);
+            $('#inv_'+chem_id).html('<a href="'+res['url']+'">'+res['value']+res['unit']+'</a>');
+        });
+    }
+}
+function update_all() {
+    var ids = {{ ids|tojson }};
+    for (i=0; i<ids.length; i++) {
+        update_inventory(ids[i]);
+    }
+}
 $(document).ready(function() {
     make_datatable($('#dtable'));
+    $('#dtable').on('draw.dt', update_all);
+    update_all();
 })
 </script>
 {% endblock %}
