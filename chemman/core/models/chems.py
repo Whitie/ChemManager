@@ -205,12 +205,14 @@ class Chemical(models.Model):
         return bool(self.operating_instructions.all().count())
 
     def update_wiki_link(self):
-        url = settings.WIKI_LINK.format(name=self.name)
+        url = settings.WIKI_LINK.format(name=self.display_name)
         r = requests.get(url)
         if r.status_code != 404:
             self.wiki_link = url
         else:
-            self.wiki_link = settings.WIKI_SEARCH_LINK.format(name=self.name)
+            self.wiki_link = settings.WIKI_SEARCH_LINK.format(
+                name=self.display_name
+            )
 
     class Meta:
         verbose_name = _('Chemical')

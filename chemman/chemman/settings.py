@@ -225,8 +225,8 @@ MEDIA_URL = '/media/'
 SESSION_COOKIE_NAME = 'cm_sid'
 
 # Customize for your language
-WIKI_LINK = 'http://de.wikipedia.org/wiki/{name}'
-WIKI_SEARCH_LINK = 'http://de.wikipedia.org/wiki/Spezial:Suche/{name}'
+WIKI_LINK = 'https://de.wikipedia.org/wiki/{name}'
+WIKI_SEARCH_LINK = 'https://de.wikipedia.org/wiki/Spezial:Suche/{name}'
 
 MSDS_MAXAGE_DAYS = 730
 INVENTORY_MAX_AGE = 365
