@@ -6,7 +6,17 @@ from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from .models import *
+from .models import (
+    Employee, Department, Identifiers, ContactPerson, Chemical, Synonym,
+    PhysicalData, GHSPictogram, Company, Paragraph, Building, Storage,
+    StoragePlace, StoredChemical, StoredPackage, PackageUsage, Chapter,
+    ChapterComment, StockLimit, LegalLimit, InventoryDifference, Order,
+    OperatingInstruction, Bookmark, Group, DisposalInstructions,
+    MaterialSafetyDataSheet, JournalEntry, JournalType, HazardStatement,
+    EUHazardStatement, PrecautionaryStatement, StorageClass,
+    StorageRestriction, Handbook, HandbookImage, Consume, Room, Barcode,
+    Notification
+)
 
 
 admin.site.unregister(User)
@@ -124,7 +134,7 @@ class GHSPictogramAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
     def get_image(self, obj):
-        return mark_safe('<img src="{}" alt="" width="30">'.format(
+        return mark_safe('<img src="{}" alt="{}" width="30">'.format(
             obj.image.url, str(obj)))
 
     get_image.short_description = _('Pictogram')

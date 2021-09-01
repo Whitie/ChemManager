@@ -8,7 +8,6 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.utils import six
 from django.utils.translation import ugettext_lazy as _
-from django.views.decorators.csrf import csrf_exempt
 
 from ..manage_forms import (
     BuildingForm, DepartmentForm, NotificationForm, StorageForm,
@@ -17,7 +16,7 @@ from ..manage_forms import (
 from ..models.base import Department, Notification
 from ..models.storage import Building, Room, Storage, StoragePlace
 from ..system_info import Hardware, Software
-from ..utils import render, render_json
+from ..utils import render
 
 
 CUSTOM_PERMISSIONS = (

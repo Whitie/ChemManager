@@ -9,4 +9,4 @@ class CoreConfig(AppConfig):
     verbose_name = _('Core')
 
     def ready(self):
-        import core.signal_handlers
+        import core.signal_handlers  # noqa: F401

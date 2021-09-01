@@ -323,9 +323,11 @@ def api_inventory_chemical(req, chem_id):
 
 def api_get_lists(req):
     lists = []
-    for l in ListCache.objects.all().order_by('-added')[10:]:
-        d = dict(name=l.name, url=list_url(l.json_query, l.name),
-                 added=l.added.strftime('%d.%m.%Y %H:%M'))
+    for cache in ListCache.objects.all().order_by('-added')[10:]:
+        d = dict(
+            name=cache.name, url=list_url(cache.json_query, cache.name),
+            added=cache.added.strftime('%d.%m.%Y %H:%M')
+        )
         lists.append(d)
     return render_json(req, lists)
 

@@ -25,16 +25,16 @@ def create_related_objects_for_chemical(sender, instance, created, **kw):
 def check_cmr_toxic(sender, instance, **kw):
     try:
         check_cmr(instance)
-    except:
-        pass
+    except Exception as err:
+        print(err)
     try:
         check_toxic(instance)
-    except:
-        pass
+    except Exception as err:
+        print(err)
     try:
         check_flammable(instance)
-    except:
-        pass
+    except Exception as err:
+        print(err)
 
 
 @receiver(post_save, sender=User)

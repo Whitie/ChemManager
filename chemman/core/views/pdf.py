@@ -5,7 +5,6 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils import timezone
-from django.utils.translation import ugettext, ugettext_lazy as _
 from weasyprint import HTML
 
 from core.models.storage import Storage
