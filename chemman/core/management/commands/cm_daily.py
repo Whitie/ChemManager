@@ -18,7 +18,7 @@ COMPOUND_re = re.compile(r'.+/compound/(\d+)/?', re.I)
 
 
 def _search_compound_id(cas):
-    r = requests.get(SEARCH_URL, params={'term': f'CAS-{cas}'})
+    r = requests.get(SEARCH_URL, params={'term': 'CAS-{cas}'.format(cas=cas)})
     m = COMPOUND_re.search(r.text)
     if m is not None:
         return int(m.group(1))
@@ -61,13 +61,13 @@ class Command(BaseCommand):
             if not chem.wiki_link or 'Suche' in chem.wiki_link:
                 self.stdout.write('  `+ Updating Wiki link')
                 chem.update_wiki_link()
-                self.stdout.write(f'   - {chem.wiki_link}')
+                self.stdout.write('   - {link}'.format(link=chem.wiki_link))
             if not chem.identifiers.pubchem_id and chem.identifiers.cas:
                 self.stdout.write('  `+ Searching Pubchem Compound ID')
                 cid = _search_compound_id(chem.identifiers.cas)
                 if cid:
                     chem.identifiers.pubchem_id = cid
-                    self.stdout.write(f'   + CID: {cid}')
+                    self.stdout.write('   + CID: {cid}'.format(cid=cid))
             if chem.identifiers.pubchem_id:
                 self.stdout.write('  `+ Updating from Pubchem')
                 try:
@@ -80,7 +80,8 @@ class Command(BaseCommand):
                 if data:
                     fp = ContentFile(data)
                     self.stdout.write('   - Image downloaded')
-                    chem.structure.save(f'{chem.id}_structure.png', fp,
-                                        save=True)
+                    chem.structure.save(
+                        '{id}_structure.png'.format(id=chem.id), fp, save=True
+                    )
             chem.identifiers.save()
             chem.save()
