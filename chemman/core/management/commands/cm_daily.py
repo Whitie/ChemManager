@@ -15,6 +15,7 @@ from core.models.chems import Chemical
 STRUCTURE_URL = 'https://pubchem.ncbi.nlm.nih.gov/image/imagefly.cgi'
 SEARCH_URL = 'https://www.ncbi.nlm.nih.gov/pccompound'
 COMPOUND_re = re.compile(r'.+/compound/(\d+)/?', re.I)
+MM_MAX_DIFF = decimal.Decimal('0.1')
 
 
 def _search_compound_id(cas):
@@ -27,14 +28,22 @@ def _search_compound_id(cas):
 def _update_chem(cid, chem):
     compound = pc.Compound.from_cid(cid)
     data = compound.to_dict()
+    mm_saved = chem.molar_mass or -5
+    mm_new = data.get('molecular_weight', 0)
+    try:
+        if abs(mm_saved - mm_new) > MM_MAX_DIFF:
+            chem.identifiers.pubchem_id = None
+            return
+    except Exception as err:
+        print(err)
+        return
     if not chem.iupac_name_en:
         chem.iupac_name_en = data.get('iupac_name', '')[:200]
     if not chem.formula:
         chem.formula = data.get('molecular_formula', '')
     if not chem.molar_mass:
-        molar_mass = data.get('molecular_weight', None)
-        if molar_mass:
-            chem.molar_mass = decimal.Decimal(molar_mass)
+        if mm_new:
+            chem.molar_mass = decimal.Decimal(mm_new)
     if not chem.identifiers.inchi:
         chem.identifiers.inchi = data.get('inchi', '')
     if not chem.identifiers.inchi_key:
