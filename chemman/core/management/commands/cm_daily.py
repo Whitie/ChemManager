@@ -30,12 +30,8 @@ def _update_chem(cid, chem):
     data = compound.to_dict()
     mm_saved = chem.molar_mass or -5
     mm_new = data.get('molecular_weight', 0)
-    try:
-        if abs(mm_saved - mm_new) > MM_MAX_DIFF:
-            chem.identifiers.pubchem_id = None
-            return
-    except Exception as err:
-        print(err)
+    if abs(mm_saved - mm_new) > MM_MAX_DIFF:
+        chem.identifiers.pubchem_id = None
         return
     if not chem.iupac_name_en:
         chem.iupac_name_en = data.get('iupac_name', '')[:200]
