@@ -70,7 +70,7 @@ def save_draft(draft, data):
 
 
 def save_to_chemical(draft, pdf, data):
-    for num, dep in enumerate(draft.work_departments.all(), start=1):
+    for dep in draft.work_departments.all():
         cm_dep, created = Department.objects.get_or_create(name=dep.name)
         if data['substitutes']:
             oi = data['substitutes']
@@ -80,7 +80,7 @@ def save_to_chemical(draft, pdf, data):
                 chemical=draft.chemical, department=cm_dep
             )
         doc = ContentFile(pdf)
-        name = '{0}_{1:03d}.pdf'.format(draft.chemical.display_name, num)
+        name = '{0}_{1}.pdf'.format(draft.chemical.display_name, dep.name)
         oi.document.save(name, doc, save=False)
         oi.notes = data['note']
         oi.last_updated_by = draft.responsible
