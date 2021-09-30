@@ -75,8 +75,35 @@ def get_error_image():
     return img
 
 
+def _smart_replace(s):
+    if not s.strip():
+        return '-'
+    s = s.replace('\r', '\n')
+    s = s.replace('\n\n', '\n')
+    return s
+
+
 def save_draft(draft, data):
     # Todo
+    draft.work_departments.set([data['dep_1']])
+    if data['dep_2'] and data['dep_2'] != data['dep_1']:
+        draft.work_departments.add(data['dep_2'])
+    draft.signature = data['signature']
+    draft.hazards = _smart_replace(data['hazards'])
+    draft.protection = data['protection']
+    draft.protection_pics.set(data['protection_pics'])
+    draft.eye_protection = data['eye_protection']
+    draft.hand_protection = data['hand_protection']
+    draft.conduct = data['conduct']
+    draft.green_cross = data['green_cross']
+    draft.first_aid = _smart_replace(data['first_aid'])
+    draft.skin = data['skin']
+    draft.eye = data['eye']
+    draft.breathe = data['breathe']
+    draft.swallow = data['swallow']
+    draft.disposal = _smart_replace(data['disposal'])
+    draft.ext_phone = data['ext_phone']
+    draft.int_phone = data['int_phone']
     draft.released = None
     draft.save()
 
@@ -114,6 +141,7 @@ def edit_operating_instruction(req, id):
     if req.method == 'POST':
         form = OIForm(req.POST)
         if form.is_valid():
+            oi.responsible = req.user
             save_draft(oi, form.cleaned_data)
             return redirect('oic:index')
     chem = oi.chemical
