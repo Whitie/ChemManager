@@ -11,6 +11,7 @@ from django.shortcuts import redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 from PIL import Image, ImageDraw, ImageFont
@@ -46,8 +47,16 @@ def generate_preview(req, data, chem):
 
 
 def generate_released_pdf(user, draft):
+    data = {}
+    fa1 = 'E003' if draft.green_cross else 'E012'
+    data['fa1'] = FirstAidPictogram.objects.get(ident=fa1)
+    data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
+    data['pictograms'] = [x for x in draft.chemical.pictograms.all()]
+    data['ppics'] = [x for x in draft.protection_pics.all()]
+    for num, dep in enumerate(draft.work_departments.all(), start=1):
+        data['dep_{}'.format(num)] = dep.name
     ctx = dict(user=user, font_size=12, chem=draft.chemical, draft=draft,
-               root=settings.MEDIA_ROOT.rstrip('/'))
+               root=settings.MEDIA_ROOT.rstrip('/'), **data)
     # Todo: Edit template
     tpl = 'oic/pdf/oi.{}.html'.format(draft.language.lower())
     html_filled = render_to_string(tpl, ctx)
@@ -83,7 +92,7 @@ def save_to_chemical(draft, pdf, data):
                 chemical=draft.chemical, department=cm_dep
             )
         doc = ContentFile(pdf)
-        name = '{0}_{1}.pdf'.format(draft.chemical.slug, dep.name)
+        name = '{0}_{1}.pdf'.format(draft.chemical.slug, slugify(dep.name))
         oi.document.save(name, doc, save=False)
         oi.notes = data['note']
         oi.last_updated_by = draft.responsible
@@ -145,6 +154,8 @@ def release(req, id):
             try:
                 pdf = generate_released_pdf(req.user, oi)
                 save_to_chemical(oi, pdf, form.cleaned_data)
+                oi.released = timezone.now().date()
+                oi.save()
                 return redirect('oic:index')
             except Exception as err:
                 print(err)

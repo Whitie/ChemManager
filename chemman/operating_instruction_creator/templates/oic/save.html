@@ -8,6 +8,7 @@
     {% trans %}for{% endtrans %}: {{ chem }} ({{ oi.work_departments.all()|join(', ', attribute='name') }})
 </h3>
 <form class="uk-form uk-form-horizontal" action="{{ url('oic:release', oi.id) }}" method="post">
+    {% csrf_token %}
     <div class="uk-form-row">
         <label class="uk-form-label">{{ form.substitutes.label }}</label>
         <div class="uk-form-controls">{{ form.substitutes }}</div>

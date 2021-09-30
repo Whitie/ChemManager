@@ -1,19 +1,19 @@
 <html>
 	<head>
     <meta charset="utf-8">
-    <title>BA - 1,2-Dichlorethan</title>
-    <meta name="author" content="Thorsten Weimann">
-    <meta name="description" content="BA 1,2-Dichlorethan - bbz Chemie">
+    <title>{{ chem.display_name }}</title>
+    <meta name="author" content="{{ draft.responsible.get_full_name() }}">
+    <meta name="description" content="{{ chem.display_name }} - bbz Chemie">
     <meta name="keywords" content="BA,Betriebsanweisung,Gefahrstoff,CAS,NAME">
-    <meta name="dcterms.created" content="2020-01-28">
-    <meta name="dcterms.modified" content="2020-02-03">
+    <meta name="dcterms.created" content="{{ draft.created|date('c') }}">
+    <meta name="dcterms.modified" content="{{ draft.edited|date('c') }}">
 		<style>
 			@page {
 				size: A4;
 				margin: 0.4cm;
 			}
       body {
-        font-size: ${font_size}px;
+        font-size: {{ font_size }}px;
         font-family: Arial, sans-serif;
       }
 			h1,h2,h3,h4 {
@@ -79,59 +79,57 @@
       </tr>
 			<tr>
 				<td><strong>Nummer:</strong></td>
-				<td>- 1</td>
+				<td>- {{ draft.id }} -</td>
 				<td><strong>Abteilung</strong></td>
-				<td>Fachlabor</td>
+				<td>{{ dep_1 }}</td>
 				<td><strong>Verantwortlich</strong></td>
-				<td>A. Paschke</td>
+				<td>{{ draft.responsible.last_name }}</td>
 			</tr>
       <tr>
         <td><strong>Datum:</strong></td>
-        <td>28.01.2020</td>
+        <td>{{ draft.edited|date('d.m.Y') }}</td>
         <td></td>
-        <td>Technikum</td>
+        <td>{{ dep_2|default('', true) }}</td>
         <td><strong>Unterschrift</strong></td>
-        <td>A. Paschke</td>
+        <td>{{ draft.signature.last_name }}</td>
       </tr>
       <tr class="divider">
         <td class="center" colspan="6"><h3>Gefahrstoffbezeichnung</h3></td>
       </tr>
       <tr>
-        <td colspan="2" class="center"><h3>107-06-2</h3></td>
-        <td colspan="4" class="center"><h3>1,2-Dichlorethan</h3></td>
+        <td colspan="2" class="center"><h3>{{ chem.identifiers.cas }}</h3></td>
+        <td colspan="4" class="center"><h3>{{ chem.display_name }}</h3></td>
       </tr>
       <tr>
         <td><strong>Form:</strong></td>
-        <td>flüssig</td>
+        <td>{{ chem.physical_data.get_physical_state_display() }}</td>
         <td><strong>Farbe:</strong></td>
-        <td>farblos</td>
+        <td>{{ chem.physical_data.color|default('-', true) }}</td>
         <td><strong>Geruch:</strong></td>
-        <td></td>
+        <td>{{ chem.physical_data.odor|default('-', true) }}</td>
       </tr>
       <tr class="divider">
         <td class="center" colspan="6"><h3>Gefahren für Mensch und Umwelt</h3></td>
       </tr>
       <tr>
         <td class="center">
-          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/GHS02.svg">
+          {% if pictograms|length >= 1 %}
+          <img class="pictogram" src="file:{{ root }}/{{ pictograms[0].image.name }}">
+          {% endif %}
+          {% if pictograms|length >= 2 %}
           <br>
-          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/GHS06.svg">
+          <img class="pictogram" src="file:{{ root }}/{{ pictograms[1].image.name }}">
+          {% endif %}
         </td>
         <td colspan="4">
-          H-Sätze: 225, 302, 304, 315, 319, 331, 335, 350<br>
-          Flüssigkeit und Dampf leicht entzündbar<br>
-          Kann Krebs erzeugen<br>
-          Gesundheitsschädlich bei Verschlucken<br>
-          Kann die Atemwege reizen<br>
-          Kann bei Verschlucken und Eindringen in die Atemwege tödlich sein<br>
-          Verursacht Hautreizungen<br>
-          Verursacht schwere Augenreizungen<br>
-          Giftig bei einatmen
+          {{ draft.hazards|replace('\n', '<br>')|safe }}
         </td>
         <td class="center">
-          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/GHS08.svg">
+          {% if pictograms|length > 2 %}
+          <img class="pictogram" src="file:{{ root }}/{{ pictograms[2].image.name }}">
           <br>
-          <h3>Gefahr</h3>
+          {% endif %}
+          <h3>{{ _(chem.signal_word)|default('', true) }}</h3>
         </td>
       </tr>
 
@@ -142,44 +140,47 @@
       </tr>
       <tr>
         <td class="center">
-          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/ISO_7010_M004.svg">
+          {% if ppics|length >= 1 %}
+          <img class="pictogram" src="file:{{ root }}/{{ ppics[0].icon.name }}">
+          {% endif %}
         </td>
         <td colspan="4">
-          P-Sätze: 202, 210<br>
-          Abzug verwenden!<br>
-          Vor Gebrauch alle Sicherheitshinweise lesen und verstehen.<br>
-          Von Hitze, heißen Oberflächen, Funken, offenen Flammen sowie anderen Zündquellarten fernhalten.
+          {{ draft.protection|replace('\n', '<br>')|safe }}
         </td>
         <td class="center">
-          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/ISO_7010_M009.svg">
+          {% if ppics|length >= 2 %}
+          <img class="pictogram" src="file:{{ root }}/{{ ppics[1].icon.name }}">
+          {% endif %}
         </td>
       </tr>
+      {% if draft.eye_protection and draft.eye_protection != '-' %}
       <tr>
         <td></td>
         <td><strong>Augenschutz:</strong></td>
-        <td colspan="3">Brille</td>
+        <td colspan="3">{{ draft.eye_protection }}</td>
         <td></td>
       </tr>
+      {% endif %}
+      {% if draft.hand_protection and draft.hand_protection != '-' %}
       <tr>
         <td></td>
         <td><strong>Handschutz:</strong></td>
-        <td colspan="3">Schutzhandschhuhe</td>
+        <td colspan="3">{{ draft.hand_protection }}</td>
         <td></td>
       </tr>
-
+      {% endif %}
       <tr class="divider">
         <td class="center container" colspan="6">
           <h3>Verhalten im Gefahrfall</h3>
           <div class="overlay ol-ext">
-            <strong>0-112</strong>
+            <strong>{{ draft.ext_phone }}</strong>
           </div>
         </td>
       </tr>
       <tr>
         <td></td>
         <td colspan="4">
-          Brennbar.<br>
-          Dämpfe sind schwerer als Luft, breiten sich am Boden aus und bilden mit Luft explosionsfähige Gemische.
+          {{ draft.conduct|replace('\n', '<br>')|safe }}
         </td>
         <td></td>
       </tr>
@@ -188,60 +189,53 @@
         <td class="center container" colspan="6">
           <h3>Erste Hilfe</h3>
           <div class="overlay ol-ext">
-            <strong>Hausapp. 10</strong>
+            <strong>Hausapp. {{ draft.int_phone }}</strong>
           </div>
         </td>
       </tr>
       <tr>
         <td class="center">
-          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/ISO_7010_E012.svg">
+          <img class="pictogram" src="file:{{ root }}/{{ fa1.icon.name }}">
         </td>
         <td colspan="4">
-          P-Sätze: 301+312, 303+361+353, 305+351+338, 308+313<br>
-          BEI VERSCHLUCKEN: Bei Unwohlsein GIFTINFORMATIONSZENTRUM/Arzt anrufen.<br>
-          BEI BERÜHRUNG MIT DER HAUT (oder dem Haar): Alle kontaminierten Kleidungsstücke
-          sofort ausziehen. Haut mit Wasser abwaschen/duschen.<br>
-          BEI KONTAKT MIT DEN AUGEN: einige Minuten lang behutsam mit Wasser ausspülen.
-          Eventuell vorhandene Kontaktlinsen nach Möglichkeit entfernen. Weiter spülen.<br>
-          BEI Exposition oder falls betroffen: ärztlichen Rat einholen/ärztliche Hilfe hinzuziehen.
+          {{ draft.first_aid|replace('\n', '<br>')|safe }}
         </td>
         <td class="center">
-          <img class="pictogram" src="file:/home/tweimann/Projekte/pdf-test-env/pictograms/ISO_7010_E011.svg">
+          <img class="pictogram" src="file:{{ root }}/{{ fa2.icon.name }}">
         </td>
       </tr>
+      {% if draft.skin and draft.skin != '-' %}
       <tr>
         <td></td>
         <td><strong>Nach Hautkontakt:</strong></td>
-        <td colspan="3">
-          Haut mit Wasser abwaschen/duschen. Bei Hautreizungen Arzt aufsuchen.
-        </td>
+        <td colspan="3">{{ draft.skin }}</td>
         <td></td>
       </tr>
+      {% endif %}
+      {% if draft.eye and draft.eye != '-' %}
       <tr>
         <td></td>
         <td><strong>Nach Augenkontakt:</strong></td>
-        <td colspan="3">
-          Augenlider geöffnet halten und mindestens 10 Minuten lang reichlich mit sauberem, fließendem Wasser spülen. Bei Augenreizungen einen Augenarzt aufsuchen.
-        </td>
+        <td colspan="3">{{ draft.eye }}</td>
         <td></td>
       </tr>
+      {% endif %}
+      {% if draft.breathe and draft.breathe != '-' %}
       <tr>
         <td></td>
         <td><strong>Nach Einatmen:</strong></td>
-        <td colspan="3">
-          Sofort Arzt hinzuziehen. Bei Atembeschwerden oder Atemstillstand künstliche Beatmung einleiten.
-        </td>
+        <td colspan="3">{{ draft.breathe }}</td>
         <td></td>
       </tr>
+      {% endif %}
+      {% if draft.swallow and draft.swallow != '-' %}
       <tr>
         <td></td>
         <td><strong>Nach Verschlucken:</strong></td>
-        <td colspan="3">
-          Mund mit Wasser ausspülen (nur wenn Verunfallter bei Bewustsstsein ist). Sofort Arzt hinzuziehen. Bei Unfall oder Unwohlsein sofort Arzt hinzuziehen. Arzt anrufen.
-        </td>
+        <td colspan="3">{{ draft.swallow }}</td>
         <td></td>
       </tr>
-
+      {% endif %}
       <tr class="divider">
         <td class="center" colspan="6">
           <h3>Sachgerechte Entsorgung</h3>
@@ -250,8 +244,7 @@
       <tr>
         <td></td>
         <td colspan="4">
-          Das 1,2-Dichlorethan wird in den organischen Lösemittelabfall entsorgt.<br>
-          Nicht in die Kanalisation gelangen lassen.
+          {{ draft.disposal|replace('\n', '<br>')|safe }}
         </td>
         <td></td>
       </tr>
