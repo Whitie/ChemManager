@@ -32,16 +32,20 @@
         {% for rel in released %}
         <tr>
             <td>{{ rel.released|date('SHORT_DATE_FORMAT') }}</td>
-            <td>{{ rel.chemical.name }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', rel.chemical.id) }}">
+                    {{ rel.chemical.display_name }}
+                </a>
+            </td>
             <td>{{ rel.work_departments.all()|join(', ', attribute='name') }}</td>
             <td>{{ rel.responsible.username }}</td>
             <td>
-                <a href="{{ url('core:detail-by-id', rel.chemical.id) }}" class="uk-button uk-button-small uk-button-primary" title="{% trans %}Show{% endtrans %}">
+                <a href="{{ rel.saved_as.document.url }}" target="_blank" class="uk-button uk-button-small uk-button-primary" title="{% trans %}Show{% endtrans %}">
                     <i class="uk-icon-eye"></i>
                 </a>
                 {% if perms.operating_instruction_creator.create %}
-                <a href="{{ url('oic:edit', rel.id) }}" class="uk-button uk-button-small" title="{% trans %}Copy{% endtrans %}">
-                    <i class="uk-icon-copy"></i>
+                <a href="{{ url('oic:edit', rel.id) }}" class="uk-button uk-button-small" title="{% trans %}Revise{% endtrans %}">
+                    <i class="uk-icon-refresh"></i>
                 </a>
                 {% endif %}
             </td>
@@ -66,7 +70,11 @@
         {% for draft in drafts %}
         <tr>
             <td>{{ draft.edited|date('SHORT_DATE_FORMAT') }}</td>
-            <td>{{ draft.chemical.name }}</td>
+            <td>
+                <a href="{{ url('core:detail-by-id', draft.chemical.id) }}">
+                    {{ draft.chemical.display_name }}
+                </a>
+            </td>
             <td>{{ draft.work_departments.all()|join(', ', attribute='name') }}</td>
             <td>{{ draft.responsible.username }}</td>
             <td>

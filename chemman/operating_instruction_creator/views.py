@@ -123,7 +123,9 @@ def save_to_chemical(draft, pdf, data):
         oi.document.save(name, doc, save=False)
         oi.notes = data['note']
         oi.last_updated_by = draft.responsible
+        draft.saved_as = oi
         oi.save()
+        draft.save()
 
 
 def index(req):

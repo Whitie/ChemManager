@@ -23,7 +23,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from core.models.chems import Chemical
+from core.models.chems import Chemical, OperatingInstruction
 
 
 def get_sentinel_user():
@@ -123,6 +123,10 @@ class OperatingInstructionDraft(models.Model):
     edited = models.DateTimeField(_('Created'), auto_now=True)
     released = models.DateField(_('Released'), blank=True, editable=False,
                                 default=None, null=True)
+    saved_as = models.ForeignKey(
+        OperatingInstruction, verbose_name=_('Saved as'), blank=True,
+        null=True, default=None, on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         deps = [x.name for x in self.work_departments.all()]
