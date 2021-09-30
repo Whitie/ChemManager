@@ -48,7 +48,9 @@ def generate_preview(req, data, chem):
 def generate_released_pdf(user, draft):
     ctx = dict(user=user, font_size=12, chem=draft.chemical, draft=draft,
                root=settings.MEDIA_ROOT.rstrip('/'))
-    html_filled = render_to_string('oic/pdf/oi.de.html', ctx)
+    # Todo: Edit template
+    tpl = 'oic/pdf/oi.{}.html'.format(draft.language.lower())
+    html_filled = render_to_string(tpl, ctx)
     html = HTML(string=html_filled)
     return html.write_pdf()
 
@@ -65,6 +67,7 @@ def get_error_image():
 
 
 def save_draft(draft, data):
+    # Todo
     draft.released = None
     draft.save()
 
@@ -80,7 +83,7 @@ def save_to_chemical(draft, pdf, data):
                 chemical=draft.chemical, department=cm_dep
             )
         doc = ContentFile(pdf)
-        name = '{0}_{1}.pdf'.format(draft.chemical.display_name, dep.name)
+        name = '{0}_{1}.pdf'.format(draft.chemical.slug, dep.name)
         oi.document.save(name, doc, save=False)
         oi.notes = data['note']
         oi.last_updated_by = draft.responsible
