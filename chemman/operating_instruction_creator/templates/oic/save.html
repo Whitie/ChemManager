@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">
+    {% trans %}Add/subtitute Operating Instruction{% endtrans %}
+</h1>
+<h3 class="uk-text-center">
+    {% trans %}for{% endtrans %}: {{ chem }} ({{ oi.work_departments.all()|join(', ', attribute='name') }})
+</h3>
+<form class="uk-form uk-form-horizontal" action="{{ url('oic:release', oi.id) }}" method="post">
+    <div class="uk-form-row">
+        <label class="uk-form-label">{{ form.substitutes.label }}</label>
+        <div class="uk-form-controls">{{ form.substitutes }}</div>
+    </div>
+    <div class="uk-form-row">
+        <label class="uk-form-label">{{ form.note.label }}</label>
+        <div class="uk-form-controls">{{ form.note }}</div>
+    </div>
+    <div class="uk-form-row">
+        <div class="uk-form-controls">
+            <button type="submit" class="uk-button uk-button-success uk-button-large">
+                {% trans %}Save{% endtrans %}
+                <i class="uk-icon-save"></i>
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block js %}
+<script>
+var notes = {{ notes|tojson }};
+$(document).ready(function() {
+    $('#id_note').attr('placeholder', '{% trans %}e. g. Solution 30%{% endtrans %}');
+    $('select').change(function() {
+        var selected = $('select option:selected').val();
+        if (selected in notes) {
+            $('#id_note').val(notes[selected]);
+        } else {
+            $('#id_note').val('');
+        }
+    });
+})
+</script>
+{% endblock %}

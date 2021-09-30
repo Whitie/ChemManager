@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from core.utils import _get_users_by_permission
+from core.models.chems import OperatingInstruction
 from core.models.safety import GHSPictogram
 from .models import (
     WorkDepartment, ProtectionPictogram
@@ -81,3 +82,18 @@ class OIForm(forms.Form):
         super().__init__(*args, **kw)
         for field in self.fields.values():
             field.widget.attrs.update({'class': 'uk-form-width-large'})
+
+
+class ReleaseForm(forms.Form):
+    substitutes = forms.ModelChoiceField(
+        label=_('Substitutes'), queryset=OperatingInstruction.objects.all(),
+        required=False, empty_label=_('Add new')
+    )
+    note = forms.CharField(
+        label=_('Note'), widget=forms.Textarea, required=False
+    )
+
+    def __init__(self, *args, **kw):
+        chem = kw.pop('chem')
+        super().__init__(*args, **kw)
+        self.fields['substitutes'].queryset = chem.operating_instructions.all()
