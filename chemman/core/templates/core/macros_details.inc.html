@@ -137,7 +137,7 @@ All chemicals are potentially dangerous. They are therefore only be handled by s
             <td class="uk-text-bold">{% trans %}Solubility (Water){% endtrans %}</td>
             <td>
             	{% if chem.physical_data.solubility_h2o %}
-            	{{ chem.physical_data.solubility_h2o|round(4) }} g/100g
+            	{{ chem.physical_data.solubility_h2o|round(4) }} g/L
                 {% if chem.physical_data.solubility_h2o_temp %}
             	@ {{ chem.physical_data.solubility_h2o_temp }} °C
                 {% endif %}

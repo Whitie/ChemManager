@@ -321,7 +321,7 @@ class PhysicalData(models.Model):
     # DE: Löslichkeit in Wasser
     solubility_h2o = models.DecimalField(
         _('Solubility (H2O)'), max_digits=10, decimal_places=4, blank=True,
-        null=True, help_text=_('In g/100g.')
+        null=True, help_text=_('In g/L.')
     )
     solubility_h2o_temp = models.IntegerField(
         _('Solubility at Temperature'), blank=True, null=True,
