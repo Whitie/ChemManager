@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 12:34+0200\n"
+"POT-Creation-Date: 2021-10-15 09:20+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,7 @@ msgstr "Erste Hilfe Symbole"
 
 #: operating_instruction_creator/models.py:77
 #: operating_instruction_creator/templates/oic/index.html:25
-#: operating_instruction_creator/templates/oic/index.html:59
+#: operating_instruction_creator/templates/oic/index.html:63
 msgid "Chemical"
 msgstr "Chemikalie"
 
@@ -190,19 +190,25 @@ msgstr "Erstellt"
 msgid "Released"
 msgstr "Veröffentlicht"
 
-#: operating_instruction_creator/models.py:132
+#: operating_instruction_creator/models.py:127
+#, fuzzy
+#| msgid "Save"
+msgid "Saved as"
+msgstr "Speichern"
+
+#: operating_instruction_creator/models.py:136
 msgid "Operating instruction draft"
 msgstr "Betriebsanweisung Entwurf"
 
-#: operating_instruction_creator/models.py:133
+#: operating_instruction_creator/models.py:137
 msgid "Operating instruction drafts"
 msgstr "Betriebsanweisung Entwürfe"
 
-#: operating_instruction_creator/models.py:136
+#: operating_instruction_creator/models.py:140
 msgid "Can create operating instructions"
 msgstr "Darf Betriebsanweisungen erstellen"
 
-#: operating_instruction_creator/models.py:137
+#: operating_instruction_creator/models.py:141
 msgid "Can release operating instructions"
 msgstr "Darf Betriebsanweisungen veröffentlichen"
 
@@ -302,41 +308,41 @@ msgid "Search..."
 msgstr "Suche..."
 
 #: operating_instruction_creator/templates/oic/index.html:26
-#: operating_instruction_creator/templates/oic/index.html:60
+#: operating_instruction_creator/templates/oic/index.html:64
 msgid "Departments"
 msgstr "Bereiche"
 
 #: operating_instruction_creator/templates/oic/index.html:27
-#: operating_instruction_creator/templates/oic/index.html:61
+#: operating_instruction_creator/templates/oic/index.html:65
 msgid "User"
 msgstr "Benutzer"
 
 #: operating_instruction_creator/templates/oic/index.html:28
-#: operating_instruction_creator/templates/oic/index.html:62
+#: operating_instruction_creator/templates/oic/index.html:66
 msgid "Actions"
 msgstr "Aktionen"
 
-#: operating_instruction_creator/templates/oic/index.html:39
+#: operating_instruction_creator/templates/oic/index.html:43
 msgid "Show"
 msgstr "Anzeigen"
 
-#: operating_instruction_creator/templates/oic/index.html:43
-msgid "Copy"
-msgstr "Kopieren"
+#: operating_instruction_creator/templates/oic/index.html:47
+msgid "Revise"
+msgstr ""
 
-#: operating_instruction_creator/templates/oic/index.html:54
+#: operating_instruction_creator/templates/oic/index.html:58
 msgid "Drafts"
 msgstr "Entwürfe"
 
-#: operating_instruction_creator/templates/oic/index.html:58
+#: operating_instruction_creator/templates/oic/index.html:62
 msgid "Modified"
 msgstr "Bearbeitet"
 
-#: operating_instruction_creator/templates/oic/index.html:74
+#: operating_instruction_creator/templates/oic/index.html:82
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: operating_instruction_creator/templates/oic/index.html:79
+#: operating_instruction_creator/templates/oic/index.html:87
 msgid "Release"
 msgstr "Veröffentlichen"
 
@@ -364,3 +370,6 @@ msgstr "Neu"
 #: operating_instruction_creator/views.py:68
 msgid "! ERROR !"
 msgstr "! FEHLER !"
+
+#~ msgid "Copy"
+#~ msgstr "Kopieren"

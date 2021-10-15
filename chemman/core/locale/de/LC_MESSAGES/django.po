@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 12:34+0200\n"
+"POT-Creation-Date: 2021-10-15 09:20+0200\n"
 "PO-Revision-Date: 2016-10-10 11:03+0200\n"
 "Last-Translator: Thorsten Weimann\n"
 "Language-Team: \n"
@@ -22,9 +22,9 @@ msgstr ""
 msgid "Employee"
 msgstr "Mitarbeiter"
 
-#: core/admin.py:34 core/forms.py:343 core/models/base.py:171
+#: core/admin.py:34 core/forms.py:349 core/models/base.py:171
 #: core/models/chems.py:391 core/models/storage.py:102
-#: core/models/storage.py:800 core/templates/core/search/package.html:16
+#: core/models/storage.py:804 core/templates/core/search/package.html:16
 #: core/templates/core/search/package.html:28
 #: core/templates/core/storage/index.html:12
 #: core/templates/core/storage/index.html:21
@@ -41,7 +41,7 @@ msgstr "Bereiche"
 #: core/models/base.py:204 core/models/chems.py:70 core/models/chems.py:363
 #: core/models/safety.py:59 core/models/storage.py:78 core/models/storage.py:96
 #: core/models/storage.py:134 core/models/storage.py:171
-#: core/models/storage.py:642 core/templates/core/index.html:32
+#: core/models/storage.py:646 core/templates/core/index.html:32
 #: core/templates/core/index.html:40 core/templates/core/info/ghs.html:12
 #: core/templates/core/macros.inc.html:69
 #: core/templates/core/macros.inc.html:80
@@ -55,11 +55,11 @@ msgstr "Bereiche"
 #: core/templates/core/storage/info_supplier.html:10
 #: core/templates/core/storage/info_supplier.html:21
 #: core/templates/core/storage/initial_delivery.html:44
-#: core/templates/core/storage/initial_delivery.html:53
+#: core/templates/core/storage/initial_delivery.html:54
 #: core/templates/core/storage/inventory.html:21
 #: core/templates/core/storage/inventory_result.html:15
 #: core/templates/core/storage/storage.html:16
-#: core/templates/core/storage/storage.html:29
+#: core/templates/core/storage/storage.html:32
 #: core/templates/core/storage/stored_chemicals.html:13
 #: core/templates/core/storage/stored_chemicals.html:23
 msgid "Name"
@@ -71,7 +71,7 @@ msgstr "Name"
 #: core/templates/core/macros.inc.html:81
 #: core/templates/core/storage/observe.html:14
 #: core/templates/core/storage/storage.html:17
-#: core/templates/core/storage/storage.html:30
+#: core/templates/core/storage/storage.html:33
 msgid "CAS"
 msgstr "CAS"
 
@@ -250,10 +250,10 @@ msgstr "Zusammenfassung"
 msgid "Supplier"
 msgstr "Lieferant"
 
-#: core/forms.py:115 core/forms.py:301
+#: core/forms.py:115 core/forms.py:307
 #: core/templates/core/storage/info_supplier.html:15
 #: core/templates/core/storage/info_supplier.html:26
-#: core/templates/core/storage/initial_delivery.html:54
+#: core/templates/core/storage/initial_delivery.html:55
 #: core/templates/core/storage/stored_chemicals.html:14
 #: core/templates/core/storage/stored_chemicals.html:24
 #: core/templates/core/storage/stored_chemicals.html:40
@@ -289,7 +289,7 @@ msgstr "Z. B. lieferantenspezifische Bezeichnung oder Verwendungsart."
 msgid "Target Storage"
 msgstr "Ziellager"
 
-#: core/forms.py:131 core/forms.py:353 core/forms.py:357
+#: core/forms.py:131 core/forms.py:359 core/forms.py:363
 #: core/templates/core/extended_search.html:10
 msgid "--------"
 msgstr ""
@@ -298,7 +298,7 @@ msgstr ""
 msgid "Or choose present"
 msgstr "Oder vorhandenes aussuchen"
 
-#: core/forms.py:144 core/forms.py:285 core/forms.py:348
+#: core/forms.py:144 core/forms.py:285 core/forms.py:354
 #: core/models/storage.py:293 core/models/storage.py:324
 #: core/templates/core/storage/deliver_packages.html:12
 #: core/templates/core/storage/info_orders.html:22
@@ -313,24 +313,24 @@ msgid "Content"
 msgstr "Inhalt"
 
 #: core/forms.py:146 core/forms.py:174 core/forms.py:192 core/forms.py:209
-#: core/forms.py:286 core/forms.py:318 core/models/storage.py:295
-#: core/models/storage.py:326 core/models/storage.py:596
-#: core/models/storage.py:664 core/models/storage.py:715
-#: core/models/storage.py:796
+#: core/forms.py:286 core/forms.py:324 core/models/storage.py:295
+#: core/models/storage.py:326 core/models/storage.py:600
+#: core/models/storage.py:668 core/models/storage.py:719
+#: core/models/storage.py:800
 #: core/templates/core/storage/deliver_packages.html:19
 #: core/templates/core/storage/initial_delivery.html:49
-#: core/templates/core/storage/initial_delivery.html:60
+#: core/templates/core/storage/initial_delivery.html:61
 msgid "Unit"
 msgstr "Einheit"
 
-#: core/forms.py:147 core/forms.py:288 core/forms.py:352
+#: core/forms.py:147 core/forms.py:288 core/forms.py:358
 #: core/models/storage.py:328
 #: core/templates/core/storage/deliver_packages.html:13
 #: core/templates/core/storage/initial_delivery.html:50
 msgid "Composition"
 msgstr "Beschaffenheit"
 
-#: core/forms.py:150 core/forms.py:291 core/forms.py:356
+#: core/forms.py:150 core/forms.py:291 core/forms.py:362
 #: core/models/storage.py:332
 msgid "Container Material"
 msgstr "Gebindematerial"
@@ -340,7 +340,7 @@ msgid "Article No."
 msgstr "Artikelnummer"
 
 #: core/forms.py:154 core/models/storage.py:289
-#: core/templates/core/storage/initial_delivery.html:57
+#: core/templates/core/storage/initial_delivery.html:58
 msgid "Code"
 msgstr "Code"
 
@@ -348,9 +348,9 @@ msgstr "Code"
 msgid "Batch No."
 msgstr "Chargennummer"
 
-#: core/forms.py:159 core/forms.py:294 core/models/storage.py:345
+#: core/forms.py:159 core/forms.py:300 core/models/storage.py:345
 #: core/templates/core/storage/deliver_packages.html:16
-#: core/templates/core/storage/initial_delivery.html:52
+#: core/templates/core/storage/initial_delivery.html:53
 #: core/templates/core/storage/package_info.html:42
 msgid "Best before"
 msgstr "Haltbar bis"
@@ -399,7 +399,7 @@ msgid "Instructor"
 msgstr "Ausbilder"
 
 #: core/forms.py:198 core/forms.py:212 core/forms.py:253
-#: core/models/base.py:198 core/models/storage.py:504
+#: core/models/base.py:198 core/models/storage.py:508
 #: core/templates/core/storage/package_info.html:138
 #: core/templates/core/storage/tox_info.html:13
 #: core/templates/core/storage/tox_info.html:45
@@ -407,7 +407,7 @@ msgstr "Ausbilder"
 msgid "Group"
 msgstr "Gruppe"
 
-#: core/forms.py:201 core/forms.py:215 core/models/storage.py:507
+#: core/forms.py:201 core/forms.py:215 core/models/storage.py:511
 #: core/templates/core/storage/package_info.html:140
 #: core/templates/core/storage/tox_info.html:41
 #: core/templates/core/storage/tox_info.html:55
@@ -430,10 +430,10 @@ msgstr "Bis Datum"
 msgid "Show only toxic"
 msgstr "Nur Gifte anzeigen"
 
-#: core/forms.py:272 core/forms.py:336 core/models/chems.py:222
+#: core/forms.py:272 core/forms.py:342 core/models/chems.py:222
 #: core/models/chems.py:232 core/models/chems.py:280 core/models/chems.py:360
 #: core/models/chems.py:376 core/models/chems.py:387 core/models/storage.py:221
-#: core/models/storage.py:282 core/models/storage.py:583
+#: core/models/storage.py:282 core/models/storage.py:587
 #: core/templates/core/storage/consume/select.html:20
 #: core/templates/core/storage/info_orders.html:19
 #: core/templates/core/storage/info_orders.html:30
@@ -452,41 +452,48 @@ msgstr "Chemikalie"
 msgid "Place"
 msgstr "Platz"
 
-#: core/forms.py:298 core/models/base.py:132 core/models/base.py:139
+#: core/forms.py:297 core/models/storage.py:369
+#: core/templates/core/storage/initial_delivery.html:52
+#: core/templates/core/storage/storage.html:24
+#: core/templates/core/storage/storage.html:40
+msgid "Delivered for"
+msgstr "Geliefert für"
+
+#: core/forms.py:304 core/models/base.py:132 core/models/base.py:139
 #: core/models/storage.py:225
 msgid "Company"
 msgstr "Firma"
 
-#: core/forms.py:302
+#: core/forms.py:308
 msgid "Leave empty, to get the one from the choosen chemical."
 msgstr "Leer lassen, um das SDB von der gewählten Chemikalie zu benutzen."
 
-#: core/forms.py:306 core/models/storage.py:197
-#: core/templates/core/storage/initial_delivery.html:55
+#: core/forms.py:312 core/models/storage.py:197
+#: core/templates/core/storage/initial_delivery.html:56
 msgid "Published"
 msgstr "Veröffentlicht"
 
-#: core/forms.py:310
+#: core/forms.py:316
 msgid "Supplier ID"
 msgstr "Artikelnummer"
 
-#: core/forms.py:312
+#: core/forms.py:318
 msgid "Supplier CODE"
 msgstr "Strich-/QR-Code"
 
-#: core/forms.py:314
+#: core/forms.py:320
 msgid "Supplier BATCH"
 msgstr "Chargennummer"
 
-#: core/forms.py:316 core/templates/core/macros.inc.html:195
+#: core/forms.py:322 core/templates/core/macros.inc.html:195
 #: core/templates/core/storage/consume/special.html:36
 #: core/templates/core/storage/package_info.html:25
 #: core/templates/core/storage/package_info.html:109
 msgid "Brutto mass"
 msgstr "Bruttomasse"
 
-#: core/forms.py:340 core/models/storage.py:119 core/models/storage.py:141
-#: core/models/storage.py:174 core/models/storage.py:587
+#: core/forms.py:346 core/models/storage.py:119 core/models/storage.py:141
+#: core/models/storage.py:174 core/models/storage.py:591
 #: core/templates/core/detail.html:34
 #: core/templates/core/extended_search.html:12 core/templates/core/info.html:32
 #: core/templates/core/macros.inc.html:73
@@ -522,8 +529,8 @@ msgid "Message"
 msgstr "Nachricht"
 
 #: core/models/base.py:23 core/models/base.py:177 core/models/base.py:221
-#: core/models/storage.py:500 core/models/storage.py:717
-#: core/models/storage.py:753 core/templates/core/storage/delivery.html:65
+#: core/models/storage.py:504 core/models/storage.py:721
+#: core/models/storage.py:757 core/templates/core/storage/delivery.html:65
 #: core/templates/core/storage/delivery.part.html:17
 #: core/templates/core/storage/info_orders.html:23
 #: core/templates/core/storage/info_orders.html:34
@@ -544,7 +551,7 @@ msgid "Bookmarks"
 msgstr "Lesezeichen"
 
 #: core/models/base.py:40 core/models/base.py:217 core/models/storage.py:105
-#: core/models/storage.py:591 core/models/storage.py:651
+#: core/models/storage.py:595 core/models/storage.py:655
 msgid "Type"
 msgstr "Typ"
 
@@ -941,7 +948,7 @@ msgstr "Zugefügt von"
 msgid "Last Updated"
 msgstr "Zuletzt geändert"
 
-#: core/models/chems.py:223 core/models/storage.py:648
+#: core/models/chems.py:223 core/models/storage.py:652
 #: core/templates/core/extended_search.html:11
 #: core/templates/core/manage/index.html:67
 msgid "Chemicals"
@@ -1087,8 +1094,8 @@ msgid "Solubility (H2O)"
 msgstr "Löslichkeit in Wasser"
 
 #: core/models/chems.py:324
-msgid "In g/100g."
-msgstr "In g/100g."
+msgid "In g/L."
+msgstr "In g/L."
 
 #: core/models/chems.py:327
 msgid "Solubility at Temperature"
@@ -1203,7 +1210,7 @@ msgstr ""
 "Diese Breite wird benutzt, um das Bild im Text anzuzeigen. Es wird aber "
 "generell ein Link erzeugt, um das Bild in voller Größe zu betrachten."
 
-#: core/models/safety.py:16 core/models/storage.py:643
+#: core/models/safety.py:16 core/models/storage.py:647
 #: core/templates/core/info/ghs.html:11
 msgid "Reference"
 msgstr "Referenz"
@@ -1236,7 +1243,7 @@ msgstr "Lagerbeschränkungen"
 msgid "Storage Restrictions"
 msgstr "Lagerbeschränkungen"
 
-#: core/models/safety.py:98 core/models/storage.py:714
+#: core/models/safety.py:98 core/models/storage.py:718
 msgid "Value"
 msgstr "Wert"
 
@@ -1386,7 +1393,7 @@ msgstr "Bezeichner"
 msgid "Building"
 msgstr "Gebäude"
 
-#: core/models/storage.py:91 core/models/storage.py:645
+#: core/models/storage.py:91 core/models/storage.py:649
 #: core/views/management.py:97
 msgid "Buildings"
 msgstr "Gebäude"
@@ -1478,7 +1485,7 @@ msgid "No company"
 msgstr "Keine Firma"
 
 #: core/models/storage.py:274 core/models/storage.py:286
-#: core/models/storage.py:317 core/models/storage.py:792
+#: core/models/storage.py:317 core/models/storage.py:796
 msgid "Stored Chemical"
 msgstr "Gelagerte Chemikalie"
 
@@ -1492,7 +1499,7 @@ msgstr "Gelagerte Chemikalien"
 msgid "Supplier Ident. No."
 msgstr "Artikelnummer beim Lieferanten"
 
-#: core/models/storage.py:310 core/models/storage.py:748
+#: core/models/storage.py:310 core/models/storage.py:752
 #: core/templates/core/storage/delivery.html:40
 #: core/templates/core/storage/info_orders.html:56
 #: core/templates/core/storage/info_supplier.html:41
@@ -1544,139 +1551,139 @@ msgstr "Leer"
 msgid "Dispose Reason"
 msgstr "Entsorgungsgrund"
 
-#: core/models/storage.py:470
+#: core/models/storage.py:474
 msgid "Stored Package"
 msgstr "Gelagertes Gebinde"
 
-#: core/models/storage.py:471
+#: core/models/storage.py:475
 msgid "Stored Packages"
 msgstr "Gelagerte Gebinde"
 
-#: core/models/storage.py:477 core/models/storage.py:711
+#: core/models/storage.py:481 core/models/storage.py:715
 msgid "Package"
 msgstr "Gebinde"
 
-#: core/models/storage.py:481
+#: core/models/storage.py:485
 msgid "Mass after usage"
 msgstr "Masse nach der Benutzung"
 
-#: core/models/storage.py:484
+#: core/models/storage.py:488
 msgid "Mass after Unit"
 msgstr "Einheit (Masse nach der Benutzung)"
 
-#: core/models/storage.py:487
+#: core/models/storage.py:491
 msgid "Removed Quantity"
 msgstr "Entnommene Menge"
 
-#: core/models/storage.py:491
+#: core/models/storage.py:495
 msgid "Removed Quantity Unit"
 msgstr "Einheit (Entnommene Menge)"
 
-#: core/models/storage.py:494
+#: core/models/storage.py:498
 msgid "Usage Date/Time"
 msgstr "Datum/Zeit der Benutzung"
 
-#: core/models/storage.py:508
+#: core/models/storage.py:512
 msgid "Is Inventory"
 msgstr "Ist Inventur-Entnahme"
 
-#: core/models/storage.py:576
+#: core/models/storage.py:580
 msgid "Package Usage"
 msgstr "Gebinde-Benutzung"
 
-#: core/models/storage.py:577
+#: core/models/storage.py:581
 msgid "Package Usages"
 msgstr "Gebinde-Benutzungen"
 
-#: core/models/storage.py:593 core/models/storage.py:661
+#: core/models/storage.py:597 core/models/storage.py:665
 msgid "Limit"
 msgstr "Limit"
 
-#: core/models/storage.py:634
+#: core/models/storage.py:638
 msgid "Stock Limit"
 msgstr "Bestandslimit"
 
-#: core/models/storage.py:635
+#: core/models/storage.py:639
 msgid "Stock Limits"
 msgstr "Bestandslimits"
 
-#: core/models/storage.py:641 core/templates/core/storage/info_orders.html:21
+#: core/models/storage.py:645 core/templates/core/storage/info_orders.html:21
 #: core/templates/core/storage/info_orders.html:32
 #: core/templates/core/storage/info_supplier.html:11
 #: core/templates/core/storage/info_supplier.html:22
 msgid "Ident"
 msgstr "Identifikation"
 
-#: core/models/storage.py:653
+#: core/models/storage.py:657
 msgid "Threshold"
 msgstr "Schwelle"
 
-#: core/models/storage.py:656
+#: core/models/storage.py:660
 msgid "Percent of Threshold"
 msgstr "Prozent von Schwelle"
 
-#: core/models/storage.py:704
+#: core/models/storage.py:708
 msgid "Legal Limit"
 msgstr "Gesetzliches Limit"
 
-#: core/models/storage.py:705 core/templates/core/manage/index.html:43
+#: core/models/storage.py:709 core/templates/core/manage/index.html:43
 msgid "Legal Limits"
 msgstr "Gesetzliche Limits"
 
-#: core/models/storage.py:716
+#: core/models/storage.py:720
 #: core/templates/core/storage/deliver_packages.html:79
 #: core/templates/core/storage/delivery.html:129
 #: core/templates/core/storage/inventory_result.html:19
 msgid "Saved"
 msgstr "Gespeichert"
 
-#: core/models/storage.py:719 core/templates/core/macros.inc.html:220
+#: core/models/storage.py:723 core/templates/core/macros.inc.html:220
 msgid "Note"
 msgstr "Bemerkung"
 
-#: core/models/storage.py:741
+#: core/models/storage.py:745
 msgid "Inventory Difference"
 msgstr "Inventurdifferenz"
 
-#: core/models/storage.py:742
+#: core/models/storage.py:746
 msgid "Inventory Differences"
 msgstr "Inventurdifferenzen"
 
-#: core/models/storage.py:751 core/templates/core/storage/deliver_box.html:31
+#: core/models/storage.py:755 core/templates/core/storage/deliver_box.html:31
 #: core/templates/core/storage/delivery.html:63
 #: core/templates/core/storage/delivery.part.html:15
 msgid "Count"
 msgstr "Anzahl"
 
-#: core/models/storage.py:760 core/templates/core/storage/delivery.html:64
+#: core/models/storage.py:764 core/templates/core/storage/delivery.html:64
 #: core/templates/core/storage/delivery.part.html:16
 msgid "Delivered"
 msgstr "Geliefert"
 
-#: core/models/storage.py:781
+#: core/models/storage.py:785
 msgctxt "Order system"
 msgid "Order"
 msgstr "Bestellung"
 
-#: core/models/storage.py:782
+#: core/models/storage.py:786
 msgctxt "Order system"
 msgid "Orders"
 msgstr "Bestellungen"
 
-#: core/models/storage.py:785
+#: core/models/storage.py:789
 msgid "Can order chemicals"
 msgstr "Kann Chemikalien bestellen"
 
-#: core/models/storage.py:794
+#: core/models/storage.py:798
 msgid "Quantity"
 msgstr "Menge"
 
-#: core/models/storage.py:797 core/templates/core/storage/history.html:13
+#: core/models/storage.py:801 core/templates/core/storage/history.html:13
 #: core/templates/core/storage/history.html:25
 msgid "Opened"
 msgstr "Geöffnet"
 
-#: core/models/storage.py:823 core/templates/core/macros.inc.html:143
+#: core/models/storage.py:827 core/templates/core/macros.inc.html:143
 #: core/templates/core/macros.inc.html:145
 #: core/templates/core/storage/consume/normal.html:4
 #: core/templates/core/storage/consume/select.html:5
@@ -1685,7 +1692,7 @@ msgstr "Geöffnet"
 msgid "Consume"
 msgstr "Entnahme"
 
-#: core/models/storage.py:824
+#: core/models/storage.py:828
 #: core/templates/core/storage/consume/normal.html:16
 #: core/templates/core/storage/consume/special.html:30
 msgid "Consumes"
@@ -1865,7 +1872,7 @@ msgstr "Kapiteldaten eingeben"
 #: core/templates/core/manage/base.html:33 core/templates/core/profile.html:23
 #: core/templates/core/storage/deliver_box.html:20
 #: core/templates/core/storage/deliver_packages.html:59
-#: core/templates/core/storage/initial_delivery.html:78
+#: core/templates/core/storage/initial_delivery.html:79
 #: core/templates/core/storage/merge_select.part.html:14
 #: core/templates/core/storage/new_package_2.html:33
 #: core/templates/core/storage/stocklimits.html:50
@@ -2134,7 +2141,7 @@ msgstr "Anmelden"
 #: core/templates/core/macros.inc.html:7 core/templates/core/macros.inc.html:46
 #: core/templates/core/macros.inc.html:135
 #: core/templates/core/storage/observe.html:33
-#: core/templates/core/storage/storage.html:51
+#: core/templates/core/storage/storage.html:57
 msgid "CMR"
 msgstr "CMR"
 
@@ -2166,7 +2173,7 @@ msgstr "Zeige mehr"
 #: core/templates/core/storage/inventory_result.html:14
 #: core/templates/core/storage/observe.html:12
 #: core/templates/core/storage/storage.html:15
-#: core/templates/core/storage/storage.html:28
+#: core/templates/core/storage/storage.html:31
 #: core/templates/core/storage/stored_chemicals.html:12
 #: core/templates/core/storage/stored_chemicals.html:22
 msgid "No."
@@ -2176,14 +2183,14 @@ msgstr "Nr."
 #: core/templates/core/macros.inc.html:83
 #: core/templates/core/storage/observe.html:15
 #: core/templates/core/storage/storage.html:18
-#: core/templates/core/storage/storage.html:31
+#: core/templates/core/storage/storage.html:34
 msgid "GHS"
 msgstr "GHS"
 
 #: core/templates/core/macros.inc.html:94
 #: core/templates/core/search/package.html:63
 #: core/templates/core/storage/observe.html:60
-#: core/templates/core/storage/storage.html:84
+#: core/templates/core/storage/storage.html:93
 #: core/templates/core/storage/tox_info.html:97
 msgid "No results"
 msgstr "Keine Ergebnisse"
@@ -2212,7 +2219,7 @@ msgstr "Giftig"
 
 #: core/templates/core/macros.inc.html:151
 #: core/templates/core/macros.inc.html:153
-#: core/templates/core/storage/transfer.html:43 core/views/helpers.py:402
+#: core/templates/core/storage/transfer.html:43 core/views/helpers.py:403
 #: core/views/storage.py:236
 msgid "Transfer"
 msgstr "Umlagern"
@@ -2264,7 +2271,7 @@ msgid "Check chemicals against storage classes"
 msgstr "Zusammenlagerung überprüfen"
 
 #: core/templates/core/macros.inc.html:253
-#: core/templates/core/storage/storage.html:105
+#: core/templates/core/storage/storage.html:117
 msgid "Check storage classes"
 msgstr "Lagerklassen überprüfen"
 
@@ -2754,14 +2761,14 @@ msgid "Limits min./max."
 msgstr "Bestandslimits min./max."
 
 #: core/templates/core/storage/chem_info.html:51
-#: core/templates/core/storage/storage.html:35
+#: core/templates/core/storage/storage.html:38
 msgid "Limits"
 msgstr "Bestandslimits"
 
 #: core/templates/core/storage/chem_info.html:85
 #: core/templates/core/storage/chem_info.html:95
 #: core/templates/core/storage/storage.html:19
-#: core/templates/core/storage/storage.html:32
+#: core/templates/core/storage/storage.html:35
 msgid "Package Size"
 msgstr "Gebindegröße"
 
@@ -2769,8 +2776,8 @@ msgstr "Gebindegröße"
 #: core/templates/core/storage/chem_info.html:97
 #: core/templates/core/storage/index.html:15
 #: core/templates/core/storage/index.html:24
-#: core/templates/core/storage/storage.html:23
-#: core/templates/core/storage/storage.html:36 core/utils.py:86
+#: core/templates/core/storage/storage.html:26
+#: core/templates/core/storage/storage.html:42 core/utils.py:86
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -2896,7 +2903,7 @@ msgstr ""
 "und lassen die Felder einfach leer."
 
 #: core/templates/core/storage/deliver_box.html:53
-#: core/templates/core/storage/initial_delivery.html:96
+#: core/templates/core/storage/initial_delivery.html:97
 msgid "Don't forget to enter the brutto mass!"
 msgstr "Bitte vergessen Sie nicht, die Bruttomasse einzugeben!"
 
@@ -2910,7 +2917,7 @@ msgid "Container"
 msgstr "Gebinde"
 
 #: core/templates/core/storage/deliver_packages.html:15
-#: core/templates/core/storage/initial_delivery.html:58
+#: core/templates/core/storage/initial_delivery.html:59
 msgid "Batch"
 msgstr "Charge"
 
@@ -3099,13 +3106,13 @@ msgstr "Giftinformationen"
 msgid "Name Extra"
 msgstr "Name Extra"
 
-#: core/templates/core/storage/initial_delivery.html:56
+#: core/templates/core/storage/initial_delivery.html:57
 msgid "Ident."
 msgstr "Ident."
 
-#: core/templates/core/storage/initial_delivery.html:59
+#: core/templates/core/storage/initial_delivery.html:60
 #: core/templates/core/storage/storage.html:21
-#: core/templates/core/storage/storage.html:34
+#: core/templates/core/storage/storage.html:37
 msgid "Brutto"
 msgstr "Brutto"
 
@@ -3420,7 +3427,7 @@ msgid "Minimum:"
 msgstr "Minimum:"
 
 #: core/templates/core/storage/stocklimits.html:34
-#: core/templates/core/storage/stocklimits.html:37 core/views/helpers.py:396
+#: core/templates/core/storage/stocklimits.html:37 core/views/helpers.py:397
 #: core/views/storage.py:684 core/views/storage.py:685
 msgid "not set"
 msgstr "nicht gesetzt"
@@ -3431,23 +3438,23 @@ msgid "Maximum:"
 msgstr "Maximum:"
 
 #: core/templates/core/storage/storage.html:20
-#: core/templates/core/storage/storage.html:33
+#: core/templates/core/storage/storage.html:36
 msgid "Stock"
 msgstr "Bestand"
 
-#: core/templates/core/storage/storage.html:70
+#: core/templates/core/storage/storage.html:79
 msgid "Stock Information"
 msgstr "Bestandsinformationen"
 
-#: core/templates/core/storage/storage.html:75 core/views/storage.py:251
+#: core/templates/core/storage/storage.html:84 core/views/storage.py:251
 msgid "Merge packages"
 msgstr "Gebinde vereinen"
 
-#: core/templates/core/storage/storage.html:97
+#: core/templates/core/storage/storage.html:109
 msgid "No places in this storage yet"
 msgstr "Es sind keine Lagerplätze in diesem Lager angelegt"
 
-#: core/templates/core/storage/storage.html:101
+#: core/templates/core/storage/storage.html:113
 msgid "Print QR-Codes"
 msgstr "QR-Codes drucken"
 
@@ -3617,27 +3624,27 @@ msgstr "Das Gebinde [{}] wurde automatisch entfernt"
 msgid "No old package found. Nothing removed."
 msgstr "Keine alten Gebinde gefunden. Nichts wurde entfernt."
 
-#: core/views/helpers.py:257
+#: core/views/helpers.py:258
 msgid "Inventory balancing"
 msgstr "Inventurausgleich"
 
-#: core/views/helpers.py:275
+#: core/views/helpers.py:276
 msgid "Inventory difference greater than saved stock: {} > {}"
 msgstr "Die Inventurdifferenz ist größer als der Bestand: {} > {}"
 
-#: core/views/helpers.py:293
+#: core/views/helpers.py:294
 msgid "Data saved. Difference: {}."
 msgstr "Daten gespeichert. Differenz: {}."
 
-#: core/views/helpers.py:295
+#: core/views/helpers.py:296
 msgid "{} Package marked as empty."
 msgstr "{} Gebinde als leer markiert."
 
-#: core/views/helpers.py:335
+#: core/views/helpers.py:336
 msgid "No storage class given"
 msgstr "Keine Lagerklasse angegeben"
 
-#: core/views/helpers.py:346
+#: core/views/helpers.py:347
 #, python-brace-format
 msgid ""
 "{sc} -> Storage of {new} together with {stored} is possibly not allowed. "
@@ -3646,12 +3653,12 @@ msgstr ""
 "{sc} -> Die Zusammenlagerung von {new} und {stored} ist evtl. nicht erlaubt. "
 "Bitte prüfen Sie die Lagerklassen und die gelagerten Mengen."
 
-#: core/views/helpers.py:403
+#: core/views/helpers.py:404
 #, python-brace-format
 msgid "Content transfered to {fill}"
 msgstr "Inhalt vereint mit {fill}"
 
-#: core/views/helpers.py:414
+#: core/views/helpers.py:415
 msgid "Filled up from {}"
 msgstr "Aufgefüllt von {}"
 
@@ -3847,21 +3854,3 @@ msgstr "Die folgende Nachricht wurde an {} geschickt:<br>{}"
 #: core/views/storage.py:727
 msgid "Error:<br>{}"
 msgstr "Fehler:<br>{}"
-
-#~ msgid "up to date"
-#~ msgstr "aktuell"
-
-#~ msgid "Last updated"
-#~ msgstr "Zuletzt erneuert"
-
-#~ msgid "NO"
-#~ msgstr "NEIN"
-
-#~ msgid "YES"
-#~ msgstr "JA"
-
-#~ msgid "German"
-#~ msgstr "Deutsch"
-
-#~ msgid "English"
-#~ msgstr "Englisch"

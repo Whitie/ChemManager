@@ -291,7 +291,7 @@ class InitialDeliveryForm(forms.Form):
         label=_('Container Material')
     )
     delivered_for = forms.ModelChoiceField(
-        queryset=User.objects.all().exclude(
+        queryset=User.objects.filter(is_active=True).exclude(
             username__icontains='admin'
         ).order_by('username'),
         required=False, label=_('Delivered for')
