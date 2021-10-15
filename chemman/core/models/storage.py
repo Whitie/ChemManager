@@ -365,6 +365,10 @@ class StoredPackage(models.Model):
     )
     dispose_reason = models.CharField(_('Dispose Reason'), max_length=100,
                                       blank=True, default='')
+    delivered_for = models.ForeignKey(
+        User, verbose_name=_('Delivered for'), blank=True, null=True,
+        default=None, related_name='my_deliveries', on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return '{} {:.2f} {}, {}'.format(

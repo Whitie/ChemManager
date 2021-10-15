@@ -168,7 +168,8 @@ def initial_delivery(user, chemical, **data):
         supplier_ident=data['supplier_ident'],
         supplier_code=data['supplier_code'],
         supplier_batch=data['supplier_batch'],
-        best_before=data['best_before'], stored_by=user
+        best_before=data['best_before'], stored_by=user,
+        delivered_for=data['delivered_for']
     )
     if data['brutto_mass']:
         package.brutto_mass = data['brutto_mass']

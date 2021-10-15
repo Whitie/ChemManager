@@ -20,6 +20,9 @@
             <th>{% trans %}Stock{% endtrans %}</th>
             <th>{% trans %}Brutto{% endtrans %}</th>
             <th>{% trans %}Limits min./max.{% endtrans %}</th>
+            {% if storage.type == 'through' %}
+            <th>{% trans %}Delivered for{% endtrans %}</th>
+            {% endif %}
             <th>{% trans %}Actions{% endtrans %}</th>
         </tr>
     </thead>
@@ -33,6 +36,9 @@
             <th>{% trans %}Stock{% endtrans %}</th>
             <th>{% trans %}Brutto{% endtrans %}</th>
             <th>{% trans %}Limits{% endtrans %}</th>
+            {% if storage.type == 'through' %}
+            <th>{% trans %}Delivered for{% endtrans %}</th>
+            {% endif %}
             <th>{% trans %}Actions{% endtrans %}</th>
         </tr>
     </tfoot>
@@ -66,6 +72,9 @@
             <td class="uk-text-center limit-data" data-url="{{ url('core:api-limit', stored_chem_id=p.stored_chemical.id, storage_id=storage.id) }}">
                 <i class="uk-icon-spinner uk-icon-spin"></i>
             </td>
+            {% if storage.type == 'through' %}
+            <td>{% if p.delivered_for %}{{ p.delivered_for.username }}{% else %}-{% endif %}</td>
+            {% endif %}
             <td>
                 <a href="{{ url('core:chem-inventory', chem.id) }}" class="uk-button uk-button-primary uk-button-small" title="{% trans %}Stock Information{% endtrans %}">
                     <i class="uk-icon-info"></i>
@@ -88,6 +97,9 @@
             <td></td>
             <td></td>
             <td></td>
+            {% if storage.type == 'through' %}
+            <td></td>
+            {% endif %}
             <td></td>
         </tr>
         {% endfor %}
@@ -119,6 +131,7 @@ $(document).ready(function() {
             {'searchable': false},
             {'searchable': false},
             {'searchable': false},
+            {% if storage.type == 'through' %}null,{% endif %}
             {'orderable': false, 'searchable': false}
         ]
     };

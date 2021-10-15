@@ -290,6 +290,12 @@ class InitialDeliveryForm(forms.Form):
         choices=CONTAINER_MATERIAL_CHOICES, required=False,
         label=_('Container Material')
     )
+    delivered_for = forms.ModelChoiceField(
+        queryset=User.objects.all().exclude(
+            username__icontains='admin'
+        ).order_by('username'),
+        required=False, label=_('Delivered for')
+    )
     best_before = forms.DateField(
         required=False, label=_('Best before'),
         input_formats=['%Y-%m-%d', '%y-%m-%d', '%d.%m.%Y', '%d.%m.%y']
