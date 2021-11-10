@@ -57,6 +57,9 @@
                     {% if chem.cmr %}| {% trans %}CMR{% endtrans %}{% endif %}
                 </span>
                 {% endif %}
+                {% if p.stored_chemical.name_extra %}
+                <br><small>{{ p.stored_chemical.name_extra }}</small>
+                {% endif %}
             </td>
             <td>{{ chem.identifiers.cas|default('-', true) }}</td>
             <td>
