@@ -49,7 +49,7 @@
             <td>{{ loop.index }}</td>
             <td>
                 <a href="{{ url('core:detail-by-id', chem.id) }}" class="tt" title="{{ p.stored_chemical.quality }}">
-                    {{ chem.name }}
+                    {{ chem.name }}{% if p.stored_chemical.company %} ({{ p.stored_chemical.company.short_name }}){% endif %}
                 </a>
                 {% if chem.signal_word or chem.cmr %}
                 <span class="uk-badge uk-badge-{{ chem.signal_word }}">
