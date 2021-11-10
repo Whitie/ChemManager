@@ -230,7 +230,8 @@ WIKI_SEARCH_LINK = 'https://de.wikipedia.org/wiki/Spezial:Suche/{name}'
 
 MSDS_MAXAGE_DAYS = 730
 INVENTORY_MAX_AGE = 365
-CMR_HAZARDS = ('340', '341', '350', '351', '360', '361', '362', '372')
+# 10.11.2021 Removed 372 from CMR_HAZARDS
+CMR_HAZARDS = ('340', '341', '350', '351', '360', '361', '362')
 DEFAULT_VOLUME_UNIT = 'mL'
 DEFAULT_MASS_UNIT = 'g'
 SHOW_THRESHOLDS = {
