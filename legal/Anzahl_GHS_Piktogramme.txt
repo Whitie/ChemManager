@@ -1,0 +1,12 @@
+Anzahl der erforderlichen Piktogramme
+
+Die Anzahl der erforderlichen Gefahrenpiktogramme sollte das Kennzeichnungsetikett
+nicht überladen. Daher sind nach Artikel 26 Absatz 1 der CLP-Verordnung bestimmte
+Rangfolgeregelungen anzuwenden:
+
+Muss mit "GHS01" gekennzeichnet werden, so ist die Verwendung von "GHS02" und "GHS03" fakultativ.
+Muss mit "GHS06" gekennzeichnet werden, so erscheint "GHS07" nicht.
+Muss mit "GHS05" gekennzeichnet werden, so erscheint "GHS07" für Haut- und Augenreizung nicht.
+Muss mit "GHS08" in Verbindung mit H334 (Resp. Sens. 1, 1A, 1B) gekennzeichnet werden, so erscheint
+nicht GHS07 in Verbindung mit H317 (Skin Sens, 1, 1A, 1B), H315 (Skin Irrit. 2) oder H319 (Eye Irrit. 2).
+Muss mit "GHS02" oder "GHS06" gekennzeichnet werden, so ist die Verwendung von "GHS04" fakultativ.

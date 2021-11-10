@@ -27,6 +27,7 @@ Sphinx = "2.1.0"
 Babel = "2.7.0"
 openpyxl = "2.6.4"
 weasyprint = "51"
+djangorestframework = "^3.12.4"
 
 [tool.poetry.extras]
 ldap = ["python-ldap", "python3-ldap", "django-auth-ldap"]

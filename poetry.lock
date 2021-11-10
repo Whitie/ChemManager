@@ -267,6 +267,17 @@ python-versions = "*"
 django = "*"
 
 [[package]]
+name = "djangorestframework"
+version = "3.12.4"
+description = "Web APIs for Django, made easy."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+django = ">=2.2"
+
+[[package]]
 name = "docutils"
 version = "0.17.1"
 description = "Docutils -- Python Documentation Utilities"
@@ -905,7 +916,7 @@ pgsql = ["psycopg2"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.5"
-content-hash = "140cceaadcec82a75fd759e220762456fb22213f30c20c21db2edc19b73a1327"
+content-hash = "0752f18ddc9de355515e8470c3b4dff4a6d77f623dd574723b48a7ed12e7c9a3"
 
 [metadata.files]
 alabaster = [
@@ -1036,6 +1047,10 @@ django-jinja = [
 ]
 django-spaghetti-and-meatballs = [
     {file = "django-spaghetti-and-meatballs-0.2.2.tar.gz", hash = "sha256:db5d4fb29f3ed697156370837db49ea755d62a20358ac687148ae56385557f5f"},
+]
+djangorestframework = [
+    {file = "djangorestframework-3.12.4-py3-none-any.whl", hash = "sha256:6d1d59f623a5ad0509fe0d6bfe93cbdfe17b8116ebc8eda86d45f6e16e819aaf"},
+    {file = "djangorestframework-3.12.4.tar.gz", hash = "sha256:f747949a8ddac876e879190df194b925c177cdeb725a099db1460872f7c0a7f2"},
 ]
 docutils = [
     {file = "docutils-0.17.1-py2.py3-none-any.whl", hash = "sha256:cf316c8370a737a022b72b56874f6602acf974a37a9fba42ec2876387549fc61"},

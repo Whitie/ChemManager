@@ -309,3 +309,42 @@ def get_users_by_permission(permission_name, include_superusers=True):
     return User.objects.filter(
         _get_users_by_permission(permission_name, include_superusers)
     )
+
+
+def _get_three_pics(nums):
+    while len(nums) > 3:
+        if 6 in nums:
+            if 7 in nums:
+                nums.remove(7)
+        if 1 in nums:
+            if 2 in nums:
+                nums.remove(2)
+            elif 3 in nums:
+                nums.remove(3)
+        if 2 in nums or 6 in nums:
+            if 4 in nums:
+                nums.remove(4)
+        if 5 in nums:
+            if 7 in nums:
+                nums.remove(7)
+    return nums
+
+
+def _check_ghs08_h334(chem):
+    pic = chem.pictograms.filter(ref_num=8).first()
+    h = chem.hazard_statements.filter(ref='334').first()
+    return pic and h
+
+
+def get_three_pics(chem):
+    nums = [x.ref_num for x in chem.pictograms.all()]
+    if len(nums) > 3:
+        nums = _get_three_pics(nums)
+    if len(nums) > 3 and _check_ghs08_h334(chem):
+        if 7 in nums:
+            nums.remove(7)
+    if len(nums) > 3:
+        print('==> Could not reduce to 3 pictograms')
+        print('==>', chem)
+    new_pics = GHSPictogram.objects.filter(ref_num__in=nums)
+    return new_pics.order_by('ref_num')
