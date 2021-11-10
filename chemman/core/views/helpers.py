@@ -38,6 +38,10 @@ def search_chemical_by_name(search):
     return chems
 
 
+def get_matching_synonyms(chem, search):
+    return chem.synonyms.filter(name__icontains=search).order_by('name')
+
+
 def search_package(data):
     query = (
         Q(stored_chemical__chemical=data['chemical']) &

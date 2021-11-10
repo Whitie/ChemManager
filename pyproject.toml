@@ -24,9 +24,9 @@ python3-ldap = {version = "0.9.8.4", optional = true}
 qrcode = "6.1"
 requests = "2.22.0"
 Sphinx = "2.1.0"
-WeasyPrint = "51"
 Babel = "2.7.0"
 openpyxl = "2.6.4"
+weasyprint = "51"
 
 [tool.poetry.extras]
 ldap = ["python-ldap", "python3-ldap", "django-auth-ldap"]
