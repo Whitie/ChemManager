@@ -3,12 +3,10 @@
 Django settings for chemman project.
 """
 
-import ldap
 import os
 
 from django.contrib.messages import constants as messages
 from django.utils.translation import ugettext_lazy as _
-from django_auth_ldap.config import LDAPSearch
 
 from core.units import Mass, Volume
 
@@ -65,11 +63,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'cmrpc.middlewares.RpcAuthMiddleware',
-]
-
-AUTHENTICATION_BACKENDS = [
-    'django_auth_ldap.backend.LDAPBackend',
-    'django.contrib.auth.backends.ModelBackend',
 ]
 
 ROOT_URLCONF = 'chemman.urls'
@@ -132,11 +125,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'chemman.wsgi.application'
-
-if DEBUG:
-    TEMPLATES[0]['OPTIONS']['context_processors'].append(
-        'core.processors.add_sql_queries'
-    )
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -244,27 +232,6 @@ USE_OZONE = True
 OZONE_URL = 'http://10.0.0.175:8003/'
 OZONE_UID_URL = OZONE_URL + 'core/api/uid/{username}/'
 
-# LDAP
-AUTH_LDAP_SERVER_URI = 'ldap://10.0.0.10'
-AUTH_LDAP_CONNECTION_OPTIONS = {
-    ldap.OPT_REFERRALS: 0,
-}
-AUTH_LDAP_USER_SEARCH = LDAPSearch(
-    'dc=bbzchemie,dc=local', ldap.SCOPE_SUBTREE,
-    'sAMAccountName=%(user)s'
-)
-AUTH_LDAP_USER_ATTR_MAP = {
-    'username': 'sAMAccountName',
-    'first_name': 'givenName',
-    'last_name': 'sn',
-    'email': 'mail',
-}
-# AUTH_LDAP_BIND_AS_AUTHENTICATING_USER = True
-
-# Set in local_settings
-# AUTH_LDAP_BIND_DN = ''
-# AUTH_LDAP_BIND_PASSWORD = ''
-
 # Deprecated
 # OZONE_AUTH_URL = 'http://10.0.0.175:8003/external_auth2/'
 # OZONE_AUTH_KEY = b''
@@ -312,6 +279,11 @@ def get_secret_key(secret_file):
 SECRET_KEY = get_secret_key(SECRET_FILE)
 
 try:
-    from .local_settings import *
+    from .local_settings import *  # noqa: F401,F403
 except ImportError:
     pass
+
+if DEBUG:
+    TEMPLATES[0]['OPTIONS']['context_processors'].append(
+        'core.processors.add_sql_queries'
+    )
