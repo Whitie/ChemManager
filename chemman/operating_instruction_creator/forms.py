@@ -16,6 +16,7 @@ EDIT_PERM = 'operating_instruction_creator.create'
 
 
 class OIForm(forms.Form):
+    msds_date = forms.DateField(label=_('MSDS Date'))
     dep_1 = forms.ModelChoiceField(
         label=_('Department 1'), queryset=WorkDepartment.objects.all()
     )

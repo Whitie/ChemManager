@@ -127,6 +127,7 @@ class OperatingInstructionDraft(models.Model):
         OperatingInstruction, verbose_name=_('Saved as'), blank=True,
         null=True, default=None, on_delete=models.SET_NULL
     )
+    msds_date = models.DateField(_('MSDS Date'), blank=True, null=True)
 
     def __str__(self):
         deps = [x.name for x in self.work_departments.all()]

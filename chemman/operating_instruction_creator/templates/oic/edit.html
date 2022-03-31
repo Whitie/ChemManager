@@ -56,6 +56,7 @@
                 <strong>{% trans %}Creator:{% endtrans %}</strong> {{ user.get_full_name() }}
             </div>
         </div>
+        {{ form_row(form.msds_date) }}
         {{ form_row(form.dep_1) }}
         {{ form_row(form.dep_2) }}
         {{ form_row(form.signature) }}
@@ -150,6 +151,9 @@ function update_preview() {
 
 {% if edit %}
 function fill_fields_on_edit() {
+    {% if oi.msds_date %}
+    $('#id_msds_date').val('{{ oi.msds_date|date("SHORT_DATE_FORMAT") }}');
+    {% endif %}
     $('#id_dep_1 option[value="{{ deps[0].id }}"]').attr('selected', true);
     {% if deps|length > 1 %}
     $('#id_dep_2 option[value="{{ deps[1].id }}"]').attr('selected', true);
@@ -209,6 +213,8 @@ $(document).ready(function() {
     {% for id in hpics %}
     $('#id_pictograms option[value="{{ id }}"]').attr('selected', true);
     {% endfor %}
+    var msds_date = $('#id_msds_date');
+    var dp = UIkit.datepicker(msds_date, {format: 'DD.MM.YYYY'});
     add_focus_handler();
 })
 </script>

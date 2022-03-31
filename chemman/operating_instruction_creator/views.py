@@ -19,7 +19,9 @@ from weasyprint import HTML
 
 from core.views.helpers import search_chemical_by_name
 from core.models.base import Department
-from core.models.chems import Chemical, OperatingInstruction
+from core.models.chems import (
+    Chemical, OperatingInstruction
+)
 from core.utils import base_menu, Menu, MenuItem, render, render_json
 from .forms import OIForm, ReleaseForm
 from .models import OperatingInstructionDraft, FirstAidPictogram
@@ -31,6 +33,12 @@ oic_menu = Menu(
     _('Op. Inst.'),
     MenuItem(_('New'), urlname='oic:index'),
 )
+SIGNAL_WORDS = {
+    'de': {
+        'danger': 'Gefahr',
+        'warning': 'Achtung',
+    },
+}
 
 
 def generate_preview(req, data, chem):
@@ -39,6 +47,7 @@ def generate_preview(req, data, chem):
     fa1 = 'E003' if data['green_cross'] else 'E012'
     data['fa1'] = FirstAidPictogram.objects.get(ident=fa1)
     data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
+    data['signal_word'] = SIGNAL_WORDS['de'][chem.signal_word]
     ctx = dict(user=req.user, font_size=12, chem=chem, now=timezone.now(),
                root=settings.MEDIA_ROOT.rstrip('/'), **data)
     html_filled = render_to_string('oic/pdf/oi-preview.de.html', ctx)
@@ -48,17 +57,19 @@ def generate_preview(req, data, chem):
 
 def generate_released_pdf(user, draft):
     data = {}
+    lang = draft.language.lower()
     fa1 = 'E003' if draft.green_cross else 'E012'
     data['fa1'] = FirstAidPictogram.objects.get(ident=fa1)
     data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
     data['pictograms'] = [x for x in draft.chemical.pictograms.all()]
     data['ppics'] = [x for x in draft.protection_pics.all()]
+    data['signal_word'] = SIGNAL_WORDS[lang][draft.chemical.signal_word]
     for num, dep in enumerate(draft.work_departments.all(), start=1):
         data['dep_{}'.format(num)] = dep.name
     ctx = dict(user=user, font_size=12, chem=draft.chemical, draft=draft,
                root=settings.MEDIA_ROOT.rstrip('/'), **data)
     # Todo: Edit template
-    tpl = 'oic/pdf/oi.{}.html'.format(draft.language.lower())
+    tpl = 'oic/pdf/oi.{}.html'.format(lang)
     html_filled = render_to_string(tpl, ctx)
     html = HTML(string=html_filled)
     return html.write_pdf()
@@ -105,6 +116,7 @@ def save_draft(draft, data):
     draft.ext_phone = data['ext_phone']
     draft.int_phone = data['int_phone']
     draft.released = None
+    draft.msds_date = data['msds_date']
     draft.save()
 
 

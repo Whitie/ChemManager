@@ -88,12 +88,18 @@
         <td><strong>Unterschrift</strong></td>
         <td>{{ signature.last_name }}</td>
       </tr>
+      <tr>
+        <td><strong>Datum SDB:</strong></td>
+        <td>{{ msds_date|date('SHORT_DATE_FORMAT') }}</td>
+        <td colspan="4"></td>
+      </tr>
       <tr class="divider">
         <td class="center" colspan="6"><h3>Gefahrstoffbezeichnung</h3></td>
       </tr>
       <tr>
-        <td colspan="2" class="center"><h3>{{ chem.identifiers.cas }}</h3></td>
-        <td colspan="4" class="center"><h3>{{ chem.display_name }}</h3></td>
+        <td colspan="6" class="center">
+          <h3>{{ chem.display_name }} ({{ chem.identifiers.cas }})</h3>
+      </td>
       </tr>
       <tr>
         <td><strong>Form:</strong></td>
@@ -124,7 +130,7 @@
             <img class="pictogram" src="file:{{ root }}/{{ pictograms[2].image.name }}">
             <br>
             {% endif %}
-            <h3>{{ _(chem.signal_word)|default('', true) }}</h3>
+            <h3>{{ signal_word }}</h3>
         </td>
       </tr>
 
