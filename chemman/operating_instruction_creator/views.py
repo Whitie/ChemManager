@@ -47,7 +47,7 @@ def generate_preview(req, data, chem):
     fa1 = 'E003' if data['green_cross'] else 'E012'
     data['fa1'] = FirstAidPictogram.objects.get(ident=fa1)
     data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
-    data['signal_word'] = SIGNAL_WORDS['de'][chem.signal_word]
+    data['signal_word'] = SIGNAL_WORDS['de'].get(chem.signal_word, '')
     ctx = dict(user=req.user, font_size=12, chem=chem, now=timezone.now(),
                root=settings.MEDIA_ROOT.rstrip('/'), **data)
     html_filled = render_to_string('oic/pdf/oi-preview.de.html', ctx)
@@ -63,7 +63,9 @@ def generate_released_pdf(user, draft):
     data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
     data['pictograms'] = [x for x in draft.chemical.pictograms.all()]
     data['ppics'] = [x for x in draft.protection_pics.all()]
-    data['signal_word'] = SIGNAL_WORDS[lang][draft.chemical.signal_word]
+    data['signal_word'] = SIGNAL_WORDS[lang].get(
+        draft.chemical.signal_word, ''
+    )
     for num, dep in enumerate(draft.work_departments.all(), start=1):
         data['dep_{}'.format(num)] = dep.name
     ctx = dict(user=user, font_size=12, chem=draft.chemical, draft=draft,
