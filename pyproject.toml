@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.5"
-Django = "2.2.15"
+Django = "2.2.28"
 CherryPy = "18.5.0"
 cryptography = "2.7"
 django-auth-ldap = {version = "2.2.0", optional = true}
