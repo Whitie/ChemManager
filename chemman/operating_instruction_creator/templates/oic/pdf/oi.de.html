@@ -184,11 +184,27 @@
         </td>
       </tr>
       <tr>
-        <td></td>
+        <td class="center">
+          {% if cpics|length >= 1 %}
+          <img class="pictogram" src="file:{{ root }}/{{ cpics[0].icon.name }}">
+          {% endif %}
+          {% if cpics|length >= 2 %}
+          <br>
+          <img class="pictogram" src="file:{{ root }}/{{ cpics[1].icon.name }}">
+          {% endif %}
+        </td>
         <td colspan="4">
           {{ draft.conduct|replace('\n', '<br>')|safe }}
         </td>
-        <td></td>
+        <td class="center">
+          {% if cpics|length >= 3 %}
+          <img class="pictogram" src="file:{{ root }}/{{ cpics[2].icon.name }}">
+          {% endif %}
+          {% if cpics|length >= 4 %}
+          <br>
+          <img class="pictogram" src="file:{{ root }}/{{ cpics[3].icon.name }}">
+          {% endif %}
+        </td>
       </tr>
 
       <tr class="divider">

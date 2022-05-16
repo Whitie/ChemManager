@@ -179,11 +179,27 @@
         </td>
       </tr>
       <tr>
-        <td></td>
+        <td class="center">
+          {% if conduct_pics|length >= 1 %}
+          <img class="pictogram" src="file:{{ root }}/{{ conduct_pics[0].icon.name }}">
+          {% endif %}
+          {% if conduct_pics|length >= 2 %}
+          <br>
+          <img class="pictogram" src="file:{{ root }}/{{ conduct_pics[1].icon.name }}">
+          {% endif %}
+        </td>
         <td colspan="4">
             {{ conduct|join('<br>')|safe }}
         </td>
-        <td></td>
+        <td class="center">
+          {% if conduct_pics|length >= 3 %}
+          <img class="pictogram" src="file:{{ root }}/{{ conduct_pics[2].icon.name }}">
+          {% endif %}
+          {% if conduct_pics|length >= 4 %}
+          <br>
+          <img class="pictogram" src="file:{{ root }}/{{ conduct_pics[3].icon.name }}">
+          {% endif %}
+        </td>
       </tr>
 
       <tr class="divider">

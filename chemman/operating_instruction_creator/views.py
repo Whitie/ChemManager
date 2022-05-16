@@ -63,6 +63,7 @@ def generate_released_pdf(user, draft):
     data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
     data['pictograms'] = [x for x in draft.chemical.pictograms.all()]
     data['ppics'] = [x for x in draft.protection_pics.all()]
+    data['cpics'] = [x for x in draft.conduct_pics.all()]
     data['signal_word'] = SIGNAL_WORDS[lang].get(
         draft.chemical.signal_word, ''
     )
@@ -108,6 +109,8 @@ def save_draft(draft, data):
     draft.eye_protection = data['eye_protection']
     draft.hand_protection = data['hand_protection']
     draft.conduct = data['conduct']
+    if data['conduct_pics']:
+        draft.conduct_pics.set(data['conduct_pics'])
     draft.green_cross = data['green_cross']
     draft.first_aid = _smart_replace(data['first_aid'])
     draft.skin = data['skin']
@@ -164,9 +167,10 @@ def edit_operating_instruction(req, id):
     deps = oi.work_departments.all()[:2]
     hpics = [x.id for x in chem.pictograms.all()]
     ppics = [x.id for x in oi.protection_pics.all()]
+    cpics = [x.id for x in oi.conduct_pics.all()]
     form = OIForm()
     ctx = dict(oi=oi, chem=chem, form=form, deps=deps, hpics=hpics,
-               ppics=ppics, menu=oic_menu, edit=True)
+               ppics=ppics, cpics=cpics, menu=oic_menu, edit=True)
     return render(req, 'oic/edit.html', ctx)
 
 

@@ -51,6 +51,10 @@ class OIForm(forms.Form):
     conduct = forms.CharField(
         label=_('Conduct in case of danger'), widget=forms.Textarea
     )
+    conduct_pics = forms.ModelMultipleChoiceField(
+        label=_('Pictograms'), queryset=ProtectionPictogram.objects.all(),
+        required=False
+    )
     green_cross = forms.BooleanField(
         label=_('Show green cross'), required=False
     )

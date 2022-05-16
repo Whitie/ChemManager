@@ -94,6 +94,7 @@
             </button>
         </legend>
         {{ form_row(form.conduct, _('Text')) }}
+        {{ form_row(form.conduct_pics) }}
         {{ form_row(form.ext_phone) }}
     </fieldset>
     <fieldset data-uk-margin>
@@ -167,6 +168,9 @@ function fill_fields_on_edit() {
     $('#id_eye_protection').val('{{ oi.eye_protection }}');
     $('#id_hand_protection').val('{{ oi.hand_protection }}');
     $('#id_conduct').val({{ oi.conduct|tojson }});
+    {% for id in cpics %}
+    $('#id_conduct_pics option[value="{{ id }}"]').attr('selected', true);
+    {% endfor %}
     $('#id_ext_phone').val('{{ oi.ext_phone }}');
     $('#id_green_cross').prop('checked', {{ oi.green_cross|tojson }});
     $('#id_first_aid').val({{ oi.first_aid|tojson }});

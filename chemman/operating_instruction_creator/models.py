@@ -103,6 +103,10 @@ class OperatingInstructionDraft(models.Model):
     conduct = models.TextField(
         _('Conduct in case of danger'), default='-'
     )
+    conduct_pics = models.ManyToManyField(
+        ProtectionPictogram, verbose_name=_('Conduct Pictograms'),
+        blank=True, related_name='drafts'
+    )
     green_cross = models.BooleanField(_('Green Cross'), default=True)
     first_aid = models.TextField(_('First aid'), default='-')
     skin = models.CharField(_('After skin contact'), max_length=150,
