@@ -356,6 +356,7 @@ def consume_special(req, package, inv):
         form = ConsumeSpecialForm(req.POST)
         if form.is_valid():
             cd = form.cleaned_data
+            cd['removed_quantity'] = abs(cd['removed_quantity'])
             cd['package'] = package
             usage = PackageUsage.objects.create(user=req.user, **cd)
             if helpers.check_removal(package, inv, usage.removed_quantity,
