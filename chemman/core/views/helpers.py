@@ -2,6 +2,8 @@
 
 from datetime import timedelta
 from decimal import Decimal
+from io import BytesIO
+from tempfile import NamedTemporaryFile
 
 from django.conf import settings
 from django.contrib import messages
@@ -9,8 +11,11 @@ from django.db.models import Q
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.translation import ugettext, ugettext_lazy as _
+from openpyxl import Workbook
+from openpyxl.drawing.image import Image
+from openpyxl.utils import get_column_letter
 
-from .. import units
+from .. import units, utils
 from ..forms import NewNormalPackageForm, NewSpecialPackageForm, EXP_LOOKUP
 from ..models import Chemical
 from ..models.storage import (
@@ -21,6 +26,7 @@ from ..models.storage import (
 
 MO = Decimal(-1)
 INV_NOTE = _('Inventory balancing!')
+QR_SIZE_ON_LABEL = 75
 
 
 def search_chemical_by_name(search):
@@ -428,3 +434,38 @@ def can_store_here(chem, place):
         else:
             return False
     return True
+
+
+# Create xlsx file for label printer
+def _make_qr(package_id):
+    png, ct = utils.make_qrcode('png', package_id)
+    buf = BytesIO()
+    png.save(buf)
+    img = Image(buf)
+    img.width, img.height = QR_SIZE_ON_LABEL, QR_SIZE_ON_LABEL
+    return img
+
+
+def create_label_file(packages):
+    columns = ['ID', 'Name', 'Zusatz', 'Content', 'qrcode']
+    wb = Workbook()
+    ws = wb.active
+    for column, title in enumerate(columns, start=1):
+        ws.cell(row=1, column=column, value=title)
+    for row, package in enumerate(packages, start=2):
+        ws.row_dimensions[row].height = QR_SIZE_ON_LABEL - 5
+        ws.cell(row=row, column=1, value=package.package_id)
+        name = '{} ({})'.format(
+            package.stored_chemical.chemical.display_name,
+            package.stored_chemical.get_quality_display()
+        )
+        ws.cell(row=row, column=2, value=name)
+        ws.cell(row=row, column=3, value=package.stored_chemical.name_extra)
+        ws.cell(row=row, column=4, value=str(package.content_obj))
+        ws.add_image(_make_qr(package.package_id), 'E{}'.format(row))
+    for column in range(1, 6):
+        ws.column_dimensions[get_column_letter(column)].width = 30
+    with NamedTemporaryFile() as tmp:
+        wb.save(tmp.name)
+        tmp.seek(0)
+        return tmp.read()

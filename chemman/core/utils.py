@@ -128,7 +128,8 @@ def str2num(name, val):
     if name in FIELD_TYPES:
         try:
             return FIELD_TYPES[name](val.replace('.', ','))
-        except:
+        except Exception as err:
+            print(err)
             return val
     return val
 

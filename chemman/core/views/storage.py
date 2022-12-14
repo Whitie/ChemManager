@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-
-import csv
 import os
 
 from collections import OrderedDict
@@ -35,6 +32,11 @@ from .. import units
 from . import helpers
 
 
+CONTENT_TYPES = {
+    'csv': 'text/csv',
+    'xlsx': ('application/vnd.openxmlformats-officedocument'
+             '.spreadsheetml.sheet'),
+}
 _raise = os.urandom(20)
 
 
@@ -502,18 +504,9 @@ def download_labels_as_csv(req):
     packages = StoredPackage.objects.select_related().filter(
         id__in=package_ids
     ).order_by('stored_chemical__chemical__name')
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="labels.csv"'
-    writer = csv.writer(response, dialect='excel')
-    writer.writerow(['ID', 'Name', 'Content'])
-    for package in packages:
-        name = '{} ({})'.format(
-            package.stored_chemical.chemical.display_name,
-            package.stored_chemical.get_quality_display()
-        )
-        if package.stored_chemical.name_extra:
-            name = '{}, {}'.format(name, package.stored_chemical.name_extra)
-        writer.writerow([package.package_id, name, str(package.content_obj)])
+    response = HttpResponse(content_type=CONTENT_TYPES['xlsx'])
+    response['Content-Disposition'] = 'attachment; filename="labels.xlsx"'
+    response.write(helpers.create_label_file(packages))
     return response
 
 
