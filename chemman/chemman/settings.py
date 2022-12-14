@@ -231,23 +231,7 @@ INFO_WRONG_BRUTTO = ['admin']
 USE_OZONE = True
 OZONE_URL = 'http://10.0.0.175:8003/'
 OZONE_UID_URL = OZONE_URL + 'core/api/uid/{username}/'
-
-# Deprecated
-# OZONE_AUTH_URL = 'http://10.0.0.175:8003/external_auth2/'
-# OZONE_AUTH_KEY = b''
-# OZONE_AUTH_SEPARATOR = '~##~'
-
-# if USE_OZONE:
-#     AUTHENTICATION_BACKENDS.insert(
-#         0, 'core.ozone_support.OzoneAuthBackend'
-#     )
-
-# Now handled by background tasks
-# MSDS_WORKER_URL = 'http://127.0.0.1:12012/'
-# MSDS_WORKER_USER = 'cm'
-# MSDS_WORKER_PASSWD = ''
-
-# Deprecation End
+LINK_FIRST_THROUGH_STORAGE = True
 
 # Only served by external server (pure HTML/CSS/JS)
 # Set to empty string, to hide the link

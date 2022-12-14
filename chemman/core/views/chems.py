@@ -25,6 +25,7 @@ from ..models.safety import (
     HazardStatement, EUHazardStatement, PrecautionaryStatement,
     GHSPictogram
 )
+from ..models.storage import Storage
 from ..tasks import get_ozone_user_id
 from ..utils import make_qrcode, render, render_json
 from .helpers import (
@@ -51,9 +52,15 @@ def index(req):
         id__in=settings.SHOW_HB_PARAGRAPHS
     )
     chems = query.filter(special_log=True, active=True)
+    if settings.LINK_FIRST_THROUGH_STORAGE:
+        storage = Storage.objects.select_related().filter(
+            type='through'
+        ).first()
+    else:
+        storage = None
     ctx = dict(title=_('Mainpage'), all_count=all_count, cmr_count=cmr_count,
                active_count=active_count, paragraphs=paragraphs, notes=[],
-               chems=chems)
+               chems=chems, storage=storage)
     if req.user.is_authenticated:
         for note in Notification.objects.exclude(seen_by=req.user):
             note.seen_by.add(req.user)

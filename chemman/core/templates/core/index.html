@@ -5,6 +5,12 @@
 <p class="uk-text-right uk-text-muted">
     {% trans %}Currently {{ all_count }} chemicals are listed
     ({{ active_count }} active / {{ cmr_count }} CMR).{% endtrans %}
+    {% if user.is_authenticated and storage %}
+    <br>
+    <a href="{{ url('core:storage-inventory', storage.id) }}" class="uk-button uk-button-primary uk-button-mini">
+        {{ storage.name }}
+    </a>
+    {% endif %}
     {% if user.is_staff %}
     <br>
     <a href="{{ url('admin:index') }}" class="uk-button uk-button-mini">
