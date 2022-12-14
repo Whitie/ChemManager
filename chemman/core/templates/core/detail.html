@@ -50,7 +50,7 @@
                 {{ m.storage(chem, packages, false) }}
             </li>
             <li>
-                {{ m.msdss(chem.storage.all()) }}
+                {{ m.msdss(chem, chem.storage.all()) }}
             </li>
             <li>{{ m.operating_instructions(chem) }}</li>
         </ul>

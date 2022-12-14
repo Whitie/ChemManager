@@ -237,7 +237,7 @@ All chemicals are potentially dangerous. They are therefore only be handled by s
 </table>
 {%- endmacro %}
 
-{% macro msdss(stchems, headline=true) -%}
+{% macro msdss(chem, stchems, headline=true) -%}
 {% if headline %}
 <h2 class="bg-primary">
     <i class="uk-icon-book"></i>
@@ -245,6 +245,14 @@ All chemicals are potentially dangerous. They are therefore only be handled by s
 </h2>
 {% endif %}
 <ul class="uk-list uk-list-striped">
+    {% if chem.identifiers.imported_from %}
+    <li>
+        <em>{% trans %}Imported from{% endtrans %}</em>:
+        <a href="{{ chem.identifiers.imported_from.url }}" target="_blank">
+            {{ chem.identifiers.imported_from.name }}
+        </a>
+    </li>
+    {% endif %}
     {% for c in stchems %}
     {% if c.msds %}
     <li>
