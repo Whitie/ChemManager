@@ -25,7 +25,7 @@ from ..models.safety import (
     HazardStatement, EUHazardStatement, PrecautionaryStatement,
     GHSPictogram
 )
-from ..models.storage import Storage
+from ..models.storage import Storage, StoredPackage
 from ..tasks import get_ozone_user_id
 from ..utils import make_qrcode, render, render_json
 from .helpers import (
@@ -69,9 +69,20 @@ def index(req):
     return render(req, 'core/index.html', ctx)
 
 
+def _get_package(pid):
+    pk = int(pid.split('-')[-1])
+    return StoredPackage.objects.get(pk=int(pk))
+
+
 def search(req, searchstring=None):
     if searchstring is None:
         searchstring = req.POST['search']
+    if searchstring.startswith('#'):
+        try:
+            package = _get_package(searchstring.strip())
+            return redirect('core:package-info', pid=package.id)
+        except Exception as err:
+            print(err)
     chems = search_chemical_by_name(searchstring)
     title = _('Searchresult for {search}').format(search=searchstring)
     ctx = dict(title=title, searchstring=searchstring, chems=chems)
