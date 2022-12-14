@@ -149,7 +149,7 @@ def index(req):
     drafts = OperatingInstructionDraft.objects.select_related().filter(
         released__isnull=True).order_by('-edited')
     released = OperatingInstructionDraft.objects.select_related().filter(
-        released__isnull=False).order_by('-edited')
+        released__isnull=False, saved_as__isnull=False).order_by('-edited')
     ctx = dict(drafts=drafts, released=released, menu=oic_menu)
     return render(req, 'oic/index.html', ctx)
 
