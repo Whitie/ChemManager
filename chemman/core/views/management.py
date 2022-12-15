@@ -6,8 +6,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import Permission, User
 from django.db.models import Q
 from django.shortcuts import redirect
-from django.utils import six
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from ..manage_forms import (
     BuildingForm, DepartmentForm, NotificationForm, StorageForm,
@@ -35,7 +34,7 @@ def get_permission_object(perm):
 
 
 def get_users_with_permission(perm, include_superuser=True):
-    if isinstance(perm, six.string_types):
+    if isinstance(perm, (str, bytes)):
         pobj = get_permission_object(perm)
     else:
         pobj = perm

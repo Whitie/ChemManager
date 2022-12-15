@@ -5,14 +5,16 @@ Django settings for chemman project.
 
 import os
 
+from pathlib import Path
+
 from django.contrib.messages import constants as messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from core.units import Mass, Volume
 
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 MESSAGE_TAGS = {
     messages.INFO: '',
@@ -45,7 +47,7 @@ INSTALLED_APPS = [
     'django_jinja',
     'django_jinja.contrib._humanize',
     'django_spaghetti',
-    'background_task',
+    'django_q',
     # ChemMan apps
     'core',
     'cmrpc',
@@ -86,8 +88,6 @@ TEMPLATES = [
             'extensions': [
                 'jinja2.ext.do',
                 'jinja2.ext.loopcontrols',
-                'jinja2.ext.with_',
-                'jinja2.ext.autoescape',
                 'django_jinja.builtins.extensions.CsrfExtension',
                 'django_jinja.builtins.extensions.CacheExtension',
                 'django_jinja.builtins.extensions.TimezoneExtension',
@@ -132,7 +132,7 @@ WSGI_APPLICATION = 'chemman.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'chemman.sqlite3'),
+        'NAME': BASE_DIR / 'chemman.sqlite3',
     }
 }
 
@@ -140,7 +140,7 @@ DATABASES = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': os.path.join(BASE_DIR, 'cache'),
+        'LOCATION': BASE_DIR / 'cache',
         'TIMEOUT': 600,
         'OPTIONS': {
             'MAX_ENTRIES': 10000,
@@ -191,23 +191,23 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'chemman', 'locale'),
-    os.path.join(BASE_DIR, 'core', 'locale'),
-    os.path.join(BASE_DIR, 'floor_map', 'locale'),
-    os.path.join(BASE_DIR, 'msds_collector', 'locale'),
-    os.path.join(BASE_DIR, 'operating_instruction_creator', 'locale'),
+    BASE_DIR / 'chemman' / 'locale',
+    BASE_DIR / 'core' / 'locale',
+    BASE_DIR / 'floor_map' / 'locale',
+    BASE_DIR / 'msds_collector' / 'locale',
+    BASE_DIR / 'operating_instruction_creator' / 'locale',
 ]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'cp_static')
+STATIC_ROOT = BASE_DIR / 'cp_static'
 
 START_VIEW = 'core:index'
 SHOW_HB_PARAGRAPHS = [1]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_ROOT = BASE_DIR / 'uploads'
 MEDIA_URL = '/media/'
 
 SESSION_COOKIE_NAME = 'cm_sid'
@@ -246,16 +246,26 @@ SPAGHETTI_SAUCE = {
 
 SITE_ID = 1
 
-SECRET_FILE = os.path.join(BASE_DIR, '.secret')
+# Django-q
+Q_CLUSTER = {
+    'sync': True,
+    'timeout': 90,
+    'retry': 120,
+    'queue_limit': 100,
+    'max_attempts': 5,
+    'orm': 'default',
+}
+
+SECRET_FILE = BASE_DIR / '.secret'
 
 
 def get_secret_key(secret_file):
     try:
-        with open(secret_file, 'rb') as fp:
+        with SECRET_FILE.open('rb') as fp:
             return fp.read()
     except FileNotFoundError:
         secret_key = os.urandom(40)
-        with open(secret_file, 'wb') as fp:
+        with SECRET_FILE.open('wb') as fp:
             fp.write(secret_key)
         return secret_key
 

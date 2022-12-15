@@ -2,7 +2,7 @@
 
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from core.json_utils import dumps
 from core.models.storage import Building

@@ -9,7 +9,7 @@ from decimal import Decimal as D
 from django.core.files.base import ContentFile
 from django.db.models import Q
 from django.utils.text import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from core.models.chems import Chemical, Identifiers, PhysicalData, Synonym
 from core.models.safety import (

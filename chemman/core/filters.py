@@ -4,8 +4,8 @@ from base64 import b64encode
 from os import path
 
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
-from jinja2 import Markup
+from django.utils.translation import gettext_lazy as _
+from jinja2.utils import markupsafe
 
 from . import units
 from .json_utils import dumps
@@ -33,7 +33,7 @@ BUILTIN_LISTS = {
 
 def markup_unit(value):
     if 'm3' in value:
-        return Markup(value.replace('m3', 'm<sup>3</sup>'))
+        return markupsafe.Markup(value.replace('m3', 'm<sup>3</sup>'))
     return value
 
 
@@ -51,7 +51,7 @@ def builtin_list(list_name):
     tag = '<a href="{url}">{name}</a>'.format(
         url=list_url(list_spec['query_spec'], name), name=name
     )
-    return Markup(tag)
+    return markupsafe.Markup(tag)
 
 
 def _humanize_mass(value, unit):
@@ -90,7 +90,7 @@ def _humanize_volume(value, unit):
         return '{:.2f} {}'.format(val, u)
     else:
         val = units.convert(val, from_unit, 'm3')
-        return Markup('{:4f} m<sup>3</sup>'.format(val))
+        return markupsafe.Markup('{:4f} m<sup>3</sup>'.format(val))
 
 
 def humanize_mass_vol(value, unit):

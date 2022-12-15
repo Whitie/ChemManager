@@ -13,7 +13,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
 
 from ..forms import (
@@ -192,7 +192,7 @@ def dispose(req, package_id):
         form = DisposeForm(req.POST)
         if form.is_valid():
             cd = form.cleaned_data
-            cd['task'] = ugettext('Disposal')
+            cd['task'] = gettext('Disposal')
             helpers.dispose_package(package, req.user, cd)
             messages.success(req,
                              _('{} where marked as disposed').format(stock))
@@ -658,7 +658,7 @@ def api_check_observe(req):
     chem_id = int(req.GET.get('chem_id', 0))
     storage_id = int(req.GET.get('storage_id', 0))
     if not chem_id or not storage_id:
-        msg = ugettext('Chemical or storage not given.')
+        msg = gettext('Chemical or storage not given.')
         return render_json(req, {'ok': False, 'msg': msg})
     storage = Storage.objects.select_related().get(pk=storage_id)
     chemical = Chemical.objects.select_related().get(pk=chem_id)

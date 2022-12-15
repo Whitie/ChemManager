@@ -3,7 +3,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse
 from django.shortcuts import redirect
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from ..forms import HandbookCommentForm, NewChapterForm, NewParagraphForm
 from ..models.handbook import (

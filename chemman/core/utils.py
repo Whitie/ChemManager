@@ -15,7 +15,7 @@ from django.http import JsonResponse
 from django.shortcuts import render as django_render
 from django.template.loader import get_template
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from qrcode.image.svg import SvgPathFillImage
 
 from .json_utils import dumps, loads

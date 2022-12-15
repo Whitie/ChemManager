@@ -5,7 +5,7 @@ from django.utils.translation import (
     npgettext as django_npgettext
 )
 from jinja2.ext import InternationalizationExtension
-from jinja2.utils import contextfunction, Markup
+from jinja2.utils import markupsafe, pass_context
 
 
 def collapse_whitespace(message):
@@ -15,20 +15,20 @@ def collapse_whitespace(message):
     )
 
 
-@contextfunction
+@pass_context
 def pgettext(env_context, context, message, **variables):
     rv = django_pgettext(context, message)
     if env_context.eval_ctx.autoescape:
-        rv = Markup(rv)
+        rv = markupsafe.Markup(rv)
     return rv % variables
 
 
-@contextfunction
+@pass_context
 def npgettext(env_context, context, singular, plural, number, **variables):
     variables.setdefault('num', number)
     rv = django_npgettext(context, singular, plural, number)
     if env_context.eval_ctx.autoescape:
-        rv = Markup(rv)
+        rv = markupsafe.Markup(rv)
     return rv % variables
 
 

@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.utils import timezone
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from openpyxl import Workbook
 from openpyxl.drawing.image import Image
 from openpyxl.utils import get_column_letter
@@ -104,7 +104,7 @@ def handle_consumption(req, storage, package):
         return redirect('core:package-remove')
     elif len(old) == 1:
         old_package = StoredPackage.objects.select_related().get(pk=old[0].id)
-        data = {'reason': ugettext('Automatic removal'),
+        data = {'reason': gettext('Automatic removal'),
                 'task': '-'}
         dispose_package(old_package, req.user, data)
         msg = _('Package [{}] was automatically removed').format(old_package)
@@ -283,7 +283,7 @@ def _calculate_difference(data):
         return diff
     inv = data['package'].get_inventory()
     if abs(diff) > inv:
-        msg = ugettext('Inventory difference greater than saved stock: '
+        msg = gettext('Inventory difference greater than saved stock: '
                        '{} > {}').format(abs(diff), inv)
         raise ValueError(msg)
     return diff
@@ -301,9 +301,9 @@ def save_inventory(data, user):
             color = 'green'
     except Exception as err:
         return False, str(err), None
-    msg = ugettext('Data saved. Difference: {}.').format(diff)
+    msg = gettext('Data saved. Difference: {}.').format(diff)
     if _check_empty(data['package']):
-        msg = ugettext('{} Package marked as empty.').format(msg)
+        msg = gettext('{} Package marked as empty.').format(msg)
         return True, msg, color
     return True, msg, color
 
@@ -410,8 +410,8 @@ def set_limit(chem, storage, _type, value, unit):
 
 def merge_packages(fill, remove, user):
     data = {
-        'task': ugettext('Transfer'),
-        'reason': ugettext('Content transfered to {fill}').format(
+        'task': gettext('Transfer'),
+        'reason': gettext('Content transfered to {fill}').format(
             fill=fill.package_id)
     }
     content = fill.blank_obj

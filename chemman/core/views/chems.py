@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
 
@@ -263,10 +263,10 @@ def api_login(req):
                 get_ozone_user_id(user.id)
             return render_json(req, {'success': True})
         else:
-            return render_json(req, {'success': False, 'msg': ugettext(
+            return render_json(req, {'success': False, 'msg': gettext(
                 'Wrong username and/or password.'
             )})
-    return render_json(req, {'success': False, 'msg': ugettext(
+    return render_json(req, {'success': False, 'msg': gettext(
         'Wrong request method (only POST allowed).'
     )})
 
