@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
+from django_q.tasks import async_task
 
 from core.models.chems import Chemical
 from core.utils import action_menu, MenuItem, render, render_json
@@ -57,8 +58,7 @@ def upload(req):
             '<i class="uk-icon-check"></i> '
             'New object (<a href="{}">{}</a>) saved, processing started...'
         ).format(obj.document.url, obj.document.name)
-        # send_to_worker(req, obj.id, obj.document.url, obj.token)
-        parse_new_msds(obj.id)
+        async_task(parse_new_msds, obj.id)
     return HttpResponse(txt)
 
 

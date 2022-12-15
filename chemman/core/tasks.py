@@ -5,7 +5,6 @@ import logging
 import requests
 
 from django.conf import settings
-#from background_task import background
 
 from .models.base import Employee
 
@@ -13,7 +12,6 @@ from .models.base import Employee
 logger = logging.getLogger(__name__)
 
 
-#@background(queue='core')
 def get_ozone_user_id(cm_user_id):
     employee = Employee.objects.get(user__id=cm_user_id)
     user = employee.user

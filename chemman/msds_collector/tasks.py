@@ -6,7 +6,6 @@ import os
 from tempfile import gettempdir, TemporaryDirectory
 
 from django.conf import settings
-#from background_task import background
 
 from .msds_parser import prepare, sdbparser, uba
 from . import utils
@@ -29,7 +28,6 @@ def _save_result(data, upload):
         obj, _ = ParsedData.objects.get_or_create(upload=upload, cmr=False)
 
 
-#@background(queue='msds')
 def parse_new_msds(upload_id):
     upload = UploadedMSDS.objects.get(pk=upload_id)
     upload.in_progress = True

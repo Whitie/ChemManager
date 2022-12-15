@@ -12,6 +12,7 @@ from django.urls import reverse
 from django.utils.translation import gettext, gettext_lazy as _
 from django.views.decorators.cache import cache_page
 from django.views.decorators.csrf import csrf_exempt
+from django_q.tasks import async_task
 
 from .. import units, utils
 from ..filters import list_url
@@ -260,7 +261,7 @@ def api_login(req):
         if user is not None:
             login(req, user)
             if settings.USE_OZONE:
-                get_ozone_user_id(user.id)
+                async_task(get_ozone_user_id, user.id)
             return render_json(req, {'success': True})
         else:
             return render_json(req, {'success': False, 'msg': gettext(
