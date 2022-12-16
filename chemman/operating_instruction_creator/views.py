@@ -15,7 +15,6 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_exempt
-from PIL import Image, ImageDraw, ImageFont
 from weasyprint import HTML
 
 from core.views.helpers import search_chemical_by_name
@@ -77,17 +76,6 @@ def generate_released_pdf(user, draft):
     html_filled = render_to_string(tpl, ctx)
     html = HTML(string=html_filled)
     return html.write_pdf()
-
-
-def get_error_image():
-    text = _('! ERROR !')
-    font = ImageFont.load_default()
-    img = Image.new('RGB', font.getsize(str(text)), color=(255, 51, 51))
-    draw = ImageDraw.Draw(img)
-    draw.text((0, 0), str(text), fill=(255, 255, 255), font=font,
-              align='center')
-    img = img.resize((img.width * 8, img.height * 8))
-    return img
 
 
 def _smart_replace(s):
