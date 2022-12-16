@@ -1,0 +1,20 @@
+[Unit]
+Description=ChemManager (Open Source Chemical Management System)
+Requires=chemman.socket
+After=network.target
+
+[Service]
+Type=notify
+User={{ user }}
+Group={{ http_group }}
+WorkingDirectory={{ base_dir }}
+RuntimeDirectory=gunicorn_chemman
+{% if hint %}# Gunicorn was not installed at generation time. Please check path.{% endif %}
+ExecStart={{ gunicorn }} --access-logfile - --workers 3 --bind unix:{{ socket }} chemman.wsgi:application
+ExecReload=/bin/kill -s HUP $MAINPID
+KillMode=mixed
+TimeoutStopSec=5
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

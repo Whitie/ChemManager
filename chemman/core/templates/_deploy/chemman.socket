@@ -1,0 +1,9 @@
+[Unit]
+Description=Gunicorn socket for ChemManager
+
+[Socket]
+ListenStream={{ socket }}
+SocketUser={{ http_user }}
+
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,13 @@
+[Unit]
+Description=Process ChemManager background tasks (using Django-Q)
+After=network.target
+
+[Service]
+WorkingDirectory={{ base_dir }}
+ExecStart={{ python }} {{ manage_py }} qcluster
+Restart=always
+User={{ user }}
+Group={{ http_group }}
+
+[Install]
+WantedBy=multi-user.target

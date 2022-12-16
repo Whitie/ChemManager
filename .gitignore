@@ -132,6 +132,7 @@ test/*
 */.secret
 */uploads/*
 */cache/*
+*/deploy/*
 
 .vscode
 *.pid

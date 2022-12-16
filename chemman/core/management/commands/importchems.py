@@ -13,8 +13,10 @@ from django.core.files import File
 from django.core.management.base import BaseCommand
 from django.utils.text import slugify
 
-from core.models.chems import *
-from core.models.safety import *
+from core.models.chems import Chemical, StorageClass, Synonym
+from core.models.safety import (
+    EUHazardStatement, GHSPictogram, HazardStatement, PrecautionaryStatement
+)
 
 
 def D(v):
@@ -27,25 +29,25 @@ def _add_statements(c, chem):
         try:
             euh = EUHazardStatement.objects.get(ref=euh_num)
             chem.eu_hazard_statements.add(euh)
-        except:
+        except:  # NOQA
             pass
     for h_num in c['h']:
         try:
             h = HazardStatement.objects.get(ref=h_num)
             chem.hazard_statements.add(h)
-        except:
+        except:  # NOQA
             pass
     for p_num in c['p']:
         try:
             p = PrecautionaryStatement.objects.get(ref=p_num)
             chem.precautionary_statements.add(p)
-        except:
+        except:  # NOQA
             pass
     for sym_num in c['symbols']:
         try:
             sym = GHSPictogram.objects.get(ref_num=sym_num)
             chem.pictograms.add(sym)
-        except:
+        except:  # NOQA
             pass
     chem.save()
     return chem
@@ -55,7 +57,7 @@ def _add_storage_class(ref, chem):
     try:
         scl = StorageClass.objects.get(value=ref)
         chem.storage_class = scl
-    except:
+    except:  # NOQA
         pass
 
 
