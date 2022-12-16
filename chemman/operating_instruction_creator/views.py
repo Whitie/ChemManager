@@ -2,6 +2,7 @@
 
 from base64 import b64encode
 from io import BytesIO
+from pathlib import Path
 
 from django.conf import settings
 from django.contrib.auth.decorators import permission_required
@@ -49,7 +50,7 @@ def generate_preview(req, data, chem):
     data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
     data['signal_word'] = SIGNAL_WORDS['de'].get(chem.signal_word, '')
     ctx = dict(user=req.user, font_size=12, chem=chem, now=timezone.now(),
-               root=settings.MEDIA_ROOT.rstrip('/'), **data)
+               root=settings.MEDIA_ROOT, **data)
     html_filled = render_to_string('oic/pdf/oi-preview.de.html', ctx)
     html = HTML(string=html_filled)
     return html
@@ -222,18 +223,19 @@ def preview(req, chem_id):
         try:
             chem = Chemical.objects.get(pk=chem_id)
             html = generate_preview(req, form.cleaned_data, chem)
-            png = BytesIO()
-            html.write_png(png)
-            png.seek(0)
-            return HttpResponse(b64encode(png.read()),
-                                content_type='image/png')
+            pdf = BytesIO()
+            html.write_pdf(pdf)
+            pdf.seek(0)
+            return HttpResponse(
+                b64encode(pdf.read()), content_type='application/pdf'
+            )
         except Exception as err:
             print(err)
-    img = get_error_image()
-    png = BytesIO()
-    img.save(png, format='PNG')
-    png.seek(0)
-    return HttpResponse(b64encode(png.read()), content_type='image/png')
+    error_file = Path(__file__).parent / 'error.pdf'
+    with error_file.open('rb') as fp:
+        return HttpResponse(
+            b64encode(fp.read()), content_type='application/pdf'
+        )
 
 
 @csrf_exempt

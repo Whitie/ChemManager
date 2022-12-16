@@ -18,7 +18,8 @@
         display: none;
         top: 75px;
         right: 5px;
-        width: 30%;
+        width: 35%;
+        height: 80%;
         border: 1px solid blue;
         background-color: white;
     }
@@ -139,14 +140,17 @@
 {% endblock %}
 
 {% block js %}
+<script src="{{ static('oic/js/pdfobject.min.js') }}"></script>
+
 <script>
 function update_preview() {
     var data = $('form').serialize();
     var url = '{{ url("oic:preview", chem.id) }}';
     $.post(url, data, function(res) {
+        let b64 = 'data:application/pdf;base64,' + res;
         $('#preview').css('display', 'block');
         $('#preview').text('');
-        $('#preview').html('<img src="data:image/png;base64,'+res+'">');
+        PDFObject.embed(b64, '#preview');
     });
 }
 
