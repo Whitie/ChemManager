@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import os
+import multiprocessing
 import platform
+import subprocess
 import sys
+
+from pathlib import Path
 
 import core
 import django
@@ -11,12 +14,34 @@ import django
 class Hardware:
     byteorder = sys.byteorder
     machine = platform.machine()
-    processor = platform.processor()
+
+    @property
+    def processor(self):
+        p = platform.processor()
+        if p:
+            return p
+        if (path := Path('/proc/cpuinfo')).is_file():
+            with path.open() as fp:
+                for line in fp:
+                    if line.lower().startswith('model name'):
+                        p = line.split(':')[1]
+                        return p.strip()
+        else:
+            try:
+                p = subprocess.run(
+                    ['wmic', 'cpu', 'get', 'name'], check=True,
+                    stdout=subprocess.PIPE
+                ).stdout
+                return p.strip()
+            except subprocess.CalledProcessError:
+                pass
 
     @property
     def cpu_count(self):
-        if hasattr(os, 'cpu_count'):
-            return os.cpu_count() or 1
+        try:
+            return multiprocessing.cpu_count() or 1
+        except Exception as err:
+            print(err)
         return 1
 
 
@@ -35,7 +60,7 @@ class Software:
 
     @property
     def uname(self):
-        return '{0.system} {0.version} on {0.node}'.format(platform.uname())
+        return platform.platform()
 
     @property
     def cm_version(self):
