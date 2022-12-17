@@ -26,8 +26,6 @@ class Command(BaseCommand):
         'chemman_cluster.service',
         'chemman.service',
         'chemman.socket',
-        'cm_daily.service',
-        'cm_daily.timer',
         'nginx.conf',
     ]
 
@@ -64,6 +62,11 @@ class Command(BaseCommand):
         parser.add_argument(
             '-u', '--user', default=user, help='User to run Gunicorn, '
             'default: %(default)s.'
+        )
+        parser.add_argument(
+            '-s', '--skip-internal-commands', default=False, dest='skip',
+            action='store_true', help='Skip internal Django commands '
+            '[migrate, collectstatic]'
         )
 
     def _check_nginx(self):
@@ -107,7 +110,8 @@ class Command(BaseCommand):
         if not gunicorn_path:
             p = pathlib.Path(sys.executable).parent
             gunicorn_path = p / 'gunicorn'
-        # self._run_commands()
+        if not opts['skip']:
+            self._run_commands()
         ctx = {
             'base_dir': settings.BASE_DIR,
             'manage_py': settings.BASE_DIR / 'manage.py',

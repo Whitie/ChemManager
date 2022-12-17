@@ -254,8 +254,9 @@ Q_CLUSTER = {
     'timeout': 90,
     'retry': 120,
     'queue_limit': 100,
-    'max_attempts': 5,
+    'max_attempts': 3,
     'orm': 'default',
+    'catch_up': False,
 }
 
 SECRET_FILE = BASE_DIR / '.secret'
