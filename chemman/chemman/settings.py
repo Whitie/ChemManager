@@ -28,6 +28,8 @@ MESSAGE_TAGS = {
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# Serve ChemManager using only Gunicorn
+SERVE_LAN = os.environ.get('SERVE_LAN', False)
 
 ALLOWED_HOSTS = []
 

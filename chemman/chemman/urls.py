@@ -40,7 +40,7 @@ urlpatterns = [
     path('rpc/', include('cmrpc.urls')),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG or settings.SERVE_LAN:
     from django.conf.urls.static import static
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += static(settings.MEDIA_URL,
