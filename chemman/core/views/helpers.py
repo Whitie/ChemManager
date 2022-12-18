@@ -284,7 +284,7 @@ def _calculate_difference(data):
     inv = data['package'].get_inventory()
     if abs(diff) > inv:
         msg = gettext('Inventory difference greater than saved stock: '
-                       '{} > {}').format(abs(diff), inv)
+                      '{} > {}').format(abs(diff), inv)
         raise ValueError(msg)
     return diff
 
@@ -455,14 +455,14 @@ def create_label_file(packages):
     for row, package in enumerate(packages, start=2):
         ws.row_dimensions[row].height = QR_SIZE_ON_LABEL - 5
         ws.cell(row=row, column=1, value=package.package_id)
-        name = '{} ({})'.format(
-            package.stored_chemical.chemical.display_name,
-            package.stored_chemical.get_quality_display()
-        )
+        name = package.stored_chemical.chemical.display_name
+        extra = package.stored_chemical.get_quality_display()
+        if package.stored_chemical.name_extra:
+            extra = f'{extra} ({package.stored_chemical.name_extra})'
         ws.cell(row=row, column=2, value=name)
-        ws.cell(row=row, column=3, value=package.stored_chemical.name_extra)
+        ws.cell(row=row, column=3, value=extra)
         ws.cell(row=row, column=4, value=str(package.content_obj))
-        ws.add_image(_make_qr(package.package_id), 'E{}'.format(row))
+        ws.add_image(_make_qr(package.package_id), f'E{row}')
     for column in range(1, 6):
         ws.column_dimensions[get_column_letter(column)].width = 30
     with NamedTemporaryFile() as tmp:
