@@ -248,9 +248,8 @@ SPAGHETTI_SAUCE = {
 
 SITE_ID = 1
 
-# Django-q
+# Django-Q
 Q_CLUSTER = {
-    'sync': True,
     'timeout': 90,
     'retry': 120,
     'queue_limit': 100,

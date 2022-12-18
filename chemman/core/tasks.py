@@ -42,7 +42,7 @@ def get_ozone_user_id(cm_user_id):
 obj, created = Schedule.objects.get_or_create(
     name='Alte Sessions löschen',
     func='django.core.management.call_command',
-    args='clearsessions'
+    args=('clearsessions',)
 )
 if created:
     obj.schedule_type = Schedule.HOURLY
@@ -50,18 +50,18 @@ if created:
 obj, created = Schedule.objects.get_or_create(
     name='CMR Substanzen prüfen',
     func='django.core.management.call_command',
-    args='checkcmr'
+    args=('checkcmr',)
 )
 if created:
     obj.schedule_type = Schedule.DAILY
-    obj.next_run = now().replace(hour=23, minute=30)
+    obj.next_run = now().replace(hour=22, minute=30)
     obj.save()
 obj, created = Schedule.objects.get_or_create(
     name='Tägliche Aufgaben ausführen',
     func='django.core.management.call_command',
-    args='cm_daily'
+    args=('cm_daily',)
 )
 if created:
     obj.schedule_type = Schedule.DAILY
-    obj.next_run = now().replace(hour=23, minute=40)
+    obj.next_run = now().replace(hour=22, minute=40)
     obj.save()
