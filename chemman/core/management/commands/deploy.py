@@ -135,7 +135,11 @@ class Command(BaseCommand):
         }
         if not INDEX.is_file():
             ctx['hide_presentations'] = True
-        for file in self.chemman_files:
+        if opts['nginx_only']:
+            files = self.chemman_files[-1:]
+        else:
+            files = self.chemman_files
+        for file in files:
             self._process_template(file, ctx)
 
     def _process_template(self, template_name, context):
