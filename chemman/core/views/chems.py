@@ -291,11 +291,11 @@ def api_search(req):
         text = '{}, CAS: {}'.format(
             chem.formula or '-', chem.identifiers.cas or '-'
         )
-        if (iupac := chem.iupac_name or chem.iupac_name_en):
-            text = f'<span title="IUPAC: {iupac}">{text}</span>'
+        if chem.iupac:
+            text = f'<span title="IUPAC: {chem.iupac}">{text}</span>'
         if hasattr(chem, 'syns'):
-            synonyms = [x.name for x in chem.syns[:5]]
-            text = '{}<br><small>{}</small>'.format(text, ', '.join(synonyms))
+            synonyms = ', '.join([x.name for x in chem.syns[:5]])
+            text = f'{text}<br><small>{synonyms}</small>'
         results.append(
             dict(title=chem.display_name, text=text,
                  url=reverse('core:detail-by-slug',

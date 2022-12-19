@@ -183,7 +183,11 @@ class Chemical(models.Model):
 
     @property
     def display_name(self):
-        return self.name or self.name_en or self.iupac_name
+        return self.name or self.name_en or self.iupac
+
+    @property
+    def iupac(self):
+        return self.iupac_name or self.iupac_name_en
 
     @property
     def acutely_toxic(self):
