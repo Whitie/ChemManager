@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-19 10:41+0100\n"
+"POT-Creation-Date: 2022-12-19 12:41+0100\n"
 "PO-Revision-Date: 2016-10-10 11:03+0200\n"
 "Last-Translator: Thorsten Weimann\n"
 "Language-Team: \n"
@@ -308,7 +308,7 @@ msgstr "Oder vorhandenes aussuchen"
 #: core/templates/core/storage/initial_delivery.html:48
 #: core/templates/core/storage/initial_delivery_result.html:11
 #: core/templates/core/storage/package_info.html:22
-#: core/templates/core/storage/package_info.html:118
+#: core/templates/core/storage/package_info.html:117
 msgid "Content"
 msgstr "Inhalt"
 
@@ -369,8 +369,8 @@ msgid "Brutto Mass"
 msgstr "Bruttomasse"
 
 #: core/forms.py:179 core/templates/core/storage/dispose.html:24
-#: core/templates/core/storage/package_info.html:92
-#: core/templates/core/storage/package_info.html:184
+#: core/templates/core/storage/package_info.html:91
+#: core/templates/core/storage/package_info.html:183
 msgid "Reason"
 msgstr "Grund"
 
@@ -391,7 +391,7 @@ msgid "Mass after"
 msgstr "Masse nach der Benutzung"
 
 #: core/forms.py:194 core/forms.py:257
-#: core/templates/core/storage/package_info.html:142
+#: core/templates/core/storage/package_info.html:141
 #: core/templates/core/storage/tox_info.html:16
 #: core/templates/core/storage/tox_info.html:43
 #: core/templates/core/storage/tox_info.html:57
@@ -400,7 +400,7 @@ msgstr "Ausbilder"
 
 #: core/forms.py:198 core/forms.py:212 core/forms.py:253
 #: core/models/base.py:198 core/models/storage.py:508
-#: core/templates/core/storage/package_info.html:149
+#: core/templates/core/storage/package_info.html:148
 #: core/templates/core/storage/tox_info.html:13
 #: core/templates/core/storage/tox_info.html:45
 #: core/templates/core/storage/tox_info.html:59
@@ -408,7 +408,7 @@ msgid "Group"
 msgstr "Gruppe"
 
 #: core/forms.py:201 core/forms.py:215 core/models/storage.py:511
-#: core/templates/core/storage/package_info.html:151
+#: core/templates/core/storage/package_info.html:150
 #: core/templates/core/storage/tox_info.html:41
 #: core/templates/core/storage/tox_info.html:55
 msgid "Task"
@@ -488,7 +488,7 @@ msgstr "Chargennummer"
 #: core/forms.py:322 core/templates/core/macros.inc.html:203
 #: core/templates/core/storage/consume/special.html:36
 #: core/templates/core/storage/package_info.html:25
-#: core/templates/core/storage/package_info.html:120
+#: core/templates/core/storage/package_info.html:119
 msgid "Brutto mass"
 msgstr "Bruttomasse"
 
@@ -1531,7 +1531,7 @@ msgstr "Einheit (Bruttomasse)"
 #: core/templates/core/search/package.html:47
 #: core/templates/core/storage/initial_delivery_result.html:13
 #: core/templates/core/storage/package_info.html:38
-#: core/templates/core/storage/package_info.html:122
+#: core/templates/core/storage/package_info.html:121
 msgid "Stored by"
 msgstr "Eingelagert von"
 
@@ -1688,7 +1688,7 @@ msgstr "Geöffnet"
 #: core/templates/core/macros.inc.html:145
 #: core/templates/core/storage/consume/normal.html:4
 #: core/templates/core/storage/consume/select.html:5
-#: core/templates/core/storage/package_info.html:139 core/utils.py:87
+#: core/templates/core/storage/package_info.html:138 core/utils.py:87
 #: core/views/storage.py:429
 msgid "Consume"
 msgstr "Entnahme"
@@ -1810,7 +1810,7 @@ msgid "Phy/Chem"
 msgstr "Phy/Chem"
 
 #: core/templates/core/detail.html:30
-#: core/templates/core/storage/package_info.html:179 core/views/storage.py:195
+#: core/templates/core/storage/package_info.html:178 core/views/storage.py:195
 msgid "Disposal"
 msgstr "Entsorgung"
 
@@ -2437,7 +2437,7 @@ msgstr "Klicken, um Details zum Gebinde anzusehen"
 
 #: core/templates/core/macros_details.inc.html:401
 #: core/templates/core/storage/classes_info.html:49
-#: core/templates/core/storage/package_info.html:82
+#: core/templates/core/storage/package_info.html:81
 msgid "Nothing listed"
 msgstr "Nichts verbucht"
 
@@ -3322,56 +3322,54 @@ msgstr "Hinweis: Entleeren oder Entsorgen"
 
 #: core/templates/core/storage/package_info.html:56
 msgid ""
-"Dispose may only be used if the amount removed has\n"
-"                ended up in the trash."
+"Dispose may only be used if the amount removed has ended up in the trash."
 msgstr ""
-"Entsorgen darf nur benutzt werden, wenn die\n"
-"entnommene Menge im Müll gelandet ist."
+"Entsorgen darf nur benutzt werden, wenn die entnommene Menge im Müll gelandet ist."
 
-#: core/templates/core/storage/package_info.html:58
+#: core/templates/core/storage/package_info.html:57
 msgid "Discharge can be used if the rest has been consumed."
 msgstr "Entleeren kann genutzt werden, wenn der Rest verbraucht wurde."
 
-#: core/templates/core/storage/package_info.html:66
+#: core/templates/core/storage/package_info.html:65
 msgid "Print QR-Code"
 msgstr "QR-Code drucken"
 
-#: core/templates/core/storage/package_info.html:70
+#: core/templates/core/storage/package_info.html:69
 msgid "Consumption:"
 msgstr "Entnahmen:"
 
-#: core/templates/core/storage/package_info.html:89
+#: core/templates/core/storage/package_info.html:88
 #, python-format
 msgid "This package was disposed by %(u)s"
 msgstr "Dieses Gebinde wurde von %(u)s entsorgt"
 
-#: core/templates/core/storage/package_info.html:96
-#: core/templates/core/storage/package_info.html:165
+#: core/templates/core/storage/package_info.html:95
+#: core/templates/core/storage/package_info.html:164
 msgid "Package is empty"
 msgstr "Gebinde ist leer"
 
-#: core/templates/core/storage/package_info.html:106
+#: core/templates/core/storage/package_info.html:105
 msgid "Detailed usage"
 msgstr "Detailierte Benutzung"
 
-#: core/templates/core/storage/package_info.html:115 core/utils.py:88
+#: core/templates/core/storage/package_info.html:114 core/utils.py:88
 #: core/views/orders.py:36 core/views/orders.py:57
 msgid "Delivery"
 msgstr "Anlieferung"
 
-#: core/templates/core/storage/package_info.html:145
+#: core/templates/core/storage/package_info.html:144
 msgid "Account"
 msgstr "Account"
 
-#: core/templates/core/storage/package_info.html:147
+#: core/templates/core/storage/package_info.html:146
 msgid "Usage time"
 msgstr "Datum/Zeit der Benutzung"
 
-#: core/templates/core/storage/package_info.html:159
+#: core/templates/core/storage/package_info.html:158
 msgid "New brutto mass"
 msgstr "Neue Bruttomasse"
 
-#: core/templates/core/storage/package_info.html:182
+#: core/templates/core/storage/package_info.html:181
 msgid "Disposed by"
 msgstr "Entsorgt von"
 
