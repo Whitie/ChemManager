@@ -288,10 +288,13 @@ def api_search(req):
     results = []
     chems = search_chemical_by_name(search)
     for chem in chems:
-        synonyms = [x.name for x in get_matching_synonyms(chem, search)[:3]]
-        text = '{}, CAS: {}'.format(chem.formula or '-',
-                                    chem.identifiers.cas or '-')
-        if synonyms:
+        text = '{}, CAS: {}'.format(
+            chem.formula or '-', chem.identifiers.cas or '-'
+        )
+        if (iupac := chem.iupac_name or chem.iupac_name_en):
+            text = f'<span title="IUPAC: {iupac}">{text}</span>'
+        if hasattr(chem, 'syns'):
+            synonyms = [x.name for x in chem.syns[:5]]
             text = '{}<br><small>{}</small>'.format(text, ', '.join(synonyms))
         results.append(
             dict(title=chem.display_name, text=text,

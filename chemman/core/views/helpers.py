@@ -33,13 +33,17 @@ def search_chemical_by_name(search):
     query = (
         Q(name__icontains=search) | Q(name_en__icontains=search) |
         Q(iupac_name__icontains=search) | Q(iupac_name_en__icontains=search) |
-        Q(formula__icontains=search) | Q(synonyms__name__icontains=search) |
-        Q(identifiers__cas__startswith=search)
+        Q(formula__icontains=search) | Q(identifiers__cas__startswith=search)
     )
     chems = []
     for chem in Chemical.objects.select_related().filter(
       query, active=True).order_by('name'):
         if chem not in chems:
+            chems.append(chem)
+    for chem in Chemical.objects.filter(
+      Q(synonyms__name__icontains=search), active=True).order_by('name'):
+        if chem not in chems:
+            chem.syns = get_matching_synonyms(chem, search)
             chems.append(chem)
     return chems
 
