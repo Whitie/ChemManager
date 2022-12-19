@@ -29,7 +29,7 @@ def _update_chem(cid, chem):
     compound = pc.Compound.from_cid(cid)
     data = compound.to_dict()
     mm_saved = chem.molar_mass or -5
-    mm_new = data.get('molecular_weight', 0)
+    mm_new = decimal.Decimal(data.get('molecular_weight', 0))
     if abs(mm_saved - mm_new) > MM_MAX_DIFF:
         chem.identifiers.pubchem_id = None
         return
