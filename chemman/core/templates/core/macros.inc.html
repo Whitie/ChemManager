@@ -26,6 +26,7 @@
         <br>
         <strong>{% trans %}Formula{% endtrans %}:</strong>
         <span class="formula">{{ chem.formula }}</span>
+        {% if chem.molar_mass %}({{ chem.molar_mass|floatformat(1) }} g/mol){% endif %}
         <a class="uk-button uk-button-primary uk-align-right" href="{{ url('core:detail-by-id', chem.id) }}">
             {% trans %}Show more{% endtrans %}
         </a>
@@ -48,7 +49,10 @@
         {% endif %}
     </td>
     <td>{{ chem.identifiers.cas| default('-', true) }}</td>
-    <td class="formula">{{ chem.formula }}</td>
+    <td>
+        <span class="formula">{{ chem.formula }}</span>
+        {% if chem.molar_mass %}({{ chem.molar_mass|floatformat(1) }} g/mol){% endif %}
+    </td>
     <td>
         {% for pic in chem.pictograms.all() %}
         <img src="{{ pic.image.url }}" width="25" alt="{{ pic.short }}" title="{{ pic }}">
