@@ -10,7 +10,7 @@
         <div class="uk-form-controls">
             {{ field }}
             {% if field.name == 'removed_quantity' %}
-            <button type="button" class="uk-button" onclick="document.getElementById('{{ field.auto_id }}').value='{{ consume_all }}';">
+            <button id="btn-remove-all" type="button" class="uk-button" onclick="document.getElementById('{{ field.auto_id }}').value='{{ consume_all }}';">
                 {% trans %}Consume all{% endtrans %}
             </button>
             {% endif %}

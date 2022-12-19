@@ -28,3 +28,15 @@
 </div>
 {% endif %}
 {% endblock %}
+
+{% block js %}
+{% if discharge %}
+<script>
+    $(document).ready(function() {
+        $('#id_removed_quantity').prop('readonly', true);
+        $('#btn-remove-all').prop('disabled', true);
+        $('#id_removed_quantity_unit option:not(:selected)').prop('disabled', true);
+    });
+</script>
+{% endif %}
+{% endblock %}

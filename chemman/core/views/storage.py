@@ -352,8 +352,12 @@ def select_chemical_for_consume(req):
     return render(req, 'core/storage/consume/select.html', ctx)
 
 
-def consume_special(req, package, inv):
-    initial = dict(removed_quantity_unit=inv.unit)
+def consume_special(req, package, inv, discharge):
+    initial = dict(mass_after_unit=inv.unit, removed_quantity_unit=inv.unit)
+    if discharge:
+        initial['removed_quantity'] = inv.value
+        new_mass = package.brutto - inv
+        initial['mass_after'] = new_mass.value
     if req.method == 'POST':
         form = ConsumeSpecialForm(req.POST)
         if form.is_valid():
@@ -380,12 +384,14 @@ def consume_special(req, package, inv):
     else:
         form = ConsumeSpecialForm(initial=initial)
     ctx = dict(title=_('Toxic Consume'), package=package, form=form,
-               consume_all=inv.value)
+               consume_all=inv.value, discharge=discharge)
     return render(req, 'core/storage/consume/special.html', ctx)
 
 
-def consume_normal(req, package, inv):
+def consume_normal(req, package, inv, discharge):
     initial = dict(removed_quantity_unit=inv.unit)
+    if discharge:
+        initial['removed_quantity'] = inv.value
     if req.method == 'POST':
         form = ConsumeNormalForm(req.POST)
         form.fields['removed_quantity_unit'].choices = get_choices(
@@ -421,12 +427,13 @@ def consume_normal(req, package, inv):
             package.unit
         )
     ctx = dict(title=_('Consume'), package=package, form=form,
-               consume_all=inv.value)
+               consume_all=inv.value, discharge=discharge)
     return render(req, 'core/storage/consume/normal.html', ctx)
 
 
 @permission_required('core.can_consume')
 def consume(req, package_id):
+    discharge = bool(req.GET.get('type', ''))
     try:
         package = StoredPackage.objects.select_related().get(
             pk=package_id
@@ -439,9 +446,9 @@ def consume(req, package_id):
         return redirect('core:consume-select')
     inv = package.get_inventory()
     if package.stored_chemical.chemical.special_log:
-        return consume_special(req, package, inv)
+        return consume_special(req, package, inv, discharge)
     else:
-        return consume_normal(req, package, inv)
+        return consume_normal(req, package, inv, discharge)
 
 
 @permission_required('core.inventory')

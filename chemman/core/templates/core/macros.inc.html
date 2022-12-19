@@ -141,8 +141,16 @@
 {{ container|safe }}
 {% if perms.core.can_consume %}
 <a href="{{ url('core:consume', pid) }}" class="uk-button uk-button-primary{% if size %} uk-button-{{ size }}{% endif %}" title="{% trans %}Consume{% endtrans %}">
-    <i class="uk-icon-arrow-circle-down"></i>
+    <i class="uk-icon-angle-down"></i>
     {% if not icon_only %}{% trans %}Consume{% endtrans %}{% endif %}
+</a>
+{% endif %}
+{{ end_container|safe }}
+{{ container|safe }}
+{% if perms.core.can_consume %}
+<a href="{{ url('core:consume', pid) }}?type=full" class="uk-button uk-button-primary{% if size %} uk-button-{{ size }}{% endif %}" title="{% trans %}Discharge{% endtrans %}">
+    <i class="uk-icon-angle-double-down"></i>
+    {% if not icon_only %}{% trans %}Discharge{% endtrans %}{% endif %}
 </a>
 {% endif %}
 {{ end_container|safe }}

@@ -29,7 +29,7 @@
                 {{ package.current_brutto }}
                 <button type="button" id="wrong_brutto" class="uk-button uk-button-mini uk-button-danger" title="{% trans %}Report wrong brutto mass.{% endtrans %}">
                     <i class="uk-icon-exclamation-triangle"></i>
-            </button>
+                </button>
             </dd>
             {% endif %}
             <dt>{% trans %}Current Stock{% endtrans %}</dt>
@@ -45,7 +45,18 @@
         </dl>
         {% if not package.empty %}
         <div class="uk-grid">
-            {{ m.actions(perms, package.id, icon_only=false, container='<div class="uk-width-1-4">', end_container='</div>')}}
+            {{ m.actions(perms, package.id, icon_only=false, container='<div class="uk-width-1-5">', end_container='</div>')}}
+        </div>
+        <br>
+        <div class="uk-accordion" data-uk-accordion="{showfirst: false}">
+            <h3 class="uk-accordion-title">
+                {% trans %}Note: Discharge VS Dispose{% endtrans %}
+            </h3>
+            <div class="uk-accordion-content">
+                <p>{% trans %}Dispose may only be used if the amount removed has
+                ended up in the trash.{% endtrans %}</p>
+                <p>{% trans %}Discharge can be used if the rest has been consumed.{% endtrans %}</p>
+            </div>
         </div>
         {% endif %}
     </div>

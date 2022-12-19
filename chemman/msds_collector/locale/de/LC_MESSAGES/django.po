@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-15 09:20+0200\n"
+"POT-Creation-Date: 2022-12-19 10:41+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -483,19 +483,19 @@ msgstr "Keine ähnlichen Treffer."
 msgid "Add as new chemical"
 msgstr "Als neue Chemikalie einfügen"
 
-#: msds_collector/views.py:23
+#: msds_collector/views.py:24
 msgid "Upload MSDS"
 msgstr "SDB hochladen"
 
-#: msds_collector/views.py:24
+#: msds_collector/views.py:25
 msgid "Add chemical"
 msgstr "Chemikalie anlegen"
 
-#: msds_collector/views.py:31
+#: msds_collector/views.py:32
 msgid "MSDS Upload"
 msgstr "SDB hochladen"
 
-#: msds_collector/views.py:42
+#: msds_collector/views.py:43
 msgid ""
 "<i class=\"uk-icon-exclamation\"></i> <span style=\"color:red;\">Object <a "
 "href=\"{}\">{}</a> already known</span>"
@@ -503,7 +503,7 @@ msgstr ""
 "<i class=\"uk-icon-exclamation\"></i> <span style=\"color:red;\">Objekt <a "
 "href=\"{}\">{}</a> bereits bekannt</span>"
 
-#: msds_collector/views.py:57
+#: msds_collector/views.py:58
 msgid ""
 "<i class=\"uk-icon-check\"></i> New object (<a href=\"{}\">{}</a>) saved, "
 "processing started..."

@@ -73,6 +73,10 @@
 
     $(document).ready(function() {
         $('#wrong_brutto').click(report_wrong_brutto);
+        {% if discharge %}
+        $('#id_mass_after').prop('readonly', true);
+        $('#id_mass_after_unit option:not(:selected)').prop('disabled', true);
+        {% endif %}
     });
 </script>
 {% endblock %}
