@@ -10,6 +10,9 @@ from pathlib import Path
 import core
 import django
 
+from django.db import connections
+from .models import Chemical
+
 
 class Hardware:
     byteorder = sys.byteorder
@@ -65,3 +68,11 @@ class Software:
     @property
     def cm_version(self):
         return '{} {}'.format(core.__version__, core.__state__)
+
+    @property
+    def database(self):
+        db = Chemical._base_manager.db
+        wrapper = connections[db]
+        version = wrapper.get_database_version()
+        name = wrapper.display_name
+        return f'{name} {version[0]}.{version[1]}'

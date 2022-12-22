@@ -29,6 +29,8 @@
             <dd>{{ software.path|join(', ') }}</dd>
             <dt>{% trans %}Django{% endtrans %}</dt>
             <dd>{{ software.django_version }}</dd>
+            <dt>{% trans %}Database{% endtrans %}</dt>
+            <dd>{{ software.database }}</dd>
             <dt>{% trans %}ChemManager{% endtrans %}</dt>
             <dd>{{ software.cm_version }}</dd>
         </dl>

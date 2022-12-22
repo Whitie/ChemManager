@@ -537,6 +537,11 @@ def set_stocklimits(req, storage_id):
     return render(req, 'core/storage/stocklimits.html', ctx)
 
 
+def transfer_many(req):
+    ctx = dict(title=_('Transfer Many Packages'))
+    return render(req, 'core/storage/transfer_many.html', ctx)
+
+
 # API
 
 @csrf_exempt
@@ -623,8 +628,8 @@ def api_consume_chem(req):
     tmp = []
     for c in StoredChemical.objects.select_related(
       ).filter(query).order_by('chemical__name'):
-        if c not in tmp:
-            tmp.append(c)
+        if c.id not in tmp:
+            tmp.append(c.id)
             res.append({
                 'id': c.id,
                 'title': str(c),

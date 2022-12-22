@@ -104,6 +104,7 @@ urlpatterns += [
          name='package-dispose'),
     path('storage/transfer/<int:package_id>/', views.transfer,
          name='package-transfer'),
+    path('storage/transfer-many/', views.transfer_many, name='transfer-many'),
     path('storage/inventory/chemical/<int:chem_id>/',
          views.chem_inventory, name='chem-inventory'),
     path('storage/inventory/<int:storage_id>/',

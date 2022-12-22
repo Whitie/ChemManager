@@ -25,4 +25,7 @@ def add_misc_info(req):
     driver = q.db
     name = settings.DATABASES[driver]['NAME']
     name = name.rsplit('.', 1)[0]
-    return dict(mirror_db=name.endswith('_test'))
+    return dict(
+        mirror_db=name.endswith('_test'),
+        api_base=req.build_absolute_uri('/api/'),
+    )

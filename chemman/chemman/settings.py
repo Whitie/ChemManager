@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_jinja',
     'django_jinja.contrib._humanize',
     'django_spaghetti',
+    'rest_framework',
     'django_q',
     # ChemMan apps
     'core',
@@ -107,7 +108,7 @@ TEMPLATES = [
                 'basename': 'core.filters.basename',
             },
             'match_extension': '.html',
-            'match_regex': r'(?!admin/).*',
+            'match_regex': r'^(?!admin/|rest_framework/).*',
             'newstyle_gettext': True,
         },
     },
@@ -250,12 +251,20 @@ SITE_ID = 1
 
 # Django-Q
 Q_CLUSTER = {
-    'timeout': 90,
-    'retry': 120,
+    'timeout': 300,
+    'retry': 600,
     'queue_limit': 100,
     'max_attempts': 3,
     'orm': 'default',
     'catch_up': False,
+}
+
+# REST Framework
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': (
+        'rest_framework.pagination.PageNumberPagination'
+    ),
+    'PAGE_SIZE': 20,
 }
 
 SECRET_FILE = BASE_DIR / '.secret'
