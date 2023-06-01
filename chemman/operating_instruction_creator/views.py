@@ -157,7 +157,7 @@ def edit_operating_instruction(req, id):
     cpics = [x.id for x in oi.conduct_pics.all()]
     form = OIForm()
     ctx = dict(oi=oi, chem=chem, form=form, deps=deps, hpics=hpics,
-               ppics=ppics, cpics=cpics, menu=oic_menu, edit=True)
+               ppics=ppics, cpics=cpics, menu=oic_menu, edit=True, all=[])
     return render(req, 'oic/edit.html', ctx)
 
 
@@ -175,8 +175,9 @@ def new_operating_instruction(req, chem_id):
             save_draft(oi, cd)
             return redirect('oic:index')
     form = OIForm()
+    all_ois = OperatingInstructionDraft.objects.select_related().all()
     ctx = dict(oi=None, chem=chem, form=form, menu=oic_menu, edit=False,
-               hpics=hpics)
+               hpics=hpics, all=all_ois)
     return render(req, 'oic/edit.html', ctx)
 
 
@@ -258,4 +259,28 @@ def get_related_text(req, chem_id):
         data['same'].append('-')
     if not data['similar']:
         data['similar'].append('-')
+    return render_json(req, data)
+
+
+def text_for_import(req):
+    oi_id = int(req.GET.get('oi_id', 0))
+    if not oi_id:
+        return render_json(req, {'oi': None})
+    oi = OperatingInstructionDraft.objects.get(pk=oi_id)
+    data = {
+        'oi': str(oi),
+        'hazards': oi.hazards,
+        'protection': oi.protection,
+        'eye_protection': oi.eye_protection,
+        'hand_protection': oi.hand_protection,
+        'conduct': oi.conduct,
+        'ext_phone': oi.ext_phone,
+        'first_aid': oi.first_aid,
+        'skin': oi.skin,
+        'eye': oi.eye,
+        'breathe': oi.breathe,
+        'swallow': oi.swallow,
+        'int_phone': oi.int_phone,
+        'disposal': oi.disposal,
+    }
     return render_json(req, data)

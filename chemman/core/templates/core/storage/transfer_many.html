@@ -22,10 +22,10 @@
 {% block js %}
 <script>
 function move_package(from_id, to_id) {
-    let from_box = document.getElementById(from_id);
-    let to_box = document.getElementById(to_id);
-    if (from_box != null && to_box != null) {
-        if (from_box.length < 1 || from_box.options.selectedIndex == -1) {
+    const from_box = document.getElementById(from_id);
+    const to_box = document.getElementById(to_id);
+    if (from_box !== null && to_box !== null) {
+        if (from_box.length < 1 || from_box.options.selectedIndex === -1) {
             return false;
         }
         while (from_box.options.selectedIndex >= 0) {

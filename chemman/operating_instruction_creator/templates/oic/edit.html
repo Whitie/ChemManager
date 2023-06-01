@@ -38,6 +38,19 @@
     </a>
     {% endif %}
 </h2>
+{% if all %}
+<div class="uk-text-center">
+    <div class="uk-form-select" data-uk-form-select>
+        <span>{% trans %}Import from{% endtrans %}</span>
+        <select id="import-from" onchange="import_from();">
+            <option value="0">----</option>
+            {% for opinst in all %}
+            <option value="{{ opinst.pk }}">{{ opinst }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+{% endif %}
 <form class="uk-form uk-form-horizontal" method="post" action="{% if edit %}{{ url('oic:edit', oi.id) }}{% else %}{{ url('oic:new', chem.id) }}{% endif %}">
     {% csrf_token %}
     <fieldset data-uk-margin>
@@ -143,6 +156,19 @@
 <script src="{{ static('oic/js/pdfobject.min.js') }}"></script>
 
 <script>
+function import_from() {
+    const selected_id = $('#import-from option:selected').val();
+    const url = '{{ url("oic:api-import") }}' + '?oi_id=' + selected_id;
+    $.get(url, function(data) {
+        if (data.oi !== null) {
+            delete data.oi;
+            $.each(data, function(key, val) {
+                $('#id_' + key).val(val);
+            });
+        }
+    });
+}
+
 function update_preview() {
     var data = $('form').serialize();
     var url = '{{ url("oic:preview", chem.id) }}';

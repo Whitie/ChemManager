@@ -18,4 +18,5 @@ urlpatterns = [
          name='api-select-chemical'),
     path('api/related-text/<int:chem_id>/', views.get_related_text,
          name='api-related-text'),
+    path('api/text-for-import/', views.text_for_import, name='api-import'),
 ]
