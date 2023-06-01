@@ -1,0 +1,71 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1 class="uk-text-center">{% trans %}Transfer Many Packages{% endtrans %}</h1>
+<div class="uk-grid" id="app">
+    <div class="uk-width-4-10" id="source">
+        <form class="uk-form">
+            <fieldset>
+                <div class="uk-form-row">
+                    <select class="uk-width-1-1" v-model="st_left">
+                        <option :value="0">Bitte Lager auswählen</option>
+                        <option v-for="item in storages" :key="item.id" :value="item.id">
+                            ${ item.name }
+                        </option>
+                    </select>
+                </div>
+                <div class="uk-form-row">
+                    <select class="uk-width-1-1" v-model="p_left">
+                        <option :value="0">Bitte Lagerplatz auswählen</option>
+                        <option v-for="item in places[st_left]" :key="item.id" :value="item.id">
+                            ${ item.name }
+                        </option>
+                    </select>
+                </div>
+                <div class="uk-form-row">
+                    <select class="uk-width-1-1" v-model="i_left" size="10" id="left" multiple>
+                        <option v-for="item in packages[p_left]" :key="item.id" :value="item.id">
+                            ${ item.ident }
+                        </option>
+                    </select>
+                </div>
+            </fieldset>
+        </form>
+        <p>${ i_left }</p>
+    </div>
+    <div class="uk-width-2-10 uk-text-center">
+        <div style="height:50%;"></div>
+        <div class="uk-button-group">
+            <button class="uk-button uk-button-primary uk-button-large" type="button" onclick="move_package('right', 'left');">
+                <i class="uk-icon-arrow-left"></i>
+            </button>
+            <button class="uk-button uk-button-primary uk-button-large" type="button" onclick="move_package('left', 'right');">
+                <i class="uk-icon-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    <div class="uk-width-4-10" id="dest"></div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ static('core/js/vue.global.js') }}"></script>
+
+<script>
+const url = '{{ url("core:api-packages-for-place") }}';
+
+Vue.createApp({
+    data() {
+        return {
+            storages: {{ storages|tojson }},
+            places: {{ places|tojson }},
+            packages: {{ packages|tojson }},
+            st_left: Vue.ref(0),
+            p_left: Vue.ref(0),
+            i_left: Vue.ref([]),
+        }
+    },
+    delimiters: ['${', '}']
+}).mount('#app');
+</script>
+{% endblock %}

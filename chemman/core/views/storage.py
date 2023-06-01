@@ -539,8 +539,28 @@ def set_stocklimits(req, storage_id):
 
 @permission_required('core.can_transfer')
 def transfer_many(req):
-    ctx = dict(title=_('Transfer Many Packages'))
-    return render(req, 'core/storage/transfer_many.html', ctx)
+    storages = []
+    places = {}
+    packages = {}
+    for storage in Storage.objects.select_related().all():
+        storages.append({'id': storage.pk, 'name': str(storage)})
+        places[storage.pk] = [
+            {'id': x.pk, 'name': x.name} for x in storage.places.all()
+        ]
+    for package in StoredPackage.objects.select_related().all():
+        if package.place.pk in packages:
+            packages[package.place.pk].append(
+                {'id': package.pk, 'ident': str(package)}
+            )
+        else:
+            packages[package.place.pk] = [
+                {'id': package.pk, 'ident': str(package)}
+            ]
+    ctx = dict(
+        title=_('Transfer Many Packages'), storages=storages,
+        places=places, packages=packages
+    )
+    return render(req, 'core/storage/transfer_many_vue.html', ctx)
 
 
 # API

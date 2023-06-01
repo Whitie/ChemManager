@@ -21,6 +21,15 @@
 
 {% block js %}
 <script>
+const storages = {{ storages|tojson }};
+const places = {{ places|tojson }};
+const selected = {
+    st_left: 0,
+    p_left: 0,
+    st_right: 0,
+    p_right: 0,
+}
+
 function move_package(from_id, to_id) {
     const from_box = document.getElementById(from_id);
     const to_box = document.getElementById(to_id);
@@ -39,22 +48,27 @@ function move_package(from_id, to_id) {
     return false;
 }
 
-let Storages = {
-    view: function() {
-        return m('div.uk-form-row', m('select.uk-width-1-1', [
-            m('option', 'CHL 2'),
-            m('option', 'CHL 3')
-            ])
-        )
+const Storages = function(initialVnode) {
+    return {
+        view: function(vnode) {
+            return m('div.uk-form-row',
+                m('select.uk-width-1-1', 
+                    storages.map(function(storage) {
+                        return m('option', {value: storage.id}, storage.name);
+                }))
+            );
+        }
     }
 }
-let Places = {
-    view: function() {
-        return m('div.uk-form-row', m('select.uk-width-1-1', [
-            m('option', 'Schrank 1'),
-            m('option', 'Schrank 2')
-            ])
-        )
+const Places = function(initialVnode) {
+    return {
+        view: function(vnode) {
+            return m('div.uk-form-row', m('select.uk-width-1-1', [
+                m('option', 'Schrank 1'),
+                m('option', 'Schrank 2')
+                ])
+            )
+        }
     }
 }
 let Items = {
@@ -67,18 +81,20 @@ let Items = {
         )
     }
 }
-let StorageForm = {
-    view: function(vnode) {
-        return m('form.uk-form', m('fieldset', [
-            m(Storages),
-            m(Places),
-            m(Items, {id: vnode.attrs.id})
-            ])
-        )
+const StorageForm = function(initialVnode) {
+    return {
+        view: function(vnode) {
+            return m('form.uk-form', m('fieldset', [
+                m(Storages),
+                m(Places),
+                m(Items, {id: vnode.attrs.id})
+                ])
+            )
+        }
     }
 }
-let source = document.getElementById('source');
-let dest = document.getElementById('dest');
+const source = document.getElementById('source');
+const dest = document.getElementById('dest');
 m.mount(source, {view: function() { return m(StorageForm, {id: 'left'})}});
 m.mount(dest, {view: function() { return m(StorageForm, {id: 'right'})}});
 </script>
