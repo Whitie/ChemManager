@@ -110,3 +110,13 @@ def is_mass(unit):
 
 def basename(p):
     return path.basename(p)
+
+
+def text_with_endmarker(text, marker='#'):
+    lines = []
+    for line in text.splitlines():
+        if not line.strip() or line.strip() == marker:
+            lines.append('<br>')
+        else:
+            lines.append(line)
+    return markupsafe.Markup('<br>'.join(lines))

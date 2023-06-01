@@ -537,6 +537,7 @@ def set_stocklimits(req, storage_id):
     return render(req, 'core/storage/stocklimits.html', ctx)
 
 
+@permission_required('core.can_transfer')
 def transfer_many(req):
     ctx = dict(title=_('Transfer Many Packages'))
     return render(req, 'core/storage/transfer_many.html', ctx)

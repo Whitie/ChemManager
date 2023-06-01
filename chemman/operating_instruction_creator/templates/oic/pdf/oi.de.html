@@ -128,7 +128,7 @@
           {% endif %}
         </td>
         <td colspan="4">
-          {{ draft.hazards|replace('\n', '<br>')|safe }}
+          {{ draft.hazards|text_with_endmarker }}
         </td>
         <td class="center">
           {% if pictograms|length > 2 %}
@@ -151,7 +151,7 @@
           {% endif %}
         </td>
         <td colspan="4">
-          {{ draft.protection|replace('\n', '<br>')|safe }}
+          {{ draft.protection|text_with_endmarker }}
         </td>
         <td class="center">
           {% if ppics|length >= 2 %}
@@ -194,7 +194,7 @@
           {% endif %}
         </td>
         <td colspan="4">
-          {{ draft.conduct|replace('\n', '<br>')|safe }}
+          {{ draft.conduct|text_with_endmarker }}
         </td>
         <td class="center">
           {% if cpics|length >= 3 %}
@@ -220,7 +220,7 @@
           <img class="pictogram" src="file:{{ root }}/{{ fa1.icon.name }}">
         </td>
         <td colspan="4">
-          {{ draft.first_aid|replace('\n', '<br>')|safe }}
+          {{ draft.first_aid|text_with_endmarker }}
         </td>
         <td class="center">
           <img class="pictogram" src="file:{{ root }}/{{ fa2.icon.name }}">
@@ -266,7 +266,7 @@
       <tr>
         <td></td>
         <td colspan="4">
-          {{ draft.disposal|replace('\n', '<br>')|safe }}
+          {{ draft.disposal|text_with_endmarker }}
         </td>
         <td></td>
       </tr>

@@ -49,6 +49,7 @@
         {% include 'core/modals.inc.html' %}
         {% block modals %}{% endblock %}
         <!-- Base javascripts -->
+        <script>const API_BASE = {{ api_base|tojson }};</script>
         <script src="{{ static('core/js/jquery.min.js') }}"></script>
         <script src="{{ static('core/js/uikit.min.js') }}"></script>
         <script src="{{ static('core/js/jquery.dataTables.min.js') }}"></script>

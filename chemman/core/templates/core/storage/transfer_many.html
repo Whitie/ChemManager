@@ -3,30 +3,7 @@
 {% block content %}
 <h1 class="uk-text-center">{% trans %}Transfer Many Packages{% endtrans %}</h1>
 <div class="uk-grid">
-    <div class="uk-width-4-10">
-        <form class="uk-form">
-            <fieldset>
-                <div class="uk-form-row">
-                    <select id="storage-1" class="uk-width-1-1">
-                        <option>CHL 2</option>
-                    </select>
-                </div>
-                <div class="uk-form-row">
-                    <select id="place-1" class="uk-width-1-1">
-                        <option>Säureschrank</option>
-                    </select>
-                </div>
-                <div class="uk-form-row">
-                    <select id="left" class="uk-width-1-1" multiple>
-                        <option>Item 1</option>
-                        <option>Item 2</option>
-                        <option>Item 3</option>
-                        <option>Item 4</option>
-                    </select>
-                </div>
-            </fieldset>
-        </form>
-    </div>
+    <div class="uk-width-4-10" id="source"></div>
     <div class="uk-width-2-10 uk-text-center">
         <div style="height:50%;"></div>
         <div class="uk-button-group">
@@ -38,36 +15,12 @@
             </button>
         </div>
     </div>
-    <div class="uk-width-4-10">
-        <form class="uk-form">
-            <fieldset>
-                <div class="uk-form-row">
-                    <select id="storage-1" class="uk-width-1-1">
-                        <option>CHL 3</option>
-                    </select>
-                </div>
-                <div class="uk-form-row">
-                    <select id="place-1" class="uk-width-1-1">
-                        <option>Säureschrank</option>
-                    </select>
-                </div>
-                <div class="uk-form-row">
-                    <select id="right" class="uk-width-1-1" multiple>
-                        <option>Item 5</option>
-                        <option>Item 6</option>
-                        <option>Item 7</option>
-                        <option>Item 8</option>
-                    </select>
-                </div>
-            </fieldset>
-        </form>
-    </div>
+    <div class="uk-width-4-10" id="dest"></div>
 </div>
 {% endblock %}
 
 {% block js %}
 <script>
-const API_BASE = '{{ api_base }}';
 function move_package(from_id, to_id) {
     let from_box = document.getElementById(from_id);
     let to_box = document.getElementById(to_id);
@@ -85,5 +38,48 @@ function move_package(from_id, to_id) {
     }
     return false;
 }
+
+let Storages = {
+    view: function() {
+        return m('div.uk-form-row', m('select.uk-width-1-1', [
+            m('option', 'CHL 2'),
+            m('option', 'CHL 3')
+            ])
+        )
+    }
+}
+let Places = {
+    view: function() {
+        return m('div.uk-form-row', m('select.uk-width-1-1', [
+            m('option', 'Schrank 1'),
+            m('option', 'Schrank 2')
+            ])
+        )
+    }
+}
+let Items = {
+    view: function(vnode) {
+        return m('div.uk-form-row',
+            m('select.uk-width-1-1', {size: 10, multiple: true, id: vnode.attrs.id}, [
+                m('option', 'Item 1'),
+                m('option', 'Item 2')
+            ])
+        )
+    }
+}
+let StorageForm = {
+    view: function(vnode) {
+        return m('form.uk-form', m('fieldset', [
+            m(Storages),
+            m(Places),
+            m(Items, {id: vnode.attrs.id})
+            ])
+        )
+    }
+}
+let source = document.getElementById('source');
+let dest = document.getElementById('dest');
+m.mount(source, {view: function() { return m(StorageForm, {id: 'left'})}});
+m.mount(dest, {view: function() { return m(StorageForm, {id: 'right'})}});
 </script>
 {% endblock %}

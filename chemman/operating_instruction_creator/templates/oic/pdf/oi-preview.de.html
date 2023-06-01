@@ -127,7 +127,7 @@
             {% endif %}
         </td>
         <td colspan="4">
-          {{ hazards|join('<br>')|safe }}
+          {{ hazards|text_with_endmarker }}
         </td>
         <td class="center">
             {% if pictograms|length > 2 %}
@@ -150,7 +150,7 @@
             {% endif %}
         </td>
         <td colspan="4">
-          {{ protection|join('<br>')|safe }}
+          {{ protection|text_with_endmarker }}
         </td>
         <td class="center">
             {% if protection_pics|length >= 2 %}
@@ -193,7 +193,7 @@
           {% endif %}
         </td>
         <td colspan="4">
-            {{ conduct|join('<br>')|safe }}
+            {{ conduct|text_with_endmarker }}
         </td>
         <td class="center">
           {% if conduct_pics|length >= 3 %}
@@ -219,7 +219,7 @@
             <img class="pictogram" src="file:{{ root }}/{{ fa1.icon.name }}">
         </td>
         <td colspan="4">
-          {{ first_aid|join('<br>')|safe }}
+          {{ first_aid|text_with_endmarker }}
         </td>
         <td class="center">
           <img class="pictogram" src="file:{{ root }}/{{ fa2.icon.name }}">
@@ -265,7 +265,7 @@
       <tr>
         <td></td>
         <td colspan="4">
-          {{ disposal|join('<br>')|safe }}
+          {{ disposal|text_with_endmarker }}
         </td>
         <td></td>
       </tr>

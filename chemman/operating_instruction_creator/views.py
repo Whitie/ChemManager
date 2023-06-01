@@ -42,8 +42,6 @@ SIGNAL_WORDS = {
 
 
 def generate_preview(req, data, chem):
-    for block in ('hazards', 'protection', 'conduct', 'first_aid', 'disposal'):
-        data[block] = data[block].splitlines()
     fa1 = 'E003' if data['green_cross'] else 'E012'
     data['fa1'] = FirstAidPictogram.objects.get(ident=fa1)
     data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
@@ -70,7 +68,7 @@ def generate_released_pdf(user, draft):
     for num, dep in enumerate(draft.work_departments.all(), start=1):
         data['dep_{}'.format(num)] = dep.name
     ctx = dict(user=user, font_size=12, chem=draft.chemical, draft=draft,
-               root=settings.MEDIA_ROOT.rstrip('/'), **data)
+               root=settings.MEDIA_ROOT, **data)
     # Todo: Edit template
     tpl = 'oic/pdf/oi.{}.html'.format(lang)
     html_filled = render_to_string(tpl, ctx)

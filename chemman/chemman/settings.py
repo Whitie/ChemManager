@@ -106,6 +106,7 @@ TEMPLATES = [
                 'humanize_mass_vol': 'core.filters.humanize_mass_vol',
                 'is_mass': 'core.filters.is_mass',
                 'basename': 'core.filters.basename',
+                'text_with_endmarker': 'core.filters.text_with_endmarker',
             },
             'match_extension': '.html',
             'match_regex': r'^(?!admin/|rest_framework/).*',
