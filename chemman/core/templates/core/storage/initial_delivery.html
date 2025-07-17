@@ -105,6 +105,12 @@ $(document).ready(function() {
             }
         });
     });
+    $('.chem').each(function() {
+        $(this).select2();
+    });
+    $('.place').each(function() {
+        $(this).select2();
+    });
     var opts = {'format': 'DD.MM.YYYY'};
     $('.dt').each(function() {
         var dt = UIkit.datepicker($(this), opts);

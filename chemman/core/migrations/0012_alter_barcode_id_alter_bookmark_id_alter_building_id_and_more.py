@@ -14,287 +14,410 @@ class Migration(migrations.Migration):
             model_name="barcode",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="bookmark",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="building",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="chapter",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="chaptercomment",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="chemical",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="company",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="consume",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="contactperson",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="department",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="disposalinstructions",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="employee",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="euhazardstatement",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="ghspictogram",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="group",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="handbook",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="handbookimage",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="hazardstatement",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="identifiers",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="inventorydifference",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="journalentry",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="journaltype",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="legallimit",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="listcache",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="materialsafetydatasheet",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="notification",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="operatinginstruction",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="order",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="packageusage",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="paragraph",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="physicaldata",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="precautionarystatement",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="room",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="stocklimit",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="storage",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="storageclass",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="storageplace",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="storagerestriction",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="storedchemical",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="storedpackage",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
         migrations.AlterField(
             model_name="synonym",
             name="id",
             field=models.BigAutoField(
-                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+                auto_created=True,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
             ),
         ),
     ]
