@@ -1,7 +1,8 @@
+import json
 import os
 
 from collections import OrderedDict
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from django.conf import settings
 from django.contrib import messages
@@ -652,6 +653,20 @@ def transfer_many(req):
 
 
 @csrf_exempt
+def api_relocate_packages(req: HttpRequest):
+    data = json.loads(req.body)
+    try:
+        new_place = StoragePlace.objects.get(pk=data["to_place"])
+        for package_id in data["packages"]:
+            package = StoredPackage.objects.get(pk=package_id)
+            package.place = new_place
+            package.save()
+    except Exception as error:
+        return render_json(req, {"success": False, "error": str(error)})
+    return render_json(req, {"success": True})
+
+
+@csrf_exempt
 def api_inventory_save(req):
     form = InventoryJSONForm(req.POST)
     data = dict(success=False)
@@ -814,7 +829,7 @@ def save_stocklimit(req):
 
 
 def api_wrong_brutto(req):
-    now = datetime.now()
+    now = timezone.now()
     try:
         user = User.objects.get(pk=int(req.GET.get("uid")))
         package = StoredPackage.objects.get(pk=int(req.GET.get("pid")))

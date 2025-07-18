@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from django.conf import settings
 from django.db.models.functions import Lower
 
 from .models import Bookmark

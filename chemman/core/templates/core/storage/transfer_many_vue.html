@@ -3,11 +3,12 @@
 {% block content %}
 <h1 class="uk-text-center">{% trans %}Transfer Many Packages{% endtrans %}</h1>
 <div class="uk-grid" id="app">
-    <div class="uk-width-4-10" id="source">
+    <div class="uk-width-5-10" id="source">
+        <h3>{% trans %}Source{% endtrans %}</h3>
         <form class="uk-form">
             <fieldset>
-                <div class="uk-form-row">
-                    <select class="uk-width-1-1" v-model="st_left">
+                <div class="uk-form-row place">
+                    <select class="uk-width-1-1" v-model="st_left" @change="inventory.left.length = 0">
                         <option :value="0">Bitte Lager auswählen</option>
                         <option v-for="item in storages" :key="item.id" :value="item.id">
                             ${ item.name }
@@ -15,7 +16,7 @@
                     </select>
                 </div>
                 <div class="uk-form-row">
-                    <select class="uk-width-1-1" v-model="p_left">
+                    <select class="uk-width-1-1" v-model="p_left" @change="inventory.left.length = 0">
                         <option :value="0">Bitte Lagerplatz auswählen</option>
                         <option v-for="item in places[st_left]" :key="item.id" :value="item.id">
                             ${ item.name }
@@ -23,7 +24,7 @@
                     </select>
                 </div>
                 <div class="uk-form-row">
-                    <select class="uk-width-1-1" v-model="i_left" size="10" id="left" multiple>
+                    <select class="uk-width-1-1" v-model="inventory.left" size="10" id="left" multiple>
                         <option v-for="item in packages[p_left]" :key="item.id" :value="item.id">
                             ${ item.ident }
                         </option>
@@ -31,20 +32,54 @@
                 </div>
             </fieldset>
         </form>
-        <p>${ i_left }</p>
     </div>
     <div class="uk-width-2-10 uk-text-center">
         <div style="height:50%;"></div>
         <div class="uk-button-group">
-            <button class="uk-button uk-button-primary uk-button-large" type="button" onclick="move_package('right', 'left');">
+            <button
+                class="uk-button uk-button-primary uk-button-large"
+                type="button"
+                @click="move_packages('right', 'left');"
+                disabled
+            >
                 <i class="uk-icon-arrow-left"></i>
             </button>
-            <button class="uk-button uk-button-primary uk-button-large" type="button" onclick="move_package('left', 'right');">
+            <button
+                class="uk-button uk-button-primary uk-button-large"
+                type="button"
+                @click="move_packages('left', 'right');"
+                :disabled="!dest_ok"
+            >
                 <i class="uk-icon-arrow-right"></i>
             </button>
         </div>
     </div>
-    <div class="uk-width-4-10" id="dest"></div>
+    <div class="uk-width-3-10" id="dest">
+        <h3>{% trans %}Destination{% endtrans %}</h3>
+        <form class="uk-form">
+            <fieldset>
+                <div class="uk-form-row place">
+                    <select class="uk-width-1-1" v-model="st_right">
+                        <option :value="0">Bitte Lager auswählen</option>
+                        <option v-for="item in storages" :key="item.id" :value="item.id">
+                            ${ item.name }
+                        </option>
+                    </select>
+                </div>
+                <div class="uk-form-row">
+                    <select class="uk-width-1-1" v-model="p_right">
+                        <option :value="0">Bitte Lagerplatz auswählen</option>
+                        <option v-for="item in places[st_right]" :key="item.id" :value="item.id">
+                            ${ item.name }
+                        </option>
+                    </select>
+                </div>
+                <div class="uk-form-row">
+                    <p v-for="item_id in inventory.right">${ item_id }</p>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </div>
 {% endblock %}
 
@@ -52,17 +87,63 @@
 <script src="{{ static('core/js/vue.global.js') }}"></script>
 
 <script>
-const url = '{{ url("core:api-packages-for-place") }}';
+const url = '{{ url("core:api-relocate") }}';
+const { computed, createApp, reactive, ref, watch } = Vue;
 
-Vue.createApp({
+createApp({
     data() {
+        const st_right = ref(0);
+        const p_right = ref(0);
+        const p_left = ref(0);
+        const st_left = ref(0);
+        const packages = {{ packages|tojson }};
+        const inventory = reactive({left: [], right: []});
+        const dest_ok = computed(() => {
+            if (st_right.value > 0 && p_right.value > 0 && inventory.left.length > 0) {
+                return true;
+            }
+            return false;
+        });
         return {
             storages: {{ storages|tojson }},
             places: {{ places|tojson }},
-            packages: {{ packages|tojson }},
-            st_left: Vue.ref(0),
-            p_left: Vue.ref(0),
-            i_left: Vue.ref([]),
+            packages,
+            st_left,
+            p_left,
+            inventory,
+            st_right,
+            p_right,
+            dest_ok,
+        }
+    },
+    methods: {
+        async move_packages(from, to) {
+            this.inventory[to] = this.inventory[from];
+            this.inventory[from] = [];
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        to_place: this.p_right,
+                        packages: this.inventory[to]
+                    })
+                });
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+                const result = await response.json();
+                if (result.success) {
+                    alert("{% trans %}Packages are relocated{% endtrans %}");
+                    window.location.reload();
+                } else {
+                    throw new Error(`Response: ${result.error}`);
+                }
+            } catch (e) {
+                console.error(e);
+            }
         }
     },
     delimiters: ['${', '}']
