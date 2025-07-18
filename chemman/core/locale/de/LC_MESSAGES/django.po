@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-19 12:41+0100\n"
+"POT-Creation-Date: 2025-07-18 11:47+0200\n"
 "PO-Revision-Date: 2016-10-10 11:03+0200\n"
 "Last-Translator: Thorsten Weimann\n"
 "Language-Team: \n"
@@ -22,8 +22,8 @@ msgstr ""
 msgid "Employee"
 msgstr "Mitarbeiter"
 
-#: core/admin.py:34 core/forms.py:349 core/models/base.py:171
-#: core/models/chems.py:391 core/models/storage.py:102
+#: core/admin.py:34 core/forms.py:390 core/models/base.py:171
+#: core/models/chems.py:395 core/models/storage.py:102
 #: core/models/storage.py:804 core/templates/core/search/package.html:16
 #: core/templates/core/search/package.html:28
 #: core/templates/core/storage/index.html:12
@@ -38,13 +38,13 @@ msgstr "Bereiche"
 
 #: core/admin.py:91 core/admin.py:188 core/admin.py:319 core/models/base.py:96
 #: core/models/base.py:120 core/models/base.py:162 core/models/base.py:190
-#: core/models/base.py:204 core/models/chems.py:70 core/models/chems.py:363
+#: core/models/base.py:204 core/models/chems.py:70 core/models/chems.py:367
 #: core/models/safety.py:59 core/models/storage.py:78 core/models/storage.py:96
 #: core/models/storage.py:134 core/models/storage.py:171
 #: core/models/storage.py:646 core/templates/core/index.html:38
 #: core/templates/core/index.html:46 core/templates/core/info/ghs.html:12
-#: core/templates/core/macros.inc.html:69
-#: core/templates/core/macros.inc.html:80
+#: core/templates/core/macros.inc.html:73
+#: core/templates/core/macros.inc.html:84
 #: core/templates/core/manage/rights.html:26
 #: core/templates/core/manage/rights.html:33
 #: core/templates/core/modals.inc.html:14
@@ -67,8 +67,8 @@ msgstr "Name"
 
 #: core/admin.py:98 core/templates/core/index.html:39
 #: core/templates/core/index.html:47 core/templates/core/macros.inc.html:24
-#: core/templates/core/macros.inc.html:70
-#: core/templates/core/macros.inc.html:81
+#: core/templates/core/macros.inc.html:74
+#: core/templates/core/macros.inc.html:85
 #: core/templates/core/storage/observe.html:14
 #: core/templates/core/storage/storage.html:17
 #: core/templates/core/storage/storage.html:33
@@ -83,7 +83,7 @@ msgstr "Struktur"
 msgid "GHS Info"
 msgstr "GHS Info"
 
-#: core/admin.py:140 core/forms.py:21
+#: core/admin.py:140 core/forms.py:32
 msgid "Pictogram"
 msgstr "Piktogramm"
 
@@ -107,7 +107,7 @@ msgstr "Logo"
 msgid "[No title]"
 msgstr "[Kein Titel]"
 
-#: core/admin.py:275 core/forms.py:88 core/forms.py:100 core/forms.py:107
+#: core/admin.py:275 core/forms.py:98 core/forms.py:109 core/forms.py:117
 #: core/models/handbook.py:30 core/models/handbook.py:49
 #: core/models/handbook.py:74 core/models/handbook.py:117
 #: core/templates/core/handbook/overview.html:39
@@ -135,109 +135,109 @@ msgstr "Giftige Chemikalien (GHS 06)"
 msgid "CMR substances"
 msgstr "CMR Substanzen"
 
-#: core/forms.py:15
+#: core/forms.py:26
 msgid "H-Statement"
 msgstr "H-Satz"
 
-#: core/forms.py:16 core/models/chems.py:112
+#: core/forms.py:27 core/models/chems.py:112
 msgid "WHC"
 msgstr "WGK"
 
-#: core/forms.py:17 core/models/chems.py:117
+#: core/forms.py:28 core/models/chems.py:117
 msgid "MAC"
 msgstr "AGW"
 
-#: core/forms.py:18 core/models/chems.py:124
+#: core/forms.py:29 core/models/chems.py:124
 msgid "MABC"
 msgstr "BGW"
 
-#: core/forms.py:19 core/models/chems.py:80
+#: core/forms.py:30 core/models/chems.py:80
 #: core/templates/core/macros_details.inc.html:94
 msgid "Molar Mass"
 msgstr "Molare Masse"
 
-#: core/forms.py:20 core/models/chems.py:84
+#: core/forms.py:31 core/models/chems.py:84
 #: core/templates/core/macros_details.inc.html:373
 msgid "Storage Temperature"
 msgstr "Lagertemperatur"
 
-#: core/forms.py:22
+#: core/forms.py:33
 msgid "EUH-Statement"
 msgstr "EUH-Satz"
 
-#: core/forms.py:23 core/templates/core/macros_details.inc.html:110
+#: core/forms.py:34 core/templates/core/macros_details.inc.html:110
 msgid "Melting Point"
 msgstr "Schmelzpunkt"
 
-#: core/forms.py:24 core/templates/core/macros_details.inc.html:114
+#: core/forms.py:35 core/templates/core/macros_details.inc.html:114
 msgid "Boiling Point"
 msgstr "Siedepunkt"
 
-#: core/forms.py:27 core/forms.py:35 core/forms.py:38
+#: core/forms.py:38 core/forms.py:45 core/forms.py:47
 msgid "="
 msgstr ""
 
-#: core/forms.py:28
-msgid "\\u2248"
-msgstr ""
-
-#: core/forms.py:29
-msgid ">"
-msgstr ""
-
-#: core/forms.py:30
-msgid "\\u2265"
-msgstr ""
-
-#: core/forms.py:31
-msgid "<"
-msgstr ""
-
-#: core/forms.py:32
-msgid "\\u2264"
+#: core/forms.py:39
+msgid "≈"
 msgstr ""
 
 #: core/forms.py:40
+msgid ">"
+msgstr ""
+
+#: core/forms.py:41
+msgid "≥"
+msgstr ""
+
+#: core/forms.py:42
+msgid "<"
+msgstr ""
+
+#: core/forms.py:43
+msgid "≤"
+msgstr ""
+
+#: core/forms.py:49
 msgid "AND"
 msgstr "UND"
 
-#: core/forms.py:41
+#: core/forms.py:50
 msgid "OR"
 msgstr "ODER"
 
-#: core/forms.py:62
+#: core/forms.py:71
 msgid "General"
 msgstr "Allgemein"
 
-#: core/forms.py:67
+#: core/forms.py:77
 msgid "Name for this List"
 msgstr "Name für diese Liste"
 
-#: core/forms.py:89
+#: core/forms.py:100
 msgid "Title (optional)"
 msgstr "Titel (optional)"
 
-#: core/forms.py:93 core/models/base.py:27 core/models/handbook.py:77
+#: core/forms.py:103 core/models/base.py:27 core/models/handbook.py:77
 #: core/models/handbook.py:118 core/models/safety.py:17
 #: core/models/safety.py:77 core/templates/core/handbook/edit.html:15
 #: core/templates/core/profile.html:34
 msgid "Text"
 msgstr "Text"
 
-#: core/forms.py:94
+#: core/forms.py:104
 msgid "Write your comment"
 msgstr "Schreiben Sie Ihren Kommentar"
 
-#: core/forms.py:101 core/forms.py:108 core/models/handbook.py:50
+#: core/forms.py:110 core/forms.py:118 core/models/handbook.py:50
 #: core/models/handbook.py:75 core/models/storage.py:135
 msgid "Number"
 msgstr "Nummer"
 
-#: core/forms.py:102 core/models/handbook.py:51
+#: core/forms.py:112 core/models/handbook.py:51
 msgid "Synopsis"
 msgstr "Zusammenfassung"
 
-#: core/forms.py:113 core/templates/core/storage/history.html:11
+#: core/forms.py:123 core/templates/core/storage/history.html:11
 #: core/templates/core/storage/history.html:23
 #: core/templates/core/storage/history.html:70
 #: core/templates/core/storage/history.html:80
@@ -246,11 +246,11 @@ msgstr "Zusammenfassung"
 #: core/templates/core/storage/initial_delivery_result.html:10
 #: core/templates/core/storage/inventory.html:23
 #: core/templates/core/storage/inventory_result.html:17
-#: core/views/orders.py:183
+#: core/views/orders.py:212
 msgid "Supplier"
 msgstr "Lieferant"
 
-#: core/forms.py:115 core/forms.py:307
+#: core/forms.py:125 core/forms.py:340
 #: core/templates/core/storage/info_supplier.html:15
 #: core/templates/core/storage/info_supplier.html:26
 #: core/templates/core/storage/initial_delivery.html:55
@@ -260,11 +260,11 @@ msgstr "Lieferant"
 msgid "MSDS"
 msgstr "SDB"
 
-#: core/forms.py:117
+#: core/forms.py:127
 msgid "MSDS publishing date"
 msgstr "SDB Veröffentlichungsdatum"
 
-#: core/forms.py:120 core/forms.py:274 core/models/storage.py:232
+#: core/forms.py:131 core/forms.py:299 core/models/storage.py:232
 #: core/templates/core/storage/history.html:10
 #: core/templates/core/storage/history.html:22
 #: core/templates/core/storage/history.html:69
@@ -277,28 +277,28 @@ msgstr "SDB Veröffentlichungsdatum"
 msgid "Quality"
 msgstr "Qualität"
 
-#: core/forms.py:122 core/forms.py:276 core/models/storage.py:229
+#: core/forms.py:133 core/forms.py:303 core/models/storage.py:229
 msgid "Name extra"
 msgstr "Name extra"
 
-#: core/forms.py:123 core/forms.py:277
+#: core/forms.py:136 core/forms.py:304
 msgid "E. g. supplier specific name or label."
 msgstr "Z. B. lieferantenspezifische Bezeichnung oder Verwendungsart."
 
-#: core/forms.py:126
+#: core/forms.py:139
 msgid "Target Storage"
 msgstr "Ziellager"
 
-#: core/forms.py:131 core/forms.py:359 core/forms.py:363
+#: core/forms.py:144 core/forms.py:402 core/forms.py:407
 #: core/templates/core/extended_search.html:10
 msgid "--------"
 msgstr ""
 
-#: core/forms.py:138
+#: core/forms.py:152
 msgid "Or choose present"
 msgstr "Oder vorhandenes aussuchen"
 
-#: core/forms.py:144 core/forms.py:285 core/forms.py:354
+#: core/forms.py:162 core/forms.py:313 core/forms.py:396
 #: core/models/storage.py:293 core/models/storage.py:324
 #: core/templates/core/storage/deliver_packages.html:12
 #: core/templates/core/storage/info_orders.html:22
@@ -312,8 +312,8 @@ msgstr "Oder vorhandenes aussuchen"
 msgid "Content"
 msgstr "Inhalt"
 
-#: core/forms.py:146 core/forms.py:174 core/forms.py:192 core/forms.py:209
-#: core/forms.py:286 core/forms.py:324 core/models/storage.py:295
+#: core/forms.py:164 core/forms.py:198 core/forms.py:217 core/forms.py:232
+#: core/forms.py:315 core/forms.py:364 core/models/storage.py:295
 #: core/models/storage.py:326 core/models/storage.py:600
 #: core/models/storage.py:668 core/models/storage.py:719
 #: core/models/storage.py:800
@@ -323,39 +323,39 @@ msgstr "Inhalt"
 msgid "Unit"
 msgstr "Einheit"
 
-#: core/forms.py:147 core/forms.py:288 core/forms.py:358
+#: core/forms.py:166 core/forms.py:317 core/forms.py:400
 #: core/models/storage.py:328
 #: core/templates/core/storage/deliver_packages.html:13
 #: core/templates/core/storage/initial_delivery.html:50
 msgid "Composition"
 msgstr "Beschaffenheit"
 
-#: core/forms.py:150 core/forms.py:291 core/forms.py:362
+#: core/forms.py:169 core/forms.py:322 core/forms.py:405
 #: core/models/storage.py:332
 msgid "Container Material"
 msgstr "Gebindematerial"
 
-#: core/forms.py:152
+#: core/forms.py:172
 msgid "Article No."
 msgstr "Artikelnummer"
 
-#: core/forms.py:154 core/models/storage.py:289
+#: core/forms.py:175 core/models/storage.py:289
 #: core/templates/core/storage/initial_delivery.html:58
 msgid "Code"
 msgstr "Code"
 
-#: core/forms.py:156
+#: core/forms.py:178
 msgid "Batch No."
 msgstr "Chargennummer"
 
-#: core/forms.py:159 core/forms.py:300 core/models/storage.py:345
+#: core/forms.py:181 core/forms.py:333 core/models/storage.py:345
 #: core/templates/core/storage/deliver_packages.html:16
 #: core/templates/core/storage/initial_delivery.html:53
 #: core/templates/core/storage/package_info.html:42
 msgid "Best before"
 msgstr "Haltbar bis"
 
-#: core/forms.py:166 core/models/storage.py:191 core/models/storage.py:322
+#: core/forms.py:189 core/models/storage.py:191 core/models/storage.py:322
 #: core/templates/core/storage/chem_info.html:84
 #: core/templates/core/storage/chem_info.html:94
 #: core/templates/core/storage/initial_delivery_result.html:12
@@ -363,34 +363,34 @@ msgstr "Haltbar bis"
 msgid "Storage Place"
 msgstr "Lagerplatz"
 
-#: core/forms.py:172 core/models/storage.py:347
+#: core/forms.py:196 core/models/storage.py:347
 #: core/templates/core/storage/deliver_packages.html:18
 msgid "Brutto Mass"
 msgstr "Bruttomasse"
 
-#: core/forms.py:179 core/templates/core/storage/dispose.html:24
+#: core/forms.py:202 core/templates/core/storage/dispose.html:24
 #: core/templates/core/storage/package_info.html:91
 #: core/templates/core/storage/package_info.html:183
 msgid "Reason"
 msgstr "Grund"
 
-#: core/forms.py:183 core/models/base.py:143
+#: core/forms.py:206 core/models/base.py:143
 msgid "First Name"
 msgstr "Vorname"
 
-#: core/forms.py:184 core/models/base.py:142
+#: core/forms.py:207 core/models/base.py:142
 msgid "Last Name"
 msgstr "Nachname"
 
-#: core/forms.py:185 core/models/base.py:179
+#: core/forms.py:209 core/models/base.py:179
 msgid "Internal Phone"
 msgstr "Interne Telefonnr."
 
-#: core/forms.py:190
+#: core/forms.py:215
 msgid "Mass after"
 msgstr "Masse nach der Benutzung"
 
-#: core/forms.py:194 core/forms.py:257
+#: core/forms.py:219 core/forms.py:280
 #: core/templates/core/storage/package_info.html:141
 #: core/templates/core/storage/tox_info.html:16
 #: core/templates/core/storage/tox_info.html:43
@@ -398,7 +398,7 @@ msgstr "Masse nach der Benutzung"
 msgid "Instructor"
 msgstr "Ausbilder"
 
-#: core/forms.py:198 core/forms.py:212 core/forms.py:253
+#: core/forms.py:223 core/forms.py:234 core/forms.py:275
 #: core/models/base.py:198 core/models/storage.py:508
 #: core/templates/core/storage/package_info.html:148
 #: core/templates/core/storage/tox_info.html:13
@@ -407,32 +407,32 @@ msgstr "Ausbilder"
 msgid "Group"
 msgstr "Gruppe"
 
-#: core/forms.py:201 core/forms.py:215 core/models/storage.py:511
+#: core/forms.py:225 core/forms.py:239 core/models/storage.py:511
 #: core/templates/core/storage/package_info.html:150
 #: core/templates/core/storage/tox_info.html:41
 #: core/templates/core/storage/tox_info.html:55
 msgid "Task"
 msgstr "Aufgabe/Versuch"
 
-#: core/forms.py:206
+#: core/forms.py:230
 msgid "Removed quantity"
 msgstr "Entnommene Menge"
 
-#: core/forms.py:261 core/templates/core/storage/tox_info.html:19
+#: core/forms.py:285 core/templates/core/storage/tox_info.html:19
 msgid "From Date"
 msgstr "Von Datum"
 
-#: core/forms.py:264 core/templates/core/storage/tox_info.html:21
+#: core/forms.py:287 core/templates/core/storage/tox_info.html:21
 msgid "To Date"
 msgstr "Bis Datum"
 
-#: core/forms.py:266 core/templates/core/storage/tox_info.html:23
+#: core/forms.py:288 core/templates/core/storage/tox_info.html:23
 msgid "Show only toxic"
 msgstr "Nur Gifte anzeigen"
 
-#: core/forms.py:272 core/forms.py:342 core/models/chems.py:222
-#: core/models/chems.py:232 core/models/chems.py:280 core/models/chems.py:360
-#: core/models/chems.py:376 core/models/chems.py:387 core/models/storage.py:221
+#: core/forms.py:297 core/forms.py:384 core/models/chems.py:226
+#: core/models/chems.py:236 core/models/chems.py:284 core/models/chems.py:364
+#: core/models/chems.py:380 core/models/chems.py:391 core/models/storage.py:221
 #: core/models/storage.py:282 core/models/storage.py:587
 #: core/templates/core/storage/consume/select.html:20
 #: core/templates/core/storage/info_orders.html:19
@@ -446,58 +446,58 @@ msgstr "Nur Gifte anzeigen"
 msgid "Chemical"
 msgstr "Chemikalie"
 
-#: core/forms.py:280 core/templates/core/search/package.html:20
+#: core/forms.py:307 core/templates/core/search/package.html:20
 #: core/templates/core/search/package.html:32
 #: core/templates/core/storage/initial_delivery.html:47
 msgid "Place"
 msgstr "Platz"
 
-#: core/forms.py:297 core/models/storage.py:369
+#: core/forms.py:329 core/models/storage.py:369
 #: core/templates/core/storage/initial_delivery.html:52
 #: core/templates/core/storage/storage.html:24
 #: core/templates/core/storage/storage.html:40
 msgid "Delivered for"
 msgstr "Geliefert für"
 
-#: core/forms.py:304 core/models/base.py:132 core/models/base.py:139
+#: core/forms.py:337 core/models/base.py:132 core/models/base.py:139
 #: core/models/storage.py:225
 msgid "Company"
 msgstr "Firma"
 
-#: core/forms.py:308
+#: core/forms.py:343
 msgid "Leave empty, to get the one from the choosen chemical."
 msgstr "Leer lassen, um das SDB von der gewählten Chemikalie zu benutzen."
 
-#: core/forms.py:312 core/models/storage.py:197
+#: core/forms.py:348 core/models/storage.py:197
 #: core/templates/core/storage/initial_delivery.html:56
 msgid "Published"
 msgstr "Veröffentlicht"
 
-#: core/forms.py:316
+#: core/forms.py:352
 msgid "Supplier ID"
 msgstr "Artikelnummer"
 
-#: core/forms.py:318
+#: core/forms.py:355
 msgid "Supplier CODE"
 msgstr "Strich-/QR-Code"
 
-#: core/forms.py:320
+#: core/forms.py:358
 msgid "Supplier BATCH"
 msgstr "Chargennummer"
 
-#: core/forms.py:322 core/templates/core/macros.inc.html:203
+#: core/forms.py:361 core/templates/core/macros.inc.html:207
 #: core/templates/core/storage/consume/special.html:36
 #: core/templates/core/storage/package_info.html:25
 #: core/templates/core/storage/package_info.html:119
 msgid "Brutto mass"
 msgstr "Bruttomasse"
 
-#: core/forms.py:346 core/models/storage.py:119 core/models/storage.py:141
+#: core/forms.py:387 core/models/storage.py:119 core/models/storage.py:141
 #: core/models/storage.py:174 core/models/storage.py:591
 #: core/templates/core/detail.html:34
 #: core/templates/core/extended_search.html:12 core/templates/core/info.html:32
-#: core/templates/core/macros.inc.html:73
-#: core/templates/core/macros.inc.html:84
+#: core/templates/core/macros.inc.html:77
+#: core/templates/core/macros.inc.html:88
 #: core/templates/core/macros_details.inc.html:390
 #: core/templates/core/manage/rooms.html:13
 #: core/templates/core/search/package.html:19
@@ -512,11 +512,11 @@ msgstr "Bruttomasse"
 #: core/templates/core/storage/merge.html:7
 #: core/templates/core/storage/package_info.html:16
 #: core/templates/core/storage/transfer.html:24 core/utils.py:81
-#: core/views/storage.py:108
+#: core/views/storage.py:132
 msgid "Storage"
 msgstr "Lager"
 
-#: core/models/base.py:15 core/utils.py:78 core/views/chems.py:108
+#: core/models/base.py:15 core/utils.py:78 core/views/chems.py:128
 msgid "Information"
 msgstr "Informationen"
 
@@ -658,7 +658,7 @@ msgstr "Durchwahl"
 msgid "Responsible for"
 msgstr "Zuständig für"
 
-#: core/models/base.py:149 core/models/base.py:191 core/models/chems.py:394
+#: core/models/base.py:149 core/models/base.py:191 core/models/chems.py:398
 #: core/models/storage.py:84
 msgid "Notes"
 msgstr "Notizen"
@@ -826,7 +826,7 @@ msgid "Signal Word"
 msgstr "Signalwort"
 
 #: core/models/chems.py:95 core/templates/core/info/ghs.html:4
-#: core/views/chems.py:173
+#: core/views/chems.py:205
 msgid "GHS Pictograms"
 msgstr "GHS Piktogramme"
 
@@ -948,190 +948,190 @@ msgstr "Zugefügt von"
 msgid "Last Updated"
 msgstr "Zuletzt geändert"
 
-#: core/models/chems.py:223 core/models/storage.py:652
+#: core/models/chems.py:227 core/models/storage.py:652
 #: core/templates/core/extended_search.html:11
 #: core/templates/core/manage/index.html:67
 msgid "Chemicals"
 msgstr "Chemikalien"
 
-#: core/models/chems.py:226
+#: core/models/chems.py:230
 msgid "Can manage chemicals"
 msgstr "Chemikalien-Manager"
 
-#: core/models/chems.py:236
+#: core/models/chems.py:240
 msgid "CAS Registry Number"
 msgstr "CAS Nummer"
 
-#: core/models/chems.py:237
+#: core/models/chems.py:241
 msgid "CAS = Chemical Abstract Service"
 msgstr ""
 
-#: core/models/chems.py:240 core/templates/core/macros_details.inc.html:18
+#: core/models/chems.py:244 core/templates/core/macros_details.inc.html:18
 msgid "UN Number"
 msgstr "UN Nummer"
 
-#: core/models/chems.py:242 core/templates/core/macros_details.inc.html:15
+#: core/models/chems.py:246 core/templates/core/macros_details.inc.html:15
 msgid "EC Number"
 msgstr "EC Nummer"
 
-#: core/models/chems.py:243
+#: core/models/chems.py:247
 msgid "European Community Number (EC No., EINECS No., EC#)"
 msgstr ""
 
-#: core/models/chems.py:246 core/templates/core/macros_details.inc.html:23
+#: core/models/chems.py:250 core/templates/core/macros_details.inc.html:23
 msgid "InChI"
 msgstr ""
 
-#: core/models/chems.py:246
+#: core/models/chems.py:250
 msgid "InChI = International Chemical Identifier"
 msgstr ""
 
-#: core/models/chems.py:248
+#: core/models/chems.py:252
 msgid "InChI-Key"
 msgstr ""
 
-#: core/models/chems.py:250 core/templates/core/macros_details.inc.html:27
+#: core/models/chems.py:254 core/templates/core/macros_details.inc.html:27
 msgid "SMILES"
 msgstr ""
 
-#: core/models/chems.py:251
+#: core/models/chems.py:255
 msgid "SMILES = Simplified Molecular Input Line Entry Specification"
 msgstr ""
 
-#: core/models/chems.py:254
+#: core/models/chems.py:258
 msgid "PubChem Compound ID"
 msgstr ""
 
-#: core/models/chems.py:256
+#: core/models/chems.py:260
 msgid "DrugBank"
 msgstr ""
 
-#: core/models/chems.py:257
+#: core/models/chems.py:261
 msgid "KEGG Number"
 msgstr "KEGG Nummer"
 
-#: core/models/chems.py:258
+#: core/models/chems.py:262
 msgid "KEGG = Kyoto Encyclopedia of Genes and Genomes"
 msgstr ""
 
-#: core/models/chems.py:260 core/templates/core/macros_details.inc.html:250
+#: core/models/chems.py:264 core/templates/core/macros_details.inc.html:250
 #: core/templates/core/macros_details.inc.html:328
 msgid "Imported from"
 msgstr "Importiert von"
 
-#: core/models/chems.py:267 core/models/chems.py:268
+#: core/models/chems.py:271 core/models/chems.py:272
 msgid "Identifiers"
 msgstr "Identität"
 
-#: core/models/chems.py:283 core/templates/core/macros_details.inc.html:98
+#: core/models/chems.py:287 core/templates/core/macros_details.inc.html:98
 msgid "Physical State"
 msgstr "Aggregatzustand"
 
-#: core/models/chems.py:286 core/templates/core/macros_details.inc.html:102
+#: core/models/chems.py:290 core/templates/core/macros_details.inc.html:102
 msgid "Color"
 msgstr "Farbe"
 
-#: core/models/chems.py:288 core/templates/core/macros_details.inc.html:106
+#: core/models/chems.py:292 core/templates/core/macros_details.inc.html:106
 msgid "Odor"
 msgstr "Geruch"
 
-#: core/models/chems.py:291 core/templates/core/macros_details.inc.html:118
+#: core/models/chems.py:295 core/templates/core/macros_details.inc.html:118
 msgid "Density"
 msgstr "Dichte"
 
-#: core/models/chems.py:292
+#: core/models/chems.py:296
 msgid "In g/cm3."
 msgstr "In g/cm3."
 
-#: core/models/chems.py:294
+#: core/models/chems.py:298
 msgid "Density at Temperature"
 msgstr "Dichte bei Temperatur"
 
-#: core/models/chems.py:295 core/models/chems.py:309 core/models/chems.py:319
-#: core/models/chems.py:328
+#: core/models/chems.py:299 core/models/chems.py:313 core/models/chems.py:323
+#: core/models/chems.py:332
 msgid "In °C."
 msgstr "In °C."
 
-#: core/models/chems.py:298 core/templates/core/macros_details.inc.html:129
+#: core/models/chems.py:302 core/templates/core/macros_details.inc.html:129
 msgid "Bulk Density"
 msgstr "Schüttdichte"
 
-#: core/models/chems.py:299
+#: core/models/chems.py:303
 msgid "In kg/m3."
 msgstr "In kg/m3"
 
-#: core/models/chems.py:303
+#: core/models/chems.py:307
 msgid "Melting Point low"
 msgstr "Schmelzpunkt tief"
 
-#: core/models/chems.py:304
+#: core/models/chems.py:308
 msgid ""
 "If this chemical has a defined melting point use only this field. Give in °C."
 msgstr ""
 "Wenn diese Chemikalie einen Schmelzpunkt hat (nicht Bereich), bitte nur "
 "dieses Feld benutzen. In °C."
 
-#: core/models/chems.py:308
+#: core/models/chems.py:312
 msgid "Melting Point high"
 msgstr "Schmelzpunkt hoch"
 
-#: core/models/chems.py:313
+#: core/models/chems.py:317
 msgid "Boiling Point low"
 msgstr "Siedepunkt tief"
 
-#: core/models/chems.py:314
+#: core/models/chems.py:318
 msgid ""
 "If this chemical has a defined boiling point use only this field. Give in °C."
 msgstr ""
 "Wenn diese Chemikalie einen Siedepunkt hat (nicht Bereich), bitte nur dieses "
 "Feld benutzen. In °C."
 
-#: core/models/chems.py:318
+#: core/models/chems.py:322
 msgid "Boiling Point high"
 msgstr "Siedepunkt hoch"
 
-#: core/models/chems.py:323
+#: core/models/chems.py:327
 msgid "Solubility (H2O)"
 msgstr "Löslichkeit in Wasser"
 
-#: core/models/chems.py:324
+#: core/models/chems.py:328
 msgid "In g/L."
 msgstr "In g/L."
 
-#: core/models/chems.py:327
+#: core/models/chems.py:331
 msgid "Solubility at Temperature"
 msgstr "Löslichkeit bei Temperatur"
 
-#: core/models/chems.py:353 core/models/chems.py:354
+#: core/models/chems.py:357 core/models/chems.py:358
 msgid "Physical Data"
 msgstr "Physikalische Daten"
 
-#: core/models/chems.py:369
+#: core/models/chems.py:373
 msgid "Synonym"
 msgstr "Synonym"
 
-#: core/models/chems.py:370 core/templates/core/macros.inc.html:16
+#: core/models/chems.py:374 core/templates/core/macros.inc.html:16
 #: core/templates/core/macros_details.inc.html:3
 msgid "Synonyms"
 msgstr "Synonyme"
 
-#: core/models/chems.py:379 core/templates/core/macros_details.inc.html:158
+#: core/models/chems.py:383 core/templates/core/macros_details.inc.html:158
 msgid "Method"
 msgstr "Methode"
 
-#: core/models/chems.py:396 core/models/storage.py:198
+#: core/models/chems.py:400 core/models/storage.py:198
 msgid "Document"
 msgstr "Dokument"
 
-#: core/models/chems.py:401
+#: core/models/chems.py:405
 msgid "Last updated by"
 msgstr "Zuletzt überarbeitet von"
 
-#: core/models/chems.py:410
+#: core/models/chems.py:414
 msgid "Operating Instruction"
 msgstr "Betriebsanweisung"
 
-#: core/models/chems.py:411 core/templates/core/info.html:26
+#: core/models/chems.py:415 core/templates/core/info.html:26
 #: core/templates/core/info/operating_instructions.html:4
 #: core/templates/core/macros_details.inc.html:417
 #: core/templates/core/storage/chem_info.html:40
@@ -1249,7 +1249,7 @@ msgid "Value"
 msgstr "Wert"
 
 #: core/models/safety.py:122 core/templates/core/info.html:41
-#: core/templates/core/storage/classes_info.html:4 core/views/storage.py:125
+#: core/templates/core/storage/classes_info.html:4 core/views/storage.py:149
 msgid "Storage Classes"
 msgstr "Lagerklasse"
 
@@ -1492,7 +1492,7 @@ msgstr "Gelagerte Chemikalie"
 
 #: core/models/storage.py:275 core/templates/core/info.html:47
 #: core/templates/core/storage/stored_chemicals.html:5
-#: core/views/storage.py:136
+#: core/views/storage.py:161
 msgid "Stored Chemicals"
 msgstr "Gelagerte Chemikalien"
 
@@ -1638,7 +1638,7 @@ msgstr "Gesetzliche Limits"
 msgid "Saved"
 msgstr "Gespeichert"
 
-#: core/models/storage.py:723 core/templates/core/macros.inc.html:228
+#: core/models/storage.py:723 core/templates/core/macros.inc.html:232
 msgid "Note"
 msgstr "Bemerkung"
 
@@ -1684,12 +1684,12 @@ msgstr "Menge"
 msgid "Opened"
 msgstr "Geöffnet"
 
-#: core/models/storage.py:827 core/templates/core/macros.inc.html:143
-#: core/templates/core/macros.inc.html:145
+#: core/models/storage.py:827 core/templates/core/macros.inc.html:147
+#: core/templates/core/macros.inc.html:149
 #: core/templates/core/storage/consume/normal.html:4
 #: core/templates/core/storage/consume/select.html:5
 #: core/templates/core/storage/package_info.html:138 core/utils.py:87
-#: core/views/storage.py:429
+#: core/views/storage.py:495
 msgid "Consume"
 msgstr "Entnahme"
 
@@ -1721,7 +1721,7 @@ msgstr "CPU Kerne"
 
 #: core/templates/core/about.html:15
 msgid "Byteorder"
-msgstr ""
+msgstr "Byteorder"
 
 #: core/templates/core/about.html:20
 msgid "Software"
@@ -1748,10 +1748,14 @@ msgid "Django"
 msgstr ""
 
 #: core/templates/core/about.html:32
+msgid "Database"
+msgstr ""
+
+#: core/templates/core/about.html:34
 msgid "ChemManager"
 msgstr "ChemManager"
 
-#: core/templates/core/about.html:38 core/templates/core/info/ghs.html:35
+#: core/templates/core/about.html:40 core/templates/core/info/ghs.html:35
 #: core/templates/core/info/hp.html:60
 #: core/templates/core/info/operating_instructions.html:30
 #: core/templates/core/info/whc.html:19 core/templates/core/manage/base.html:46
@@ -1768,7 +1772,7 @@ msgstr "Zurück"
 msgid "Open information and storage system for chemicals"
 msgstr "Offenes Informations- und Lagersystem für Chemikalien"
 
-#: core/templates/core/choose_list.html:5 core/views/chems.py:204
+#: core/templates/core/choose_list.html:5 core/views/chems.py:236
 msgid "Listgenerator"
 msgstr "Listengenerator"
 
@@ -1810,7 +1814,7 @@ msgid "Phy/Chem"
 msgstr "Phy/Chem"
 
 #: core/templates/core/detail.html:30
-#: core/templates/core/storage/package_info.html:178 core/views/storage.py:195
+#: core/templates/core/storage/package_info.html:178 core/views/storage.py:231
 msgid "Disposal"
 msgstr "Entsorgung"
 
@@ -1851,7 +1855,7 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: core/templates/core/extended_search.html:4 core/utils.py:79
-#: core/views/chems.py:103
+#: core/views/chems.py:123
 msgid "Extended Search"
 msgstr "Erweiterte Suche"
 
@@ -1994,7 +1998,7 @@ msgstr ""
 
 #: core/templates/core/index.html:17
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: core/templates/core/index.html:26
 msgid ""
@@ -2010,8 +2014,8 @@ msgstr "Spezielle Chemikalien"
 
 #: core/templates/core/index.html:40 core/templates/core/index.html:48
 #: core/templates/core/macros.inc.html:27
-#: core/templates/core/macros.inc.html:71
-#: core/templates/core/macros.inc.html:82
+#: core/templates/core/macros.inc.html:75
+#: core/templates/core/macros.inc.html:86
 #: core/templates/core/macros_details.inc.html:21
 msgid "Formula"
 msgstr "Formel"
@@ -2139,8 +2143,8 @@ msgstr "Bitte melden Sie sich an, um diese Seite zu besuchen."
 msgid "Login"
 msgstr "Anmelden"
 
-#: core/templates/core/macros.inc.html:7 core/templates/core/macros.inc.html:46
-#: core/templates/core/macros.inc.html:135
+#: core/templates/core/macros.inc.html:7 core/templates/core/macros.inc.html:47
+#: core/templates/core/macros.inc.html:139
 #: core/templates/core/storage/observe.html:33
 #: core/templates/core/storage/storage.html:57
 msgid "CMR"
@@ -2150,12 +2154,12 @@ msgstr "CMR"
 msgid "IUPAC"
 msgstr "IUPAC"
 
-#: core/templates/core/macros.inc.html:30
+#: core/templates/core/macros.inc.html:31
 msgid "Show more"
 msgstr "Zeige mehr"
 
-#: core/templates/core/macros.inc.html:68
-#: core/templates/core/macros.inc.html:79
+#: core/templates/core/macros.inc.html:72
+#: core/templates/core/macros.inc.html:83
 #: core/templates/core/search/package.html:15
 #: core/templates/core/search/package.html:27
 #: core/templates/core/storage/chem_info.html:35
@@ -2180,15 +2184,15 @@ msgstr "Zeige mehr"
 msgid "No."
 msgstr "Nr."
 
-#: core/templates/core/macros.inc.html:72
-#: core/templates/core/macros.inc.html:83
+#: core/templates/core/macros.inc.html:76
+#: core/templates/core/macros.inc.html:87
 #: core/templates/core/storage/observe.html:15
 #: core/templates/core/storage/storage.html:18
 #: core/templates/core/storage/storage.html:34
 msgid "GHS"
 msgstr "GHS"
 
-#: core/templates/core/macros.inc.html:94
+#: core/templates/core/macros.inc.html:98
 #: core/templates/core/search/package.html:63
 #: core/templates/core/storage/observe.html:60
 #: core/templates/core/storage/storage.html:96
@@ -2196,7 +2200,7 @@ msgstr "GHS"
 msgid "No results"
 msgstr "Keine Ergebnisse"
 
-#: core/templates/core/macros.inc.html:112
+#: core/templates/core/macros.inc.html:116
 #, python-format
 msgid ""
 "\n"
@@ -2205,7 +2209,7 @@ msgstr ""
 "\n"
 "Geschrieben von %(author)s, am %(added)s."
 
-#: core/templates/core/macros.inc.html:115
+#: core/templates/core/macros.inc.html:119
 #, python-format
 msgid ""
 "\n"
@@ -2214,104 +2218,104 @@ msgstr ""
 "\n"
 "Zuletzt geändert von %(author)s, am %(added)s."
 
-#: core/templates/core/macros.inc.html:130
+#: core/templates/core/macros.inc.html:134
 msgid "Toxic"
 msgstr "Giftig"
 
-#: core/templates/core/macros.inc.html:151
-#: core/templates/core/macros.inc.html:153
+#: core/templates/core/macros.inc.html:155
+#: core/templates/core/macros.inc.html:157
 msgid "Discharge"
 msgstr "Entleeren"
 
-#: core/templates/core/macros.inc.html:159
-#: core/templates/core/macros.inc.html:161
-#: core/templates/core/storage/transfer.html:43 core/views/helpers.py:413
-#: core/views/storage.py:238
+#: core/templates/core/macros.inc.html:163
+#: core/templates/core/macros.inc.html:165
+#: core/templates/core/storage/transfer.html:43 core/views/helpers.py:466
+#: core/views/storage.py:277
 msgid "Transfer"
 msgstr "Umlagern"
 
-#: core/templates/core/macros.inc.html:167
-#: core/templates/core/macros.inc.html:169
+#: core/templates/core/macros.inc.html:171
+#: core/templates/core/macros.inc.html:173
 msgid "Dispose"
 msgstr "Entsorgen"
 
-#: core/templates/core/macros.inc.html:191
+#: core/templates/core/macros.inc.html:195
 msgid "Last inventory:"
 msgstr "Letzte Inventur:"
 
-#: core/templates/core/macros.inc.html:206
 #: core/templates/core/macros.inc.html:210
+#: core/templates/core/macros.inc.html:214
 #: core/templates/core/macros_details.inc.html:382
 msgid "Inventory"
 msgstr "Bestand"
 
-#: core/templates/core/macros.inc.html:215
+#: core/templates/core/macros.inc.html:219
 msgid "New brutto mass here!"
 msgstr "Hier neue Bruttomasse eingeben!"
 
-#: core/templates/core/macros.inc.html:226
+#: core/templates/core/macros.inc.html:230
 msgid "Check if the stock is correct"
 msgstr "Machen Sie den Haken, wenn der angezeigte Bestand korrekt ist"
 
-#: core/templates/core/macros.inc.html:227
+#: core/templates/core/macros.inc.html:231
 msgid "Add a note for this stock"
 msgstr "Bemerkung zu diesem Bestand zufügen"
 
-#: core/templates/core/macros.inc.html:241
-#: core/templates/core/macros.inc.html:243
+#: core/templates/core/macros.inc.html:245
+#: core/templates/core/macros.inc.html:247
 msgid "Make inventory"
 msgstr "Inventur machen"
 
-#: core/templates/core/macros.inc.html:247
-#: core/templates/core/macros.inc.html:249
+#: core/templates/core/macros.inc.html:251
+#: core/templates/core/macros.inc.html:253
 msgid "Show last inventory"
 msgstr "Letzte Inventur anzeigen"
 
-#: core/templates/core/macros.inc.html:253
-#: core/templates/core/macros.inc.html:255
+#: core/templates/core/macros.inc.html:257
+#: core/templates/core/macros.inc.html:259
 msgid "Deliver new package here"
 msgstr "Neues Gebinde hier einlagern"
 
-#: core/templates/core/macros.inc.html:259
+#: core/templates/core/macros.inc.html:263
 msgid "Check chemicals against storage classes"
 msgstr "Zusammenlagerung überprüfen"
 
-#: core/templates/core/macros.inc.html:261
+#: core/templates/core/macros.inc.html:265
 #: core/templates/core/storage/storage.html:120
 msgid "Check storage classes"
 msgstr "Lagerklassen überprüfen"
 
-#: core/templates/core/macros.inc.html:265
+#: core/templates/core/macros.inc.html:269
 msgid "Set stocklimits for chemicals in this storage"
 msgstr "Bestandslimits für Chemikalien in diesem Lager setzen"
 
-#: core/templates/core/macros.inc.html:267
+#: core/templates/core/macros.inc.html:271
 msgid "Set stocklimits"
 msgstr "Bestandslimits setzen"
 
-#: core/templates/core/macros.inc.html:285
+#: core/templates/core/macros.inc.html:289
 msgid "yes"
 msgstr "ja"
 
-#: core/templates/core/macros.inc.html:288
+#: core/templates/core/macros.inc.html:292
 msgid "no"
 msgstr "nein"
 
-#: core/templates/core/macros.inc.html:294
+#: core/templates/core/macros.inc.html:298
 msgid "Operating Instruction available"
 msgstr "Betriebsanweisung vorhanden"
 
-#: core/templates/core/macros.inc.html:295
+#: core/templates/core/macros.inc.html:299
 #: core/templates/core/storage/stored_chemicals.html:17
 #: core/templates/core/storage/stored_chemicals.html:27
 msgid "OI"
 msgstr "BA"
 
-#: core/templates/core/macros.inc.html:298
+#: core/templates/core/macros.inc.html:302
 msgid "No Operating Instruction available"
 msgstr "Keine Betriebsanweisung vorhanden"
 
-#: core/templates/core/macros.inc.html:299
+#: core/templates/core/macros.inc.html:303
 msgid "No OI"
 msgstr "Keine BA"
 
@@ -2660,7 +2664,7 @@ msgstr "Keine Ergebnisse gefunden"
 msgid "Search..."
 msgstr "Suchen..."
 
-#: core/templates/core/navigation.inc.html:35 core/views/chems.py:242
+#: core/templates/core/navigation.inc.html:35 core/views/chems.py:278
 msgid "Profile"
 msgstr "Profil"
 
@@ -2680,7 +2684,7 @@ msgstr "Profildaten"
 msgid "Click to remove this bookmark"
 msgstr "Klicken, um dieses Lesezeichen zu löschen"
 
-#: core/templates/core/search/package.html:5 core/views/chems.py:100
+#: core/templates/core/search/package.html:5 core/views/chems.py:117
 msgid "Package Search"
 msgstr "Gebindesuche"
 
@@ -2741,8 +2745,8 @@ msgid_plural "%(count)s Results"
 msgstr[0] "%(count)s Ergebnis"
 msgstr[1] "%(count)s Ergebnisse"
 
-#: core/templates/core/searchresult.html:17 core/utils.py:179
-#: core/views/chems.py:216
+#: core/templates/core/searchresult.html:17 core/utils.py:189
+#: core/views/chems.py:251
 msgid "List"
 msgstr "Liste"
 
@@ -2750,7 +2754,7 @@ msgstr "Liste"
 msgid "Table"
 msgstr "Tabelle"
 
-#: core/templates/core/storage/chem_info.html:27 core/views/chems.py:179
+#: core/templates/core/storage/chem_info.html:27 core/views/chems.py:211
 msgid "Detail"
 msgstr "Detail"
 
@@ -2936,7 +2940,7 @@ msgid "Error while saving!"
 msgstr "Fehler beim Speichern!"
 
 #: core/templates/core/storage/delivery.html:6
-#: core/templates/core/storage/initial_delivery.html:5 core/views/orders.py:131
+#: core/templates/core/storage/initial_delivery.html:5 core/views/orders.py:152
 msgid "Initial Delivery"
 msgstr "Erstanlieferung"
 
@@ -3134,7 +3138,7 @@ msgstr "Mehr Gebinde einlagern"
 msgid "Print package ID's"
 msgstr "Gebinde ID's drucken"
 
-#: core/templates/core/storage/inventory.html:5 core/views/storage.py:464
+#: core/templates/core/storage/inventory.html:5 core/views/storage.py:536
 msgid "Make Inventory"
 msgstr "Inventur machen"
 
@@ -3185,7 +3189,7 @@ msgstr ""
 "neuenBestand/Bruttomasse angeben!"
 
 #: core/templates/core/storage/inventory_result.html:4
-#: core/views/storage.py:481
+#: core/views/storage.py:559
 msgid "Inventory Result"
 msgstr "Inventurergebnis"
 
@@ -3291,8 +3295,8 @@ msgid "Select package to fill up:"
 msgstr "Gebinde zum Auffüllen wählen:"
 
 #: core/templates/core/storage/new_package.html:5
-#: core/templates/core/storage/new_package_2.html:5 core/views/storage.py:310
-#: core/views/storage.py:338
+#: core/templates/core/storage/new_package_2.html:5 core/views/storage.py:353
+#: core/views/storage.py:380
 msgid "New Package"
 msgstr "Neues Gebinde"
 
@@ -3300,7 +3304,7 @@ msgstr "Neues Gebinde"
 msgid "continue"
 msgstr "weiter"
 
-#: core/templates/core/storage/observe.html:6 core/views/storage.py:148
+#: core/templates/core/storage/observe.html:6 core/views/storage.py:180
 msgid "Observation"
 msgstr "Überwachung"
 
@@ -3324,7 +3328,8 @@ msgstr "Hinweis: Entleeren oder Entsorgen"
 msgid ""
 "Dispose may only be used if the amount removed has ended up in the trash."
 msgstr ""
-"Entsorgen darf nur benutzt werden, wenn die entnommene Menge im Müll gelandet ist."
+"Entsorgen darf nur benutzt werden, wenn die entnommene Menge im Müll "
+"gelandet ist."
 
 #: core/templates/core/storage/package_info.html:57
 msgid "Discharge can be used if the rest has been consumed."
@@ -3353,7 +3358,7 @@ msgid "Detailed usage"
 msgstr "Detailierte Benutzung"
 
 #: core/templates/core/storage/package_info.html:114 core/utils.py:88
-#: core/views/orders.py:36 core/views/orders.py:57
+#: core/views/orders.py:41 core/views/orders.py:69
 msgid "Delivery"
 msgstr "Anlieferung"
 
@@ -3447,8 +3452,8 @@ msgid "Minimum:"
 msgstr "Minimum:"
 
 #: core/templates/core/storage/stocklimits.html:34
-#: core/templates/core/storage/stocklimits.html:37 core/views/helpers.py:407
-#: core/views/storage.py:685 core/views/storage.py:686
+#: core/templates/core/storage/stocklimits.html:37 core/views/helpers.py:460
+#: core/views/storage.py:820 core/views/storage.py:821
 msgid "not set"
 msgstr "nicht gesetzt"
 
@@ -3466,7 +3471,7 @@ msgstr "Bestand"
 msgid "Stock Information"
 msgstr "Bestandsinformationen"
 
-#: core/templates/core/storage/storage.html:87 core/views/storage.py:253
+#: core/templates/core/storage/storage.html:87 core/views/storage.py:292
 msgid "Merge packages"
 msgstr "Gebinde vereinen"
 
@@ -3537,6 +3542,23 @@ msgstr "Neuen Lagerplatz auswählen"
 msgid "Available Places"
 msgstr "Verfügbare Lagerplätze"
 
+#: core/templates/core/storage/transfer_many_vue.html:4
+#: core/views/storage.py:644
+msgid "Transfer Many Packages"
+msgstr "Mehrere Gebinde umlagern"
+
+#: core/templates/core/storage/transfer_many_vue.html:7
+msgid "Source"
+msgstr "Quelle"
+
+#: core/templates/core/storage/transfer_many_vue.html:58
+msgid "Destination"
+msgstr "Ziel"
+
+#: core/templates/core/storage/transfer_many_vue.html:139
+msgid "Packages are relocated"
+msgstr "Gebinde wurden umgelagert"
+
 #: core/utils.py:77
 msgid "Menu"
 msgstr "Menü"
@@ -3545,49 +3567,53 @@ msgstr "Menü"
 msgid "Lists"
 msgstr "Listen"
 
-#: core/utils.py:91
+#: core/utils.py:89
+msgid "Relocate"
+msgstr "Umlagern"
+
+#: core/utils.py:92
 msgid "Presentations"
 msgstr "Präsentationen"
 
-#: core/views/chems.py:43
+#: core/views/chems.py:52
 msgid "You are logged out."
 msgstr "Sie sind abgemeldet."
 
-#: core/views/chems.py:62
+#: core/views/chems.py:72
 msgid "Mainpage"
 msgstr "Hauptseite"
 
-#: core/views/chems.py:88
+#: core/views/chems.py:104
 #, python-brace-format
 msgid "Searchresult for {search}"
 msgstr "Suchergebnisse für {search}"
 
-#: core/views/chems.py:119
+#: core/views/chems.py:139
 msgid "Op. Inst. Info"
 msgstr "BA's Info"
 
-#: core/views/chems.py:128
+#: core/views/chems.py:148
 #, python-brace-format
 msgid "WHC {num}"
 msgstr "WGK {num}"
 
-#: core/views/chems.py:131
+#: core/views/chems.py:151
 msgid "WHC Info"
 msgstr "WGK Info"
 
-#: core/views/chems.py:160
+#: core/views/chems.py:189
 msgid "H + P"
 msgstr "H + P"
 
-#: core/views/chems.py:234
+#: core/views/chems.py:269
 msgid "All data was saved."
 msgstr "Alle Daten wurden gespeichert."
 
-#: core/views/chems.py:268
+#: core/views/chems.py:307
 msgid "Wrong username and/or password."
 msgstr "Falscher Benutzername und/oder Passwort."
 
-#: core/views/chems.py:271
+#: core/views/chems.py:314
 msgid "Wrong request method (only POST allowed)."
 msgstr "Falscher Zugriff (nur POST erlaubt)."
 
@@ -3603,68 +3629,68 @@ msgstr "Neuer Absatz"
 msgid "No title"
 msgstr "Kein Titel"
 
-#: core/views/helpers.py:28
+#: core/views/helpers.py:33
 msgid "Inventory balancing!"
 msgstr "Inventurausgleich!"
 
-#: core/views/helpers.py:56
+#: core/views/helpers.py:71
 msgid "Chemical = {}"
 msgstr "Chemikalie = {}"
 
-#: core/views/helpers.py:59
+#: core/views/helpers.py:74
 msgid "Storage = {}"
 msgstr "Lager = {}"
 
-#: core/views/helpers.py:62
+#: core/views/helpers.py:77
 msgid "Department = {}"
 msgstr "Bereich = {}"
 
-#: core/views/helpers.py:67
+#: core/views/helpers.py:83
 #, python-brace-format
 msgid "Content {exp} {value} {unit}"
 msgstr "Inhalt {exp} {value} {unit}"
 
-#: core/views/helpers.py:72
+#: core/views/helpers.py:89
 msgid "Composition = {}"
 msgstr "Beschaffenheit = {}"
 
-#: core/views/helpers.py:75
+#: core/views/helpers.py:93
 msgid "Container Material = {}"
 msgstr "Gebindematerial = {}"
 
-#: core/views/helpers.py:107
+#: core/views/helpers.py:127
 msgid "Automatic removal"
 msgstr "Automatisches Entfernen"
 
-#: core/views/helpers.py:110
+#: core/views/helpers.py:129
 msgid "Package [{}] was automatically removed"
 msgstr "Das Gebinde [{}] wurde automatisch entfernt"
 
-#: core/views/helpers.py:113
+#: core/views/helpers.py:132
 msgid "No old package found. Nothing removed."
 msgstr "Keine alten Gebinde gefunden. Nichts wurde entfernt."
 
-#: core/views/helpers.py:268
+#: core/views/helpers.py:305
 msgid "Inventory balancing"
 msgstr "Inventurausgleich"
 
-#: core/views/helpers.py:286
+#: core/views/helpers.py:325
 msgid "Inventory difference greater than saved stock: {} > {}"
 msgstr "Die Inventurdifferenz ist größer als der Bestand: {} > {}"
 
-#: core/views/helpers.py:304
+#: core/views/helpers.py:343
 msgid "Data saved. Difference: {}."
 msgstr "Daten gespeichert. Differenz: {}."
 
-#: core/views/helpers.py:306
+#: core/views/helpers.py:345
 msgid "{} Package marked as empty."
 msgstr "{} Gebinde als leer markiert."
 
-#: core/views/helpers.py:346
+#: core/views/helpers.py:392
 msgid "No storage class given"
 msgstr "Keine Lagerklasse angegeben"
 
-#: core/views/helpers.py:357
+#: core/views/helpers.py:405
 #, python-brace-format
 msgid ""
 "{sc} -> Storage of {new} together with {stored} is possibly not allowed. "
@@ -3673,12 +3699,12 @@ msgstr ""
 "{sc} -> Die Zusammenlagerung von {new} und {stored} ist evtl. nicht erlaubt. "
 "Bitte prüfen Sie die Lagerklassen und die gelagerten Mengen."
 
-#: core/views/helpers.py:414
+#: core/views/helpers.py:467
 #, python-brace-format
 msgid "Content transfered to {fill}"
 msgstr "Inhalt vereint mit {fill}"
 
-#: core/views/helpers.py:425
+#: core/views/helpers.py:482
 msgid "Filled up from {}"
 msgstr "Aufgefüllt von {}"
 
@@ -3720,137 +3746,137 @@ msgstr "Benachrichtigung gespeichert"
 msgid "System Info"
 msgstr "System Info"
 
-#: core/views/orders.py:55
+#: core/views/orders.py:66
 msgid "Something went wrong."
 msgstr "Etwas ging schief :-("
 
-#: core/views/orders.py:85 core/views/orders.py:117 core/views/storage.py:233
+#: core/views/orders.py:104 core/views/orders.py:138 core/views/storage.py:273
 msgid ""
 "Chemical {} can not be stored in place {}. Place/Storage is not lockable!"
 msgstr ""
 "Chemikalie {} kann nicht am Platz {} gelagert werden. Platz/Lager ist nicht "
 "abschließbar."
 
-#: core/views/orders.py:140
+#: core/views/orders.py:164
 msgid "No new packages found."
 msgstr "Keine neuen Gebinde gefunden."
 
-#: core/views/orders.py:145
+#: core/views/orders.py:171
 msgid "Result"
 msgstr "Ergebnis"
 
-#: core/views/orders.py:169
+#: core/views/orders.py:196
 msgid "Info Orders"
 msgstr "Info Bestellungen"
 
-#: core/views/orders.py:199
+#: core/views/orders.py:229
 msgid "No orders found for this barcode."
 msgstr "Keine Bestellungen zu diesem Code gefunden."
 
-#: core/views/orders.py:208
+#: core/views/orders.py:242
 msgid "No data found for this barcode."
 msgstr "Keine Daten zu diesem Code gefunden."
 
-#: core/views/storage.py:53
+#: core/views/storage.py:67
 msgid "Package Info"
 msgstr "Gebindeinformation"
 
-#: core/views/storage.py:87
+#: core/views/storage.py:108
 msgid "Storage of {}"
 msgstr "Lager von {}"
 
-#: core/views/storage.py:101
+#: core/views/storage.py:126
 msgid "Storage {}"
 msgstr "Lager {}"
 
-#: core/views/storage.py:154
+#: core/views/storage.py:186
 msgid "Usage"
 msgstr "Benutzung"
 
-#: core/views/storage.py:181
+#: core/views/storage.py:214
 msgid "History of Packages"
 msgstr "Verlauf der Gebinde"
 
-#: core/views/storage.py:198
+#: core/views/storage.py:234
 msgid "{} where marked as disposed"
 msgstr "{} wurde als entsorgt gekennzeichnet"
 
-#: core/views/storage.py:203
+#: core/views/storage.py:241
 msgid "DISPOSE"
 msgstr "ENTSORGUNG"
 
-#: core/views/storage.py:251
+#: core/views/storage.py:289
 msgid "Not enough packages to merge!"
 msgstr "Nicht genug Gebinde zum Vereinen im Lager!"
 
-#: core/views/storage.py:286
+#: core/views/storage.py:328
 msgid "Package(s) removed"
 msgstr "Gebinde entfernt"
 
-#: core/views/storage.py:288
+#: core/views/storage.py:330
 msgid "Nothing removed"
 msgstr "Nichts entfernt"
 
-#: core/views/storage.py:292
+#: core/views/storage.py:334
 msgid "Remove package"
 msgstr "Gebinde entfernen"
 
-#: core/views/storage.py:327
+#: core/views/storage.py:368
 msgid "Package {} was saved."
 msgstr "Gebinde {} wurde gespeichert."
 
-#: core/views/storage.py:339
+#: core/views/storage.py:384
 msgid "No company choosen"
 msgstr "Keine Firma ausgewählt"
 
-#: core/views/storage.py:351
+#: core/views/storage.py:397
 msgid "Consume selection"
 msgstr "Auswahl Entnahme"
 
-#: core/views/storage.py:370 core/views/storage.py:410
+#: core/views/storage.py:421 core/views/storage.py:473
 #, python-brace-format
 msgid "Consume of {mass} was saved."
 msgstr "Entnahme von {mass} wurde gespeichert."
 
-#: core/views/storage.py:375 core/views/storage.py:415
+#: core/views/storage.py:426 core/views/storage.py:478
 msgid "Package was marked as empty."
 msgstr "Gebinde wurde als leer markiert."
 
-#: core/views/storage.py:380 core/views/storage.py:420
+#: core/views/storage.py:432 core/views/storage.py:484
 #, python-brace-format
 msgid "Consume of {mass} is higher as package inventory {inv}."
 msgstr "Entnahme {mass} ist größer als Bestand {inv}."
 
-#: core/views/storage.py:386
+#: core/views/storage.py:440
 msgid "Toxic Consume"
 msgstr "Gift-Entnahmen"
 
-#: core/views/storage.py:443
+#: core/views/storage.py:512
 #, python-brace-format
 msgid "Package with ID {pid} does not exist!"
 msgstr "Gebinde mit der ID {pid} existiert nicht!"
 
-#: core/views/storage.py:492 core/views/storage.py:509
+#: core/views/storage.py:570 core/views/storage.py:589
 msgid "No packages found."
 msgstr "Keine Gebinde gefunden."
 
-#: core/views/storage.py:498
+#: core/views/storage.py:578
 msgid "Print IDs"
 msgstr "IDs ausdrucken"
 
-#: core/views/storage.py:536
+#: core/views/storage.py:620
 msgid "Stocklimits"
 msgstr "Bestandslimits"
 
-#: core/views/storage.py:556
+#: core/views/storage.py:683
 msgid "Internal Server Error"
 msgstr "Interner Serverfehler"
 
-#: core/views/storage.py:668
+#: core/views/storage.py:803
 msgid "Chemical or storage not given."
 msgstr "Chemikalie oder Lager nicht angegeben."
 
-#: core/views/storage.py:708
+#: core/views/storage.py:845
 #, python-brace-format
 msgid ""
 "For the package (ID: {pid}) of {chem} was a wrong brutto mass reported by "
@@ -3863,14 +3889,14 @@ msgstr ""
 "\n"
 "Diese Nachricht wurde automatisch generiert. Bitte nicht darauf antworten."
 
-#: core/views/storage.py:717
+#: core/views/storage.py:856
 msgid "[ChemManager] Wrong brutto mass!"
 msgstr "[ChemManager] Falsche Bruttomasse!"
 
-#: core/views/storage.py:722
+#: core/views/storage.py:861
 msgid "The following message was send to {}:<br>{}"
 msgstr "Die folgende Nachricht wurde an {} geschickt:<br>{}"
 
-#: core/views/storage.py:728
+#: core/views/storage.py:867
 msgid "Error:<br>{}"
 msgstr "Fehler:<br>{}"

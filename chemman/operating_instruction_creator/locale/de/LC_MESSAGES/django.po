@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-19 10:41+0100\n"
+"POT-Creation-Date: 2025-07-18 11:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,13 +44,13 @@ msgstr "Piktogramme"
 
 #: operating_instruction_creator/forms.py:37
 #: operating_instruction_creator/models.py:93
-#: operating_instruction_creator/templates/oic/edit.html:67
+#: operating_instruction_creator/templates/oic/edit.html:86
 msgid "Hazards for people and the environment"
 msgstr "Gefahren für Mensch und Umwelt"
 
 #: operating_instruction_creator/forms.py:41
 #: operating_instruction_creator/models.py:96
-#: operating_instruction_creator/templates/oic/edit.html:78
+#: operating_instruction_creator/templates/oic/edit.html:97
 msgid "Protective measures and rules of conduct"
 msgstr "Schutzmaßnahmen und Verhaltensregeln"
 
@@ -66,7 +66,7 @@ msgstr "Handschutz"
 
 #: operating_instruction_creator/forms.py:52
 #: operating_instruction_creator/models.py:104
-#: operating_instruction_creator/templates/oic/edit.html:91
+#: operating_instruction_creator/templates/oic/edit.html:110
 msgid "Conduct in case of danger"
 msgstr "Verhalten im Gefahrfall"
 
@@ -76,7 +76,7 @@ msgstr "Weißes Kreuz anzeigen"
 
 #: operating_instruction_creator/forms.py:62
 #: operating_instruction_creator/models.py:111
-#: operating_instruction_creator/templates/oic/edit.html:103
+#: operating_instruction_creator/templates/oic/edit.html:122
 msgid "First aid"
 msgstr "Erste Hilfe"
 
@@ -228,65 +228,73 @@ msgstr "Betriebsanweisung bearbeiten"
 msgid "Edit chemical"
 msgstr "Chemikalie bearbeiten"
 
-#: operating_instruction_creator/templates/oic/edit.html:45
+#: operating_instruction_creator/templates/oic/edit.html:47
+msgid "Import from"
+msgstr "Importiert von"
+
+#: operating_instruction_creator/templates/oic/edit.html:64
 msgid "Head"
 msgstr "Kopf"
 
-#: operating_instruction_creator/templates/oic/edit.html:47
-#: operating_instruction_creator/templates/oic/edit.html:69
-#: operating_instruction_creator/templates/oic/edit.html:80
-#: operating_instruction_creator/templates/oic/edit.html:93
-#: operating_instruction_creator/templates/oic/edit.html:105
-#: operating_instruction_creator/templates/oic/edit.html:121
+#: operating_instruction_creator/templates/oic/edit.html:66
+#: operating_instruction_creator/templates/oic/edit.html:88
+#: operating_instruction_creator/templates/oic/edit.html:99
+#: operating_instruction_creator/templates/oic/edit.html:112
+#: operating_instruction_creator/templates/oic/edit.html:124
+#: operating_instruction_creator/templates/oic/edit.html:140
 msgid "Preview"
 msgstr "Vorschau"
 
-#: operating_instruction_creator/templates/oic/edit.html:53
+#: operating_instruction_creator/templates/oic/edit.html:72
 msgid "CAS:"
 msgstr ""
 
-#: operating_instruction_creator/templates/oic/edit.html:54
+#: operating_instruction_creator/templates/oic/edit.html:73
 msgid "State:"
 msgstr "Status:"
 
-#: operating_instruction_creator/templates/oic/edit.html:55
+#: operating_instruction_creator/templates/oic/edit.html:74
 msgid "Color:"
 msgstr "Farbe:"
 
-#: operating_instruction_creator/templates/oic/edit.html:56
+#: operating_instruction_creator/templates/oic/edit.html:75
 msgid "Odor:"
 msgstr "Geruch:"
 
-#: operating_instruction_creator/templates/oic/edit.html:57
+#: operating_instruction_creator/templates/oic/edit.html:76
 msgid "Creator:"
 msgstr "Ersteller:"
 
-#: operating_instruction_creator/templates/oic/edit.html:73
-#: operating_instruction_creator/templates/oic/edit.html:84
-#: operating_instruction_creator/templates/oic/edit.html:97
-#: operating_instruction_creator/templates/oic/edit.html:110
-#: operating_instruction_creator/templates/oic/edit.html:125
+#: operating_instruction_creator/templates/oic/edit.html:92
+#: operating_instruction_creator/templates/oic/edit.html:103
+#: operating_instruction_creator/templates/oic/edit.html:116
+#: operating_instruction_creator/templates/oic/edit.html:129
+#: operating_instruction_creator/templates/oic/edit.html:144
 msgid "Text"
 msgstr ""
 
-#: operating_instruction_creator/templates/oic/edit.html:119
+#: operating_instruction_creator/templates/oic/edit.html:138
 msgid "Disposal"
 msgstr "Entsorgung"
 
-#: operating_instruction_creator/templates/oic/edit.html:132
+#: operating_instruction_creator/templates/oic/edit.html:151
+msgid "Reset"
+msgstr ""
+
+#: operating_instruction_creator/templates/oic/edit.html:155
 #: operating_instruction_creator/templates/oic/save.html:23
 msgid "Save"
 msgstr "Speichern"
 
-#: operating_instruction_creator/templates/oic/edit.html:208
+#: operating_instruction_creator/templates/oic/edit.html:244
 msgid "Existing texts"
 msgstr "Vorhandene Texte"
 
-#: operating_instruction_creator/templates/oic/edit.html:209
+#: operating_instruction_creator/templates/oic/edit.html:245
 msgid "Same Chemical"
 msgstr "Gleiche Chemikalie"
 
-#: operating_instruction_creator/templates/oic/edit.html:210
+#: operating_instruction_creator/templates/oic/edit.html:246
 msgid "Similar Chemicals"
 msgstr "Ähnliche Chemikalien"
 
