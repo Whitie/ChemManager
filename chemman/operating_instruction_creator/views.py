@@ -19,36 +19,40 @@ from weasyprint import HTML
 
 from core.views.helpers import search_chemical_by_name
 from core.models.base import Department
-from core.models.chems import (
-    Chemical, OperatingInstruction
-)
+from core.models.chems import Chemical, OperatingInstruction
 from core.utils import base_menu, Menu, MenuItem, render, render_json
 from .forms import OIForm, ReleaseForm
 from .models import OperatingInstructionDraft, FirstAidPictogram
 
 
-oic_item = MenuItem(_('Operating Instructions'), urlname='oic:index')
+oic_item = MenuItem(_("Operating Instructions"), urlname="oic:index")
 base_menu.add(oic_item)
 oic_menu = Menu(
-    _('Op. Inst.'),
-    MenuItem(_('New'), urlname='oic:index'),
+    _("Op. Inst."),
+    MenuItem(_("New"), urlname="oic:index"),
 )
 SIGNAL_WORDS = {
-    'de': {
-        'danger': 'Gefahr',
-        'warning': 'Achtung',
+    "de": {
+        "danger": "Gefahr",
+        "warning": "Achtung",
     },
 }
 
 
 def generate_preview(req, data, chem):
-    fa1 = 'E003' if data['green_cross'] else 'E012'
-    data['fa1'] = FirstAidPictogram.objects.get(ident=fa1)
-    data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
-    data['signal_word'] = SIGNAL_WORDS['de'].get(chem.signal_word, '')
-    ctx = dict(user=req.user, font_size=12, chem=chem, now=timezone.now(),
-               root=settings.MEDIA_ROOT, **data)
-    html_filled = render_to_string('oic/pdf/oi-preview.de.html', ctx)
+    fa1 = "E003" if data["green_cross"] else "E012"
+    data["fa1"] = FirstAidPictogram.objects.get(ident=fa1)
+    data["fa2"] = FirstAidPictogram.objects.get(ident="E011")
+    data["signal_word"] = SIGNAL_WORDS["de"].get(chem.signal_word, "")
+    ctx = dict(
+        user=req.user,
+        font_size=12,
+        chem=chem,
+        now=timezone.now(),
+        root=settings.MEDIA_ROOT,
+        **data,
+    )
+    html_filled = render_to_string("oic/pdf/oi-preview.de.html", ctx)
     html = HTML(string=html_filled)
     return html
 
@@ -56,21 +60,27 @@ def generate_preview(req, data, chem):
 def generate_released_pdf(user, draft):
     data = {}
     lang = draft.language.lower()
-    fa1 = 'E003' if draft.green_cross else 'E012'
-    data['fa1'] = FirstAidPictogram.objects.get(ident=fa1)
-    data['fa2'] = FirstAidPictogram.objects.get(ident='E011')
-    data['pictograms'] = [x for x in draft.chemical.pictograms.all()]
-    data['ppics'] = [x for x in draft.protection_pics.all()]
-    data['cpics'] = [x for x in draft.conduct_pics.all()]
-    data['signal_word'] = SIGNAL_WORDS[lang].get(
-        draft.chemical.signal_word, ''
+    fa1 = "E003" if draft.green_cross else "E012"
+    data["fa1"] = FirstAidPictogram.objects.get(ident=fa1)
+    data["fa2"] = FirstAidPictogram.objects.get(ident="E011")
+    data["pictograms"] = [x for x in draft.chemical.pictograms.all()]
+    data["ppics"] = [x for x in draft.protection_pics.all()]
+    data["cpics"] = [x for x in draft.conduct_pics.all()]
+    data["signal_word"] = SIGNAL_WORDS[lang].get(
+        draft.chemical.signal_word, ""
     )
     for num, dep in enumerate(draft.work_departments.all(), start=1):
-        data['dep_{}'.format(num)] = dep.name
-    ctx = dict(user=user, font_size=12, chem=draft.chemical, draft=draft,
-               root=settings.MEDIA_ROOT, **data)
+        data["dep_{}".format(num)] = dep.name
+    ctx = dict(
+        user=user,
+        font_size=12,
+        chem=draft.chemical,
+        draft=draft,
+        root=settings.MEDIA_ROOT,
+        **data,
+    )
     # Todo: Edit template
-    tpl = 'oic/pdf/oi.{}.html'.format(lang)
+    tpl = "oic/pdf/oi.{}.html".format(lang)
     html_filled = render_to_string(tpl, ctx)
     html = HTML(string=html_filled)
     return html.write_pdf()
@@ -78,54 +88,55 @@ def generate_released_pdf(user, draft):
 
 def _smart_replace(s):
     if not s.strip():
-        return '-'
-    s = s.replace('\r', '\n')
-    s = s.replace('\n\n', '\n')
+        return "-"
+    s = s.replace("\r", "\n")
+    s = s.replace("\n\n", "\n")
     return s
 
 
 def save_draft(draft, data):
     # Todo
-    draft.work_departments.set([data['dep_1']])
-    if data['dep_2'] and data['dep_2'] != data['dep_1']:
-        draft.work_departments.add(data['dep_2'])
-    draft.signature = data['signature']
-    draft.hazards = _smart_replace(data['hazards'])
-    draft.protection = data['protection']
-    draft.protection_pics.set(data['protection_pics'])
-    draft.eye_protection = data['eye_protection']
-    draft.hand_protection = data['hand_protection']
-    draft.conduct = data['conduct']
-    if data['conduct_pics']:
-        draft.conduct_pics.set(data['conduct_pics'])
-    draft.green_cross = data['green_cross']
-    draft.first_aid = _smart_replace(data['first_aid'])
-    draft.skin = data['skin']
-    draft.eye = data['eye']
-    draft.breathe = data['breathe']
-    draft.swallow = data['swallow']
-    draft.disposal = _smart_replace(data['disposal'])
-    draft.ext_phone = data['ext_phone']
-    draft.int_phone = data['int_phone']
+    draft.work_departments.set([data["dep_1"]])
+    if data["dep_2"] and data["dep_2"] != data["dep_1"]:
+        draft.work_departments.add(data["dep_2"])
+    draft.signature = data["signature"]
+    draft.hazards = _smart_replace(data["hazards"])
+    draft.protection = data["protection"]
+    draft.protection_pics.set(data["protection_pics"])
+    draft.eye_protection = data["eye_protection"]
+    draft.hand_protection = data["hand_protection"]
+    draft.conduct = data["conduct"]
+    if data["conduct_pics"]:
+        draft.conduct_pics.set(data["conduct_pics"])
+    draft.green_cross = data["green_cross"]
+    draft.first_aid = _smart_replace(data["first_aid"])
+    draft.skin = data["skin"]
+    draft.eye = data["eye"]
+    draft.breathe = data["breathe"]
+    draft.swallow = data["swallow"]
+    draft.disposal = _smart_replace(data["disposal"])
+    draft.ext_phone = data["ext_phone"]
+    draft.int_phone = data["int_phone"]
     draft.released = None
-    draft.msds_date = data['msds_date']
+    draft.msds_date = data["msds_date"]
+    draft.extra_info = data["extra_info"]
     draft.save()
 
 
 def save_to_chemical(draft, pdf, data):
     for dep in draft.work_departments.all():
         cm_dep, created = Department.objects.get_or_create(name=dep.name)
-        if data['substitutes']:
-            oi = data['substitutes']
-            data['substitutes'] = None
+        if data["substitutes"]:
+            oi = data["substitutes"]
+            data["substitutes"] = None
         else:
             oi = OperatingInstruction.objects.create(
                 chemical=draft.chemical, department=cm_dep
             )
         doc = ContentFile(pdf)
-        name = '{0}_{1}.pdf'.format(draft.chemical.slug, slugify(dep.name))
+        name = "{0}_{1}.pdf".format(draft.chemical.slug, slugify(dep.name))
         oi.document.save(name, doc, save=False)
-        oi.notes = data['note']
+        oi.notes = data["note"]
         oi.last_updated_by = draft.responsible
         draft.saved_as = oi
         oi.save()
@@ -133,58 +144,81 @@ def save_to_chemical(draft, pdf, data):
 
 
 def index(req):
-    drafts = OperatingInstructionDraft.objects.select_related().filter(
-        released__isnull=True).order_by('-edited')
-    released = OperatingInstructionDraft.objects.select_related().filter(
-        released__isnull=False, saved_as__isnull=False).order_by('-edited')
+    drafts = (
+        OperatingInstructionDraft.objects.select_related()
+        .filter(released__isnull=True)
+        .order_by("-edited")
+    )
+    released = (
+        OperatingInstructionDraft.objects.select_related()
+        .filter(released__isnull=False, saved_as__isnull=False)
+        .order_by("-edited")
+    )
     ctx = dict(drafts=drafts, released=released, menu=oic_menu)
-    return render(req, 'oic/index.html', ctx)
+    return render(req, "oic/index.html", ctx)
 
 
-@permission_required('operating_instruction_creator.create')
+@permission_required("operating_instruction_creator.create")
 def edit_operating_instruction(req, id):
     oi = OperatingInstructionDraft.objects.select_related().get(pk=id)
-    if req.method == 'POST':
+    if req.method == "POST":
         form = OIForm(req.POST)
         if form.is_valid():
             oi.responsible = req.user
             save_draft(oi, form.cleaned_data)
-            return redirect('oic:index')
+            return redirect("oic:index")
     chem = oi.chemical
     deps = oi.work_departments.all()[:2]
     hpics = [x.id for x in chem.pictograms.all()]
     ppics = [x.id for x in oi.protection_pics.all()]
     cpics = [x.id for x in oi.conduct_pics.all()]
     form = OIForm()
-    ctx = dict(oi=oi, chem=chem, form=form, deps=deps, hpics=hpics,
-               ppics=ppics, cpics=cpics, menu=oic_menu, edit=True, all=[])
-    return render(req, 'oic/edit.html', ctx)
+    ctx = dict(
+        oi=oi,
+        chem=chem,
+        form=form,
+        deps=deps,
+        hpics=hpics,
+        ppics=ppics,
+        cpics=cpics,
+        menu=oic_menu,
+        edit=True,
+        all=[],
+    )
+    return render(req, "oic/edit.html", ctx)
 
 
-@permission_required('operating_instruction_creator.create')
+@permission_required("operating_instruction_creator.create")
 def new_operating_instruction(req, chem_id):
     chem = Chemical.objects.select_related().get(pk=chem_id)
     hpics = [x.id for x in chem.pictograms.all()]
-    if req.method == 'POST':
+    if req.method == "POST":
         form = OIForm(req.POST)
         if form.is_valid():
             cd = form.cleaned_data
             oi = OperatingInstructionDraft.objects.create(
-                chemical=chem, responsible=req.user, signature=cd['signature']
+                chemical=chem, responsible=req.user, signature=cd["signature"]
             )
             save_draft(oi, cd)
-            return redirect('oic:index')
+            return redirect("oic:index")
     form = OIForm()
     all_ois = OperatingInstructionDraft.objects.select_related().all()
-    ctx = dict(oi=None, chem=chem, form=form, menu=oic_menu, edit=False,
-               hpics=hpics, all=all_ois)
-    return render(req, 'oic/edit.html', ctx)
+    ctx = dict(
+        oi=None,
+        chem=chem,
+        form=form,
+        menu=oic_menu,
+        edit=False,
+        hpics=hpics,
+        all=all_ois,
+    )
+    return render(req, "oic/edit.html", ctx)
 
 
-@permission_required('operating_instruction_creator.release')
+@permission_required("operating_instruction_creator.release")
 def release(req, id):
     oi = OperatingInstructionDraft.objects.select_related().get(pk=id)
-    if req.method == 'POST':
+    if req.method == "POST":
         form = ReleaseForm(req.POST, chem=oi.chemical)
         if form.is_valid():
             try:
@@ -192,7 +226,7 @@ def release(req, id):
                 save_to_chemical(oi, pdf, form.cleaned_data)
                 oi.released = timezone.now().date()
                 oi.save()
-                return redirect('oic:index')
+                return redirect("oic:index")
             except Exception as err:
                 print(err)
     else:
@@ -201,7 +235,7 @@ def release(req, id):
     for o in oi.chemical.operating_instructions.all():
         notes[str(o.id)] = o.notes
     ctx = dict(oi=oi, chem=oi.chemical, form=form, notes=notes)
-    return render(req, 'oic/save.html', ctx)
+    return render(req, "oic/save.html", ctx)
 
 
 def preview(req, chem_id):
@@ -214,73 +248,82 @@ def preview(req, chem_id):
             html.write_pdf(pdf)
             pdf.seek(0)
             return HttpResponse(
-                b64encode(pdf.read()), content_type='application/pdf'
+                b64encode(pdf.read()), content_type="application/pdf"
             )
         except Exception as err:
             print(err)
-    error_file = Path(__file__).parent / 'error.pdf'
-    with error_file.open('rb') as fp:
+    else:
+        print(form.errors)
+    error_file = Path(__file__).parent / "error.pdf"
+    with error_file.open("rb") as fp:
         return HttpResponse(
-            b64encode(fp.read()), content_type='application/pdf'
+            b64encode(fp.read()), content_type="application/pdf"
         )
 
 
 @csrf_exempt
 def select_chemical(req):
-    search = req.POST['search']
+    search = req.POST["search"]
     results = []
     chems = search_chemical_by_name(search)
     for chem in chems:
-        text = '{}, CAS: {}'.format(chem.formula or '-',
-                                    chem.identifiers.cas or '-')
-        results.append(
-            dict(title=chem.display_name, text=text,
-                 url=reverse('oic:new',
-                             kwargs={'chem_id': chem.id}))
+        text = "{}, CAS: {}".format(
+            chem.formula or "-", chem.identifiers.cas or "-"
         )
-    return render_json(req, {'results': results})
+        results.append(
+            dict(
+                title=chem.display_name,
+                text=text,
+                url=reverse("oic:new", kwargs={"chem_id": chem.id}),
+            )
+        )
+    return render_json(req, {"results": results})
 
 
 def get_related_text(req, chem_id):
-    topic = req.GET.get('topic', '')
+    topic = req.GET.get("topic", "")
     chemical = Chemical.objects.select_related().get(pk=chem_id)
-    pic_ids = list(chemical.pictograms.all().values_list('id', flat=True))
+    pic_ids = list(chemical.pictograms.all().values_list("id", flat=True))
     data = dict(same=[], similar=[])
     for entry in OperatingInstructionDraft.objects.filter(
-      chemical=chemical).values_list(topic, flat=True):
-        if entry.strip(' -') and entry not in data['same']:
-            data['same'].append(entry)
-    for entry in OperatingInstructionDraft.objects.select_related().filter(
-      chemical__pictograms__id__in=pic_ids).exclude(
-      chemical=chemical).values_list(topic, flat=True):
-        if entry.strip(' -') and entry not in data['similar']:
-            data['similar'].append(entry)
-    if not data['same']:
-        data['same'].append('-')
-    if not data['similar']:
-        data['similar'].append('-')
+        chemical=chemical
+    ).values_list(topic, flat=True):
+        if entry.strip(" -") and entry not in data["same"]:
+            data["same"].append(entry)
+    for entry in (
+        OperatingInstructionDraft.objects.select_related()
+        .filter(chemical__pictograms__id__in=pic_ids)
+        .exclude(chemical=chemical)
+        .values_list(topic, flat=True)
+    ):
+        if entry.strip(" -") and entry not in data["similar"]:
+            data["similar"].append(entry)
+    if not data["same"]:
+        data["same"].append("-")
+    if not data["similar"]:
+        data["similar"].append("-")
     return render_json(req, data)
 
 
 def text_for_import(req):
-    oi_id = int(req.GET.get('oi_id', 0))
+    oi_id = int(req.GET.get("oi_id", 0))
     if not oi_id:
-        return render_json(req, {'oi': None})
+        return render_json(req, {"oi": None})
     oi = OperatingInstructionDraft.objects.get(pk=oi_id)
     data = {
-        'oi': str(oi),
-        'hazards': oi.hazards,
-        'protection': oi.protection,
-        'eye_protection': oi.eye_protection,
-        'hand_protection': oi.hand_protection,
-        'conduct': oi.conduct,
-        'ext_phone': oi.ext_phone,
-        'first_aid': oi.first_aid,
-        'skin': oi.skin,
-        'eye': oi.eye,
-        'breathe': oi.breathe,
-        'swallow': oi.swallow,
-        'int_phone': oi.int_phone,
-        'disposal': oi.disposal,
+        "oi": str(oi),
+        "hazards": oi.hazards,
+        "protection": oi.protection,
+        "eye_protection": oi.eye_protection,
+        "hand_protection": oi.hand_protection,
+        "conduct": oi.conduct,
+        "ext_phone": oi.ext_phone,
+        "first_aid": oi.first_aid,
+        "skin": oi.skin,
+        "eye": oi.eye,
+        "breathe": oi.breathe,
+        "swallow": oi.swallow,
+        "int_phone": oi.int_phone,
+        "disposal": oi.disposal,
     }
     return render_json(req, data)

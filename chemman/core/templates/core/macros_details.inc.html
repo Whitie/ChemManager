@@ -54,7 +54,7 @@
 {% endif %}
 <h3>{% trans %}Hazard Statements{% endtrans %}</h3>
 <dl class="uk-description-list-horizontal">
-	{% if chem.hazard_statements or chem.eu_hazard_statements %}
+	{% if chem.hazard_statements.all() or chem.eu_hazard_statements.all() %}
 	{% for h in chem.hazard_statements.all().order_by('sortorder') %}
     <dt>{{ h.fullref }}</dt><dd>{{ h.text }}</dd>
     {% endfor %}

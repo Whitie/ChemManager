@@ -294,13 +294,19 @@
 {% endmacro -%}
 
 {%- macro operating_instruction(chem) %}
-{% if chem.has_oi %}
-<span class="uk-badge uk-badge-notification uk-badge-success" title="{% trans %}Operating Instruction available{% endtrans %}">
-    {% trans %}OI{% endtrans %}
-</span>
+{% if chem.hazard_statements.all() or chem.eu_hazard_statements.all() %}
+    {% if chem.has_oi %}
+    <span class="uk-badge uk-badge-notification uk-badge-success" title="{% trans %}Operating Instruction available{% endtrans %}">
+        {% trans %}OI{% endtrans %}
+    </span>
+    {% else %}
+    <span class="uk-badge uk-badge-notification uk-badge-warning" title="{% trans %}No Operating Instruction available{% endtrans %}">
+        {% trans %}No OI{% endtrans %}
+    </span>
+    {% endif %}
 {% else %}
-<span class="uk-badge uk-badge-notification uk-badge-warning" title="{% trans %}No Operating Instruction available{% endtrans %}">
-    {% trans %}No OI{% endtrans %}
+<span class="uk-badge uk-badge-notification uk-badge-success" title="{% trans %}Operating Instruction available{% endtrans %}">
+    {% trans %}Keine BA notwendig{% endtrans %}
 </span>
 {% endif %}
 {% endmacro -%}
