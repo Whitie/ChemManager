@@ -12,13 +12,13 @@ then
 fi
 
 echo "Migrating database"
-python manage.py migrate
+poetry run python manage.py migrate
 
 echo "Collecting static files"
-python manage.py collectstatic --no-input
+poetry run python manage.py collectstatic --no-input
 
 echo "Starting cluster service for background tasks..."
-python manage.py qcluster &
+poetry run python manage.py qcluster &
 QCLUSTER_PID=$!
 echo "Started with PID $QCLUSTER_PID"
 
@@ -26,10 +26,10 @@ trap "kill $QCLUSTER_PID" EXIT
 
 echo "Starting Gunicorn with 4 workers"
 
-gunicorn \
+poetry run gunicorn \
     --workers 4 \
     --access-logfile - \
-    --bind 0.0.0.0:8000 \
+    --bind 0.0.0.0:8800 \
     --env DJANGO_SETTINGS_MODULE=chemman.settings \
     --env SERVE_LAN=on \
     chemman.wsgi:application
